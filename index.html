@@ -313,8 +313,21 @@
     </div>
 
     <footer class="footer">
-      © 2026 Hamilton Shea • Best viewed with maximum nostalgia
+      © 2026 Hamilton Shea • I hope you like my website _(:Ⅰ」∠)_ 
     </footer>
   </div>
+  <audio id="clickSound" src="click.mp3" preload="auto"></audio>
+
+<script>
+  const clickSound = document.getElementById("clickSound");
+
+  document.querySelectorAll("a, button, .nav-button, .bubble").forEach(item => {
+    item.addEventListener("click", () => {
+      clickSound.currentTime = 0;
+      clickSound.volume = 0.45;
+      clickSound.play();
+    });
+  });
+</script>
 </body>
 </html>
