@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ham's website</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      color: white;
+      background:
+        linear-gradient(rgba(0, 60, 20, 0.15), rgba(0, 30, 10, 0.35)),
+        url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1800&q=80");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    .page {
+      width: 1000px;
+      max-width: calc(100% - 32px);
+      margin: 60px auto;
+      border-radius: 36px 36px 18px 18px;
+      background: rgba(12, 24, 14, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      box-shadow:
+        0 0 35px rgba(0, 0, 0, 0.7),
+        inset 0 1px 0 rgba(255, 255, 255, 0.45);
+      overflow: hidden;
+    }
+
+    .top-bar {
+      padding: 24px 34px;
+      background:
+        linear-gradient(to bottom, rgba(255,255,255,0.65), rgba(255,255,255,0.08) 38%, rgba(0,0,0,0.75));
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .logo {
+      width: 54px;
+      height: 54px;
+      border-radius: 14px;
+      background:
+        radial-gradient(circle at 30% 25%, #b8ff9f, #15b331 45%, #045613 80%);
+      box-shadow:
+        inset 0 2px 8px rgba(255,255,255,0.8),
+        0 0 18px rgba(55,255,95,0.65);
+      display: grid;
+      place-items: center;
+      font-size: 28px;
+    }
+
+    .title h1 {
+      margin: 0;
+      font-size: 31px;
+      font-weight: normal;
+      text-shadow: 0 2px 4px black;
+    }
+
+    .title p {
+      margin: 3px 0 0;
+      font-size: 15px;
+      color: #d8ffd5;
+      text-shadow: 0 1px 2px black;
+    }
+
+    .content-wrap {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 12px;
+      padding: 12px;
+    }
+
+    .sidebar {
+      padding: 8px;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 10px;
+    }
+
+    .side-heading {
+      text-align: center;
+      font-weight: bold;
+      font-size: 13px;
+      padding: 6px;
+      margin-bottom: 6px;
+      border-radius: 5px;
+      background: linear-gradient(to bottom, #777, #222 45%, #000);
+      border: 1px solid rgba(255,255,255,0.3);
+      text-shadow: 0 1px 2px black;
+    }
+
+    .nav-button {
+      display: block;
+      color: white;
+      text-decoration: none;
+      font-size: 13px;
+      padding: 7px 9px;
+      margin: 5px 0;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.25);
+      background:
+        linear-gradient(to bottom, rgba(255,255,255,0.42), rgba(33,88,39,0.9) 45%, rgba(5,35,11,0.95));
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.45),
+        0 1px 2px rgba(0,0,0,0.8);
+      text-shadow: 0 1px 2px black;
+    }
+
+    .nav-button:hover {
+      background:
+        linear-gradient(to bottom, rgba(255,255,255,0.65), rgba(73,196,65,0.95) 45%, rgba(10,80,20,0.95));
+      color: #efffee;
+    }
+
+    .main {
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.22);
+      background: rgba(10, 24, 13, 0.68);
+      padding: 10px;
+      box-shadow: inset 0 0 18px rgba(0,0,0,0.55);
+    }
+
+    .section-title {
+      text-align: center;
+      padding: 7px;
+      margin-bottom: 12px;
+      border-radius: 5px;
+      background:
+        linear-gradient(to bottom, #bfbfbf, #444 35%, #121212 70%, #050505);
+      border: 1px solid rgba(255,255,255,0.35);
+      text-shadow: 0 1px 2px black;
+      font-size: 15px;
+    }
+
+    .hero {
+      min-height: 230px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.28);
+      background:
+        linear-gradient(rgba(70, 255, 95, 0.12), rgba(0, 0, 0, 0.35)),
+        url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1500&q=80");
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      padding: 36px;
+      box-shadow: inset 0 0 30px rgba(0,0,0,0.65);
+    }
+
+    .hero-card {
+      max-width: 560px;
+      padding: 22px;
+      border-radius: 18px;
+      background: rgba(0, 0, 0, 0.48);
+      border: 1px solid rgba(255,255,255,0.25);
+      backdrop-filter: blur(4px);
+      box-shadow: 0 0 24px rgba(0,0,0,0.5);
+    }
+
+    .hero h2 {
+      margin: 0;
+      font-size: 46px;
+      line-height: 1;
+      color: #dcffd8;
+      text-shadow:
+        0 2px 2px black,
+        0 0 12px rgba(90,255,70,0.8);
+    }
+
+    .hero p {
+      margin: 12px 0 0;
+      font-size: 18px;
+      color: white;
+      text-shadow: 0 1px 3px black;
+    }
+
+    .panel {
+      margin-top: 12px;
+      padding: 18px;
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.48);
+      border: 1px solid rgba(255,255,255,0.22);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.15);
+      line-height: 1.65;
+    }
+
+    .panel h3 {
+      margin-top: 0;
+      color: #9cff91;
+      text-shadow: 0 1px 2px black;
+    }
+
+    .panel a {
+      color: #48ff5f;
+      font-weight: bold;
+    }
+
+    .bubble-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .bubble {
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: white;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.95), rgba(75,255,82,0.75) 28%, rgba(8,94,22,0.95) 75%);
+      border: 1px solid rgba(255,255,255,0.38);
+      box-shadow:
+        inset 0 2px 4px rgba(255,255,255,0.45),
+        0 2px 7px rgba(0,0,0,0.65);
+      text-shadow: 0 1px 2px black;
+      font-size: 14px;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 12px;
+      font-size: 12px;
+      color: #caffc4;
+      background: rgba(0,0,0,0.35);
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+
+    @media (max-width: 720px) {
+      .content-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h2 {
+        font-size: 34px;
+      }
+
+      .top-bar {
+        border-radius: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <header class="top-bar">
+      <div class="logo">✦</div>
+      <div class="title">
+        <h1>ham's website</h1>
+        <p>personal site, projects, links, and internet artifacts</p>
+      </div>
+    </header>
+
+    <div class="content-wrap">
+      <aside class="sidebar">
+        <div class="side-heading">Main Content</div>
+        <a class="nav-button" href="#">Introduction</a>
+        <a class="nav-button" href="#">About</a>
+        <a class="nav-button" href="#">Projects</a>
+        <a class="nav-button" href="#">Resume</a>
+        <a class="nav-button" href="#">Contact</a>
+
+        <div class="side-heading" style="margin-top: 14px;">Fun Stuff</div>
+        <a class="nav-button" href="#">Blog</a>
+        <a class="nav-button" href="#">Photos</a>
+        <a class="nav-button" href="#">Links</a>
+        <a class="nav-button" href="#">Guestbook</a>
+      </aside>
+
+      <main class="main">
+        <div class="section-title">Introduction Page</div>
+
+        <section class="hero">
+          <div class="hero-card">
+            <h2>Welcome to ham's site</h2>
+            <p>Glossy buttons. Grass backgrounds. Extremely serious 2000s web energy.</p>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h3>About Me</h3>
+          <p>
+            Hi, I'm Hamilton. I'm a student interested in product management,
+            technology, esports, and building cool things on the internet.
+          </p>
+          <p>
+            This site is my personal home base for projects, writing, experiments,
+            and whatever else I decide to put online.
+          </p>
+        </section>
+
+        <section class="panel">
+          <h3>Projects</h3>
+          <p>
+            Add your projects here. You can link to GitHub repos, case studies,
+            school projects, product work, events, or anything else you want to show.
+          </p>
+
+          <div class="bubble-row">
+            <span class="bubble">Product</span>
+            <span class="bubble">Esports</span>
+            <span class="bubble">Design</span>
+            <span class="bubble">GitHub Pages</span>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <footer class="footer">
+      © 2026 Hamilton Shea • Best viewed with maximum nostalgia
+    </footer>
+  </div>
+</body>
+</html>
