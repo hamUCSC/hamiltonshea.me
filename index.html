@@ -17,7 +17,7 @@
       color: white;
       background:
         linear-gradient(rgba(0, 60, 20, 0.15), rgba(0, 30, 10, 0.35)),
-        url("https://i.pinimg.com/control1/1200x/85/15/58/8515586d978244370f7a0ebef45442f7.jpg");
+        url("grass.png");
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -140,48 +140,18 @@
       border: 1px solid rgba(255,255,255,0.35);
       text-shadow: 0 1px 2px black;
       font-size: 15px;
+      text-transform: lowercase;
     }
 
     .hero {
-      min-height: 230px;
+      min-height: 260px;
       border-radius: 8px;
       border: 1px solid rgba(255,255,255,0.28);
-      background:
-        linear-gradient(rgba(70, 255, 95, 0.12), rgba(0, 0, 0, 0.35)),
-        url("https://i.pinimg.com/control1/1200x/85/15/58/8515586d978244370f7a0ebef45442f7.jpg");
+      background: url("banner.png");
       background-size: cover;
       background-position: center;
-      display: flex;
-      align-items: center;
-      padding: 36px;
-      box-shadow: inset 0 0 30px rgba(0,0,0,0.65);
-    }
-
-    .hero-card {
-      max-width: 560px;
-      padding: 22px;
-      border-radius: 18px;
-      background: rgba(0, 0, 0, 0.48);
-      border: 1px solid rgba(255,255,255,0.25);
-      backdrop-filter: blur(4px);
-      box-shadow: 0 0 24px rgba(0,0,0,0.5);
-    }
-
-    .hero h2 {
-      margin: 0;
-      font-size: 46px;
-      line-height: 1;
-      color: #dcffd8;
-      text-shadow:
-        0 2px 2px black,
-        0 0 12px rgba(90,255,70,0.8);
-    }
-
-    .hero p {
-      margin: 12px 0 0;
-      font-size: 18px;
-      color: white;
-      text-shadow: 0 1px 3px black;
+      background-repeat: no-repeat;
+      box-shadow: inset 0 0 30px rgba(0,0,0,0.35);
     }
 
     .panel {
@@ -198,32 +168,17 @@
       margin-top: 0;
       color: #9cff91;
       text-shadow: 0 1px 2px black;
+      text-transform: lowercase;
     }
 
     .panel a {
       color: #48ff5f;
       font-weight: bold;
+      text-decoration: none;
     }
 
-    .bubble-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    .bubble {
-      padding: 10px 14px;
-      border-radius: 999px;
-      color: white;
-      background:
-        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.95), rgba(75,255,82,0.75) 28%, rgba(8,94,22,0.95) 75%);
-      border: 1px solid rgba(255,255,255,0.38);
-      box-shadow:
-        inset 0 2px 4px rgba(255,255,255,0.45),
-        0 2px 7px rgba(0,0,0,0.65);
-      text-shadow: 0 1px 2px black;
-      font-size: 14px;
+    .panel a:hover {
+      text-decoration: underline;
     }
 
     .footer {
@@ -240,8 +195,8 @@
         grid-template-columns: 1fr;
       }
 
-      .hero h2 {
-        font-size: 34px;
+      .hero {
+        min-height: 180px;
       }
     }
   </style>
@@ -259,79 +214,81 @@
 
     <div class="content-wrap">
       <aside class="sidebar">
-        <div class="side-heading">Main Content</div>
-        <a class="nav-button" href="#">Introduction</a>
-        <a class="nav-button" href="#">About</a>
-        <a class="nav-button" href="#">Projects</a>
-        <a class="nav-button" href="#">Resume</a>
-        <a class="nav-button" href="#">Contact</a>
+        <div class="side-heading">main content</div>
+        <a class="nav-button" href="#">introduction</a>
+        <a class="nav-button" href="#">about</a>
+        <a class="nav-button" href="#">projects</a>
+        <a class="nav-button" href="#">resume</a>
+        <a class="nav-button" href="#">contact</a>
 
-        <div class="side-heading" style="margin-top: 14px;">Fun Stuff</div>
-        <a class="nav-button" href="#">Blog</a>
-        <a class="nav-button" href="#">Photos</a>
-        <a class="nav-button" href="#">Links</a>
-        <a class="nav-button" href="#">Guestbook</a>
+        <div class="side-heading" style="margin-top: 14px;">fun stuff</div>
+        <a class="nav-button" href="#">blog</a>
+        <a class="nav-button" href="#">photos</a>
+        <a class="nav-button" href="#">links</a>
+        <a class="nav-button" href="#">guestbook</a>
       </aside>
 
       <main class="main">
-        <div class="section-title">Introduction Page</div>
+        <div class="section-title">introduction page</div>
 
-        <section class="hero">
-          <div class="hero-card">
-            <h2>Welcome to ham's site</h2>
-            <p>Glossy buttons. Grass backgrounds. Extremely serious 2000s web energy.</p>
-          </div>
+        <section class="hero"></section>
+
+        <section class="panel">
+          <h3>introduction</h3>
+
+          <p>
+            hello! i’m ham or hamilton :D
+          </p>
+
+          <p>
+            i’m a uc santa cruz student focused on
+            <a href="#">product</a>, <a href="#">operations</a>, and
+            <a href="#">partnerships</a> within <a href="#">gaming</a> and
+            <a href="#">tech</a>. i am interested in product and
+            <a href="#">community-driven work</a> that brings users, brands,
+            and communities together through
+            <a href="#">strategic collaboration</a>,
+            <a href="#">authentic engagement</a>, and
+            <a href="#">thoughtful user experiences</a>.
+          </p>
+
+          <p>
+            i’ve managed the largest <a href="#">gaming/esports community</a>
+            on campus while also collaborating on initiatives with companies
+            such as <a href="#">razer</a>, <a href="#">corsair</a>,
+            <a href="#">nvidia</a>, <a href="#">red bull</a>,
+            <a href="#">gen.g</a>, <a href="#">nrg</a>,
+            <a href="#">team liquid</a>, and
+            <a href="#">extra life charity</a>, supporting events that
+            increased participation and <a href="#">brand engagement</a>.
+          </p>
+
+          <p>
+            i am more than happy to connect with you if you’re passionate about
+            <a href="#">product</a>, <a href="#">tech</a>, and
+            <a href="#">gaming</a>!
+          </p>
         </section>
-
-  <p>
-    hello! i’m ham or hamilton :D
-  </p>
-
-  <p>
-    i’m a uc santa cruz student focused on
-    <a href="#">product</a>, <a href="#">operations</a>, and
-    <a href="#">partnerships</a> within <a href="#">gaming</a> and
-    <a href="#">tech</a>. i’m interested in product and
-    <a href="#">community-driven work</a> that brings users, brands, and
-    communities together through <a href="#">strategic collaboration</a>,
-    <a href="#">authentic engagement</a>, and
-    <a href="#">thoughtful user experiences</a>.
-  </p>
-
-  <p>
-    i’ve managed the largest <a href="#">gaming/esports community</a> on campus
-    while also collaborating on initiatives with companies such as
-    <a href="#">razer</a>, <a href="#">corsair</a>, <a href="#">nvidia</a>,
-    <a href="#">red bull</a>, <a href="#">gen.g</a>, <a href="#">nrg</a>,
-    <a href="#">team liquid</a>, and <a href="#">extra life charity</a>,
-    supporting events that increased participation and
-    <a href="#">brand engagement</a>.
-  </p>
-
-  <p>
-    i’m more than happy to connect with you if you’re passionate about
-    <a href="#">product</a>, <a href="#">tech</a>, and <a href="#">gaming</a>!
-  </p>
-</section>
       </main>
     </div>
 
     <footer class="footer">
-      © 2026 jamilton shea • i hope you like my website _(:Ⅰ」∠)_ 
+      © 2026 hamilton shea • i hope you like my website _(:Ⅰ」∠)_
     </footer>
   </div>
+
   <audio id="clickSound" src="click.mp3" preload="auto"></audio>
 
-<script>
-  const clickSound = document.getElementById("clickSound");
+  <script>
+    const clickSound = document.getElementById("clickSound");
 
-  document.querySelectorAll("a, button, .nav-button, .bubble").forEach(item => {
-    item.addEventListener("click", () => {
-      clickSound.currentTime = 0;
-      clickSound.volume = 0.45;
-      clickSound.play();
+    document.querySelectorAll("a, button, .nav-button").forEach(item => {
+      item.addEventListener("click", () => {
+        clickSound.currentTime = 0;
+        clickSound.volume = 0.45;
+        clickSound.play();
+      });
     });
-  });
-</script>
+  </script>
 </body>
 </html>
