@@ -80,12 +80,10 @@
       object-position: center top;
       display: block;
       margin: 0 auto 28px;
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.45);
-      box-shadow:
-        0 0 28px rgba(255,255,255,0.35),
-        0 0 80px rgba(130,160,255,0.35),
-        0 18px 70px rgba(0,0,0,0.9);
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+      background: transparent;
       filter: contrast(1.12) saturate(0.82);
     }
 
@@ -175,17 +173,13 @@
 
     .ham-character {
       position: absolute;
-      right: 0;
-      bottom: -6vh;
-      width: min(48vw, 780px);
-      max-height: 105vh;
+      right: -4vw;
+      bottom: -10vh;
+      width: min(64vw, 980px);
+      max-height: 118vh;
       object-fit: contain;
       z-index: 5;
-      filter:
-        grayscale(1)
-        contrast(1.8)
-        drop-shadow(-14px 14px 0 black)
-        drop-shadow(0 0 12px white);
+      filter: drop-shadow(-14px 14px 0 black);
       transform: rotate(-4deg);
     }
 
@@ -363,9 +357,10 @@
       }
 
       .ham-character {
-        right: -34vw;
-        width: 105vw;
-        opacity: 0.45;
+        right: -42vw;
+        bottom: -8vh;
+        width: 120vw;
+        opacity: 0.85;
       }
 
       .persona-menu {
@@ -400,12 +395,12 @@
     <img class="ham-character" src="characterham.png" alt="Hamilton Shea" />
 
     <section class="menu-wrap">
-      <div class="menu-badge">Command Select</div>
+      <div class="menu-badge">Select</div>
 
-     <h1 class="main-title">
-  Ham's
-  <span>Website</span>
-</h1>
+      <h1 class="main-title">
+        Ham's
+        <span>Website</span>
+      </h1>
 
       <nav class="persona-menu">
         <a class="menu-item active" href="#">About Me</a>
