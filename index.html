@@ -11,20 +11,17 @@
           box-sizing: border-box;
         }
 
-        body {
-          margin: 0;
-          min-height: 100vh;
-          font-family: "Trebuchet MS", Arial, sans-serif;
-          color: white;
-          background:
-            linear-gradient(rgba(0, 18, 4, 0.02), rgba(0, 12, 3, 0.1)),
-            url("grass.jpg");
-          background-size: 100% 100%;
-          background-position: center center;
-          background-repeat: no-repeat;
-          background-attachment: fixed;
-        }
-
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  color: white;
+  background-color: #303030;
+  background:
+    linear-gradient(rgba(0, 18, 4, 0.02), rgba(0, 12, 3, 0.1)),
+    url("grass.jpg") no-repeat center center fixed;
+  background-size: contain;
+}
         .page {
           width: 960px;
           max-width: calc(100% - 36px);
