@@ -182,6 +182,30 @@
       text-decoration: underline;
     }
 
+    .status-lines {
+      margin: 18px 0;
+    }
+
+    .status-lines p {
+      margin: 8px 0;
+      font-size: 20px;
+      color: #ffdca8;
+      text-shadow: 0 1px 2px black;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-left: 8px;
+      padding: 4px 10px;
+      border-radius: 5px;
+      font-size: 14px;
+      color: #e9d8c3;
+      background: rgba(115, 82, 55, 0.75);
+      border: 1px solid rgba(255, 220, 170, 0.18);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+      vertical-align: middle;
+    }
+
     .footer {
       text-align: center;
       padding: 12px;
@@ -198,6 +222,14 @@
 
       .hero {
         min-height: 180px;
+      }
+
+      .status-lines p {
+        font-size: 16px;
+      }
+
+      .tag {
+        margin-top: 6px;
       }
     }
   </style>
@@ -219,7 +251,7 @@
         <a class="nav-button" href="#">introduction</a>
         <a class="nav-button" href="#">about</a>
         <a class="nav-button" href="#">projects</a>
-        <a class="nav-button" href="#">resume</a>
+        <a class="nav-button" href="resume.html">resume</a>
         <a class="nav-button" href="#">contact</a>
 
         <div class="side-heading" style="margin-top: 14px;">fun stuff</div>
@@ -252,6 +284,22 @@
             <a href="#">authentic engagement</a>, and
             <a href="#">thoughtful user experiences</a>.
           </p>
+
+          <div class="status-lines">
+            <p>
+              current:
+              <span class="tag">UCSC</span>
+              <span class="tag">SLUG GAMING</span>
+              <span class="tag">GEN.G</span>
+            </p>
+
+            <p>
+              previously at:
+              <span class="tag">H15DEN</span>
+              <span class="tag">SKYRISAI</span>
+              <span class="tag">ANTHOS CAPITAL</span>
+            </p>
+          </div>
 
           <p>
             i’ve managed the largest <a href="#">gaming/esports community</a>
