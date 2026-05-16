@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ham's website</title>
+  <link rel="icon" type="image/jpeg" href="logo.jpg" />
 
   <style>
     * {
@@ -16,7 +17,7 @@
       font-family: "Trebuchet MS", Arial, sans-serif;
       color: white;
       background:
-        linear-gradient(rgba(0, 20, 5, 0.08), rgba(0, 15, 4, 0.18)),
+        linear-gradient(rgba(0, 18, 4, 0.05), rgba(0, 12, 3, 0.16)),
         url("grass.jpg");
       background-size: cover;
       background-position: center;
@@ -50,16 +51,14 @@
     .logo {
       width: 58px;
       height: 58px;
-      border-radius: 16px;
-      background:
-        radial-gradient(circle at 30% 25%, #c9ffbe, #1fd73d 45%, #055c16 80%);
+      border-radius: 14px;
+      object-fit: cover;
+      object-position: center top;
+      background: white;
+      border: 1px solid rgba(255,255,255,0.65);
       box-shadow:
-        inset 0 2px 8px rgba(255,255,255,0.9),
-        0 0 22px rgba(55,255,95,0.75);
-      display: grid;
-      place-items: center;
-      font-size: 30px;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+        0 0 22px rgba(55,255,95,0.75),
+        inset 0 2px 8px rgba(255,255,255,0.5);
     }
 
     .title h1 {
@@ -198,8 +197,13 @@
     .status-lines p {
       margin: 8px 0;
       font-size: 18px;
-      color: #ffdca8;
+      color: #9cff91;
       text-shadow: 0 1px 2px black;
+    }
+
+    .status-label {
+      color: #7CFC00;
+      font-weight: bold;
     }
 
     .tag {
@@ -208,10 +212,13 @@
       padding: 4px 10px;
       border-radius: 5px;
       font-size: 13px;
-      color: #f3e3cc;
-      background: rgba(116, 83, 55, 0.8);
-      border: 1px solid rgba(255, 220, 170, 0.22);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.18);
+      color: #efffee;
+      background:
+        linear-gradient(to bottom, rgba(116, 230, 93, 0.5), rgba(26, 103, 31, 0.9));
+      border: 1px solid rgba(180, 255, 150, 0.35);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.25),
+        0 0 8px rgba(80,255,80,0.18);
       vertical-align: middle;
     }
 
@@ -252,7 +259,7 @@
 <body>
   <div class="page">
     <header class="top-bar">
-      <div class="logo">✦</div>
+      <img class="logo" src="logo.jpg" alt="ham logo" />
       <div class="title">
         <h1>ham's website</h1>
         <p>personal site, projects, links, and internet artifacts</p>
@@ -301,14 +308,14 @@
 
           <div class="status-lines">
             <p>
-              current:
+              <span class="status-label">current:</span>
               <span class="tag">UCSC</span>
               <span class="tag">SLUG GAMING</span>
               <span class="tag">GEN.G</span>
             </p>
 
             <p>
-              previously at:
+              <span class="status-label">previously at:</span>
               <span class="tag">H15DEN</span>
               <span class="tag">SKYRISAI</span>
               <span class="tag">ANTHOS CAPITAL</span>
