@@ -7,12 +7,9 @@
   <link rel="icon" type="image/jpeg" href="logo.jpg" />
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
-    html,
-    body {
+    html, body {
       margin: 0;
       min-height: 100vh;
       font-family: Impact, "Arial Black", "Segoe UI", sans-serif;
@@ -47,24 +44,6 @@
       background: #000;
     }
 
-    .enter-screen::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at center, transparent 38%, rgba(0,0,0,0.78) 100%),
-        repeating-linear-gradient(
-          to bottom,
-          rgba(255,255,255,0.035) 0px,
-          rgba(255,255,255,0.035) 1px,
-          transparent 1px,
-          transparent 5px
-        );
-      mix-blend-mode: screen;
-      opacity: 0.35;
-      pointer-events: none;
-    }
-
     .enter-content {
       position: relative;
       z-index: 5;
@@ -90,14 +69,11 @@
 
     .welcome-text {
       margin: 0 auto 24px;
-      font-family: "Segoe UI", "Trebuchet MS", Arial, sans-serif;
+      font-family: "Segoe UI", Arial, sans-serif;
       font-size: clamp(24px, 4vw, 54px);
       font-weight: 700;
       color: white;
-      text-shadow:
-        0 0 12px rgba(255,255,255,0.85),
-        0 0 32px rgba(130,160,255,0.6),
-        0 4px 18px black;
+      text-shadow: 0 0 12px white, 0 0 32px rgba(130,160,255,0.6), 0 4px 18px black;
       animation: floatBlink 2.8s ease-in-out infinite;
     }
 
@@ -106,34 +82,18 @@
       margin: 0 auto;
       display: block;
       mix-blend-mode: screen;
-      filter:
-        drop-shadow(0 0 8px rgba(255,255,255,0.75))
-        drop-shadow(0 0 24px rgba(150,170,255,0.45));
+      filter: drop-shadow(0 0 8px white) drop-shadow(0 0 24px rgba(150,170,255,0.45));
       animation: floatBlink 2.8s ease-in-out infinite;
     }
 
     @keyframes floatBlink {
-      0%, 100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      50% {
-        opacity: 0.28;
-        transform: translateY(-13px);
-      }
+      0%, 100% { opacity: 1; transform: translateY(0); }
+      50% { opacity: 0.28; transform: translateY(-13px); }
     }
 
     @keyframes faceBounce {
-      0%, 100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      50% {
-        opacity: 1;
-        transform: translateY(-13px);
-      }
+      0%, 100% { opacity: 1; transform: translateY(0); }
+      50% { opacity: 1; transform: translateY(-13px); }
     }
 
     .persona-screen {
@@ -153,21 +113,6 @@
       transform: scale(1);
     }
 
-    .persona-screen::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        repeating-linear-gradient(
-          -14deg,
-          rgba(255,255,255,0.06) 0,
-          rgba(255,255,255,0.06) 2px,
-          transparent 2px,
-          transparent 18px
-        );
-      opacity: 0.45;
-    }
-
     .red-slab {
       position: absolute;
       inset: -12vh auto auto 34vw;
@@ -175,10 +120,7 @@
       height: 130vh;
       background: #d00000;
       transform: rotate(14deg);
-      box-shadow:
-        -26px 0 0 black,
-        28px 0 0 white,
-        52px 0 0 black;
+      box-shadow: -26px 0 0 black, 28px 0 0 white, 52px 0 0 black;
       z-index: 2;
     }
 
@@ -194,13 +136,12 @@
       border-left: 18px solid black;
       transform: rotate(5deg);
       z-index: 1;
-      opacity: 0.95;
     }
 
     .ham-character {
       position: absolute;
-      right: -7vw;
-      bottom: -13vh;
+      right: -6vw;
+      bottom: -14vh;
       width: min(76vw, 1160px);
       max-height: 130vh;
       object-fit: contain;
@@ -208,12 +149,11 @@
       filter: drop-shadow(-14px 14px 0 black);
       transform: rotate(-4deg);
     }
-
     .menu-wrap {
       position: relative;
       z-index: 8;
       min-height: 100vh;
-      width: min(720px, 96vw);
+      width: min(760px, 96vw);
       padding: 76px 0 56px 64px;
       display: flex;
       flex-direction: column;
@@ -235,129 +175,88 @@
     }
 
     .main-title {
-      margin: 0 0 24px;
+      margin: 0 0 34px;
       font-size: clamp(54px, 8vw, 118px);
       line-height: 0.78;
-      letter-spacing: 2px;
       text-transform: uppercase;
       color: white;
       transform: rotate(-4deg);
-      text-shadow:
-        6px 6px 0 black,
-        12px 12px 0 #d00000;
+      text-shadow: 6px 6px 0 black, 12px 12px 0 #d00000;
     }
 
     .main-title span {
       display: block;
       color: #d00000;
-      text-shadow:
-        5px 5px 0 white,
-        11px 11px 0 black;
+      text-shadow: 5px 5px 0 white, 11px 11px 0 black;
     }
 
-    .persona-menu {
-      width: min(500px, 90vw);
-      display: grid;
-      gap: 8px;
-      transform: rotate(-4deg);
+    .desktop-icons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      max-width: 620px;
+      transform: rotate(-3deg);
     }
 
-    .menu-item,
-    .mute-button {
-      position: relative;
-      display: block;
-      width: 100%;
-      padding: 8px 22px 10px 34px;
-      color: white;
-      background: transparent;
+    .desktop-icon {
+      width: 110px;
       border: 0;
-      text-align: left;
-      text-decoration: none;
-      font-family: Impact, "Arial Black", sans-serif;
-      font-size: clamp(34px, 4vw, 58px);
-      line-height: 0.92;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      text-shadow:
-        -4px -4px 0 black,
-        4px -4px 0 black,
-        -4px 4px 0 black,
-        4px 4px 0 black,
-        8px 8px 0 black;
+      background: transparent;
+      color: white;
       cursor: pointer;
-      transition: transform 0.15s ease, color 0.15s ease;
-    }
-
-    .menu-item::before,
-    .mute-button::before {
-      content: "";
-      position: absolute;
-      left: -12px;
-      top: 50%;
-      width: 0;
-      height: 0;
-      border-top: 24px solid transparent;
-      border-bottom: 24px solid transparent;
-      border-right: 34px solid #d00000;
-      transform: translateY(-50%) scaleX(0);
-      transform-origin: left;
-      transition: transform 0.15s ease;
+      font-family: "Segoe UI", Arial, sans-serif;
+      text-align: center;
       filter: drop-shadow(5px 5px 0 black);
+      transition: transform 0.15s ease;
     }
 
-    .menu-item::after,
-    .mute-button::after {
-      content: "";
-      position: absolute;
-      left: 10px;
-      right: -30px;
-      top: 18%;
-      bottom: 10%;
-      background: white;
-      clip-path: polygon(0 20%, 88% 0, 100% 70%, 8% 100%);
-      z-index: -1;
-      opacity: 0;
-      transform: scaleX(0.6);
-      transform-origin: left;
-      transition: opacity 0.15s ease, transform 0.15s ease;
-      box-shadow: 10px 10px 0 #d00000;
+    .desktop-icon:hover {
+      transform: translateY(-8px) rotate(3deg) scale(1.08);
     }
 
-    .menu-item:hover,
-    .menu-item.active,
-    .mute-button:hover {
-      color: black;
-      transform: translateX(30px) rotate(2deg) scale(1.06);
-      text-shadow:
-        -3px -3px 0 white,
-        3px -3px 0 white,
-        -3px 3px 0 white,
-        3px 3px 0 white,
-        8px 8px 0 black;
+    .desktop-icon svg {
+      width: 76px;
+      height: 76px;
+      display: block;
+      margin: 0 auto 8px;
+      fill: white;
+      stroke: black;
+      stroke-width: 5px;
+      paint-order: stroke fill;
     }
 
-    .menu-item:hover::before,
-    .menu-item.active::before,
-    .mute-button:hover::before {
-      transform: translateY(-50%) scaleX(1);
-    }
-
-    .menu-item:hover::after,
-    .menu-item.active::after,
-    .mute-button:hover::after {
-      opacity: 1;
-      transform: scaleX(1);
+    .desktop-icon span {
+      display: block;
+      color: white;
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: lowercase;
+      text-shadow: 2px 2px 0 black;
     }
 
     .sound-button {
       position: fixed;
-      right: 28px;
-      bottom: 24px;
-      z-index: 20;
+      right: 34px;
+      bottom: 42px;
+      z-index: 50;
       width: auto;
       min-width: 190px;
+      padding: 8px 18px;
+      color: white;
+      background: transparent;
+      border: 0;
+      font-family: Impact, "Arial Black", sans-serif;
       font-size: 28px;
-      transform: rotate(-4deg);
+      text-transform: uppercase;
+      text-shadow:
+        -3px -3px 0 black,
+        3px -3px 0 black,
+        -3px 3px 0 black,
+        3px 3px 0 black,
+        7px 7px 0 black;
+      cursor: pointer;
+      transform: rotate(-8deg);
     }
 
     .bottom-line {
@@ -365,7 +264,6 @@
       left: 36px;
       bottom: 22px;
       z-index: 10;
-      color: white;
       font-family: "Segoe UI", Arial, sans-serif;
       font-size: 12px;
       letter-spacing: 2px;
@@ -373,14 +271,74 @@
       text-shadow: 0 2px 8px black;
     }
 
-    @media (max-width: 900px) {
-      body {
-        overflow-y: auto;
-      }
+    .window {
+      position: absolute;
+      z-index: 30;
+      width: min(520px, calc(100vw - 32px));
+      min-height: 260px;
+      background: rgba(8, 8, 8, 0.94);
+      border: 5px solid white;
+      box-shadow: 12px 12px 0 black, 18px 18px 0 #d00000;
+      display: none;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
 
-      .menu-wrap {
-        padding: 54px 22px 120px;
-      }
+    .window.open {
+      display: block;
+    }
+
+    .window-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 9px 12px;
+      color: black;
+      background: white;
+      cursor: move;
+      user-select: none;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 24px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .close-window {
+      border: 0;
+      background: #d00000;
+      color: white;
+      width: 34px;
+      height: 34px;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 4px 4px 0 black;
+    }
+
+    .window-content {
+      padding: 22px;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    .window-content h2 {
+      margin: 0 0 12px;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 44px;
+      color: #d00000;
+      text-transform: uppercase;
+      text-shadow: 3px 3px 0 white, 7px 7px 0 black;
+    }
+
+    .window-content a {
+      color: white;
+      font-weight: 800;
+    }
+
+    @media (max-width: 900px) {
+      body { overflow-y: auto; }
+
+      .menu-wrap { padding: 54px 22px 140px; }
 
       .comic-panel {
         right: -38vw;
@@ -400,8 +358,17 @@
         opacity: 0.9;
       }
 
-      .persona-menu {
-        width: 100%;
+      .desktop-icons {
+        gap: 16px;
+      }
+
+      .desktop-icon {
+        width: 92px;
+      }
+
+      .desktop-icon svg {
+        width: 62px;
+        height: 62px;
       }
 
       .intro-face {
@@ -411,13 +378,6 @@
 
       .press-any-key {
         width: min(82vw, 520px);
-      }
-
-      .sound-button {
-        left: 22px;
-        right: auto;
-        bottom: 50px;
-        font-size: 24px;
       }
     }
   </style>
@@ -447,15 +407,80 @@
         <span>Website</span>
       </h1>
 
-      <nav class="persona-menu">
-        <a class="menu-item active" href="about.html">About Me</a>
-        <a class="menu-item" href="#">Projects</a>
-        <a class="menu-item" href="resume.html">Resume</a>
-        <a class="menu-item" href="#">Contact</a>
-      </nav>
+      <div class="desktop-icons">
+        <button class="desktop-icon" data-window="aboutWindow">
+          <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="24"/><rect x="29" y="27" width="6" height="22"/><circle cx="32" cy="17" r="4"/></svg>
+          <span>about</span>
+        </button>
+
+        <button class="desktop-icon" data-window="linksWindow">
+          <svg viewBox="0 0 64 64"><path d="M25 38l-4 4a11 11 0 0 1-16-16l8-8a11 11 0 0 1 16 0"/><path d="M39 26l4-4a11 11 0 0 1 16 16l-8 8a11 11 0 0 1-16 0"/><path d="M22 42l20-20"/></svg>
+          <span>links</span>
+        </button>
+
+        <button class="desktop-icon" data-window="workWindow">
+          <svg viewBox="0 0 64 64"><path d="M6 18h20l5 7h27v29H6z"/><path d="M6 25h52"/></svg>
+          <span>work</span>
+        </button>
+
+        <button class="desktop-icon" data-window="contactWindow">
+          <svg viewBox="0 0 64 64"><rect x="7" y="16" width="50" height="34"/><path d="M7 18l25 20 25-20"/></svg>
+          <span>contact</span>
+        </button>
+      </div>
     </section>
 
-    <button class="mute-button sound-button" id="muteButton" type="button">Sound On</button>
+    <section class="window" id="aboutWindow" style="left: 48%; top: 18%;">
+      <div class="window-bar">
+        <span>about</span>
+        <button class="close-window">x</button>
+      </div>
+      <div class="window-content">
+        <h2>About Me</h2>
+        <p>hello! i’m ham or hamilton :D</p>
+        <p>i’m a UC Santa Cruz student focused on product, operations, partnerships, gaming, and tech. i like building community-driven experiences that bring people, brands, and ideas together.</p>
+      </div>
+    </section>
+
+    <section class="window" id="linksWindow" style="left: 52%; top: 24%;">
+      <div class="window-bar">
+        <span>links</span>
+        <button class="close-window">x</button>
+      </div>
+      <div class="window-content">
+        <h2>Links</h2>
+        <p><a href="#">LinkedIn</a></p>
+        <p><a href="#">Portfolio</a></p>
+        <p><a href="#">Gaming / community work</a></p>
+      </div>
+    </section>
+
+    <section class="window" id="workWindow" style="left: 46%; top: 28%;">
+      <div class="window-bar">
+        <span>work</span>
+        <button class="close-window">x</button>
+      </div>
+      <div class="window-content">
+        <h2>Work</h2>
+        <p>Current: UCSC, Slug Gaming, Gen.G.</p>
+        <p>Previously: H15DEN, SkyrisAI, Anthos Capital.</p>
+        <p>I’ve worked on gaming events, partnerships, brand engagement, operations, and student community growth.</p>
+      </div>
+    </section>
+
+    <section class="window" id="contactWindow" style="left: 50%; top: 34%;">
+      <div class="window-bar">
+        <span>contact</span>
+        <button class="close-window">x</button>
+      </div>
+      <div class="window-content">
+        <h2>Contact</h2>
+        <p>Want to connect about product, tech, gaming, partnerships, or community work?</p>
+        <p><a href="mailto:hamilton@example.com">hamilton@example.com</a></p>
+      </div>
+    </section>
+
+    <button class="sound-button" id="muteButton" type="button">Sound On</button>
     <div class="bottom-line">© 2026 Hamilton Shea</div>
   </main>
 
@@ -468,11 +493,11 @@
     const clickSound = document.getElementById("clickSound");
     const backgroundMusic = document.getElementById("backgroundMusic");
     const muteButton = document.getElementById("muteButton");
-    const menuItems = document.querySelectorAll(".menu-item");
     const canvas = document.getElementById("waveCanvas");
     const ctx = canvas.getContext("2d");
     let entered = false;
     let time = 0;
+    let topZ = 40;
 
     function resizeCanvas() {
       canvas.width = window.innerWidth * window.devicePixelRatio;
@@ -497,32 +522,23 @@
         for (let x = -6; x < columns; x++) {
           const px = x * spacing;
           const py = y * spacing;
-
           const waveA = Math.sin(x * 0.28 + time * 0.025);
           const waveB = Math.cos(y * 0.22 + time * 0.018);
           const waveC = Math.sin((x + y) * 0.12 + time * 0.02);
-
           const warpX = waveB * 26 + waveC * 16;
           const warpY = waveA * 34 + Math.sin(x * 0.08 + y * 0.18 + time * 0.018) * 22;
-
           const centerX = width * 0.5;
           const centerY = height * 0.48;
           const dx = px - centerX;
           const dy = py - centerY;
           const distance = Math.sqrt(dx * dx + dy * dy);
           const ripple = Math.sin(distance * 0.018 - time * 0.045) * 18;
-
           const finalX = px + warpX + (dx / Math.max(distance, 1)) * ripple;
           const finalY = py + warpY + (dy / Math.max(distance, 1)) * ripple;
-
-          const brightness = 0.45 + Math.sin(x * 0.18 + y * 0.24 + time * 0.035) * 0.35;
-          const fade = Math.max(0.18, 1 - distance / (Math.max(width, height) * 0.75));
-          const alpha = Math.min(1, brightness * fade + 0.15);
-          const size = 1.15 + alpha * 1.1;
-
+          const alpha = Math.min(1, 0.45 + Math.sin(x * 0.18 + y * 0.24 + time * 0.035) * 0.35);
           ctx.beginPath();
           ctx.fillStyle = "rgba(255, 255, 255, " + alpha + ")";
-          ctx.arc(finalX, finalY, size, 0, Math.PI * 2);
+          ctx.arc(finalX, finalY, 1.8, 0, Math.PI * 2);
           ctx.fill();
         }
       }
@@ -553,6 +569,43 @@
       gameScreen.classList.add("active");
     }
 
+    function openWindow(id) {
+      const win = document.getElementById(id);
+      win.classList.add("open");
+      win.style.zIndex = ++topZ;
+      playClick();
+    }
+
+    function closeWindow(win) {
+      win.classList.remove("open");
+      playClick();
+    }
+
+    function makeDraggable(win) {
+      const bar = win.querySelector(".window-bar");
+      let dragging = false;
+      let offsetX = 0;
+      let offsetY = 0;
+
+      bar.addEventListener("pointerdown", event => {
+        dragging = true;
+        win.style.zIndex = ++topZ;
+        offsetX = event.clientX - win.offsetLeft;
+        offsetY = event.clientY - win.offsetTop;
+        bar.setPointerCapture(event.pointerId);
+      });
+
+      bar.addEventListener("pointermove", event => {
+        if (!dragging) return;
+        win.style.left = event.clientX - offsetX + "px";
+        win.style.top = event.clientY - offsetY + "px";
+      });
+
+      bar.addEventListener("pointerup", () => {
+        dragging = false;
+      });
+    }
+
     function toggleMusic() {
       playClick();
       backgroundMusic.muted = !backgroundMusic.muted;
@@ -563,26 +616,21 @@
     drawWave();
     window.addEventListener("resize", resizeCanvas);
 
-    if (window.location.hash === "#select") {
-      entered = true;
-      enterScreen.classList.add("hidden");
-      gameScreen.classList.add("active");
-    }
-
     enterScreen.addEventListener("click", enterSite);
-
     window.addEventListener("keydown", () => {
-      if (!entered) {
-        enterSite();
-      }
+      if (!entered) enterSite();
     });
 
-    menuItems.forEach(item => {
-      item.addEventListener("click", () => {
-        playClick();
-        menuItems.forEach(link => link.classList.remove("active"));
-        item.classList.add("active");
+    document.querySelectorAll(".desktop-icon").forEach(icon => {
+      icon.addEventListener("click", () => openWindow(icon.dataset.window));
+    });
+
+    document.querySelectorAll(".window").forEach(win => {
+      makeDraggable(win);
+      win.addEventListener("pointerdown", () => {
+        win.style.zIndex = ++topZ;
       });
+      win.querySelector(".close-window").addEventListener("click", () => closeWindow(win));
     });
 
     muteButton.addEventListener("click", toggleMusic);
