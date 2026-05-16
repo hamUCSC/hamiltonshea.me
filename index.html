@@ -79,12 +79,26 @@
       object-fit: cover;
       object-position: center top;
       display: block;
-      margin: 0 auto 28px;
+      margin: 0 auto 24px;
       border: none;
       border-radius: 0;
       box-shadow: none;
       background: transparent;
       filter: contrast(1.12) saturate(0.82);
+      animation: floatBlink 2.8s ease-in-out infinite;
+    }
+
+    .welcome-text {
+      margin: 0 auto 24px;
+      font-family: "Segoe UI", "Trebuchet MS", Arial, sans-serif;
+      font-size: clamp(24px, 4vw, 54px);
+      font-weight: 700;
+      color: white;
+      text-shadow:
+        0 0 12px rgba(255,255,255,0.85),
+        0 0 32px rgba(130,160,255,0.6),
+        0 4px 18px black;
+      animation: floatBlink 2.8s ease-in-out infinite;
     }
 
     .press-any-key {
@@ -173,10 +187,10 @@
 
     .ham-character {
       position: absolute;
-      right: -4vw;
-      bottom: -10vh;
-      width: min(64vw, 980px);
-      max-height: 118vh;
+      right: -7vw;
+      bottom: -13vh;
+      width: min(76vw, 1160px);
+      max-height: 130vh;
       object-fit: contain;
       z-index: 5;
       filter: drop-shadow(-14px 14px 0 black);
@@ -323,6 +337,17 @@
       transform: scaleX(1);
     }
 
+    .sound-button {
+      position: fixed;
+      right: 28px;
+      bottom: 24px;
+      z-index: 20;
+      width: auto;
+      min-width: 190px;
+      font-size: 28px;
+      transform: rotate(-4deg);
+    }
+
     .bottom-line {
       position: absolute;
       left: 36px;
@@ -342,7 +367,7 @@
       }
 
       .menu-wrap {
-        padding: 54px 22px 86px;
+        padding: 54px 22px 120px;
       }
 
       .comic-panel {
@@ -357,10 +382,10 @@
       }
 
       .ham-character {
-        right: -42vw;
+        right: -48vw;
         bottom: -8vh;
-        width: 120vw;
-        opacity: 0.85;
+        width: 136vw;
+        opacity: 0.9;
       }
 
       .persona-menu {
@@ -375,6 +400,13 @@
       .press-any-key {
         width: min(82vw, 520px);
       }
+
+      .sound-button {
+        left: 22px;
+        right: auto;
+        bottom: 50px;
+        font-size: 24px;
+      }
     }
   </style>
 </head>
@@ -385,6 +417,7 @@
 
     <div class="enter-content">
       <img class="intro-face" src="logo.jpg" alt="Hamilton Shea" />
+      <div class="welcome-text">Welcome to my website! :D</div>
       <img class="press-any-key" src="press-any-key.png" alt="Press any key" />
     </div>
   </section>
@@ -395,7 +428,7 @@
     <img class="ham-character" src="characterham.png" alt="Hamilton Shea" />
 
     <section class="menu-wrap">
-      <div class="menu-badge">Select</div>
+      <div class="menu-badge">Select a Button</div>
 
       <h1 class="main-title">
         Ham's
@@ -407,10 +440,10 @@
         <a class="menu-item" href="#">Projects</a>
         <a class="menu-item" href="resume.html">Resume</a>
         <a class="menu-item" href="#">Contact</a>
-        <button class="mute-button" id="muteButton" type="button">Mute Music</button>
       </nav>
     </section>
 
+    <button class="mute-button sound-button" id="muteButton" type="button">Sound On</button>
     <div class="bottom-line">© 2026 Hamilton Shea</div>
   </main>
 
@@ -497,6 +530,7 @@
       backgroundMusic.volume = 0.32;
       backgroundMusic.loop = true;
       backgroundMusic.play().catch(() => {});
+      muteButton.textContent = "Sound On";
     }
 
     function enterSite() {
@@ -510,7 +544,7 @@
     function toggleMusic() {
       playClick();
       backgroundMusic.muted = !backgroundMusic.muted;
-      muteButton.textContent = backgroundMusic.muted ? "Unmute Music" : "Mute Music";
+      muteButton.textContent = backgroundMusic.muted ? "Sound Off" : "Sound On";
     }
 
     resizeCanvas();
