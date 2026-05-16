@@ -28,7 +28,7 @@
       display: grid;
       place-items: center;
       overflow: hidden;
-      background: #02030b;
+      background: #000;
       cursor: pointer;
       transition: opacity 0.9s ease, visibility 0.9s ease;
     }
@@ -39,26 +39,6 @@
       pointer-events: none;
     }
 
-    .intro-video {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.82;
-    }
-
-    .enter-screen::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 50% 36%, rgba(90, 120, 255, 0.24), transparent 28%),
-        radial-gradient(circle at 50% 50%, transparent 22%, rgba(0, 0, 0, 0.5) 62%, rgba(0, 0, 0, 0.92) 100%),
-        linear-gradient(to bottom, rgba(0, 0, 30, 0.22), rgba(0, 0, 0, 0.65));
-      z-index: 2;
-    }
-
     .enter-screen::after {
       content: "";
       position: absolute;
@@ -66,13 +46,13 @@
       background:
         repeating-linear-gradient(
           to bottom,
-          rgba(255,255,255,0.035) 0px,
-          rgba(255,255,255,0.035) 1px,
+          rgba(255,255,255,0.03) 0px,
+          rgba(255,255,255,0.03) 1px,
           transparent 1px,
           transparent 5px
         );
       mix-blend-mode: overlay;
-      opacity: 0.42;
+      opacity: 0.35;
       z-index: 3;
       pointer-events: none;
     }
@@ -80,54 +60,34 @@
     .enter-content {
       position: relative;
       z-index: 5;
+      width: 100%;
       text-align: center;
       padding: 24px;
-      text-shadow: 0 0 18px rgba(0,0,0,0.95);
     }
 
-    .enter-logo {
-      width: 132px;
-      height: 132px;
-      margin: 0 auto 34px;
-      border-radius: 18px;
-      object-fit: cover;
-      object-position: center top;
-      border: 1px solid rgba(210, 225, 255, 0.7);
-      box-shadow:
-        0 0 30px rgba(85, 120, 255, 0.85),
-        0 0 80px rgba(40, 70, 255, 0.45);
-      filter: saturate(0.75) contrast(1.15);
-    }
-
-    .enter-title {
-      margin: 0;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(48px, 8vw, 118px);
-      font-weight: normal;
-      letter-spacing: 10px;
-      text-transform: uppercase;
-      color: #f4f2ff;
-      text-shadow:
-        2px 0 0 rgba(255, 60, 60, 0.45),
-        -2px 0 0 rgba(60, 150, 255, 0.5),
-        0 0 24px rgba(120, 150, 255, 0.7),
-        0 6px 26px black;
-    }
-
-    .enter-subtitle {
-      margin-top: 10px;
-      font-size: 18px;
-      letter-spacing: 7px;
-      text-transform: uppercase;
-      color: #b8c8ff;
+    .intro-poster {
+      width: min(94vw, 1500px);
+      max-height: 82vh;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto;
+      filter:
+        drop-shadow(0 0 26px rgba(90, 130, 255, 0.55))
+        drop-shadow(0 0 70px rgba(30, 60, 200, 0.35));
     }
 
     .enter-prompt {
-      margin-top: 70px;
-      font-size: 15px;
+      margin-top: 28px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 18px;
       letter-spacing: 4px;
       text-transform: uppercase;
-      color: #f7f7ff;
+      color: #f7f3ff;
+      text-shadow:
+        1px 0 0 rgba(255, 45, 45, 0.4),
+        -1px 0 0 rgba(40, 140, 255, 0.45),
+        0 0 14px rgba(130, 160, 255, 0.75),
+        0 3px 12px black;
       animation: blink 1.4s infinite;
     }
 
@@ -156,7 +116,7 @@
       background:
         radial-gradient(circle at 70% 45%, rgba(140, 0, 0, 0.35), transparent 28%),
         linear-gradient(to right, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.68), rgba(0, 0, 0, 0.92)),
-        url("grass.jpg") center center / cover fixed no-repeat;
+        url("background2nd") center center / cover fixed no-repeat;
     }
 
     body::before {
@@ -403,12 +363,8 @@
 
 <body>
   <section class="enter-screen" id="enterScreen">
-    <video class="intro-video" src="intro.mp4" autoplay muted loop playsinline></video>
-
     <div class="enter-content">
-      <img class="enter-logo" src="logo.jpg" alt="ham logo" />
-      <h1 class="enter-title">ham</h1>
-      <div class="enter-subtitle">website</div>
+      <img class="intro-poster" src="HAMILTON (1).png" alt="Hamilton Shea intro" />
       <div class="enter-prompt">click any button to enter</div>
     </div>
 
@@ -464,6 +420,7 @@
     let entered = false;
 
     function playClick() {
+      if (!entered) return;
       clickSound.currentTime = 0;
       clickSound.volume = 0.45;
       clickSound.play().catch(() => {});
@@ -478,7 +435,6 @@
     function enterSite() {
       if (entered) return;
       entered = true;
-      playClick();
       startMusic();
       enterScreen.classList.add("hidden");
       gameScreen.classList.add("active");
@@ -492,7 +448,7 @@
       }
     });
 
-    document.querySelectorAll("a, button").forEach(item => {
+    document.querySelectorAll(".menu a").forEach(item => {
       item.addEventListener("click", playClick);
     });
   </script>
