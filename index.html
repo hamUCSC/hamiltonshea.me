@@ -550,6 +550,12 @@
     resizeCanvas();
     drawWave();
     window.addEventListener("resize", resizeCanvas);
+    
+    if (window.location.hash === "#select") {
+      entered = true;
+      enterScreen.classList.add("hidden");
+      gameScreen.classList.add("active");
+    }
 
     enterScreen.addEventListener("click", enterSite);
 
