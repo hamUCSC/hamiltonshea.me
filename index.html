@@ -39,24 +39,6 @@
       pointer-events: none;
     }
 
-    .enter-screen::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        repeating-linear-gradient(
-          to bottom,
-          rgba(255,255,255,0.03) 0px,
-          rgba(255,255,255,0.03) 1px,
-          transparent 1px,
-          transparent 5px
-        );
-      mix-blend-mode: overlay;
-      opacity: 0.35;
-      z-index: 3;
-      pointer-events: none;
-    }
-
     .enter-content {
       position: relative;
       z-index: 5;
@@ -89,17 +71,6 @@
         0 0 14px rgba(130, 160, 255, 0.75),
         0 3px 12px black;
       animation: blink 1.4s infinite;
-    }
-
-    .version {
-      position: fixed;
-      right: 28px;
-      bottom: 22px;
-      z-index: 6;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 24px;
-      color: #f2e9d2;
-      text-shadow: 0 2px 8px black;
     }
 
     @keyframes blink {
@@ -165,52 +136,8 @@
       transform: scale(1);
     }
 
-    .brand {
-      position: absolute;
-      top: 34px;
-      left: 42px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      opacity: 0.95;
-    }
-
-    .logo {
-      width: 78px;
-      height: 78px;
-      border-radius: 8px;
-      object-fit: cover;
-      object-position: center top;
-      border: 1px solid rgba(255, 255, 255, 0.55);
-      box-shadow:
-        0 0 24px rgba(160, 0, 0, 0.8),
-        inset 0 1px 0 rgba(255, 255, 255, 0.4);
-    }
-
-    .brand-text {
-      line-height: 1.1;
-      text-shadow: 0 2px 8px black;
-    }
-
-    .brand-text strong {
-      display: block;
-      font-size: 18px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    .brand-text span {
-      display: block;
-      margin-top: 4px;
-      font-size: 12px;
-      color: #c9c9c9;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
     .title-area {
       max-width: 520px;
-      padding-top: 90px;
     }
 
     .eyebrow {
@@ -258,9 +185,11 @@
       gap: 7px;
     }
 
-    .menu a {
+    .menu a,
+    .mute-button {
       position: relative;
       display: block;
+      width: 100%;
       padding: 11px 16px 11px 28px;
       color: #dadada;
       text-decoration: none;
@@ -269,12 +198,17 @@
       text-transform: uppercase;
       background:
         linear-gradient(to right, rgba(120, 0, 0, 0.55), rgba(15, 15, 15, 0.62), rgba(0, 0, 0, 0));
+      border: 0;
       border-left: 3px solid rgba(180, 0, 0, 0.85);
+      text-align: left;
       text-shadow: 0 2px 6px black;
       transition: 0.18s ease;
+      cursor: pointer;
+      font-family: inherit;
     }
 
-    .menu a::before {
+    .menu a::before,
+    .mute-button::before {
       content: "";
       position: absolute;
       left: 10px;
@@ -286,7 +220,8 @@
       box-shadow: 0 0 10px rgba(255, 0, 0, 0.85);
     }
 
-    .menu a:hover {
+    .menu a:hover,
+    .mute-button:hover {
       color: white;
       padding-left: 36px;
       background:
@@ -297,16 +232,16 @@
     .preview {
       justify-self: end;
       width: min(620px, 44vw);
-      min-height: 370px;
+      min-height: 430px;
       border: 1px solid rgba(255, 255, 255, 0.18);
       background:
-        linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.75)),
-        url("banner.png") center / cover no-repeat;
+        linear-gradient(rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.55)),
+        url("logo.jpg") center top / cover no-repeat;
       box-shadow:
         0 0 60px rgba(0, 0, 0, 0.85),
-        inset 0 0 80px rgba(0, 0, 0, 0.75);
-      opacity: 0.82;
-      filter: contrast(1.12) saturate(0.78);
+        inset 0 0 80px rgba(0, 0, 0, 0.62);
+      opacity: 0.9;
+      filter: contrast(1.08) saturate(0.85);
     }
 
     .bottom-bar {
@@ -316,6 +251,7 @@
       bottom: 28px;
       display: flex;
       justify-content: space-between;
+      align-items: center;
       gap: 20px;
       color: #a7a7a7;
       font-size: 12px;
@@ -324,23 +260,15 @@
       text-shadow: 0 2px 6px black;
     }
 
-    .status {
-      color: #d7d7d7;
-    }
-
-    .status strong {
-      color: #b90000;
-      font-weight: 700;
+    .bottom-mute {
+      width: auto;
+      min-width: 170px;
     }
 
     @media (max-width: 900px) {
       .game-screen {
         grid-template-columns: 1fr;
-        padding: 130px 28px 90px;
-      }
-
-      .brand {
-        left: 28px;
+        padding: 90px 28px 120px;
       }
 
       .preview {
@@ -356,6 +284,7 @@
         left: 28px;
         right: 28px;
         flex-direction: column;
+        align-items: flex-start;
       }
     }
   </style>
@@ -367,19 +296,9 @@
       <img class="intro-poster" src="HAMILTON (1).png" alt="Hamilton Shea intro" />
       <div class="enter-prompt">click any button to enter</div>
     </div>
-
-    <div class="version">Version: 1.0.6</div>
   </section>
 
   <main class="game-screen" id="gameScreen">
-    <div class="brand">
-      <img class="logo" src="logo.jpg" alt="ham logo" />
-      <div class="brand-text">
-        <strong>ham archive</strong>
-        <span>personal site</span>
-      </div>
-    </div>
-
     <section class="title-area">
       <p class="eyebrow">welcome to</p>
       <h1>
@@ -405,7 +324,7 @@
 
     <div class="bottom-bar">
       <div>© 2026 hamilton shea</div>
-      <div class="status">current: <strong>ucsc</strong> / <strong>slug gaming</strong> / <strong>gen.g</strong></div>
+      <button class="mute-button bottom-mute" id="muteButton" type="button">mute music</button>
     </div>
   </main>
 
@@ -417,6 +336,7 @@
     const gameScreen = document.getElementById("gameScreen");
     const clickSound = document.getElementById("clickSound");
     const backgroundMusic = document.getElementById("backgroundMusic");
+    const muteButton = document.getElementById("muteButton");
     let entered = false;
 
     function playClick() {
@@ -440,6 +360,12 @@
       gameScreen.classList.add("active");
     }
 
+    function toggleMusic() {
+      playClick();
+      backgroundMusic.muted = !backgroundMusic.muted;
+      muteButton.textContent = backgroundMusic.muted ? "unmute music" : "mute music";
+    }
+
     enterScreen.addEventListener("click", enterSite);
 
     window.addEventListener("keydown", () => {
@@ -451,6 +377,8 @@
     document.querySelectorAll(".menu a").forEach(item => {
       item.addEventListener("click", playClick);
     });
+
+    muteButton.addEventListener("click", toggleMusic);
   </script>
 </body>
 </html>
