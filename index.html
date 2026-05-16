@@ -140,8 +140,8 @@
 
     .ham-character {
       position: absolute;
-      right: -6vw;
-      bottom: -14vh;
+      right: -7vw;
+      bottom: -13vh;
       width: min(76vw, 1160px);
       max-height: 130vh;
       object-fit: contain;
@@ -149,6 +149,7 @@
       filter: drop-shadow(-14px 14px 0 black);
       transform: rotate(-4deg);
     }
+
     .menu-wrap {
       position: relative;
       z-index: 8;
@@ -235,30 +236,6 @@
       text-shadow: 2px 2px 0 black;
     }
 
-    .sound-button {
-      position: fixed;
-      right: 34px;
-      bottom: 42px;
-      z-index: 50;
-      width: auto;
-      min-width: 190px;
-      padding: 8px 18px;
-      color: white;
-      background: transparent;
-      border: 0;
-      font-family: Impact, "Arial Black", sans-serif;
-      font-size: 28px;
-      text-transform: uppercase;
-      text-shadow:
-        -3px -3px 0 black,
-        3px -3px 0 black,
-        -3px 3px 0 black,
-        3px 3px 0 black,
-        7px 7px 0 black;
-      cursor: pointer;
-      transform: rotate(-8deg);
-    }
-
     .bottom-line {
       position: absolute;
       left: 36px;
@@ -283,9 +260,7 @@
       font-family: "Segoe UI", Arial, sans-serif;
     }
 
-    .window.open {
-      display: block;
-    }
+    .window.open { display: block; }
 
     .window-bar {
       display: flex;
@@ -335,49 +310,79 @@
       font-weight: 800;
     }
 
+    .radio-player {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 60;
+      width: 292px;
+      padding: 14px;
+      color: white;
+      background: rgba(0, 0, 0, 0.86);
+      border: 4px solid white;
+      box-shadow: 8px 8px 0 black, 13px 13px 0 #d00000;
+      font-family: "Segoe UI", Arial, sans-serif;
+      transform: rotate(-3deg);
+    }
+
+    .radio-title {
+      width: fit-content;
+      margin-bottom: 6px;
+      padding: 2px 10px;
+      color: black;
+      background: white;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 24px;
+      text-transform: uppercase;
+      box-shadow: 4px 4px 0 #d00000;
+    }
+
+    .track-name {
+      margin-bottom: 10px;
+      font-size: 13px;
+      line-height: 1.25;
+      color: #eee;
+      text-shadow: 0 2px 4px black;
+    }
+
+    .radio-controls {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+
+    .radio-controls button {
+      padding: 6px 5px;
+      color: white;
+      background: #d00000;
+      border: 2px solid white;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 15px;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 3px 3px 0 black;
+    }
+
+    .radio-controls button:hover {
+      color: black;
+      background: white;
+    }
+
     @media (max-width: 900px) {
       body { overflow-y: auto; }
-
-      .menu-wrap { padding: 54px 22px 140px; }
-
-      .comic-panel {
-        right: -38vw;
-        width: 88vw;
-        opacity: 0.55;
-      }
-
-      .red-slab {
-        left: 38vw;
-        width: 46vw;
-      }
-
-      .ham-character {
-        right: -48vw;
-        bottom: -8vh;
-        width: 136vw;
-        opacity: 0.9;
-      }
-
-      .desktop-icons {
-        gap: 16px;
-      }
-
-      .desktop-icon {
-        width: 92px;
-      }
-
-      .desktop-icon svg {
-        width: 62px;
-        height: 62px;
-      }
-
-      .intro-face {
-        width: min(72vw, 330px);
-        height: min(72vw, 330px);
-      }
-
-      .press-any-key {
-        width: min(82vw, 520px);
+      .menu-wrap { padding: 54px 22px 160px; }
+      .comic-panel { right: -38vw; width: 88vw; opacity: 0.55; }
+      .red-slab { left: 38vw; width: 46vw; }
+      .ham-character { right: -48vw; bottom: -8vh; width: 136vw; opacity: 0.9; }
+      .desktop-icons { gap: 16px; }
+      .desktop-icon { width: 92px; }
+      .desktop-icon svg { width: 62px; height: 62px; }
+      .intro-face { width: min(72vw, 330px); height: min(72vw, 330px); }
+      .press-any-key { width: min(82vw, 520px); }
+      .radio-player {
+        left: 20px;
+        right: auto;
+        width: min(300px, calc(100vw - 40px));
       }
     }
   </style>
@@ -480,11 +485,22 @@
       </div>
     </section>
 
-    <button class="sound-button" id="muteButton" type="button">Sound On</button>
+    <div class="radio-player">
+      <div class="radio-title">radio</div>
+      <div class="track-name" id="trackName">Resident Evil 6 Theme</div>
+
+      <div class="radio-controls">
+        <button id="prevTrack" type="button">prev</button>
+        <button id="playPause" type="button">pause</button>
+        <button id="nextTrack" type="button">next</button>
+        <button id="muteButton" type="button">mute</button>
+      </div>
+    </div>
+
     <div class="bottom-line">© 2026 Hamilton Shea</div>
   </main>
 
-  <audio id="backgroundMusic" src="Resident Evil 6 Soundtrack - Main Theme Leon  Helena.mp3" preload="auto" loop></audio>
+  <audio id="backgroundMusic" preload="auto" loop></audio>
   <audio id="clickSound" src="click.mp3" preload="auto"></audio>
 
   <script>
@@ -492,12 +508,33 @@
     const gameScreen = document.getElementById("gameScreen");
     const clickSound = document.getElementById("clickSound");
     const backgroundMusic = document.getElementById("backgroundMusic");
+    const trackName = document.getElementById("trackName");
+    const prevTrack = document.getElementById("prevTrack");
+    const nextTrack = document.getElementById("nextTrack");
+    const playPause = document.getElementById("playPause");
     const muteButton = document.getElementById("muteButton");
     const canvas = document.getElementById("waveCanvas");
     const ctx = canvas.getContext("2d");
+
     let entered = false;
     let time = 0;
     let topZ = 40;
+    let currentTrack = 0;
+
+    const tracks = [
+      {
+        name: "Resident Evil 6 Theme",
+        src: "Resident Evil 6 Soundtrack - Main Theme Leon  Helena.mp3"
+      },
+      {
+        name: "Track 2",
+        src: "track2.mp3"
+      },
+      {
+        name: "Track 3",
+        src: "track3.mp3"
+      }
+    ];
 
     function resizeCanvas() {
       canvas.width = window.innerWidth * window.devicePixelRatio;
@@ -536,6 +573,7 @@
           const finalX = px + warpX + (dx / Math.max(distance, 1)) * ripple;
           const finalY = py + warpY + (dy / Math.max(distance, 1)) * ripple;
           const alpha = Math.min(1, 0.45 + Math.sin(x * 0.18 + y * 0.24 + time * 0.035) * 0.35);
+
           ctx.beginPath();
           ctx.fillStyle = "rgba(255, 255, 255, " + alpha + ")";
           ctx.arc(finalX, finalY, 1.8, 0, Math.PI * 2);
@@ -554,11 +592,49 @@
       clickSound.play().catch(() => {});
     }
 
-    function startMusic() {
+    function loadTrack(index) {
+      currentTrack = (index + tracks.length) % tracks.length;
+      backgroundMusic.src = tracks[currentTrack].src;
+      trackName.textContent = tracks[currentTrack].name;
       backgroundMusic.volume = 0.32;
       backgroundMusic.loop = true;
-      backgroundMusic.play().catch(() => {});
-      muteButton.textContent = "Sound On";
+
+      if (entered) {
+        backgroundMusic.play().catch(() => {});
+        playPause.textContent = "pause";
+      }
+    }
+
+    function startMusic() {
+      loadTrack(currentTrack);
+    }
+
+    function nextSong() {
+      playClick();
+      loadTrack(currentTrack + 1);
+    }
+
+    function prevSong() {
+      playClick();
+      loadTrack(currentTrack - 1);
+    }
+
+    function togglePlay() {
+      playClick();
+
+      if (backgroundMusic.paused) {
+        backgroundMusic.play().catch(() => {});
+        playPause.textContent = "pause";
+      } else {
+        backgroundMusic.pause();
+        playPause.textContent = "play";
+      }
+    }
+
+    function toggleMusic() {
+      playClick();
+      backgroundMusic.muted = !backgroundMusic.muted;
+      muteButton.textContent = backgroundMusic.muted ? "unmute" : "mute";
     }
 
     function enterSite() {
@@ -606,12 +682,6 @@
       });
     }
 
-    function toggleMusic() {
-      playClick();
-      backgroundMusic.muted = !backgroundMusic.muted;
-      muteButton.textContent = backgroundMusic.muted ? "Sound Off" : "Sound On";
-    }
-
     resizeCanvas();
     drawWave();
     window.addEventListener("resize", resizeCanvas);
@@ -633,8 +703,11 @@
       win.querySelector(".close-window").addEventListener("click", () => closeWindow(win));
     });
 
+    prevTrack.addEventListener("click", prevSong);
+    nextTrack.addEventListener("click", nextSong);
+    playPause.addEventListener("click", togglePlay);
     muteButton.addEventListener("click", toggleMusic);
+    backgroundMusic.addEventListener("ended", nextSong);
   </script>
 </body>
 </html>
-```
