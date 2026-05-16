@@ -1,374 +1,324 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>ham's website</title>
-      <link rel="icon" type="image/jpeg" href="logo.jpg" />
+Yes. Here’s a full copy-paste version that makes your site feel like a dark cinematic game start menu, using your existing `logo.jpg`, `grass.jpg`, `banner.png`, and `click.mp3`.
 
-      <style>
-        * {
-          box-sizing: border-box;
-        }
+Copy only from `<!DOCTYPE html>` to `</html>`.
 
-body {
-  margin: 0;
-  min-height: 100vh;
-  font-family: "Trebuchet MS", Arial, sans-serif;
-  color: white;
-  background-color: #303030;
-  background:
-    linear-gradient(rgba(0, 18, 4, 0.02), rgba(0, 12, 3, 0.1)),
-    url("grass.jpg") no-repeat center center fixed;
-  background-size: contain;
-}
-        .page {
-          width: 960px;
-          max-width: calc(100% - 36px);
-          margin: 58px auto;
-          border-radius: 40px 40px 18px 18px;
-          background: rgba(8, 20, 10, 0.72);
-          border: 1px solid rgba(255, 255, 255, 0.42);
-          box-shadow:
-            0 0 35px rgba(0, 0, 0, 0.8),
-            inset 0 1px 0 rgba(255, 255, 255, 0.55);
-          overflow: hidden;
-        }
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ham's website</title>
+  <link rel="icon" type="image/jpeg" href="logo.jpg" />
 
-        .top-bar {
-          padding: 22px 34px;
-          min-height: 112px;
-          background:
-            linear-gradient(to bottom, rgba(255,255,255,0.7), rgba(255,255,255,0.1) 32%, rgba(0,0,0,0.9) 70%);
-          display: flex;
-          align-items: center;
-          gap: 18px;
-        }
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-        .logo {
-          width: 78px;
-          height: 78px;
-          border-radius: 16px;
-          object-fit: cover;
-          object-position: center top;
-          background: white;
-          border: 1px solid rgba(255,255,255,0.65);
-          box-shadow:
-            0 0 24px rgba(55,255,95,0.85),
-            inset 0 2px 8px rgba(255,255,255,0.5);
-        }
+    html,
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", "Trebuchet MS", Arial, sans-serif;
+      color: white;
+      background: #050505;
+      overflow-x: hidden;
+    }
 
-        .title h1 {
-          margin: 0;
-          font-size: 31px;
-          font-weight: normal;
-          text-shadow: 0 2px 4px black;
-        }
+    body {
+      background:
+        radial-gradient(circle at 70% 45%, rgba(140, 0, 0, 0.35), transparent 28%),
+        linear-gradient(to right, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.68), rgba(0, 0, 0, 0.92)),
+        url("grass.jpg") center center / cover fixed no-repeat;
+    }
 
-        .title p {
-          margin: 4px 0 0;
-          font-size: 15px;
-          color: #f3fff0;
-          text-shadow: 0 1px 2px black;
-        }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.035) 0px,
+          rgba(255, 255, 255, 0.035) 1px,
+          transparent 1px,
+          transparent 4px
+        );
+      mix-blend-mode: overlay;
+      opacity: 0.45;
+      z-index: 5;
+    }
 
-        .content-wrap {
-          display: grid;
-          grid-template-columns: 130px 1fr;
-          gap: 12px;
-          padding: 12px;
-        }
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at center, transparent 35%, rgba(0, 0, 0, 0.72) 100%);
+      z-index: 4;
+    }
 
-        .sidebar {
-          padding: 7px;
-          background: rgba(0, 0, 0, 0.38);
-          border: 1px solid rgba(255,255,255,0.25);
-          border-radius: 8px;
-          box-shadow: inset 0 0 20px rgba(0,0,0,0.55);
-        }
+    .screen {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: minmax(320px, 520px) 1fr;
+      align-items: center;
+      padding: 54px 70px;
+    }
 
-        .side-heading {
-          text-align: center;
-          font-weight: bold;
-          font-size: 12px;
-          padding: 5px;
-          margin-bottom: 6px;
-          border-radius: 4px;
-          background: linear-gradient(to bottom, #777, #222 45%, #000);
-          border: 1px solid rgba(255,255,255,0.35);
-          text-shadow: 0 1px 2px black;
-        }
+    .brand {
+      position: absolute;
+      top: 34px;
+      left: 42px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      opacity: 0.95;
+    }
 
-        .nav-button {
-          display: block;
-          color: white;
-          text-decoration: none;
-          font-size: 12px;
-          font-weight: bold;
-          padding: 6px 8px;
-          margin: 5px 0;
-          border-radius: 5px;
-          border: 1px solid rgba(255,255,255,0.28);
-          background:
-            linear-gradient(to bottom, rgba(255,255,255,0.55), rgba(40,100,42,0.95) 42%, rgba(5,28,9,0.95));
-          box-shadow:
-            inset 0 1px 0 rgba(255,255,255,0.55),
-            0 1px 2px rgba(0,0,0,0.9);
-          text-shadow: 0 1px 2px black;
-        }
+    .logo {
+      width: 78px;
+      height: 78px;
+      border-radius: 8px;
+      object-fit: cover;
+      object-position: center top;
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      box-shadow:
+        0 0 24px rgba(160, 0, 0, 0.8),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    }
 
-        .nav-button:hover {
-          background:
-            linear-gradient(to bottom, rgba(255,255,255,0.75), rgba(76,210,68,0.98) 45%, rgba(8,78,18,0.98));
-          color: #efffee;
-        }
+    .brand-text {
+      line-height: 1.1;
+      text-shadow: 0 2px 8px black;
+    }
 
-        .main {
-          border-radius: 8px;
-          border: 1px solid rgba(255,255,255,0.26);
-          background: rgba(6, 18, 8, 0.58);
-          padding: 9px;
-          box-shadow: inset 0 0 20px rgba(0,0,0,0.55);
-        }
+    .brand-text strong {
+      display: block;
+      font-size: 18px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
 
-        .section-title {
-          text-align: center;
-          padding: 6px;
-          margin-bottom: 10px;
-          border-radius: 4px;
-          background:
-            linear-gradient(to bottom, #cfcfcf, #555 34%, #141414 70%, #030303);
-          border: 1px solid rgba(255,255,255,0.38);
-          text-shadow: 0 1px 2px black;
-          font-size: 15px;
-          text-transform: lowercase;
-        }
+    .brand-text span {
+      display: block;
+      margin-top: 4px;
+      font-size: 12px;
+      color: #c9c9c9;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
 
-        .hero {
-          min-height: 235px;
-          border-radius: 7px;
-          border: 1px solid rgba(255,255,255,0.32);
-          background: url("banner.png");
-          background-size: cover;
-          background-position: center;
-          background-repeat: no-repeat;
-          box-shadow:
-            inset 0 0 26px rgba(0,0,0,0.35),
-            0 1px 0 rgba(255,255,255,0.18);
-        }
+    .title-area {
+      max-width: 520px;
+      padding-top: 90px;
+    }
 
-        .panel {
-          margin-top: 10px;
-          padding: 18px;
-          border-radius: 7px;
-          background: rgba(0, 0, 0, 0.52);
-          border: 1px solid rgba(255,255,255,0.24);
-          box-shadow: inset 0 1px 0 rgba(255,255,255,0.18);
-          line-height: 1.62;
-          font-size: 14px;
-        }
+    .eyebrow {
+      margin: 0 0 10px;
+      color: #a8a8a8;
+      font-size: 13px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
 
-        .panel h3 {
-          margin-top: 0;
-          color: #9cff91;
-          text-shadow: 0 1px 2px black;
-          text-transform: lowercase;
-          font-size: 18px;
-        }
+    h1 {
+      margin: 0;
+      font-size: clamp(58px, 8vw, 108px);
+      line-height: 0.85;
+      font-weight: 300;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-shadow:
+        0 0 14px rgba(255, 255, 255, 0.15),
+        0 5px 18px black;
+    }
 
-        .panel a {
-          color: #7CFC00;
-          font-weight: bold;
-          text-decoration: none;
-          text-shadow: 0 0 5px rgba(124, 252, 0, 0.55);
-        }
+    h1 span {
+      display: block;
+      color: #b90000;
+      font-weight: 700;
+      letter-spacing: 8px;
+      text-shadow:
+        0 0 12px rgba(255, 0, 0, 0.65),
+        0 4px 16px black;
+    }
 
-        .panel a:hover {
-          text-decoration: underline;
-        }
+    .subtitle {
+      max-width: 430px;
+      margin: 22px 0 34px;
+      color: #d7d7d7;
+      font-size: 15px;
+      line-height: 1.6;
+      text-shadow: 0 2px 6px black;
+    }
 
-        .status-lines {
-          margin: 18px 0;
-        }
+    .menu {
+      width: 320px;
+      display: grid;
+      gap: 7px;
+    }
 
-        .status-lines p {
-          margin: 8px 0;
-          font-size: 18px;
-          color: #9cff91;
-          text-shadow: 0 1px 2px black;
-        }
+    .menu a {
+      position: relative;
+      display: block;
+      padding: 11px 16px 11px 28px;
+      color: #dadada;
+      text-decoration: none;
+      font-size: 15px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background:
+        linear-gradient(to right, rgba(120, 0, 0, 0.55), rgba(15, 15, 15, 0.62), rgba(0, 0, 0, 0));
+      border-left: 3px solid rgba(180, 0, 0, 0.85);
+      text-shadow: 0 2px 6px black;
+      transition: 0.18s ease;
+    }
 
-        .status-label {
-          color: #7CFC00;
-          font-weight: bold;
-        }
+    .menu a::before {
+      content: "";
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      width: 7px;
+      height: 7px;
+      background: #b90000;
+      transform: translateY(-50%) rotate(45deg);
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.85);
+    }
 
-        .tag {
-          display: inline-block;
-          margin-left: 8px;
-          padding: 4px 10px;
-          border-radius: 5px;
-          font-size: 13px;
-          color: #efffee;
-          background:
-            linear-gradient(to bottom, rgba(116, 230, 93, 0.5), rgba(26, 103, 31, 0.9));
-          border: 1px solid rgba(180, 255, 150, 0.35);
-          box-shadow:
-            inset 0 1px 0 rgba(255,255,255,0.25),
-            0 0 8px rgba(80,255,80,0.18);
-          vertical-align: middle;
-        }
+    .menu a:hover {
+      color: white;
+      padding-left: 36px;
+      background:
+        linear-gradient(to right, rgba(190, 0, 0, 0.75), rgba(35, 35, 35, 0.72), rgba(0, 0, 0, 0));
+      border-left-color: white;
+    }
 
-        .footer {
-          text-align: center;
-          padding: 12px;
-          font-size: 12px;
-          color: #d8ffd5;
-          background: rgba(0,0,0,0.38);
-          border-top: 1px solid rgba(255,255,255,0.18);
-          text-shadow: 0 1px 2px black;
-        }
+    .preview {
+      justify-self: end;
+      width: min(620px, 44vw);
+      min-height: 370px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background:
+        linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.75)),
+        url("banner.png") center / cover no-repeat;
+      box-shadow:
+        0 0 60px rgba(0, 0, 0, 0.85),
+        inset 0 0 80px rgba(0, 0, 0, 0.75);
+      opacity: 0.82;
+      filter: contrast(1.12) saturate(0.78);
+    }
 
-        @media (max-width: 720px) {
-          body {
-            background-size: cover;
-          }
+    .bottom-bar {
+      position: absolute;
+      left: 42px;
+      right: 42px;
+      bottom: 28px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      color: #a7a7a7;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-shadow: 0 2px 6px black;
+    }
 
-          .page {
-            margin: 24px auto;
-          }
+    .status {
+      color: #d7d7d7;
+    }
 
-          .top-bar {
-            min-height: 96px;
-          }
+    .status strong {
+      color: #b90000;
+      font-weight: 700;
+    }
 
-          .logo {
-            width: 64px;
-            height: 64px;
-          }
+    @media (max-width: 900px) {
+      .screen {
+        grid-template-columns: 1fr;
+        padding: 130px 28px 90px;
+      }
 
-          .content-wrap {
-            grid-template-columns: 1fr;
-          }
+      .brand {
+        left: 28px;
+      }
 
-          .hero {
-            min-height: 180px;
-          }
+      .preview {
+        display: none;
+      }
 
-          .status-lines p {
-            font-size: 16px;
-          }
+      .menu {
+        width: 100%;
+        max-width: 360px;
+      }
 
-          .tag {
-            margin-top: 6px;
-          }
-        }
-      </style>
-    </head>
+      .bottom-bar {
+        left: 28px;
+        right: 28px;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
 
-    <body>
-      <div class="page">
-        <header class="top-bar">
-          <img class="logo" src="logo.jpg" alt="ham logo" />
-          <div class="title">
-            <h1>ham's website</h1>
-            <p>personal site, projects, links, and internet artifacts</p>
-          </div>
-        </header>
-
-        <div class="content-wrap">
-          <aside class="sidebar">
-            <div class="side-heading">main content</div>
-            <a class="nav-button" href="#">introduction</a>
-            <a class="nav-button" href="#">about</a>
-            <a class="nav-button" href="#">projects</a>
-            <a class="nav-button" href="resume.html">resume</a>
-            <a class="nav-button" href="#">contact</a>
-
-            <div class="side-heading" style="margin-top: 14px;">fun stuff</div>
-            <a class="nav-button" href="#">blog</a>
-            <a class="nav-button" href="#">photos</a>
-            <a class="nav-button" href="#">links</a>
-            <a class="nav-button" href="#">guestbook</a>
-          </aside>
-
-          <main class="main">
-            <div class="section-title">introduction page</div>
-
-            <section class="hero"></section>
-
-            <section class="panel">
-              <h3>about me</h3>
-
-              <p>
-                hello! i’m ham or hamilton :D
-              </p>
-
-              <p>
-                i’m a uc santa cruz student focused on
-                <a href="#">product</a>, <a href="#">operations</a>, and
-                <a href="#">partnerships</a> within <a href="#">gaming</a> and
-                <a href="#">tech</a>. i am interested in product and
-                <a href="#">community-driven work</a> that brings users, brands,
-                and communities together through
-                <a href="#">strategic collaboration</a>,
-                <a href="#">authentic engagement</a>, and
-                <a href="#">thoughtful user experiences</a>.
-              </p>
-
-              <div class="status-lines">
-                <p>
-                  <span class="status-label">current:</span>
-                  <span class="tag">UCSC</span>
-                  <span class="tag">SLUG GAMING</span>
-                  <span class="tag">GEN.G</span>
-                </p>
-
-                <p>
-                  <span class="status-label">previously at:</span>
-                  <span class="tag">H15DEN</span>
-                  <span class="tag">SKYRISAI</span>
-                  <span class="tag">ANTHOS CAPITAL</span>
-                </p>
-              </div>
-
-              <p>
-                i’ve managed the largest <a href="#">gaming/esports community</a>
-                on campus while also collaborating on initiatives with companies
-                such as <a href="#">razer</a>, <a href="#">corsair</a>,
-                <a href="#">nvidia</a>, <a href="#">red bull</a>,
-                <a href="#">gen.g</a>, <a href="#">nrg</a>,
-                <a href="#">team liquid</a>, and
-                <a href="#">extra life charity</a>, supporting events that
-                increased participation and <a href="#">brand engagement</a>.
-              </p>
-
-              <p>
-                i am more than happy to connect with you if you’re passionate about
-                <a href="#">product</a>, <a href="#">tech</a>, and
-                <a href="#">gaming</a>!
-              </p>
-            </section>
-          </main>
-        </div>
-
-        <footer class="footer">
-          © 2026 hamilton shea • i hope you like my website _(:Ⅰ」∠)_
-        </footer>
+<body>
+  <div class="screen">
+    <div class="brand">
+      <img class="logo" src="logo.jpg" alt="ham logo" />
+      <div class="brand-text">
+        <strong>ham archive</strong>
+        <span>personal site</span>
       </div>
+    </div>
 
-      <audio id="clickSound" src="click.mp3" preload="auto"></audio>
+    <main class="title-area">
+      <p class="eyebrow">welcome to</p>
+      <h1>
+        ham's
+        <span>website</span>
+      </h1>
 
-      <script>
-        const clickSound = document.getElementById("clickSound");
+      <p class="subtitle">
+        projects, links, internet artifacts, gaming work, product thoughts,
+        and everything else worth saving.
+      </p>
 
-        document.querySelectorAll("a, button, .nav-button").forEach(item => {
-          item.addEventListener("click", () => {
-            clickSound.currentTime = 0;
-            clickSound.volume = 0.45;
-            clickSound.play();
-          });
-        });
-      </script>
-    </body>
-    </html>
+      <nav class="menu">
+        <a href="#">start</a>
+        <a href="#">about</a>
+        <a href="#">projects</a>
+        <a href="resume.html">resume</a>
+        <a href="#">contact</a>
+      </nav>
+    </main>
+
+    <section class="preview"></section>
+
+    <div class="bottom-bar">
+      <div>© 2026 hamilton shea</div>
+      <div class="status">current: <strong>ucsc</strong> / <strong>slug gaming</strong> / <strong>gen.g</strong></div>
+    </div>
+  </div>
+
+  <audio id="clickSound" src="click.mp3" preload="auto"></audio>
+
+  <script>
+    const clickSound = document.getElementById("clickSound");
+
+    document.querySelectorAll("a, button").forEach(item => {
+      item.addEventListener("click", () => {
+        clickSound.currentTime = 0;
+        clickSound.volume = 0.45;
+        clickSound.play();
+      });
+    });
+  </script>
+</body>
+</html>
+```
