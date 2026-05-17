@@ -578,7 +578,7 @@
         <p>
           Current:
           <a class="highlight-link" href="https://www.ucsc.edu/" target="_blank">UCSC</a>
-          <a class="highlight-link" href="https://sluggaming.club/" target="_blank">Slug Gaming</a>
+          <a class="highlight-link" href="https://sluggaming.org/" target="_blank">Slug Gaming</a>
           <a class="highlight-link" href="https://geng.gg/" target="_blank">Gen.G</a>
         </p>
 
@@ -679,11 +679,13 @@
 
   <audio id="backgroundMusic" preload="auto"></audio>
   <audio id="clickSound" src="click.mp3" preload="auto"></audio>
+  <audio id="hoverSound" src="hover.mp3" preload="auto"></audio>
 
   <script>
     const enterScreen = document.getElementById("enterScreen");
     const gameScreen = document.getElementById("gameScreen");
     const clickSound = document.getElementById("clickSound");
+    const hoverSound = document.getElementById("hoverSound");
     const backgroundMusic = document.getElementById("backgroundMusic");
     const trackName = document.getElementById("trackName");
     const prevTrack = document.getElementById("prevTrack");
@@ -731,7 +733,7 @@
       {
         name: "minecraft",
         src: "Wet Hands.mp3",
-        video: "Minecon 2016 1st day.mp4",
+        video: "minecraft-bg.mp4",
         overlay: "linear-gradient(90deg, rgba(20,50,20,0.42) 0%, rgba(40,80,40,0.18) 48%, rgba(0,0,0,0.42) 100%)",
         theme: "video"
       },
@@ -756,6 +758,13 @@
       clickSound.currentTime = 0;
       clickSound.volume = 0.45;
       clickSound.play().catch(() => {});
+    }
+
+    function playHover() {
+      if (!entered) return;
+      hoverSound.currentTime = 0;
+      hoverSound.volume = 0.35;
+      hoverSound.play().catch(() => {});
     }
 
     function applyTrackTheme(track) {
@@ -936,6 +945,10 @@
         event.stopPropagation();
         closeWindow(win);
       });
+    });
+
+    document.querySelectorAll("button, a, .desktop-icon, .close-window").forEach(item => {
+      item.addEventListener("mouseenter", playHover);
     });
 
     prevTrack.addEventListener("click", () => {
