@@ -129,124 +129,43 @@
       opacity: 1;
     }
 
-    .track-transition {
-      position: fixed;
+    .bg-fade-cover {
+      position: absolute;
       inset: 0;
-      z-index: 500;
+      z-index: 0;
       pointer-events: none;
       opacity: 0;
+      background: #000;
+      transition: opacity 0.9s ease;
     }
 
-    .track-transition.fog-transition {
+    .bg-fade-cover.active {
       opacity: 1;
+    }
+
+    .bg-fade-cover.blocky {
       background:
-        radial-gradient(circle at 30% 40%, rgba(210, 230, 220, 0.38), transparent 34%),
-        radial-gradient(circle at 70% 60%, rgba(180, 210, 200, 0.28), transparent 38%),
-        linear-gradient(90deg, rgba(8, 20, 18, 0.92), rgba(20, 34, 32, 0.72), rgba(0, 0, 0, 0.92));
-      animation: fogSweep 1.15s ease forwards;
+        repeating-linear-gradient(0deg, rgba(90, 62, 34, 0.55) 0 34px, rgba(50, 32, 18, 0.55) 34px 68px),
+        repeating-linear-gradient(90deg, rgba(120, 86, 42, 0.45) 0 34px, rgba(35, 90, 35, 0.45) 34px 68px),
+        rgba(0, 0, 0, 0.35);
+      animation: blockyFade 0.9s steps(6) forwards;
     }
 
-    .track-transition.party-transition {
-      opacity: 1;
-      background:
-        repeating-linear-gradient(45deg, rgba(255,255,255,0.85) 0 18px, rgba(255,0,120,0.8) 18px 36px, rgba(0,180,255,0.8) 36px 54px),
-        radial-gradient(circle, rgba(255,255,255,1), transparent 45%);
-      mix-blend-mode: screen;
-      animation: partyFlash 0.95s ease forwards;
-    }
-
-    .track-transition.dark-transition {
-      opacity: 1;
-      background:
-        radial-gradient(circle at 50% 50%, transparent 0 18%, rgba(0,0,0,0.95) 55%),
-        linear-gradient(180deg, rgba(20,20,24,0.2), rgba(0,0,0,1));
-      animation: darkDrop 1.1s ease forwards;
-    }
-
-    .track-transition.blocks-transition {
-      opacity: 1;
-      background:
-        linear-gradient(90deg, rgba(0,0,0,0.18), rgba(0,0,0,0.70)),
-        repeating-linear-gradient(0deg, rgba(88, 55, 28, 0.95) 0 32px, rgba(70, 44, 24, 0.95) 32px 64px),
-        repeating-linear-gradient(90deg, rgba(115, 78, 36, 0.95) 0 32px, rgba(60, 36, 20, 0.95) 32px 64px);
-      animation: blockBreak 1.05s steps(8) forwards;
-    }
-
-    .track-transition.dream-transition {
-      opacity: 1;
-      background:
-        radial-gradient(circle at 40% 45%, rgba(255,255,255,0.65), transparent 30%),
-        linear-gradient(120deg, rgba(210,220,255,0.72), rgba(25,30,50,0.82), rgba(0,0,0,0.96));
-      animation: dreamFade 1.2s ease forwards;
-    }
-
-    .track-transition.red-glitch-transition {
-      opacity: 1;
-      background:
-        repeating-linear-gradient(0deg, rgba(255,0,0,0.75) 0 5px, rgba(0,0,0,0.95) 5px 10px),
-        linear-gradient(90deg, rgba(180,0,0,0.95), rgba(0,0,0,0.95));
-      animation: redGlitch 0.9s steps(6) forwards;
-    }
-
-    @keyframes fogSweep {
-      0% { opacity: 0; filter: blur(18px); transform: translateX(-12%) scale(1.05); }
-      35% { opacity: 1; filter: blur(10px); }
-      100% { opacity: 0; filter: blur(24px); transform: translateX(12%) scale(1.12); }
-    }
-
-    @keyframes partyFlash {
-      0% { opacity: 0; transform: scale(0.96) rotate(0deg); filter: brightness(1); }
-      20% { opacity: 1; transform: scale(1.04) rotate(2deg); filter: brightness(2.2); }
-      45% { opacity: 0.85; transform: scale(1.02) rotate(-2deg); filter: brightness(1.8); }
-      100% { opacity: 0; transform: scale(1.18) rotate(0deg); filter: brightness(1); }
-    }
-
-    @keyframes darkDrop {
-      0% { opacity: 0; transform: translateY(-100%); }
-      35% { opacity: 1; transform: translateY(0); }
-      70% { opacity: 1; filter: contrast(1.4) grayscale(1); }
-      100% { opacity: 0; transform: translateY(100%); filter: contrast(1) grayscale(0); }
-    }
-
-    @keyframes blockBreak {
+    @keyframes blockyFade {
       0% {
         opacity: 0;
-        clip-path: inset(0 0 0 0);
         transform: scale(1);
       }
-      20% {
-        opacity: 1;
-        clip-path: inset(0 0 0 0);
-        transform: scale(1.04);
+
+      35% {
+        opacity: 0.85;
+        transform: scale(1.03);
       }
-      45% {
-        opacity: 1;
-        clip-path: polygon(0 0, 100% 0, 100% 55%, 80% 55%, 80% 75%, 55% 75%, 55% 100%, 0 100%);
-      }
-      70% {
-        opacity: 0.8;
-        clip-path: polygon(0 0, 42% 0, 42% 28%, 65% 28%, 65% 58%, 100% 58%, 100% 100%, 0 100%);
-      }
+
       100% {
         opacity: 0;
-        clip-path: inset(100% 0 0 0);
-        transform: scale(1.12);
+        transform: scale(1.08);
       }
-    }
-
-    @keyframes dreamFade {
-      0% { opacity: 0; filter: blur(0); transform: scale(1); }
-      30% { opacity: 1; filter: blur(10px); transform: scale(1.04); }
-      100% { opacity: 0; filter: blur(24px); transform: scale(1.15); }
-    }
-
-    @keyframes redGlitch {
-      0% { opacity: 0; transform: translateX(0); }
-      15% { opacity: 1; transform: translateX(-18px); }
-      30% { transform: translateX(14px); }
-      45% { transform: translateX(-9px); }
-      60% { transform: translateX(20px); }
-      100% { opacity: 0; transform: translateX(0); }
     }
 
     .red-slab {
@@ -562,7 +481,7 @@
   </section>
 
   <main class="persona-screen comic-theme" id="gameScreen">
-    <div class="track-transition" id="trackTransition"></div>
+    <div class="bg-fade-cover" id="bgFadeCover"></div>
     <video class="theme-video" id="themeVideo" muted loop playsinline></video>
 
     <div class="comic-panel"></div>
@@ -680,7 +599,7 @@
     const playPause = document.getElementById("playPause");
     const muteButton = document.getElementById("muteButton");
     const themeVideo = document.getElementById("themeVideo");
-    const trackTransition = document.getElementById("trackTransition");
+    const bgFadeCover = document.getElementById("bgFadeCover");
     const canvas = document.getElementById("waveCanvas");
     const ctx = canvas.getContext("2d");
 
@@ -695,56 +614,49 @@
         src: "Resident Evil 6 Soundtrack - Main Theme Leon  Helena.mp3",
         bg: "background2nd",
         overlay: "linear-gradient(90deg, rgba(180,0,0,0.92) 0%, rgba(120,0,0,0.78) 32%, rgba(0,0,0,0.95) 55%)",
-        theme: "comic",
-        transition: "red-glitch-transition"
+        theme: "comic"
       },
       {
         name: "twilight song",
         src: "Bella's Lullaby - Carter Burwell 4.mp3",
         bg: "twilight-bg.jpg",
         overlay: "linear-gradient(90deg, rgba(4,10,10,0.60) 0%, rgba(10,20,24,0.38) 45%, rgba(0,0,0,0.72) 100%)",
-        theme: "natural",
-        transition: "fog-transition"
+        theme: "natural"
       },
       {
         name: "clarity",
         src: "Zedd - Clarity ft. Foxes 4.mp3",
         bg: "clarity-bg.jpg",
         overlay: "linear-gradient(90deg, rgba(0,20,60,0.58) 0%, rgba(10,30,80,0.28) 45%, rgba(0,0,0,0.62) 100%)",
-        theme: "natural",
-        transition: "party-transition"
+        theme: "natural"
       },
       {
         name: "deftones",
         src: "deftones - i think about you all the time [visualizer].mp3",
         bg: "deftones-bg.jpg",
         overlay: "linear-gradient(90deg, rgba(0,0,0,0.76) 0%, rgba(12,12,16,0.48) 48%, rgba(0,0,0,0.84) 100%)",
-        theme: "natural",
-        transition: "dark-transition"
+        theme: "natural"
       },
       {
         name: "minecraft",
         src: "Wet Hands.mp3",
         video: "minecraft-bg.mp4",
         overlay: "linear-gradient(90deg, rgba(20,50,20,0.42) 0%, rgba(40,80,40,0.18) 48%, rgba(0,0,0,0.42) 100%)",
-        theme: "video",
-        transition: "blocks-transition"
+        theme: "video"
       },
       {
         name: "wasian national anthem",
         src: "Joji - WANTED U (Official Audio) 4.mp3",
         bg: "joji-bg.jpg",
         overlay: "linear-gradient(90deg, rgba(35,10,38,0.62) 0%, rgba(75,25,55,0.32) 48%, rgba(0,0,0,0.70) 100%)",
-        theme: "natural",
-        transition: "blocks-transition"
+        theme: "natural"
       },
       {
         name: "chopin",
         src: "Chopin - Winter Wind (Op.25-11) by Hayato Sumino.mp3",
         bg: "chopin-bg.jpg",
         overlay: "linear-gradient(90deg, rgba(10,14,20,0.58) 0%, rgba(40,45,55,0.28) 48%, rgba(0,0,0,0.70) 100%)",
-        theme: "natural",
-        transition: "dream-transition"
+        theme: "natural"
       }
     ];
 
@@ -755,16 +667,20 @@
       clickSound.play().catch(() => {});
     }
 
-    function playTrackTransition(track) {
-      trackTransition.className = "track-transition";
+    function playBackgroundFade(track) {
+      bgFadeCover.className = "bg-fade-cover";
 
-      void trackTransition.offsetWidth;
+      void bgFadeCover.offsetWidth;
 
-      trackTransition.classList.add(track.transition);
+      if (track.theme === "video") {
+        bgFadeCover.classList.add("blocky");
+      } else {
+        bgFadeCover.classList.add("active");
+      }
 
       setTimeout(() => {
-        trackTransition.className = "track-transition";
-      }, 1300);
+        bgFadeCover.className = "bg-fade-cover";
+      }, 950);
     }
 
     function applyTrackTheme(track) {
@@ -802,7 +718,7 @@
 
       const track = tracks[currentTrack];
 
-      playTrackTransition(track);
+      playBackgroundFade(track);
 
       setTimeout(() => {
         backgroundMusic.src = track.src;
@@ -822,7 +738,7 @@
               console.log("Could not play:", track.src, error);
             });
         }
-      }, entered ? 350 : 0);
+      }, entered ? 250 : 0);
     }
 
     backgroundMusic.addEventListener("ended", () => {
