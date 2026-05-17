@@ -486,6 +486,231 @@
       color: black;
       background: white;
     }
+
+    @media (max-width: 720px) {
+      html, body {
+        min-height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+
+      .enter-content {
+        padding: 18px;
+      }
+
+      .intro-face {
+        width: min(68vw, 260px);
+        height: min(68vw, 260px);
+        margin-bottom: 18px;
+      }
+
+      .welcome-text {
+        font-size: 28px;
+        line-height: 1.15;
+        margin-bottom: 18px;
+      }
+
+      .press-any-key {
+        width: min(82vw, 360px);
+      }
+
+      .persona-screen {
+        min-height: 100vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+        padding-bottom: 130px;
+        background:
+          linear-gradient(180deg, rgba(180,0,0,0.88) 0%, rgba(70,0,0,0.92) 48%, rgba(0,0,0,0.96) 100%),
+          url("background2nd") center / cover no-repeat;
+      }
+
+      .persona-screen.active {
+        transform: none;
+      }
+
+      .theme-video {
+        position: fixed;
+      }
+
+      .red-slab {
+        left: 50%;
+        top: -20vh;
+        width: 44vw;
+        height: 130vh;
+        opacity: 0.78;
+        transform: rotate(12deg);
+        box-shadow: -16px 0 0 black, 16px 0 0 white, 30px 0 0 black;
+      }
+
+      .comic-panel {
+        right: -32vw;
+        top: -10vh;
+        width: 58vw;
+        height: 125vh;
+        opacity: 0.55;
+        border-left: 10px solid black;
+        transform: rotate(4deg);
+      }
+
+      .ham-character {
+        display: none;
+      }
+
+      .menu-wrap {
+        width: 100%;
+        min-height: auto;
+        padding: 34px 18px 170px;
+        align-items: center;
+        justify-content: flex-start;
+      }
+
+      .menu-badge {
+        margin: 0 auto 18px;
+        padding: 6px 14px;
+        font-size: 16px;
+        letter-spacing: 1px;
+        transform: rotate(-3deg);
+        box-shadow: 6px 6px 0 #d00000;
+      }
+
+      .main-title {
+        margin: 0 0 28px;
+        font-size: clamp(54px, 18vw, 82px);
+        line-height: 0.8;
+        text-align: center;
+        transform: rotate(-3deg);
+        text-shadow: 4px 4px 0 black, 8px 8px 0 #d00000;
+      }
+
+      .main-title span {
+        text-shadow: 4px 4px 0 white, 8px 8px 0 black;
+      }
+
+      .desktop-icons {
+        width: 100%;
+        max-width: 380px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 22px 18px;
+        transform: none;
+        justify-items: center;
+      }
+
+      .desktop-icon {
+        width: 130px;
+        filter: drop-shadow(4px 4px 0 black);
+      }
+
+      .desktop-icon:hover {
+        transform: translateY(-4px) scale(1.04);
+      }
+
+      .desktop-icon svg {
+        width: 78px;
+        height: 78px;
+        margin-bottom: 8px;
+      }
+
+      .desktop-icon span {
+        font-size: 18px;
+        line-height: 1;
+      }
+
+      .window {
+        position: fixed;
+        left: 10px !important;
+        top: 92px !important;
+        width: calc(100vw - 20px);
+        min-height: auto;
+        max-height: calc(100vh - 180px);
+        overflow: hidden;
+        border: 4px solid white;
+        box-shadow: 7px 7px 0 black, 11px 11px 0 #d00000;
+      }
+
+      .window-bar {
+        padding: 8px 10px;
+        font-size: 20px;
+        cursor: default;
+      }
+
+      .close-window {
+        width: 32px;
+        height: 32px;
+        font-size: 22px;
+      }
+
+      .window-content {
+        padding: 16px;
+        font-size: 14px;
+        line-height: 1.55;
+        max-height: calc(100vh - 250px);
+        overflow-y: auto;
+      }
+
+      .window-content h2 {
+        font-size: 34px;
+        line-height: 0.95;
+        text-shadow: 2px 2px 0 white, 5px 5px 0 black;
+      }
+
+      .highlight-link {
+        margin: 3px 2px;
+        padding: 2px 6px;
+      }
+
+      .recommendation-header {
+        align-items: flex-start;
+      }
+
+      .recommendation-pfp {
+        width: 48px;
+        height: 48px;
+      }
+
+      .recommendation-name {
+        font-size: 16px;
+      }
+
+      .recommendation-title {
+        font-size: 12px;
+      }
+
+      .work-meme {
+        max-width: 100%;
+        box-shadow: 5px 5px 0 black, 8px 8px 0 #d00000;
+      }
+
+      .radio-player {
+        left: 10px;
+        right: 10px;
+        bottom: 12px;
+        width: auto;
+        padding: 10px;
+        transform: none;
+        border: 3px solid white;
+        box-shadow: 5px 5px 0 black, 8px 8px 0 #d00000;
+      }
+
+      .radio-title {
+        font-size: 20px;
+      }
+
+      .track-name {
+        font-size: 12px;
+      }
+
+      .radio-controls button {
+        font-size: 13px;
+        padding: 7px 4px;
+      }
+
+      .bottom-line {
+        left: 12px;
+        bottom: 116px;
+        font-size: 10px;
+      }
+    }
   </style>
 </head>
 
