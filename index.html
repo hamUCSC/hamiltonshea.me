@@ -912,31 +912,27 @@
         <h2>Get In Touch</h2>
         <p class="contact-intro">Send me a message below!</p>
 
-        <form class="contact-form" action="https://formsubmit.co/haminproduct@gmail.com" method="POST">
-          <input type="hidden" name="_subject" value="New message from ham's website">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_template" value="table">
-
+        <form class="contact-form" id="contactForm">
           <div class="contact-row">
             <label>
               <span>Name</span>
-              <input name="name" type="text" placeholder="Your full name" />
+              <input id="contactName" type="text" placeholder="Your full name" />
             </label>
 
             <label>
               <span>Email *</span>
-              <input name="email" type="email" placeholder="you@example.com" required />
+              <input id="contactEmail" type="email" placeholder="you@example.com" required />
             </label>
           </div>
 
           <label>
             <span>Subject</span>
-            <input name="subject" type="text" placeholder="What do you wanna talk about?" />
+            <input id="contactSubject" type="text" placeholder="What would you like to discuss?" />
           </label>
 
           <label>
             <span>Message</span>
-            <textarea name="message" placeholder="Tell me about your query or just say hello!" required></textarea>
+            <textarea id="contactMessage" placeholder="Tell me about your project, question, or just say hello..." required></textarea>
           </label>
 
           <button class="contact-submit" type="submit">Send</button>
@@ -974,6 +970,7 @@
     const playPause = document.getElementById("playPause");
     const muteButton = document.getElementById("muteButton");
     const themeVideo = document.getElementById("themeVideo");
+    const contactForm = document.getElementById("contactForm");
     const canvas = document.getElementById("waveCanvas");
     const ctx = canvas.getContext("2d");
 
@@ -1228,6 +1225,26 @@
 
     document.querySelectorAll("button, a, .desktop-icon, .close-window").forEach(item => {
       item.addEventListener("mouseenter", playHover);
+    });
+
+    contactForm.addEventListener("submit", event => {
+      event.preventDefault();
+      playClick();
+
+      const name = document.getElementById("contactName").value.trim();
+      const email = document.getElementById("contactEmail").value.trim();
+      const subject = document.getElementById("contactSubject").value.trim() || "Message from ham's website";
+      const message = document.getElementById("contactMessage").value.trim();
+
+      const body =
+        "Name: " + name + "\n" +
+        "Email: " + email + "\n\n" +
+        "Message:\n" + message;
+
+      window.location.href =
+        "mailto:haminproduct@gmail.com" +
+        "?subject=" + encodeURIComponent(subject) +
+        "&body=" + encodeURIComponent(body);
     });
 
     prevTrack.addEventListener("click", () => {
