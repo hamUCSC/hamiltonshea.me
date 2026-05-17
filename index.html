@@ -101,7 +101,7 @@
       min-height: 100vh;
       opacity: 0;
       transform: scale(1.04);
-      transition: opacity 0.9s ease, transform 0.9s ease;
+      transition: opacity 0.9s ease, transform 0.9s ease, background 0.8s ease;
       background:
         linear-gradient(90deg, rgba(180,0,0,0.92) 0%, rgba(120,0,0,0.78) 32%, rgba(0,0,0,0.95) 55%),
         url("background2nd") center / cover no-repeat;
@@ -122,6 +122,7 @@
       transform: rotate(14deg);
       box-shadow: -26px 0 0 black, 28px 0 0 white, 52px 0 0 black;
       z-index: 2;
+      transition: opacity 0.8s ease;
     }
 
     .comic-panel {
@@ -136,6 +137,19 @@
       border-left: 18px solid black;
       transform: rotate(5deg);
       z-index: 1;
+      transition: opacity 0.8s ease;
+    }
+
+    .persona-screen.natural-theme .red-slab,
+    .persona-screen.natural-theme .comic-panel {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .persona-screen.comic-theme .red-slab,
+    .persona-screen.comic-theme .comic-panel {
+      opacity: 1;
+      pointer-events: auto;
     }
 
     .ham-character {
@@ -148,6 +162,10 @@
       z-index: 5;
       filter: drop-shadow(-14px 14px 0 black);
       transform: rotate(-4deg);
+    }
+
+    .persona-screen.natural-theme .ham-character {
+      filter: drop-shadow(0 12px 18px rgba(0,0,0,0.75));
     }
 
     .menu-wrap {
@@ -404,7 +422,7 @@
     </div>
   </section>
 
-  <main class="persona-screen" id="gameScreen">
+  <main class="persona-screen comic-theme" id="gameScreen">
     <div class="comic-panel"></div>
     <div class="red-slab"></div>
     <img class="ham-character" src="characterham.png" alt="Hamilton Shea" />
@@ -494,7 +512,7 @@
 
     <div class="radio-player">
       <div class="radio-title">radio</div>
-      <div class="track-name" id="trackName">Resident Evil 6 Theme</div>
+      <div class="track-name" id="trackName">resident evil 6 theme</div>
       <div class="radio-controls">
         <button id="prevTrack" type="button">prev</button>
         <button id="playPause" type="button">pause</button>
@@ -506,7 +524,7 @@
     <div class="bottom-line">© 2026 Hamilton Shea</div>
   </main>
 
-<audio id="backgroundMusic" preload="auto"></audio>
+  <audio id="backgroundMusic" preload="auto"></audio>
   <audio id="clickSound" src="click.mp3" preload="auto"></audio>
 
   <script>
@@ -528,13 +546,55 @@
     let currentTrack = 0;
 
     const tracks = [
-      { name: "resident evil 6 theme", src: "Resident Evil 6 Soundtrack - Main Theme Leon  Helena.mp3" },
-      { name: "twilight song", src: "Bella's Lullaby - Carter Burwell 4.mp3" },
-      { name: "clarity", src: "Zedd - Clarity ft. Foxes 4.mp3" },
-      { name: "deftones", src: "deftones - i think about you all the time [visualizer].mp3" },
-      { name: "minecraft", src: "Wet Hands.mp3" },
-      { name: "wasian national anthem", src: "Joji - WANTED U (Official Audio) 4.mp3" },
-      { name: "chopin", src: "Chopin - Winter Wind (Op.25-11) by Hayato Sumino.mp3" }
+      {
+        name: "resident evil 6 theme",
+        src: "Resident Evil 6 Soundtrack - Main Theme Leon  Helena.mp3",
+        bg: "background2nd",
+        overlay: "linear-gradient(90deg, rgba(180,0,0,0.92) 0%, rgba(120,0,0,0.78) 32%, rgba(0,0,0,0.95) 55%)",
+        theme: "comic"
+      },
+      {
+        name: "twilight song",
+        src: "Bella's Lullaby - Carter Burwell 4.mp3",
+        bg: "twilight-bg.jpg",
+        overlay: "linear-gradient(90deg, rgba(4,10,10,0.60) 0%, rgba(10,20,24,0.38) 45%, rgba(0,0,0,0.72) 100%)",
+        theme: "natural"
+      },
+      {
+        name: "clarity",
+        src: "Zedd - Clarity ft. Foxes 4.mp3",
+        bg: "clarity-bg.jpg",
+        overlay: "linear-gradient(90deg, rgba(0,20,60,0.58) 0%, rgba(10,30,80,0.28) 45%, rgba(0,0,0,0.62) 100%)",
+        theme: "natural"
+      },
+      {
+        name: "deftones",
+        src: "deftones - i think about you all the time [visualizer].mp3",
+        bg: "deftones-bg.jpg",
+        overlay: "linear-gradient(90deg, rgba(0,0,0,0.76) 0%, rgba(12,12,16,0.48) 48%, rgba(0,0,0,0.84) 100%)",
+        theme: "natural"
+      },
+      {
+        name: "minecraft",
+        src: "Wet Hands.mp3",
+        bg: "minecraft-bg.jpg",
+        overlay: "linear-gradient(90deg, rgba(20,50,20,0.42) 0%, rgba(40,80,40,0.18) 48%, rgba(0,0,0,0.42) 100%)",
+        theme: "natural"
+      },
+      {
+        name: "wasian national anthem",
+        src: "Joji - WANTED U (Official Audio) 4.mp3",
+        bg: "joji-bg.jpg",
+        overlay: "linear-gradient(90deg, rgba(35,10,38,0.62) 0%, rgba(75,25,55,0.32) 48%, rgba(0,0,0,0.70) 100%)",
+        theme: "natural"
+      },
+      {
+        name: "chopin",
+        src: "Chopin - Winter Wind (Op.25-11) by Hayato Sumino.mp3",
+        bg: "chopin-bg.jpg",
+        overlay: "linear-gradient(90deg, rgba(10,14,20,0.58) 0%, rgba(40,45,55,0.28) 48%, rgba(0,0,0,0.70) 100%)",
+        theme: "natural"
+      }
     ];
 
     function playClick() {
@@ -544,38 +604,56 @@
       clickSound.play().catch(() => {});
     }
 
+    function applyTrackTheme(track) {
+      gameScreen.style.background =
+        `${track.overlay}, url("${track.bg}") center / cover no-repeat`;
+
+      if (track.theme === "comic") {
+        gameScreen.classList.add("comic-theme");
+        gameScreen.classList.remove("natural-theme");
+      } else {
+        gameScreen.classList.add("natural-theme");
+        gameScreen.classList.remove("comic-theme");
+      }
+    }
+
     function loadTrack(index) {
-  currentTrack = (index + tracks.length) % tracks.length;
-  backgroundMusic.src = tracks[currentTrack].src;
-  trackName.textContent = tracks[currentTrack].name;
-  backgroundMusic.volume = 0.32;
-  backgroundMusic.loop = false;
-  backgroundMusic.load();
+      currentTrack = (index + tracks.length) % tracks.length;
 
-  if (entered) {
-    backgroundMusic.play()
-      .then(() => {
-        playPause.textContent = "pause";
-      })
-      .catch(error => {
-        console.log("Could not play:", tracks[currentTrack].src, error);
-      });
-  }
-}
+      const track = tracks[currentTrack];
 
-backgroundMusic.addEventListener("ended", () => {
-  loadTrack(currentTrack + 1);
-});
+      backgroundMusic.src = track.src;
+      trackName.textContent = track.name;
+      backgroundMusic.volume = 0.32;
+      backgroundMusic.loop = false;
+      backgroundMusic.load();
 
-function enterSite() {
-  if (entered) return;
-  entered = true;
+      applyTrackTheme(track);
 
-  enterScreen.classList.add("hidden");
-  gameScreen.classList.add("active");
+      if (entered) {
+        backgroundMusic.play()
+          .then(() => {
+            playPause.textContent = "pause";
+          })
+          .catch(error => {
+            console.log("Could not play:", track.src, error);
+          });
+      }
+    }
 
-  loadTrack(currentTrack);
-}
+    backgroundMusic.addEventListener("ended", () => {
+      loadTrack(currentTrack + 1);
+    });
+
+    function enterSite() {
+      if (entered) return;
+      entered = true;
+
+      enterScreen.classList.add("hidden");
+      gameScreen.classList.add("active");
+
+      loadTrack(currentTrack);
+    }
 
     function resizeCanvas() {
       canvas.width = window.innerWidth * window.devicePixelRatio;
@@ -667,18 +745,30 @@ function enterSite() {
       });
     });
 
-    prevTrack.addEventListener("click", () => { playClick(); loadTrack(currentTrack - 1); });
-    nextTrack.addEventListener("click", () => { playClick(); loadTrack(currentTrack + 1); });
+    prevTrack.addEventListener("click", () => {
+      playClick();
+      loadTrack(currentTrack - 1);
+    });
+
+    nextTrack.addEventListener("click", () => {
+      playClick();
+      loadTrack(currentTrack + 1);
+    });
+
     playPause.addEventListener("click", () => {
       playClick();
+
       if (backgroundMusic.paused) {
-        backgroundMusic.play().catch(() => {});
+        backgroundMusic.play().catch(error => {
+          console.log("Could not resume:", error);
+        });
         playPause.textContent = "pause";
       } else {
         backgroundMusic.pause();
         playPause.textContent = "play";
       }
     });
+
     muteButton.addEventListener("click", () => {
       playClick();
       backgroundMusic.muted = !backgroundMusic.muted;
@@ -686,5 +776,4 @@ function enterSite() {
     });
   </script>
 </body>
-```html
 </html>
