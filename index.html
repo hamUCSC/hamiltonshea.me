@@ -8,7 +8,21 @@
 
   <style>
     * { box-sizing: border-box; }
+    
+.highlight-link {
+  color: #ffffff;
+  background: #d00000;
+  padding: 2px 7px;
+  border: 2px solid white;
+  text-decoration: none;
+  font-weight: 900;
+  box-shadow: 3px 3px 0 black;
+}
 
+.highlight-link:hover {
+  color: black;
+  background: white;
+}
     html, body {
       margin: 0;
       min-height: 100vh;
@@ -447,31 +461,35 @@
       </div>
     </section>
 
-    <section class="window" id="linksWindow" style="left: 52%; top: 24%;">
-      <div class="window-bar">
-        <span>links</span>
-        <button class="close-window" type="button">x</button>
-      </div>
-      <div class="window-content">
-        <h2>Links</h2>
-        <p><a href="#">LinkedIn</a></p>
-        <p><a href="#">Portfolio</a></p>
-        <p><a href="#">Gaming / community work</a></p>
-      </div>
-    </section>
+<section class="window" id="workWindow" style="left: 46%; top: 28%;">
+  <div class="window-bar">
+    <span>work</span>
+    <button class="close-window" type="button">x</button>
+  </div>
 
-    <section class="window" id="workWindow" style="left: 46%; top: 28%;">
-      <div class="window-bar">
-        <span>work</span>
-        <button class="close-window" type="button">x</button>
-      </div>
-      <div class="window-content">
-        <h2>Work</h2>
-        <p>Current: UCSC, Slug Gaming, Gen.G.</p>
-        <p>Previously: H15DEN, SkyrisAI, Anthos Capital.</p>
-        <p>I’ve worked on gaming events, partnerships, brand engagement, operations, and student community growth.</p>
-      </div>
-    </section>
+  <div class="window-content">
+    <h2>Work</h2>
+
+    <p>
+      Current:
+      <a class="highlight-link" href="https://www.ucsc.edu/" target="_blank">UCSC</a>,
+      <a class="highlight-link" href="https://sluggaming.org/" target="_blank">Slug Gaming</a>,
+      <a class="highlight-link" href="https://geng.gg/" target="_blank">Gen.G</a>.
+    </p>
+
+    <p>
+      Previously:
+      <a class="highlight-link" href="https://h15den.com/" target="_blank">H15DEN</a>,
+      <a class="highlight-link" href="https://www.skyrisai.com/" target="_blank">SkyrisAI</a>,
+      <a class="highlight-link" href="https://anthoscapital.com/" target="_blank">Anthos Capital</a>.
+    </p>
+
+    <p>
+      I’ve worked on gaming events, partnerships, brand engagement, operations,
+      and student community growth.
+    </p>
+  </div>
+</section>
 
     <section class="window" id="contactWindow" style="left: 50%; top: 34%;">
       <div class="window-bar">
@@ -481,7 +499,7 @@
       <div class="window-content">
         <h2>Contact</h2>
         <p>Want to connect about product, tech, gaming, partnerships, or community work?</p>
-        <p><a href="mailto:hamilton@example.com">hamilton@example.com</a></p>
+        <p><a href="mailto:haminproduct@gmail.com">haminproduct@gmail.com</a></p>
       </div>
     </section>
 
