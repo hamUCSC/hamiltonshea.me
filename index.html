@@ -1227,7 +1227,7 @@
       item.addEventListener("mouseenter", playHover);
     });
 
-    contactForm.addEventListener("submit", event => {
+        contactForm.addEventListener("submit", event => {
       event.preventDefault();
       playClick();
 
@@ -1241,10 +1241,13 @@
         "Email: " + email + "\n\n" +
         "Message:\n" + message;
 
-      window.location.href =
-        "mailto:haminproduct@gmail.com" +
-        "?subject=" + encodeURIComponent(subject) +
+      const gmailLink =
+        "https://mail.google.com/mail/?view=cm&fs=1" +
+        "&to=" + encodeURIComponent("haminproduct@gmail.com") +
+        "&su=" + encodeURIComponent(subject) +
         "&body=" + encodeURIComponent(body);
+
+      window.open(gmailLink, "_blank");
     });
 
     prevTrack.addEventListener("click", () => {
