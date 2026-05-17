@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ham's resume</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      width: 100%;
+      min-height: 100vh;
+      background: #050505;
+      color: white;
+      font-family: Impact, "Arial Black", "Segoe UI", sans-serif;
+      overflow: hidden;
+    }
+
+    .resume-page {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background:
+        linear-gradient(90deg, rgba(180,0,0,0.70), rgba(0,0,0,0.92)),
+        #050505;
+    }
+
+    .top-bar {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      background: rgba(0, 0, 0, 0.88);
+      border-bottom: 4px solid white;
+      box-shadow: 0 8px 0 #d00000;
+      z-index: 5;
+    }
+
+    .title {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 48px);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-shadow: 4px 4px 0 black, 7px 7px 0 #d00000;
+    }
+
+    .back-link {
+      color: white;
+      background: #d00000;
+      border: 3px solid white;
+      padding: 8px 14px;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: 18px;
+      box-shadow: 4px 4px 0 black;
+    }
+
+    .back-link:hover {
+      color: black;
+      background: white;
+    }
+
+    .resume-frame {
+      width: 100%;
+      height: calc(100vh - 72px);
+      border: 0;
+      background: white;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="resume-page">
+    <div class="top-bar">
+      <h1 class="title">Ham's Resume</h1>
+      <a class="back-link" href="index.html">Back</a>
+    </div>
+
+    <iframe
+      class="resume-frame"
+      src="https://drive.google.com/file/d/1I3o016vKFsXkxwHjdy_MasY8Y5BR_Foy/preview"
+      allow="autoplay">
+    </iframe>
+  </main>
+</body>
+</html>
