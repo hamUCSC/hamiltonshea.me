@@ -910,29 +910,33 @@
 
       <div class="window-content contact-window-content">
         <h2>Get In Touch</h2>
-        <p class="contact-intro">Send me a message below!</p>
+        <p class="contact-intro">I’d love to hear from you! Send me a message below.</p>
 
-        <form class="contact-form" id="contactForm">
+        <form class="contact-form" action="https://formsubmit.co/haminproduct@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="New message from ham's website">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+
           <div class="contact-row">
             <label>
               <span>Name</span>
-              <input id="contactName" type="text" placeholder="Your full name" />
+              <input name="name" type="text" placeholder="Your full name" />
             </label>
 
             <label>
               <span>Email *</span>
-              <input id="contactEmail" type="email" placeholder="you@example.com" required />
+              <input name="email" type="email" placeholder="you@example.com" required />
             </label>
           </div>
 
           <label>
             <span>Subject</span>
-            <input id="contactSubject" type="text" placeholder="What would you like to discuss?" />
+            <input name="subject" type="text" placeholder="What would you like to discuss?" />
           </label>
 
           <label>
             <span>Message</span>
-            <textarea id="contactMessage" placeholder="Tell me about your project, question, or just say hello..." required></textarea>
+            <textarea name="message" placeholder="Tell me about your project, question, or just say hello..." required></textarea>
           </label>
 
           <button class="contact-submit" type="submit">Send</button>
@@ -1254,25 +1258,6 @@
       playClick();
       backgroundMusic.muted = !backgroundMusic.muted;
       muteButton.textContent = backgroundMusic.muted ? "unmute" : "mute";
-    });
-
-    const contactForm = document.getElementById("contactForm");
-
-    contactForm.addEventListener("submit", event => {
-      event.preventDefault();
-      playClick();
-
-      const name = document.getElementById("contactName").value;
-      const email = document.getElementById("contactEmail").value;
-      const subject = document.getElementById("contactSubject").value || "Website contact";
-      const message = document.getElementById("contactMessage").value;
-
-      const body = encodeURIComponent(
-        `Name: ${name}\nEmail: ${email}\n\n${message}`
-      );
-
-      window.location.href =
-        `mailto:haminproduct@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
     });
   </script>
 </body>
