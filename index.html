@@ -506,7 +506,7 @@
     <div class="bottom-line">© 2026 Hamilton Shea</div>
   </main>
 
-  <audio id="backgroundMusic" preload="auto" loop></audio>
+<audio id="backgroundMusic" preload="auto"></audio>
   <audio id="clickSound" src="click.mp3" preload="auto"></audio>
 
   <script>
@@ -566,6 +566,16 @@
 backgroundMusic.addEventListener("ended", () => {
   loadTrack(currentTrack + 1);
 });
+
+function enterSite() {
+  if (entered) return;
+  entered = true;
+
+  enterScreen.classList.add("hidden");
+  gameScreen.classList.add("active");
+
+  loadTrack(currentTrack);
+}
 
     function resizeCanvas() {
       canvas.width = window.innerWidth * window.devicePixelRatio;
@@ -676,5 +686,5 @@ backgroundMusic.addEventListener("ended", () => {
     });
   </script>
 </body>
+```html
 </html>
-```
