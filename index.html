@@ -8,21 +8,7 @@
 
   <style>
     * { box-sizing: border-box; }
-    
-.highlight-link {
-  color: #ffffff;
-  background: #d00000;
-  padding: 2px 7px;
-  border: 2px solid white;
-  text-decoration: none;
-  font-weight: 900;
-  box-shadow: 3px 3px 0 black;
-}
 
-.highlight-link:hover {
-  color: black;
-  background: white;
-}
     html, body {
       margin: 0;
       min-height: 100vh;
@@ -250,6 +236,14 @@
       text-shadow: 2px 2px 0 black;
     }
 
+    .clean-link-icon {
+      fill: none !important;
+      stroke: white !important;
+      stroke-width: 6px !important;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
     .bottom-line {
       position: absolute;
       left: 36px;
@@ -324,6 +318,21 @@
       font-weight: 800;
     }
 
+    .highlight-link {
+      color: white;
+      background: #d00000;
+      padding: 2px 7px;
+      border: 2px solid white;
+      text-decoration: none;
+      font-weight: 900;
+      box-shadow: 3px 3px 0 black;
+    }
+
+    .highlight-link:hover {
+      color: black;
+      background: white;
+    }
+
     .radio-player {
       position: fixed;
       right: 24px;
@@ -381,24 +390,6 @@
       color: black;
       background: white;
     }
-
-    @media (max-width: 900px) {
-      body { overflow-y: auto; }
-      .menu-wrap { padding: 54px 22px 160px; }
-      .comic-panel { right: -38vw; width: 88vw; opacity: 0.55; }
-      .red-slab { left: 38vw; width: 46vw; }
-      .ham-character { right: -48vw; bottom: -8vh; width: 136vw; opacity: 0.9; }
-      .desktop-icons { gap: 16px; }
-      .desktop-icon { width: 92px; }
-      .desktop-icon svg { width: 62px; height: 62px; }
-      .intro-face { width: min(72vw, 330px); height: min(72vw, 330px); }
-      .press-any-key { width: min(82vw, 520px); }
-      .radio-player {
-        left: 20px;
-        right: auto;
-        width: min(300px, calc(100vw - 40px));
-      }
-    }
   </style>
 </head>
 
@@ -427,17 +418,17 @@
       </h1>
 
       <div class="desktop-icons">
-        <button class="desktop-icon" data-window="linksWindow">
-  <svg viewBox="0 0 64 64" style="fill: none; stroke: white; stroke-width: 6px; stroke-linecap: round;">
-    <path d="M25 38l-4 4a11 11 0 0 1-16-16l8-8a11 11 0 0 1 16 0" />
-    <path d="M39 26l4-4a11 11 0 0 1 16 16l-8 8a11 11 0 0 1-16 0" />
-    <path d="M24 40l16-16" />
-  </svg>
-  <span>links</span>
-</button>
+        <button class="desktop-icon" data-window="aboutWindow">
+          <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="24"/><rect x="29" y="27" width="6" height="22"/><circle cx="32" cy="17" r="4"/></svg>
+          <span>about</span>
+        </button>
 
         <button class="desktop-icon" data-window="linksWindow">
-          <svg viewBox="0 0 64 64"><path d="M25 38l-4 4a11 11 0 0 1-16-16l8-8a11 11 0 0 1 16 0"/><path d="M39 26l4-4a11 11 0 0 1 16 16l-8 8a11 11 0 0 1-16 0"/><path d="M22 42l20-20"/></svg>
+          <svg class="clean-link-icon" viewBox="0 0 64 64">
+            <path d="M25 38l-4 4a11 11 0 0 1-16-16l8-8a11 11 0 0 1 16 0" />
+            <path d="M39 26l4-4a11 11 0 0 1 16 16l-8 8a11 11 0 0 1-16 0" />
+            <path d="M24 40l16-16" />
+          </svg>
           <span>links</span>
         </button>
 
@@ -454,10 +445,7 @@
     </section>
 
     <section class="window" id="aboutWindow" style="left: 48%; top: 18%;">
-      <div class="window-bar">
-        <span>about</span>
-        <button class="close-window" type="button">x</button>
-      </div>
+      <div class="window-bar"><span>about</span><button class="close-window" type="button">x</button></div>
       <div class="window-content">
         <h2>About Me</h2>
         <p>hello! i’m ham or hamilton :D</p>
@@ -465,52 +453,48 @@
       </div>
     </section>
 
-<section class="window" id="workWindow" style="left: 46%; top: 28%;">
-  <div class="window-bar">
-    <span>work</span>
-    <button class="close-window" type="button">x</button>
-  </div>
+    <section class="window" id="linksWindow" style="left: 52%; top: 24%;">
+      <div class="window-bar"><span>links</span><button class="close-window" type="button">x</button></div>
+      <div class="window-content">
+        <h2>Links</h2>
+        <p><a href="https://www.linkedin.com/in/hamshea/" target="_blank">LinkedIn</a></p>
+        <p><a href="https://yael-writing-notebook.my.canva.site/hamportfolio" target="_blank">Portfolio</a></p>
+        <p><a href="https://www.youtube.com/@hamval244" target="_blank">For Fun Channel</a></p>
+      </div>
+    </section>
 
-  <div class="window-content">
-    <h2>Work</h2>
-
-    <p>
-      Current:
-      <a class="highlight-link" href="https://www.ucsc.edu/" target="_blank">UCSC Systems Administator(Gamning Lounge)</a>,
-      <a class="highlight-link" href="https://sluggaming.org/" target="_blank">Slug Gaming</a>,
-      <a class="highlight-link" href="https://geng.gg/" target="_blank">Gen.G</a>.
-    </p>
-
-    <p>
-      Previously:
-      <a class="highlight-link" href="https://h15den.com/" target="_blank">H15DEN</a>,
-      <a class="highlight-link" href="https://www.skyrisai.com/" target="_blank">SkyrisAI</a>,
-      <a class="highlight-link" href="https://anthoscapital.com/" target="_blank">Anthos Capital</a>.
-    </p>
-
-    <p>
-      I’ve worked on gaming events, partnerships, brand engagement, operations,
-      and student community growth.
-    </p>
-  </div>
-</section>
+    <section class="window" id="workWindow" style="left: 46%; top: 28%;">
+      <div class="window-bar"><span>work</span><button class="close-window" type="button">x</button></div>
+      <div class="window-content">
+        <h2>Work</h2>
+        <p>
+          Current:
+          <a class="highlight-link" href="https://www.ucsc.edu/" target="_blank">UCSC</a>,
+          <a class="highlight-link" href="https://sluggaming.org/" target="_blank">Slug Gaming</a>,
+          <a class="highlight-link" href="https://geng.gg/" target="_blank">Gen.G</a>.
+        </p>
+        <p>
+          Previously:
+          <a class="highlight-link" href="https://h15den.com/" target="_blank">H15DEN</a>,
+          <a class="highlight-link" href="https://www.skyrisai.com/" target="_blank">SkyrisAI</a>,
+          <a class="highlight-link" href="https://anthoscapital.com/" target="_blank">Anthos Capital</a>.
+        </p>
+        <p>I’ve worked on gaming events, partnerships, brand engagement, operations, and student community growth.</p>
+      </div>
+    </section>
 
     <section class="window" id="contactWindow" style="left: 50%; top: 34%;">
-      <div class="window-bar">
-        <span>contact</span>
-        <button class="close-window" type="button">x</button>
-      </div>
+      <div class="window-bar"><span>contact</span><button class="close-window" type="button">x</button></div>
       <div class="window-content">
         <h2>Contact</h2>
         <p>Want to connect about product, tech, gaming, partnerships, or community work?</p>
-        <p><a href="mailto:haminproduct@gmail.com">haminproduct@gmail.com</a></p>
+        <p><a href="mailto:hamilton@example.com">hamilton@example.com</a></p>
       </div>
     </section>
 
     <div class="radio-player">
       <div class="radio-title">radio</div>
       <div class="track-name" id="trackName">Resident Evil 6 Theme</div>
-
       <div class="radio-controls">
         <button id="prevTrack" type="button">prev</button>
         <button id="playPause" type="button">pause</button>
@@ -544,84 +528,14 @@
     let currentTrack = 0;
 
     const tracks = [
-      {
-        name: "Resident Evil 6 Theme",
-        src: "Resident Evil 6 Soundtrack - Main Theme Leon  Helena.mp3"
-      },
-      {
-        name: "Track 1",
-        src: "track1.mp3"
-      },
-      {
-        name: "Track 2",
-        src: "track2.mp3"
-      },
-      {
-        name: "Track 3",
-        src: "track3.mp3"
-      },
-      {
-        name: "Track 4",
-        src: "track4.mp3"
-      },
-      {
-        name: "Track 5",
-        src: "track5.mp3"
-      },
-      {
-        name: "Track 6",
-        src: "track6.mp3"
-      }
+      { name: "Resident Evil 6 Theme", src: "Resident Evil 6 Soundtrack - Main Theme Leon  Helena.mp3" },
+      { name: "Track 1", src: "track1.mp3" },
+      { name: "Track 2", src: "track2.mp3" },
+      { name: "Track 3", src: "track3.mp3" },
+      { name: "Track 4", src: "track4.mp3" },
+      { name: "Track 5", src: "track5.mp3" },
+      { name: "Track 6", src: "track6.mp3" }
     ];
-
-    function resizeCanvas() {
-      canvas.width = window.innerWidth * window.devicePixelRatio;
-      canvas.height = window.innerHeight * window.devicePixelRatio;
-      canvas.style.width = window.innerWidth + "px";
-      canvas.style.height = window.innerHeight + "px";
-      ctx.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0);
-    }
-
-    function drawWave() {
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-      ctx.clearRect(0, 0, width, height);
-      ctx.fillStyle = "#000";
-      ctx.fillRect(0, 0, width, height);
-
-      const spacing = 16;
-      const columns = Math.ceil(width / spacing) + 12;
-      const rows = Math.ceil(height / spacing) + 12;
-
-      for (let y = -6; y < rows; y++) {
-        for (let x = -6; x < columns; x++) {
-          const px = x * spacing;
-          const py = y * spacing;
-          const waveA = Math.sin(x * 0.28 + time * 0.025);
-          const waveB = Math.cos(y * 0.22 + time * 0.018);
-          const waveC = Math.sin((x + y) * 0.12 + time * 0.02);
-          const warpX = waveB * 26 + waveC * 16;
-          const warpY = waveA * 34 + Math.sin(x * 0.08 + y * 0.18 + time * 0.018) * 22;
-          const centerX = width * 0.5;
-          const centerY = height * 0.48;
-          const dx = px - centerX;
-          const dy = py - centerY;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-          const ripple = Math.sin(distance * 0.018 - time * 0.045) * 18;
-          const finalX = px + warpX + (dx / Math.max(distance, 1)) * ripple;
-          const finalY = py + warpY + (dy / Math.max(distance, 1)) * ripple;
-          const alpha = Math.min(1, 0.45 + Math.sin(x * 0.18 + y * 0.24 + time * 0.035) * 0.35);
-
-          ctx.beginPath();
-          ctx.fillStyle = "rgba(255, 255, 255, " + alpha + ")";
-          ctx.arc(finalX, finalY, 1.8, 0, Math.PI * 2);
-          ctx.fill();
-        }
-      }
-
-      time += 0.35;
-      requestAnimationFrame(drawWave);
-    }
 
     function playClick() {
       if (!entered) return;
@@ -643,44 +557,44 @@
       }
     }
 
-    function startMusic() {
-      loadTrack(currentTrack);
-    }
-
-    function nextSong() {
-      playClick();
-      loadTrack(currentTrack + 1);
-    }
-
-    function prevSong() {
-      playClick();
-      loadTrack(currentTrack - 1);
-    }
-
-    function togglePlay() {
-      playClick();
-
-      if (backgroundMusic.paused) {
-        backgroundMusic.play().catch(() => {});
-        playPause.textContent = "pause";
-      } else {
-        backgroundMusic.pause();
-        playPause.textContent = "play";
-      }
-    }
-
-    function toggleMusic() {
-      playClick();
-      backgroundMusic.muted = !backgroundMusic.muted;
-      muteButton.textContent = backgroundMusic.muted ? "unmute" : "mute";
-    }
-
     function enterSite() {
       if (entered) return;
       entered = true;
-      startMusic();
+      loadTrack(currentTrack);
       enterScreen.classList.add("hidden");
       gameScreen.classList.add("active");
+    }
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth * window.devicePixelRatio;
+      canvas.height = window.innerHeight * window.devicePixelRatio;
+      canvas.style.width = window.innerWidth + "px";
+      canvas.style.height = window.innerHeight + "px";
+      ctx.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0);
+    }
+
+    function drawWave() {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      ctx.fillStyle = "#000";
+      ctx.fillRect(0, 0, width, height);
+
+      for (let y = -6; y < Math.ceil(height / 16) + 12; y++) {
+        for (let x = -6; x < Math.ceil(width / 16) + 12; x++) {
+          const px = x * 16;
+          const py = y * 16;
+          const finalX = px + Math.cos(y * 0.22 + time * 0.018) * 26 + Math.sin((x + y) * 0.12 + time * 0.02) * 16;
+          const finalY = py + Math.sin(x * 0.28 + time * 0.025) * 34;
+          const alpha = Math.min(1, 0.45 + Math.sin(x * 0.18 + y * 0.24 + time * 0.035) * 0.35);
+          ctx.beginPath();
+          ctx.fillStyle = "rgba(255,255,255," + alpha + ")";
+          ctx.arc(finalX, finalY, 1.8, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      time += 0.35;
+      requestAnimationFrame(drawWave);
     }
 
     function openWindow(id) {
@@ -703,7 +617,6 @@
 
       bar.addEventListener("pointerdown", event => {
         if (event.target.classList.contains("close-window")) return;
-
         dragging = true;
         win.style.zIndex = ++topZ;
         offsetX = event.clientX - win.offsetLeft;
@@ -717,9 +630,7 @@
         win.style.top = event.clientY - offsetY + "px";
       });
 
-      bar.addEventListener("pointerup", () => {
-        dragging = false;
-      });
+      bar.addEventListener("pointerup", () => dragging = false);
     }
 
     resizeCanvas();
@@ -727,9 +638,7 @@
     window.addEventListener("resize", resizeCanvas);
 
     enterScreen.addEventListener("click", enterSite);
-    window.addEventListener("keydown", () => {
-      if (!entered) enterSite();
-    });
+    window.addEventListener("keydown", () => { if (!entered) enterSite(); });
 
     document.querySelectorAll(".desktop-icon").forEach(icon => {
       icon.addEventListener("click", () => openWindow(icon.dataset.window));
@@ -737,17 +646,8 @@
 
     document.querySelectorAll(".window").forEach(win => {
       makeDraggable(win);
-
-      win.addEventListener("pointerdown", () => {
-        win.style.zIndex = ++topZ;
-      });
-
       const closeButton = win.querySelector(".close-window");
-
-      closeButton.addEventListener("pointerdown", event => {
-        event.stopPropagation();
-      });
-
+      closeButton.addEventListener("pointerdown", event => event.stopPropagation());
       closeButton.addEventListener("click", event => {
         event.preventDefault();
         event.stopPropagation();
@@ -755,10 +655,24 @@
       });
     });
 
-    prevTrack.addEventListener("click", prevSong);
-    nextTrack.addEventListener("click", nextSong);
-    playPause.addEventListener("click", togglePlay);
-    muteButton.addEventListener("click", toggleMusic);
+    prevTrack.addEventListener("click", () => { playClick(); loadTrack(currentTrack - 1); });
+    nextTrack.addEventListener("click", () => { playClick(); loadTrack(currentTrack + 1); });
+    playPause.addEventListener("click", () => {
+      playClick();
+      if (backgroundMusic.paused) {
+        backgroundMusic.play().catch(() => {});
+        playPause.textContent = "pause";
+      } else {
+        backgroundMusic.pause();
+        playPause.textContent = "play";
+      }
+    });
+    muteButton.addEventListener("click", () => {
+      playClick();
+      backgroundMusic.muted = !backgroundMusic.muted;
+      muteButton.textContent = backgroundMusic.muted ? "unmute" : "mute";
+    });
   </script>
 </body>
 </html>
+```
