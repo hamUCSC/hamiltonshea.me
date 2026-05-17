@@ -375,6 +375,74 @@
       background: white;
     }
 
+    .contact-window-content {
+      background:
+        linear-gradient(135deg, rgba(120,0,0,0.28), rgba(0,0,0,0.82)),
+        repeating-linear-gradient(-10deg, rgba(255,255,255,0.04) 0 2px, transparent 2px 12px);
+    }
+
+    .contact-intro {
+      margin-top: 0;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 16px;
+    }
+
+    .contact-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .contact-form label {
+      display: grid;
+      gap: 6px;
+      font-weight: 900;
+    }
+
+    .contact-form span {
+      color: white;
+      text-shadow: 2px 2px 0 black;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 10px 12px;
+      color: black;
+      background: white;
+      border: 3px solid black;
+      font: 16px "Segoe UI", Arial, sans-serif;
+      box-shadow: 5px 5px 0 #d00000;
+    }
+
+    .contact-form textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .contact-submit {
+      width: fit-content;
+      padding: 10px 28px;
+      color: white;
+      background: #d00000;
+      border: 3px solid white;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 24px;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 6px 6px 0 black;
+    }
+
+    .contact-submit:hover {
+      color: black;
+      background: white;
+    }
+
     .recommendation-card {
       margin-top: 18px;
       padding: 16px;
@@ -494,9 +562,7 @@
         overflow-y: auto;
       }
 
-      .enter-content {
-        padding: 18px;
-      }
+      .enter-content { padding: 18px; }
 
       .intro-face {
         width: min(68vw, 260px);
@@ -510,27 +576,18 @@
         margin-bottom: 18px;
       }
 
-      .press-any-key {
-        width: min(82vw, 360px);
-      }
+      .press-any-key { width: min(82vw, 360px); }
 
       .persona-screen {
         min-height: 100vh;
         overflow-x: hidden;
         overflow-y: auto;
         padding-bottom: 130px;
-        background:
-          linear-gradient(180deg, rgba(180,0,0,0.88) 0%, rgba(70,0,0,0.92) 48%, rgba(0,0,0,0.96) 100%),
-          url("background2nd") center / cover no-repeat;
       }
 
-      .persona-screen.active {
-        transform: none;
-      }
+      .persona-screen.active { transform: none; }
 
-      .theme-video {
-        position: fixed;
-      }
+      .theme-video { position: fixed; }
 
       .red-slab {
         left: 50%;
@@ -552,9 +609,7 @@
         transform: rotate(4deg);
       }
 
-      .ham-character {
-        display: none;
-      }
+      .ham-character { display: none; }
 
       .menu-wrap {
         width: 100%;
@@ -582,9 +637,7 @@
         text-shadow: 4px 4px 0 black, 8px 8px 0 #d00000;
       }
 
-      .main-title span {
-        text-shadow: 4px 4px 0 white, 8px 8px 0 black;
-      }
+      .main-title span { text-shadow: 4px 4px 0 white, 8px 8px 0 black; }
 
       .desktop-icons {
         width: 100%;
@@ -601,9 +654,7 @@
         filter: drop-shadow(4px 4px 0 black);
       }
 
-      .desktop-icon:hover {
-        transform: translateY(-4px) scale(1.04);
-      }
+      .desktop-icon:hover { transform: translateY(-4px) scale(1.04); }
 
       .desktop-icon svg {
         width: 78px;
@@ -654,31 +705,11 @@
         text-shadow: 2px 2px 0 white, 5px 5px 0 black;
       }
 
+      .contact-row { grid-template-columns: 1fr; }
+
       .highlight-link {
         margin: 3px 2px;
         padding: 2px 6px;
-      }
-
-      .recommendation-header {
-        align-items: flex-start;
-      }
-
-      .recommendation-pfp {
-        width: 48px;
-        height: 48px;
-      }
-
-      .recommendation-name {
-        font-size: 16px;
-      }
-
-      .recommendation-title {
-        font-size: 12px;
-      }
-
-      .work-meme {
-        max-width: 100%;
-        box-shadow: 5px 5px 0 black, 8px 8px 0 #d00000;
       }
 
       .radio-player {
@@ -692,13 +723,8 @@
         box-shadow: 5px 5px 0 black, 8px 8px 0 #d00000;
       }
 
-      .radio-title {
-        font-size: 20px;
-      }
-
-      .track-name {
-        font-size: 12px;
-      }
+      .radio-title { font-size: 20px; }
+      .track-name { font-size: 12px; }
 
       .radio-controls button {
         font-size: 13px;
@@ -879,12 +905,38 @@
       </div>
     </section>
 
-    <section class="window" id="contactWindow" style="left: 50%; top: 34%;">
+    <section class="window" id="contactWindow" style="left: 50%; top: 18%;">
       <div class="window-bar"><span>contact</span><button class="close-window" type="button">x</button></div>
-      <div class="window-content">
-        <h2>Contact</h2>
-        <p>Want to connect about product, tech, gaming, partnerships, or community work?</p>
-        <p><a href="mailto:haminproduct@gmail.com">haminproduct@gmail.com</a></p>
+
+      <div class="window-content contact-window-content">
+        <h2>Get In Touch</h2>
+        <p class="contact-intro">I’d love to hear from you! Send me a message below.</p>
+
+        <form class="contact-form" id="contactForm">
+          <div class="contact-row">
+            <label>
+              <span>Name</span>
+              <input id="contactName" type="text" placeholder="Your full name" />
+            </label>
+
+            <label>
+              <span>Email *</span>
+              <input id="contactEmail" type="email" placeholder="you@example.com" required />
+            </label>
+          </div>
+
+          <label>
+            <span>Subject</span>
+            <input id="contactSubject" type="text" placeholder="What would you like to discuss?" />
+          </label>
+
+          <label>
+            <span>Message</span>
+            <textarea id="contactMessage" placeholder="Tell me about your project, question, or just say hello..." required></textarea>
+          </label>
+
+          <button class="contact-submit" type="submit">Send</button>
+        </form>
       </div>
     </section>
 
@@ -1020,10 +1072,6 @@
         } else {
           themeVideo.oncanplay = playVideo;
         }
-
-        themeVideo.onerror = () => {
-          console.log("Could not load background video:", themeVideo.src);
-        };
       } else {
         themeVideo.pause();
         themeVideo.removeAttribute("src");
@@ -1042,14 +1090,15 @@
 
     function loadTrack(index) {
       currentTrack = (index + tracks.length) % tracks.length;
-
       const track = tracks[currentTrack];
 
+      backgroundMusic.pause();
       backgroundMusic.src = track.src;
+      backgroundMusic.load();
+
       trackName.textContent = track.name;
       backgroundMusic.volume = 0.32;
       backgroundMusic.loop = false;
-      backgroundMusic.load();
 
       applyTrackTheme(track);
 
@@ -1059,6 +1108,7 @@
             playPause.textContent = "pause";
           })
           .catch(error => {
+            trackName.textContent = `${track.name} - file missing`;
             console.log("Could not play:", track.src, error);
           });
       }
@@ -1205,6 +1255,26 @@
       backgroundMusic.muted = !backgroundMusic.muted;
       muteButton.textContent = backgroundMusic.muted ? "unmute" : "mute";
     });
+
+    const contactForm = document.getElementById("contactForm");
+
+    contactForm.addEventListener("submit", event => {
+      event.preventDefault();
+      playClick();
+
+      const name = document.getElementById("contactName").value;
+      const email = document.getElementById("contactEmail").value;
+      const subject = document.getElementById("contactSubject").value || "Website contact";
+      const message = document.getElementById("contactMessage").value;
+
+      const body = encodeURIComponent(
+        `Name: ${name}\nEmail: ${email}\n\n${message}`
+      );
+
+      window.location.href =
+        `mailto:haminproduct@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+    });
   </script>
 </body>
 </html>
+```
