@@ -623,7 +623,7 @@
 
         <p>
           <span class="highlight-link">Community Growth</span>
-          Helped grow Slug Gaming through tournaments, campus activations, sponsorships, and student-led programs reaching hundreds of signups and attendees.
+          Helped grow Slug Gaming through tournaments, campus activations, sponsorships, and student-led programs reaching hundreds of signups and attendees. Initiated partnership conversations with Razer, Corsair, NVIDIA, Red Bull, Gen.G, NRG, Team Liquid, and Extra Life Charity.
         </p>
 
         <p>
@@ -733,7 +733,7 @@
         src: "Wet Hands.mp3",
         video: "minecraft-bg.mp4",
         overlay: "linear-gradient(90deg, rgba(20,50,20,0.42) 0%, rgba(40,80,40,0.18) 48%, rgba(0,0,0,0.42) 100%)",
-        theme: "natural"
+        theme: "video"
       },
       {
         name: "wasian national anthem",
@@ -761,6 +761,9 @@
     function applyTrackTheme(track) {
       gameScreen.classList.remove("comic-theme", "natural-theme", "video-theme");
 
+      themeVideo.oncanplay = null;
+      themeVideo.onerror = null;
+
       if (track.theme === "video") {
         gameScreen.classList.add("video-theme");
         gameScreen.style.background = track.overlay;
@@ -772,11 +775,17 @@
         themeVideo.src = track.video;
         themeVideo.load();
 
-        themeVideo.oncanplay = () => {
+        const playVideo = () => {
           themeVideo.play().catch(error => {
             console.log("Could not play background video:", error);
           });
         };
+
+        if (themeVideo.readyState >= 2) {
+          playVideo();
+        } else {
+          themeVideo.oncanplay = playVideo;
+        }
 
         themeVideo.onerror = () => {
           console.log("Could not load background video:", themeVideo.src);
