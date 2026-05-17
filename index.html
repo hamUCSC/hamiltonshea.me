@@ -129,20 +129,6 @@
       opacity: 1;
     }
 
-    .bg-fade-cover {
-      position: absolute;
-      inset: 0;
-      z-index: 6;
-      pointer-events: none;
-      opacity: 0;
-      background: #000;
-      transition: opacity 1.4s ease;
-    }
-
-    .bg-fade-cover.active {
-      opacity: 1;
-    }
-
     .red-slab {
       position: absolute;
       inset: -12vh auto auto 34vw;
@@ -456,7 +442,6 @@
   </section>
 
   <main class="persona-screen comic-theme" id="gameScreen">
-    <div class="bg-fade-cover" id="bgFadeCover"></div>
     <video class="theme-video" id="themeVideo" muted loop playsinline></video>
 
     <div class="comic-panel"></div>
@@ -575,7 +560,6 @@
     const playPause = document.getElementById("playPause");
     const muteButton = document.getElementById("muteButton");
     const themeVideo = document.getElementById("themeVideo");
-    const bgFadeCover = document.getElementById("bgFadeCover");
     const canvas = document.getElementById("waveCanvas");
     const ctx = canvas.getContext("2d");
 
@@ -643,13 +627,6 @@
       clickSound.play().catch(() => {});
     }
 
-    function fadeCoverIn() {
-      bgFadeCover.classList.add("active");
-    }
-
-    function fadeCoverOut() {
-      bgFadeCover.classList.remove("active");
-    }
 
     function applyTrackTheme(track) {
       gameScreen.classList.remove("comic-theme", "natural-theme", "video-theme");
@@ -682,32 +659,28 @@
     }
 
     function loadTrack(index) {
-      currentTrack = (index + tracks.length) % tracks.length;
+  currentTrack = (index + tracks.length) % tracks.length;
 
-      const track = tracks[currentTrack];
+  const track = tracks[currentTrack];
 
-      if (entered) {
-        fadeCoverIn();
-      }
+  backgroundMusic.src = track.src;
+  trackName.textContent = track.name;
+  backgroundMusic.volume = 0.32;
+  backgroundMusic.loop = false;
+  backgroundMusic.load();
 
-      setTimeout(() => {
-        backgroundMusic.src = track.src;
-        trackName.textContent = track.name;
-        backgroundMusic.volume = 0.32;
-        backgroundMusic.loop = false;
-        backgroundMusic.load();
+  applyTrackTheme(track);
 
-        applyTrackTheme(track);
-
-        if (entered) {
-          backgroundMusic.play()
-            .then(() => {
-              playPause.textContent = "pause";
-            })
-            .catch(error => {
-              console.log("Could not play:", track.src, error);
-            });
-        }
+  if (entered) {
+    backgroundMusic.play()
+      .then(() => {
+        playPause.textContent = "pause";
+      })
+      .catch(error => {
+        console.log("Could not play:", track.src, error);
+      });
+  }
+}
 
         setTimeout(() => {
           fadeCoverOut();
