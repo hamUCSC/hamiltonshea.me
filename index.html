@@ -545,28 +545,27 @@
     }
 
     function loadTrack(index) {
-      currentTrack = (index + tracks.length) % tracks.length;
-      backgroundMusic.src = tracks[currentTrack].src;
-      trackName.textContent = tracks[currentTrack].name;
-      backgroundMusic.volume = 0.32;
-      backgroundMusic.loop = true;
+  currentTrack = (index + tracks.length) % tracks.length;
+  backgroundMusic.src = tracks[currentTrack].src;
+  trackName.textContent = tracks[currentTrack].name;
+  backgroundMusic.volume = 0.32;
+  backgroundMusic.loop = false;
+  backgroundMusic.load();
 
-      if (entered) {
-        backgroundMusic.play().catch(() => {});
+  if (entered) {
+    backgroundMusic.play()
+      .then(() => {
         playPause.textContent = "pause";
-      }
-    }
-
-  function enterSite() {
-  if (entered) return;
-  entered = true;
-
-  enterScreen.classList.add("hidden");
-  gameScreen.classList.add("active");
-
-  loadTrack(currentTrack);
-  backgroundMusic.play().catch(() => {});
+      })
+      .catch(error => {
+        console.log("Could not play:", tracks[currentTrack].src, error);
+      });
+  }
 }
+
+backgroundMusic.addEventListener("ended", () => {
+  loadTrack(currentTrack + 1);
+});
 
     function resizeCanvas() {
       canvas.width = window.innerWidth * window.devicePixelRatio;
