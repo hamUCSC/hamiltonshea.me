@@ -123,6 +123,7 @@
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.8s ease;
+      background: #000;
     }
 
     .persona-screen.video-theme .theme-video {
@@ -500,7 +501,7 @@
   </section>
 
   <main class="persona-screen comic-theme" id="gameScreen">
-    <video class="theme-video" id="themeVideo" muted loop playsinline></video>
+    <video class="theme-video" id="themeVideo" muted loop playsinline preload="auto"></video>
 
     <div class="comic-panel"></div>
     <div class="red-slab"></div>
@@ -637,7 +638,7 @@
             <div>
               <p class="recommendation-name">Jasper Lee</p>
               <p class="recommendation-title">
-                GEN.G Partnerships & Program Manager
+                GEN.G Esports Partnerships & Program Manager
               </p>
             </div>
           </div>
@@ -764,13 +765,22 @@
         gameScreen.classList.add("video-theme");
         gameScreen.style.background = track.overlay;
 
+        themeVideo.pause();
         themeVideo.muted = true;
+        themeVideo.defaultMuted = true;
         themeVideo.volume = 0;
         themeVideo.src = track.video;
         themeVideo.load();
-        themeVideo.play().catch(error => {
-          console.log("Could not play background video:", error);
-        });
+
+        themeVideo.oncanplay = () => {
+          themeVideo.play().catch(error => {
+            console.log("Could not play background video:", error);
+          });
+        };
+
+        themeVideo.onerror = () => {
+          console.log("Could not load background video:", themeVideo.src);
+        };
       } else {
         themeVideo.pause();
         themeVideo.removeAttribute("src");
