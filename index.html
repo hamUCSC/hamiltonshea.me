@@ -488,7 +488,7 @@
       <div class="window-content">
         <h2>Contact</h2>
         <p>Want to connect about product, tech, gaming, partnerships, or community work?</p>
-        <p><a href="mailto:hamilton@example.com">hamilton@example.com</a></p>
+        <p><a href="mailto:haminproduct@gmail.com">haminproduct@gmail.com</a></p>
       </div>
     </section>
 
@@ -557,13 +557,16 @@
       }
     }
 
-    function enterSite() {
-      if (entered) return;
-      entered = true;
-      loadTrack(currentTrack);
-      enterScreen.classList.add("hidden");
-      gameScreen.classList.add("active");
-    }
+  function enterSite() {
+  if (entered) return;
+  entered = true;
+
+  enterScreen.classList.add("hidden");
+  gameScreen.classList.add("active");
+
+  loadTrack(currentTrack);
+  backgroundMusic.play().catch(() => {});
+}
 
     function resizeCanvas() {
       canvas.width = window.innerWidth * window.devicePixelRatio;
