@@ -132,40 +132,15 @@
     .bg-fade-cover {
       position: absolute;
       inset: 0;
-      z-index: 0;
+      z-index: 6;
       pointer-events: none;
       opacity: 0;
       background: #000;
-      transition: opacity 0.9s ease;
+      transition: opacity 1.4s ease;
     }
 
     .bg-fade-cover.active {
       opacity: 1;
-    }
-
-    .bg-fade-cover.blocky {
-      background:
-        repeating-linear-gradient(0deg, rgba(90, 62, 34, 0.55) 0 34px, rgba(50, 32, 18, 0.55) 34px 68px),
-        repeating-linear-gradient(90deg, rgba(120, 86, 42, 0.45) 0 34px, rgba(35, 90, 35, 0.45) 34px 68px),
-        rgba(0, 0, 0, 0.35);
-      animation: blockyFade 0.9s steps(6) forwards;
-    }
-
-    @keyframes blockyFade {
-      0% {
-        opacity: 0;
-        transform: scale(1);
-      }
-
-      35% {
-        opacity: 0.85;
-        transform: scale(1.03);
-      }
-
-      100% {
-        opacity: 0;
-        transform: scale(1.08);
-      }
     }
 
     .red-slab {
@@ -667,20 +642,12 @@
       clickSound.play().catch(() => {});
     }
 
-    function playBackgroundFade(track) {
-      bgFadeCover.className = "bg-fade-cover";
+    function fadeCoverIn() {
+      bgFadeCover.classList.add("active");
+    }
 
-      void bgFadeCover.offsetWidth;
-
-      if (track.theme === "video") {
-        bgFadeCover.classList.add("blocky");
-      } else {
-        bgFadeCover.classList.add("active");
-      }
-
-      setTimeout(() => {
-        bgFadeCover.className = "bg-fade-cover";
-      }, 950);
+    function fadeCoverOut() {
+      bgFadeCover.classList.remove("active");
     }
 
     function applyTrackTheme(track) {
@@ -718,7 +685,9 @@
 
       const track = tracks[currentTrack];
 
-      playBackgroundFade(track);
+      if (entered) {
+        fadeCoverIn();
+      }
 
       setTimeout(() => {
         backgroundMusic.src = track.src;
@@ -738,7 +707,11 @@
               console.log("Could not play:", track.src, error);
             });
         }
-      }, entered ? 250 : 0);
+
+        setTimeout(() => {
+          fadeCoverOut();
+        }, 350);
+      }, entered ? 1400 : 0);
     }
 
     backgroundMusic.addEventListener("ended", () => {
