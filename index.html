@@ -979,6 +979,10 @@
     let topZ = 40;
     let currentTrack = 0;
 
+    const AUDIO_SCALE = 0.5;
+    const CLICK_RATE = 1.2;
+    const CLICK_START_OFFSET = 0.04;
+
     const tracks = [
       {
         name: "resident evil 6 theme",
@@ -1033,15 +1037,17 @@
 
     function playClick() {
       if (!entered) return;
-      clickSound.currentTime = 0;
-      clickSound.volume = 0.45;
+      clickSound.pause();
+      clickSound.currentTime = CLICK_START_OFFSET;
+      clickSound.volume = 0.45 * AUDIO_SCALE;
+      clickSound.playbackRate = CLICK_RATE;
       clickSound.play().catch(() => {});
     }
 
     function playHover() {
       if (!entered) return;
       hoverSound.currentTime = 0;
-      hoverSound.volume = 0.35;
+      hoverSound.volume = 0.35 * AUDIO_SCALE;
       hoverSound.play().catch(() => {});
     }
 
@@ -1098,7 +1104,7 @@
       backgroundMusic.load();
 
       trackName.textContent = track.name;
-      backgroundMusic.volume = 0.32;
+      backgroundMusic.volume = 0.32 * AUDIO_SCALE;
       backgroundMusic.loop = false;
 
       applyTrackTheme(track);
@@ -1125,6 +1131,9 @@
 
       enterScreen.classList.add("hidden");
       gameScreen.classList.add("active");
+
+      clickSound.load();
+      hoverSound.load();
 
       loadTrack(currentTrack);
     }
@@ -1227,7 +1236,7 @@
       item.addEventListener("mouseenter", playHover);
     });
 
-        contactForm.addEventListener("submit", event => {
+    contactForm.addEventListener("submit", event => {
       event.preventDefault();
       playClick();
 
