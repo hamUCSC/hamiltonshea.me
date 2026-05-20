@@ -66,11 +66,32 @@
       background: white;
     }
 
+    .resume-section {
+      flex: 1;
+      background: white;
+      display: flex;
+      flex-direction: column;
+    }
+
     .resume-frame {
       width: 100%;
-      height: calc(100vh - 72px);
+      flex: 1;
       border: 0;
       background: white;
+    }
+
+    .resume-fallback {
+      margin: 0;
+      padding: 12px;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      background: white;
+      color: black;
+    }
+
+    .resume-fallback a {
+      color: #d00000;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -82,11 +103,20 @@
       <a class="back-link" href="index.html">Back</a>
     </div>
 
-    <iframe
-      class="resume-frame"
-      src="https://drive.google.com/file/d/1Jn_pNR9EqV29dya-9IK2hMxdYYOrMJ22/preview"
-      allow="autoplay">
-    </iframe>
+    <section class="resume-section">
+      <iframe
+        class="resume-frame"
+        src="https://drive.google.com/file/d/1Jn_pNR9EqV29dya-9IK2hMxdYYOrMJ22/preview"
+        allow="autoplay">
+      </iframe>
+
+      <p class="resume-fallback">
+        If the resume does not load,
+        <a href="https://drive.google.com/file/d/1Jn_pNR9EqV29dya-9IK2hMxdYYOrMJ22/view?usp=sharing" target="_blank">
+          open it here
+        </a>.
+      </p>
+    </section>
   </main>
 </body>
 </html>
