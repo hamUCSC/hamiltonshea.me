@@ -4,22 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ham's resume</title>
-
   <style>
     * {
       box-sizing: border-box;
     }
-
     html, body {
       margin: 0;
       width: 100%;
       min-height: 100vh;
       background: #050505;
       color: white;
-      font-family: Impact, "Arial Black", "Segoe UI", sans-serif;
+      font-family: "Segoe UI", Arial, sans-serif;
       overflow: hidden;
     }
-
     .resume-page {
       width: 100vw;
       height: 100vh;
@@ -29,57 +26,40 @@
         linear-gradient(90deg, rgba(180,0,0,0.70), rgba(0,0,0,0.92)),
         #050505;
     }
-
     .top-bar {
-      height: 72px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 24px;
-      background: rgba(0, 0, 0, 0.88);
-      border-bottom: 4px solid white;
-      box-shadow: 0 8px 0 #d00000;
-      z-index: 5;
+      padding: 14px 22px;
+      background: #000;
+      border-bottom: 4px solid #d00000;
     }
-
-    .title {
-      margin: 0;
-      font-size: clamp(28px, 4vw, 48px);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      text-shadow: 4px 4px 0 black, 7px 7px 0 #d00000;
-    }
-
-    .back-link {
+    .top-bar a {
       color: white;
-      background: #d00000;
-      border: 3px solid white;
-      padding: 8px 14px;
       text-decoration: none;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 20px;
+      letter-spacing: 1px;
       text-transform: uppercase;
-      font-size: 18px;
-      box-shadow: 4px 4px 0 black;
     }
-
-    .back-link:hover {
-      color: black;
-      background: white;
+    .top-bar a:hover {
+      color: #d00000;
     }
-
     .resume-section {
       flex: 1;
       background: white;
       display: flex;
       flex-direction: column;
     }
-
     .resume-frame {
       width: 100%;
       flex: 1;
       border: 0;
       background: white;
     }
-
     .resume-fallback {
       margin: 0;
       padding: 12px;
@@ -88,28 +68,24 @@
       background: white;
       color: black;
     }
-
     .resume-fallback a {
       color: #d00000;
       font-weight: bold;
     }
   </style>
 </head>
-
 <body>
   <main class="resume-page">
     <div class="top-bar">
-      <h1 class="title">Ham's Resume</h1>
-      <a class="back-link" href="index.html">Back</a>
+      <a href="index.html">&larr; ham's website</a>
+      <a href="adaptive-menu-ui.html" target="_blank">case study</a>
     </div>
-
     <section class="resume-section">
       <iframe
         class="resume-frame"
         src="https://drive.google.com/file/d/1uPmXlt5iSdxCZ0-8CfSBMITQ8XCEeDnx/preview"
         allow="autoplay">
       </iframe>
-
       <p class="resume-fallback">
         If the resume does not load,
         <a href="https://drive.google.com/file/d/1uPmXlt5iSdxCZ0-8CfSBMITQ8XCEeDnx/view">
