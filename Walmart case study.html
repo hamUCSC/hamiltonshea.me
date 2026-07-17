@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Walmart Case Study — Hamilton Shea</title>
+  <link rel="icon" type="image/jpeg" href="../logo.jpg" />
+
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; color: #f2f2f2; background: #0a0a0a; line-height: 1.6; }
+    .top-bar { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; padding: 14px 22px; background: #000; border-bottom: 4px solid #555; }
+    .top-bar a { color: white; text-decoration: none; font-family: Impact, "Arial Black", sans-serif; font-size: 20px; letter-spacing: 1px; text-transform: uppercase; }
+    .top-bar a:hover { color: #bbb; }
+    .wrap { max-width: 820px; margin: 0 auto; padding: 40px 22px 90px; }
+    .badge { display: inline-block; padding: 5px 14px; margin-bottom: 14px; color: black; background: #ccc; border: 4px solid black; font-family: Impact, "Arial Black", sans-serif; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; transform: rotate(-2deg); box-shadow: 5px 5px 0 #555; }
+    h1 { margin: 0 0 6px; font-family: Impact, "Arial Black", sans-serif; font-size: clamp(28px, 5vw, 44px); line-height: 1.0; color: white; text-shadow: 3px 3px 0 #555, 6px 6px 0 black; }
+    .subtitle { margin: 0 0 26px; color: #cfcfcf; font-size: 14px; font-style: italic; }
+    h2 { margin: 36px 0 10px; padding-bottom: 6px; font-size: 21px; font-weight: 700; color: #ccc; border-bottom: 2px solid #333; }
+    h3 { margin: 20px 0 8px; font-size: 15.5px; color: white; }
+    p, li { color: #dedede; font-size: 15px; }
+    table { width: 100%; border-collapse: collapse; margin: 12px 0 20px; font-size: 13.5px; }
+    th, td { text-align: left; padding: 8px 10px; border: 1px solid #2a2a2a; vertical-align: top; }
+    th { background: #333; color: white; font-weight: 600; font-size: 12px; text-transform: uppercase; }
+    tr:nth-child(even) td { background: rgba(255,255,255,0.03); }
+    .swot-s td:first-child, .swot-o td:first-child { background: rgba(80,140,220,0.12); }
+    .swot-w td:first-child, .swot-t td:first-child { background: rgba(220,90,90,0.12); }
+    blockquote { margin: 14px 0; padding: 10px 16px; border-left: 4px solid #666; background: rgba(255,255,255,0.03); font-style: italic; color: #ccc; font-size: 14px; }
+    .sources { margin-top: 40px; padding-top: 16px; border-top: 2px solid #333; font-size: 13px; color: #999; }
+    .sources a { color: #bbb; }
+    @media (max-width: 640px) {
+      table, thead, tbody, th, td, tr { display: block; }
+      th { display: none; }
+      td { border: none; border-bottom: 1px solid #2a2a2a; padding: 5px 4px; }
+      td::before { content: attr(data-label); display: block; font-weight: 700; color: #999; font-size: 10.5px; text-transform: uppercase; margin-bottom: 2px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <a href="../index.html">&larr; ham's website</a>
+    <a href="../case-studies.html">case studies</a>
+  </div>
+
+  <div class="wrap">
+    <span class="badge">TIM 80C · Case Study 1</span>
+    <h1>Walmart Inc.</h1>
+    <p class="subtitle">Class case study — strategy analysis</p>
+
+    <h2>SWOT Analysis</h2>
+    <table>
+      <thead><tr><th>Strengths</th><th>Weaknesses</th></tr></thead>
+      <tbody class="swot-s">
+        <tr><td data-label="Strengths">Large list of suppliers</td><td data-label="Weaknesses">Unethical labor practices</td></tr>
+        <tr><td data-label="Strengths">Strong finances</td><td data-label="Weaknesses">Failure of innovation</td></tr>
+        <tr><td data-label="Strengths">Efficient supply chain / operations</td><td data-label="Weaknesses">Outdated brand recognition</td></tr>
+      </tbody>
+    </table>
+    <table>
+      <thead><tr><th>Opportunities</th><th>Threats</th></tr></thead>
+      <tbody class="swot-o">
+        <tr><td data-label="Opportunities">Global expansion</td><td data-label="Threats">Amazon's online presence</td></tr>
+        <tr><td data-label="Opportunities">Walmart+ program</td><td data-label="Threats">More expensive outreach for suppliers globally</td></tr>
+        <tr><td data-label="Opportunities">AI-turned operations</td><td data-label="Threats">Red states might see the global-expansion change as "un-American"</td></tr>
+        <tr><td data-label="Opportunities">Becoming an ethical workplace</td><td data-label="Threats"></td></tr>
+      </tbody>
+    </table>
+
+    <h2>Porter's Five Forces</h2>
+    <table>
+      <tbody>
+        <tr><td data-label="Force"><strong>Competitors</strong></td><td data-label="Analysis">Amazon and Whole Foods, Target</td></tr>
+        <tr><td data-label="Force"><strong>New Entrants</strong></td><td data-label="Analysis">Tech companies or international companies choosing to enter the U.S.</td></tr>
+        <tr><td data-label="Force"><strong>Substitute Products</strong></td><td data-label="Analysis">DoorDash or UberEats — something that gets the product to the consumer directly</td></tr>
+        <tr><td data-label="Force"><strong>Customers</strong></td><td data-label="Analysis">Customers can easily switch platforms</td></tr>
+        <tr><td data-label="Force"><strong>Suppliers</strong></td><td data-label="Analysis">Walmart has power, but is dependent on suppliers — unless it makes its own products, like Trader Joe's does</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Strategy</h3>
+    <table>
+      <tbody>
+        <tr><td data-label="Area"><strong>Low Cost Leadership</strong></td><td data-label="Notes">Walmart already dominates in low-cost leadership, being one of the lowest-cost producers.</td></tr>
+        <tr><td data-label="Area"><strong>Customer Intimacy</strong></td><td data-label="Notes">Walmart must use technology to improve online customer relationships and loyalty, the way Amazon has.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Value Chain</h2>
+    <p><strong>Support activities</strong></p>
+    <ul>
+      <li><strong>Firm Infrastructure:</strong> use a business management software that tracks everything</li>
+      <li><strong>Human Resource Management:</strong> needs to improve — use upscaled digital programs like UC's SHAPE</li>
+      <li><strong>Technology Development:</strong> invest in computer systems, AI, and/or e-commerce, like Amazon</li>
+      <li><strong>Procurement:</strong> use digital procurement and supply management software to improve efficiency</li>
+    </ul>
+    <p><strong>Primary activities</strong></p>
+    <ul>
+      <li><strong>Inbound Logistics:</strong> study UPS tracking systems that track goods in real time, help predict demand, and optimize workload without the need for human intervention</li>
+      <li><strong>Operations:</strong> expand into cloud-based management — no need for physical servers, maybe consider automation</li>
+      <li><strong>Outbound Logistics:</strong> collaborate with companies that have already perfected route optimization, potentially internationally</li>
+      <li><strong>Marketing & Sales:</strong> increase data analytics for targeted ads and promotions for specific crowds</li>
+      <li><strong>Service:</strong> consider AI assistants — for example, DoorDash has automated service that works well, and if it fails, brings you to an agent</li>
+    </ul>
+
+    <h2>Vision, Mission, and Values</h2>
+    <h3>Vision</h3>
+    <p>Help people shop easier and more affordably all around the world.</p>
+    <h3>Mission</h3>
+    <p>Use Walmart's funds to improve its online scale and technology, building fast, cheap, and easy-to-use online shopping.</p>
+    <h3>Values</h3>
+    <ul>
+      <li>Put customers' and employees' needs first</li>
+      <li>Use technology to make operations easier</li>
+      <li>Keep prices low</li>
+      <li>Always try to improve and be responsible</li>
+    </ul>
+
+    <h2>Goals</h2>
+    <h3>Better Website</h3>
+    <ul>
+      <li>Make the online store faster and easier to use — improve UI, since the current site is similar to Amazon's but could be more distinctive and smoother on the eyes</li>
+      <li>Measure related KPIs (e.g. visitors, average session duration, top visited pages)</li>
+    </ul>
+    <h3>Stronger Brand Recognition</h3>
+    <ul>
+      <li>Improve social media, with a focus on feedback and reviews</li>
+      <li>Build relevance with the next generation as they enter adulthood</li>
+      <li>Improve employee loyalty and HR practices — many younger shoppers, especially in blue states, are aware of Walmart's labor practices and have chosen not to shop there as a result. Fixing this could meaningfully improve brand perception.</li>
+    </ul>
+    <blockquote>"Some 40 lawsuits accuse WM of a failure to pay overtime. Accusations have also been made of widespread sex discrimination to keep a class of employees — women — at lower wages." (Markkula Center for Applied Ethics, 2004)</blockquote>
+    <h3>Increased Efficiency in Logistics</h3>
+    <ul>
+      <li>Deliver packages faster with fewer or no mistakes</li>
+      <li>Measure current delivery times, shipping costs, and routes</li>
+    </ul>
+
+    <h2>Initiatives</h2>
+    <table>
+      <tbody>
+        <tr><td data-label="Goal"><strong>Goal A — Improved Website</strong></td><td data-label="Initiative">Onboard software engineering and UI/UX employees; upgrade the site with AI assistant features; connect store and online inventory; study Amazon and Target for what to keep and what to improve.</td></tr>
+        <tr><td data-label="Goal"><strong>Goal B — Make Walmart Feel Modern</strong></td><td data-label="Initiative">Create a fresh design for the website and social media; work with eco-friendly brands to attract younger shoppers; improve labor ethics to build trust with the newer generation.</td></tr>
+        <tr><td data-label="Goal"><strong>Goal C — More Efficient Logistics</strong></td><td data-label="Initiative">Use AI or collaborate with software like Waze to build better routes, similar to UPS and Amazon; build delivery centers near stores; increase international logistics operations with an AI-driven ERP.</td></tr>
+        <tr><td data-label="Goal"><strong>Goal D — Keep Customers Frequent</strong></td><td data-label="Initiative">Increase Walmart+ benefits, including digitally; use data analytics to remind specific customers about deals and restocks.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Tactics</h2>
+    <ul>
+      <li>Check the website and fix slow pages (basically everything)</li>
+      <li>Add product recommendations using visitor statistics</li>
+      <li>Bring in good design and marketing professionals</li>
+      <li>Test faster delivery in 3 local cities, to limit the test without risking a larger failure</li>
+      <li>Use AI assistant bots to improve customer service</li>
+      <li>Measure progress monthly and fix weak or stagnant areas</li>
+    </ul>
+
+    <h2>Summary</h2>
+    <p>Walmart should renovate itself for the new generation — increasing marketing, e-commerce, logistics, and labor ethics. Walmart should consider reaching out to outside companies or former employees to better understand what strong brand recognition and logistics actually look like.</p>
+    <p>UPS has made supply chain management a real competitive advantage: it commands 20–30% of U.S. shipping volume while generating 35% of the industry's revenue, showing how efficient and valuable its services are (Red Stag Fulfillment, 2025). Logistics can help a company stay ahead of the competition — Walmart should pursue this to compete with Amazon.</p>
+    <p>Logistics and e-commerce aren't the only things Walmart needs to work on — marketing and brand recognition matter too. The upcoming generation is increasingly aware of Walmart's history of labor practices through platforms like TikTok, Instagram, and X; stories about low wages, poor working conditions, and limited benefits spread quickly and shape public opinion. Some consumers have chosen to reduce their shopping at Walmart as a result, favoring businesses they believe treat employees better. This generation values ethical business practices, social responsibility, and transparency.</p>
+
+    <h3>According to the Markkula Center for Applied Ethics</h3>
+    <ul>
+      <li>The average worker earns $8/hour for a 32-hour week — about $13,312/year, below the poverty line</li>
+      <li>Two-thirds of workers can't afford Walmart's health insurance, which takes 20% of their paycheck</li>
+      <li>Wages drop around 5% in areas where a new Walmart opens</li>
+      <li>56% of Americans believe Walmart is bad for the country</li>
+    </ul>
+
+    <h3>To rebuild trust with the newer generation, Walmart should:</h3>
+    <ul>
+      <li>Raise wages to meet regional living standards</li>
+      <li>Provide affordable healthcare options for all employees</li>
+      <li>Improve workplace conditions</li>
+      <li>Invest in marketing that shows genuine change and progress</li>
+    </ul>
+
+    <div class="sources">
+      <strong>References</strong>
+      <p>Markkula Center for Applied Ethics. (2004, April 26). <em>Is it ethical to shop at Walmart?</em> Santa Clara University. <a href="https://www.scu.edu/ethics/focus-areas/business-ethics/resources/is-it-ethical-to-shop-at-walmart/">scu.edu</a></p>
+      <p>Pierce, F. (2020, May 17). <em>How UPS Logistics turns the supply chain into a competitive advantage.</em> Supply Chain Digital. <a href="https://supplychaindigital.com/logistics/how-ups-logistics-turns-supply-chain-competitive-advantage">supplychaindigital.com</a></p>
+      <p>Red Stag Fulfillment. (2025). <em>What is the market share of UPS?</em> <a href="https://redstagfulfillment.com/market-share-of-ups/">redstagfulfillment.com</a></p>
+    </div>
+  </div>
+
+</body>
+</html>
