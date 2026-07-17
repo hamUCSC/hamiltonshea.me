@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Case Studies — Hamilton Shea</title>
+  <link rel="icon" type="image/jpeg" href="logo.jpg" />
+
+  <style>
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: #f2f2f2;
+      background: #0a0a0a;
+      line-height: 1.6;
+    }
+
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 22px;
+      background: #000;
+      border-bottom: 4px solid #d00000;
+    }
+
+    .top-bar a {
+      color: white;
+      text-decoration: none;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 20px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .top-bar a:hover { color: #ff8a8a; }
+
+    .wrap {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 40px 22px 90px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 5px 14px;
+      margin-bottom: 14px;
+      color: black;
+      background: white;
+      border: 4px solid black;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transform: rotate(-2deg);
+      box-shadow: 5px 5px 0 #d00000;
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: clamp(30px, 5vw, 48px);
+      line-height: 0.95;
+      color: white;
+      text-shadow: 3px 3px 0 #d00000, 6px 6px 0 black;
+    }
+
+    .subtitle {
+      margin: 0 0 30px;
+      color: #cfcfcf;
+      font-size: 15px;
+    }
+
+    h2 {
+      margin: 40px 0 4px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+    }
+
+    .section-line {
+      border: none;
+      border-top: 1px solid #2a2a2a;
+      margin: 6px 0 16px;
+    }
+
+    .item-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .item {
+      display: block;
+      padding: 18px 20px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid #2a2a2a;
+      border-radius: 4px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+    }
+
+    .item:hover {
+      transform: translateX(2px);
+    }
+
+    .item.flagship {
+      border: 1px solid #4a1010;
+      background: rgba(208, 0, 0, 0.08);
+    }
+
+    .item.flagship:hover {
+      border-color: #d00000;
+      background: rgba(208, 0, 0, 0.14);
+    }
+
+    .item.coursework:hover {
+      border-color: #666;
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .item-tag {
+      display: inline-block;
+      margin-bottom: 6px;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .flagship .item-tag { color: #ff9c9c; }
+    .coursework .item-tag { color: #999; }
+
+    .item-title {
+      margin: 0 0 4px;
+      font-size: 19px;
+      font-weight: 700;
+      color: white;
+    }
+
+    .item-desc {
+      margin: 0;
+      font-size: 14px;
+      color: #bbb;
+    }
+
+    .framing {
+      padding: 14px 18px;
+      margin: 8px 0 6px;
+      background: rgba(255, 255, 255, 0.03);
+      border-left: 4px solid #555;
+      font-size: 14px;
+      color: #bbb;
+    }
+
+    .footer-note {
+      margin-top: 40px;
+      font-size: 12px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <a href="index.html">&larr; ham's website</a>
+    <a href="resume.html">resume</a>
+  </div>
+
+  <div class="wrap">
+    <span class="badge">All Case Studies</span>
+    <h1>Case Studies</h1>
+    <p class="subtitle">Independent work and coursework, side by side — click any one to open it.</p>
+
+    <h2>Independent Work</h2>
+    <hr class="section-line" />
+    <div class="item-list">
+      <a class="item flagship" href="adaptive-menu-ui.html">
+        <span class="item-tag">Independent Case Study · July 2026</span>
+        <p class="item-title">Adaptive Menu UI — VALORANT</p>
+        <p class="item-desc">Self-directed product case study: 6 player interviews, a responsive-layout PRD, and a usability test plan for stretched-resolution menus.</p>
+      </a>
+    </div>
+
+    <h2>Coursework</h2>
+    <hr class="section-line" />
+    <p class="framing">
+      These are graded class assignments, included to show earlier progression — not independent projects.
+    </p>
+    <div class="item-list">
+      <a class="item coursework" href="coursework/walmart-case-study.html">
+        <span class="item-tag">TIM 80C · Case Study 1</span>
+        <p class="item-title">Walmart Inc. — Strategy Case Study</p>
+        <p class="item-desc">SWOT and Porter's Five Forces analysis, value chain mapping, and a goals/initiatives/tactics plan for Walmart's e-commerce and labor practices.</p>
+      </a>
+
+      <a class="item coursework" href="coursework/cisco-case-study.html">
+        <span class="item-tag">TIM 80C · Case Study 2</span>
+        <p class="item-title">Cisco Systems — ERP Implementation</p>
+        <p class="item-desc">Analysis of Cisco's 1994 ERP replacement decision, vendor selection process, and the causes of the post-launch system failure.</p>
+      </a>
+
+      <a class="item coursework" href="coursework/netflix-case-study.html">
+        <span class="item-tag">TIM 80C · Case Study 3</span>
+        <p class="item-title">Netflix vs. Comcast — Interconnection Dispute</p>
+        <p class="item-desc">A report for CEO Reed Hastings on the 2014 streaming slowdown, evaluating three fixes and recommending a direct interconnection deal.</p>
+      </a>
+
+      <a class="item coursework" href="coursework/hw5-startup-analysis.html">
+        <span class="item-tag">TIM 80C · Homework 5</span>
+        <p class="item-title">Startup Financial &amp; Strategy Analysis</p>
+        <p class="item-desc">NPV cash flow analysis, ownership/dilution math, lessons from the Flickr founder interview, and a business plan for a hybrid minivan startup.</p>
+      </a>
+    </div>
+
+    <p class="footer-note">Course names, professor names, and grading details have been removed from the coursework pages. Content reflects the work as submitted, unedited.</p>
+  </div>
+
+</body>
+</html>
