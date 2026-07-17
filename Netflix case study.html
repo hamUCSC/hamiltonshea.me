@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Netflix Case Study — Hamilton Shea</title>
+  <link rel="icon" type="image/jpeg" href="../logo.jpg" />
+
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; color: #f2f2f2; background: #0a0a0a; line-height: 1.6; }
+    .top-bar { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; padding: 14px 22px; background: #000; border-bottom: 4px solid #555; }
+    .top-bar a { color: white; text-decoration: none; font-family: Impact, "Arial Black", sans-serif; font-size: 20px; letter-spacing: 1px; text-transform: uppercase; }
+    .top-bar a:hover { color: #bbb; }
+    .wrap { max-width: 820px; margin: 0 auto; padding: 40px 22px 90px; }
+    .badge { display: inline-block; padding: 5px 14px; margin-bottom: 14px; color: black; background: #ccc; border: 4px solid black; font-family: Impact, "Arial Black", sans-serif; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; transform: rotate(-2deg); box-shadow: 5px 5px 0 #555; }
+    h1 { margin: 0 0 6px; font-family: Impact, "Arial Black", sans-serif; font-size: clamp(28px, 5vw, 44px); line-height: 1.0; color: white; text-shadow: 3px 3px 0 #555, 6px 6px 0 black; }
+    .subtitle { margin: 0 0 26px; color: #cfcfcf; font-size: 14px; font-style: italic; }
+    h2 { margin: 36px 0 10px; padding-bottom: 6px; font-size: 21px; font-weight: 700; color: #ccc; border-bottom: 2px solid #333; }
+    h3 { margin: 20px 0 8px; font-size: 15.5px; color: white; }
+    p, li { color: #dedede; font-size: 15px; }
+    ul, ol { padding-left: 22px; }
+    figure { margin: 20px 0; text-align: center; }
+    figure svg { width: 100%; max-width: 520px; height: auto; display: block; margin: 0 auto; }
+    figcaption { margin-top: 8px; font-size: 12.5px; color: #888; font-style: italic; }
+    .option-card { padding: 14px 16px; margin: 10px 0; background: rgba(255,255,255,0.04); border: 1px solid #2a2a2a; border-radius: 4px; }
+    .option-card h3 { margin-top: 0; }
+    .sources { margin-top: 40px; padding-top: 16px; border-top: 2px solid #333; font-size: 13px; color: #999; }
+    .sources a { color: #bbb; }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <a href="../index.html">&larr; ham's website</a>
+    <a href="../case-studies.html">case studies</a>
+  </div>
+
+  <div class="wrap">
+    <span class="badge">TIM 80C · Case Study 3</span>
+    <h1>Netflix vs. Comcast</h1>
+    <p class="subtitle">Class case study — report for CEO Reed Hastings</p>
+
+    <h2>Background</h2>
+    <p>A Netflix stream passes through several companies before reaching the user. Netflix provides the content. Content delivery companies move it long distances. Comcast controls user access and the handoff points. Customer devices receive and play the video. This chain makes up the delivery path.</p>
+
+    <h2>Problem Description</h2>
+    <p>Comcast customers faced poor streaming because the ports between Level 3 and Comcast were overloaded. Netflix use grew quickly, but Comcast did not increase port size to match it. Since video needs consistent speed, the clogged ports caused buffering and slow startup times. Netflix had no other way into Comcast's system, so users experienced poor service even though Netflix could deliver the content (Greenstein &amp; Norris). The FCC reported in 2014 that congestion at interconnection points was a growing issue for internet providers.</p>
+
+    <h2>Where Congestion Occurred</h2>
+    <p>The congestion happened where Level 3 connected into Comcast, according to the HBS case study and Level 3's public statements in 2014 (Greenstein &amp; Norris; Level 3 Communications). As Netflix traffic grew, Level 3 sent more data into Comcast than the ports could handle. Comcast controlled these ports and did not expand their size. Level 3 could not send data faster even though Netflix had content ready — the full ports caused buffering, slower loading, and lower video quality.</p>
+    <p>Users blamed Netflix, but the blocking point was inside the Comcast network.</p>
+
+    <h2>Packet Path (Appendix)</h2>
+    <figure>
+      <svg viewBox="0 0 620 420" xmlns="http://www.w3.org/2000/svg">
+        <rect x="20" y="20" width="180" height="46" rx="4" fill="#3a2020" stroke="#a83232"/>
+        <text x="110" y="48" fill="#f2c0c0" font-family="Segoe UI, sans-serif" font-size="13" text-anchor="middle">Netflix CDN</text>
+
+        <rect x="420" y="20" width="180" height="46" rx="4" fill="#1a2a3a" stroke="#3a5a7a"/>
+        <text x="510" y="42" fill="#bcd4ec" font-family="Segoe UI, sans-serif" font-size="12" text-anchor="middle">Transit Providers</text>
+        <text x="510" y="58" fill="#bcd4ec" font-family="Segoe UI, sans-serif" font-size="11" text-anchor="middle">(Level 3, Cogent)</text>
+
+        <rect x="220" y="120" width="170" height="46" rx="4" fill="#2a2015" stroke="#8a6a30"/>
+        <text x="305" y="148" fill="#e8cf9c" font-family="Segoe UI, sans-serif" font-size="13" text-anchor="middle">Other CDNs</text>
+        <rect x="430" y="120" width="170" height="46" rx="4" fill="#2a2015" stroke="#8a6a30"/>
+        <text x="515" y="148" fill="#e8cf9c" font-family="Segoe UI, sans-serif" font-size="13" text-anchor="middle">Akamai</text>
+
+        <rect x="220" y="220" width="170" height="46" rx="4" fill="#241a2e" stroke="#7a4aa0"/>
+        <text x="305" y="240" fill="#d9c2ec" font-family="Segoe UI, sans-serif" font-size="11.5" text-anchor="middle">Comcast ISP</text>
+        <text x="305" y="255" fill="#d9c2ec" font-family="Segoe UI, sans-serif" font-size="11.5" text-anchor="middle">Interconnection</text>
+        <rect x="430" y="220" width="170" height="46" rx="4" fill="#241a2e" stroke="#7a4aa0"/>
+        <text x="515" y="248" fill="#d9c2ec" font-family="Segoe UI, sans-serif" font-size="12" text-anchor="middle">Comcast Regional Net</text>
+
+        <rect x="220" y="320" width="170" height="46" rx="4" fill="#1a2a20" stroke="#3a7a4a"/>
+        <text x="305" y="348" fill="#b8e6c4" font-family="Segoe UI, sans-serif" font-size="12" text-anchor="middle">Modem / WiFi Router</text>
+        <rect x="430" y="320" width="170" height="46" rx="4" fill="#1a2a20" stroke="#3a7a4a"/>
+        <text x="515" y="340" fill="#b8e6c4" font-family="Segoe UI, sans-serif" font-size="11.5" text-anchor="middle">User Device</text>
+        <text x="515" y="355" fill="#b8e6c4" font-family="Segoe UI, sans-serif" font-size="11" text-anchor="middle">(TV, PC, Phone)</text>
+
+        <line x1="200" y1="43" x2="420" y2="43" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <line x1="480" y1="66" x2="380" y2="120" stroke="#666" stroke-width="1.5"/>
+        <line x1="480" y1="66" x2="500" y2="120" stroke="#666" stroke-width="1.5"/>
+        <line x1="290" y1="166" x2="305" y2="220" stroke="#666" stroke-width="1.5"/>
+        <line x1="505" y1="166" x2="380" y2="220" stroke="#666" stroke-width="1.5"/>
+        <line x1="305" y1="266" x2="305" y2="320" stroke="#666" stroke-width="1.5"/>
+        <line x1="390" y1="243" x2="430" y2="243" stroke="#666" stroke-width="1.5"/>
+        <line x1="390" y1="343" x2="430" y2="343" stroke="#666" stroke-width="1.5"/>
+      </svg>
+      <figcaption>Redrawn network diagram from the case appendix showing the packet path from Netflix's CDN through transit providers into Comcast's network.</figcaption>
+    </figure>
+    <p>When a user starts playback, the Netflix app sends an encrypted HTTPS request (Presentation Layer), sustained through a session (Session Layer). The Transport Layer uses TCP to guarantee reliable delivery, while IP packets are directed (Network Layer) via content delivery networks such as Akamai and Level 3, using routers and switches (Data Link and Physical Layers).</p>
+    <p>Level 3 carries packets over long distances through its routers (Network Layer) until they reach Comcast's network. Congestion occurs at the Network Layer, where Comcast's interconnection ports become overloaded. Comcast then routes the packets through its regional system (Data Link Layer) to the customer's modem, WiFi router, and device (Physical Layer).</p>
+
+    <h2>Solution Options</h2>
+
+    <div class="option-card">
+      <h3>1. Direct Interconnection</h3>
+      <p>Netflix compensates Comcast for a private connection, bypassing Level 3/Cogent congestion. This immediately resolves the bottleneck and ensures consistent performance for Netflix. It stands as the most efficient and reliable resolution.</p>
+    </div>
+    <div class="option-card">
+      <h3>2. Use Other CDNs</h3>
+      <p>Netflix could route more traffic through Akamai or additional transit partners. However, all routes ultimately enter Comcast through the same limited ports, so congestion would return unless Comcast expands capacity. This is a temporary measure, not a fix.</p>
+    </div>
+    <div class="option-card">
+      <h3>3. Install Open Connect Servers</h3>
+      <p>Netflix offers free caching appliances that store popular content locally inside ISP networks, dramatically reducing traffic across interconnection points. Comcast rejected this option at the time, preferring a paid arrangement instead.</p>
+    </div>
+
+    <h2>Preferred Solution</h2>
+    <p>The best fix is a direct connection between Netflix and Comcast. The real problem is not Netflix or Level 3 — the slowdown happens at the ports Comcast owns. A direct deal gives Netflix a steady path into Comcast's system and avoids future slowdowns (Greenstein &amp; Norris). It costs Netflix more money, but it protects user experience and keeps streaming fast long-term.</p>
+
+    <p>A direct deal is the strongest fix because it targets the exact clog point. Other CDNs and caching cannot fix the capacity limits Comcast controls. Direct connection creates steady traffic flow and prevents future slowdowns, which keeps quality high and reduces user complaints. According to the HBS case study and FCC filings, interconnection limits directly affected streaming quality (Greenstein &amp; Norris; FCC).</p>
+
+    <h3>The Comcast Deal</h3>
+    <p>Comcast should add more port capacity for Netflix and upgrade connections as traffic increases. Netflix can pay for this access and also place Open Connect servers where possible. This removes the bottleneck, improves speed, and keeps customers satisfied — and Comcast benefits through lower transit costs and fewer support issues.</p>
+
+    <div class="sources">
+      <strong>References</strong>
+      <p>Greenstein, S., &amp; Norris, M. <em>Streaming Over Broadband: Why Doesn't My Netflix Work?</em> Harvard Business School Case 616-007, November 2015 (Revised April 2017).</p>
+      <p>Federal Communications Commission. <em>Interconnection and Network Management Reports.</em> 2014.</p>
+      <p>Level 3 Communications. <em>Public Statements on Interconnection Congestion.</em> 2014.</p>
+      <p>Akamai Technologies. <em>CDN Technical Overview.</em> 2014.</p>
+    </div>
+  </div>
+
+</body>
+</html>
