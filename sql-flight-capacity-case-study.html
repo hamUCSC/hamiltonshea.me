@@ -1,0 +1,62 @@
+<style>
+  :root {
+    --bg: #09060d;
+    --panel: #120d18;
+    --panel-2: #181021;
+    --ink: #f7f1ff;
+    --muted: #cbc2d8;
+    --soft: #a189b5;
+    --line: #352642;
+    --accent: #b76cff;
+    --accent-dark: #7c3aed;
+    --accent-soft: rgba(183, 108, 255, 0.14);
+    --code-bg: #0e0714;
+  }
+
+  html, body { color: var(--ink); background: var(--bg); }
+
+  .top-bar {
+    background: #010403;
+    border-bottom-color: var(--accent-dark);
+  }
+
+  .top-bar a:hover { color: #d9bdff; }
+
+  .badge {
+    color: #14001e;
+    background: #e8d5ff;
+    box-shadow: 5px 5px 0 var(--accent-dark);
+  }
+
+  h1 {
+    text-shadow: 3px 3px 0 var(--accent-dark), 6px 6px 0 black;
+  }
+
+  h2,
+  .metric strong,
+  .query-tag,
+  summary {
+    color: #e8d5ff;
+  }
+
+  th { background: #2b1740; }
+
+  pre {
+    background: var(--code-bg);
+    color: #f1e6ff;
+  }
+
+  .lead,
+  .insight {
+    background: rgba(183, 108, 255, 0.07);
+    border-left-color: var(--accent);
+    color: #f8f1ff;
+  }
+
+  .result-table td:first-child {
+    background: var(--accent-soft);
+    color: #f7efff;
+  }
+
+  .note { color: #a99ab8; }
+</style>
