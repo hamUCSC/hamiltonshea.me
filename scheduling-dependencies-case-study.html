@@ -1,0 +1,1019 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dependency-Aware Scheduler - Hamilton Shea</title>
+  <link rel="icon" type="image/jpeg" href="../logo.jpg" />
+
+  <style>
+    * { box-sizing: border-box; }
+
+    :root {
+      --bg: #070808;
+      --panel: #101313;
+      --panel-2: #161a1a;
+      --ink: #f5f5ef;
+      --muted: #cbd0c8;
+      --soft: #96a39d;
+      --line: #2b3432;
+      --accent: #22d3ee;
+      --accent-dark: #087b91;
+      --accent-soft: rgba(34, 211, 238, 0.12);
+      --gold: #ffd166;
+      --gold-dark: #b67c00;
+      --code-bg: #070d0f;
+    }
+
+    html, body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px 22px;
+      background: #000;
+      border-bottom: 4px solid var(--accent-dark);
+    }
+
+    .top-bar a {
+      color: white;
+      text-decoration: none;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 20px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .top-bar a:hover { color: #9bebf6; }
+
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 40px 22px 90px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 5px 14px;
+      margin-bottom: 14px;
+      color: #050505;
+      background: var(--gold);
+      border: 4px solid black;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transform: rotate(-2deg);
+      box-shadow: 5px 5px 0 var(--accent-dark);
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: clamp(32px, 5vw, 54px);
+      line-height: 0.98;
+      color: white;
+      text-shadow: 3px 3px 0 var(--accent-dark), 6px 6px 0 black;
+    }
+
+    .subtitle {
+      max-width: 760px;
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 14px;
+      font-style: italic;
+    }
+
+    h2 {
+      margin: 42px 0 10px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--line);
+      color: #9bebf6;
+      font-size: 21px;
+    }
+
+    h3 {
+      margin: 20px 0 8px;
+      color: white;
+      font-size: 15.5px;
+    }
+
+    p, li {
+      color: #e5e9e4;
+      font-size: 15px;
+    }
+
+    .lead {
+      margin: 0 0 18px;
+      padding: 12px 16px;
+      border-left: 4px solid var(--accent);
+      background: rgba(34, 211, 238, 0.07);
+      color: #f3fdff;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin: 18px 0 26px;
+    }
+
+    .metric {
+      min-height: 86px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+    }
+
+    .metric strong {
+      display: block;
+      color: var(--gold);
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 24px;
+      letter-spacing: 1px;
+      line-height: 1;
+    }
+
+    .metric span {
+      display: block;
+      margin-top: 7px;
+      color: var(--soft);
+      font-size: 12px;
+      line-height: 1.35;
+      text-transform: uppercase;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 22px;
+      font-size: 13.5px;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    th {
+      background: #14333a;
+      color: white;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    tr:nth-child(even) td { background: rgba(255, 255, 255, 0.025); }
+
+    .model td:first-child,
+    .skills td:first-child {
+      background: var(--accent-soft);
+      color: #e9fbff;
+      font-weight: 700;
+    }
+
+    .code-card {
+      margin: 18px 0 28px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+    }
+
+    .code-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 14px 16px 10px;
+      border-bottom: 1px solid var(--line);
+      background: var(--panel-2);
+    }
+
+    .code-title {
+      margin: 0;
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .code-tag {
+      flex: 0 0 auto;
+      padding: 3px 8px;
+      border: 1px solid var(--accent-dark);
+      color: #9bebf6;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+    }
+
+    pre {
+      margin: 0;
+      padding: 16px;
+      overflow-x: auto;
+      border-bottom: 1px solid var(--line);
+      background: var(--code-bg);
+      color: #ddfbff;
+      font-size: 13px;
+      line-height: 1.45;
+      tab-size: 2;
+    }
+
+    code {
+      font-family: Consolas, "Courier New", monospace;
+    }
+
+    details {
+      padding: 0;
+      background: rgba(255, 255, 255, 0.018);
+    }
+
+    summary {
+      cursor: pointer;
+      padding: 12px 16px;
+      color: #9bebf6;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+
+    summary::before {
+      content: "+";
+      display: inline-block;
+      width: 18px;
+      color: var(--accent);
+      font-weight: 900;
+    }
+
+    details[open] summary::before { content: "-"; }
+
+    .details-body {
+      padding: 0 16px 16px;
+    }
+
+    .insight {
+      margin: 10px 0 0;
+      padding: 10px 12px;
+      border-left: 4px solid var(--accent);
+      background: rgba(34, 211, 238, 0.07);
+      color: #e5e9e4;
+      font-size: 14px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    .panel {
+      padding: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .panel h3 {
+      margin-top: 0;
+    }
+
+    .next-step {
+      margin: 14px 0;
+      padding: 12px 16px;
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--gold);
+      background: rgba(255, 209, 102, 0.06);
+    }
+
+    .next-step strong {
+      color: var(--gold);
+    }
+
+    .demo-shell {
+      margin: 16px 0 28px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+    }
+
+    .demo-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      background: var(--panel-2);
+    }
+
+    .demo-top h3 {
+      margin: 0;
+      font-size: 17px;
+    }
+
+    .demo-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .demo-button {
+      min-height: 34px;
+      padding: 7px 12px;
+      border: 2px solid white;
+      color: white;
+      background: var(--accent-dark);
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 4px 4px 0 black;
+    }
+
+    .demo-button:hover {
+      color: black;
+      background: var(--gold);
+    }
+
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      padding: 14px 16px;
+    }
+
+    .demo-column {
+      min-height: 160px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .demo-column h4 {
+      margin: 0 0 10px;
+      color: #9bebf6;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .task-pill {
+      margin: 7px 0;
+      padding: 8px 9px;
+      border: 1px solid var(--line);
+      color: #f3fdff;
+      background: #0b1517;
+      font-size: 13px;
+      line-height: 1.3;
+    }
+
+    .task-pill.ready {
+      border-color: var(--accent);
+      background: rgba(34, 211, 238, 0.11);
+    }
+
+    .task-pill.done {
+      border-color: var(--gold-dark);
+      background: rgba(255, 209, 102, 0.10);
+      color: #fff2c2;
+    }
+
+    .task-pill small {
+      display: block;
+      margin-top: 4px;
+      color: var(--soft);
+      font-size: 11px;
+    }
+
+    .demo-log {
+      margin: 0;
+      padding: 12px 16px 16px;
+      border-top: 1px solid var(--line);
+      color: #e5e9e4;
+      font-size: 14px;
+    }
+
+    .note {
+      margin-top: 40px;
+      padding-top: 16px;
+      border-top: 2px solid var(--line);
+      color: #8f9e9a;
+      font-size: 13px;
+    }
+
+    @media (max-width: 760px) {
+      .metrics,
+      .two-col {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .top-bar a { font-size: 17px; }
+      .metrics,
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+      .code-head {
+        display: block;
+      }
+      .code-tag {
+        display: inline-block;
+        margin-top: 8px;
+      }
+      .demo-top {
+        display: block;
+      }
+      .demo-controls {
+        margin-top: 10px;
+      }
+      .demo-grid {
+        grid-template-columns: 1fr;
+      }
+      table, thead, tbody, th, td, tr { display: block; }
+      th { display: none; }
+      td {
+        border: none;
+        border-bottom: 1px solid var(--line);
+        padding: 7px 4px;
+      }
+      td::before {
+        content: attr(data-label);
+        display: block;
+        margin-bottom: 2px;
+        color: var(--soft);
+        font-size: 10.5px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <a href="../index.html">&larr; ham's website</a>
+    <a href="../case-studies.html">case studies</a>
+  </div>
+
+  <div class="wrap">
+    <span class="badge">Technical PM Project</span>
+    <h1>Dependency-Aware Scheduler</h1>
+    <p class="subtitle">A technical PM case study about prerequisites, blockers, rework, and launch order.</p>
+
+    <p class="lead">
+      This project models work as tasks with dependencies. The code can identify which tasks are ready, prevent tasks from being completed before prerequisites are done, run a schedule step by step, and handle redo logic when finished work becomes invalid.
+    </p>
+
+    <div class="metrics">
+      <div class="metric">
+        <strong>3</strong>
+        <span>Scheduler objects</span>
+      </div>
+      <div class="metric">
+        <strong>AND/OR</strong>
+        <span>Dependency rules modeled</span>
+      </div>
+      <div class="metric">
+        <strong>Redo</strong>
+        <span>Rework propagation supported</span>
+      </div>
+      <div class="metric">
+        <strong>PM</strong>
+        <span>Planning, blockers, sequencing</span>
+      </div>
+    </div>
+
+    <h2>Project Question</h2>
+    <p>
+      How can a program decide what work can happen now, what work is blocked, and what has to be redone when a dependency changes? This is close to a product manager's planning problem: launches depend on prerequisites, some work can happen in parallel, and changes can force downstream work to be revisited.
+    </p>
+
+    <h2>Live Scheduler Demo</h2>
+    <p>
+      Click through the demo to see the dependency logic working. The scheduler only moves a task into Ready when its prerequisites are complete.
+    </p>
+
+    <section class="demo-shell" aria-label="Interactive scheduler demo">
+      <div class="demo-top">
+        <h3>Launch Plan Simulation</h3>
+        <div class="demo-controls">
+          <button class="demo-button" type="button" id="demoStep">Complete Next</button>
+          <button class="demo-button" type="button" id="demoRedo">Redo Requirements</button>
+          <button class="demo-button" type="button" id="demoReset">Reset</button>
+        </div>
+      </div>
+
+      <div class="demo-grid">
+        <div class="demo-column">
+          <h4>Ready</h4>
+          <div id="readyTasks"></div>
+        </div>
+
+        <div class="demo-column">
+          <h4>Blocked</h4>
+          <div id="blockedTasks"></div>
+        </div>
+
+        <div class="demo-column">
+          <h4>Completed</h4>
+          <div id="completedTasks"></div>
+        </div>
+      </div>
+
+      <p class="demo-log" id="demoLog">Ready to start. The first unblocked task is available.</p>
+    </section>
+
+    <h2>Core Data Model</h2>
+    <table>
+      <thead>
+        <tr><th>Code Element</th><th>What It Represents</th><th>PM Meaning</th></tr>
+      </thead>
+      <tbody class="model">
+        <tr>
+          <td data-label="Code Element">tasks</td>
+          <td data-label="What It Represents">Every task known to the scheduler.</td>
+          <td data-label="PM Meaning">The work items in a launch plan or roadmap.</td>
+        </tr>
+        <tr>
+          <td data-label="Code Element">predecessors</td>
+          <td data-label="What It Represents">Tasks that must be completed before another task.</td>
+          <td data-label="PM Meaning">Prerequisites and blockers.</td>
+        </tr>
+        <tr>
+          <td data-label="Code Element">successors</td>
+          <td data-label="What It Represents">Tasks that depend on a completed task.</td>
+          <td data-label="PM Meaning">Downstream work affected by a decision.</td>
+        </tr>
+        <tr>
+          <td data-label="Code Element">completed_tasks</td>
+          <td data-label="What It Represents">Tasks already marked as done.</td>
+          <td data-label="PM Meaning">Current project status.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Code &amp; PM Meaning</h2>
+
+    <section class="code-card">
+      <div class="code-head">
+        <h3 class="code-title">1. Build the Dependency Scheduler</h3>
+        <span class="code-tag">Data Model</span>
+      </div>
+      <pre><code>from collections import defaultdict
+
+class DependencyScheduler(object):
+
+    def __init__(self):
+        self.tasks = set()
+        self.successors = defaultdict(set)
+        self.predecessors = defaultdict(set)
+        self.completed_tasks = set()
+
+    def add_task(self, t, dependencies):
+        assert t not in self.tasks or len(self.predecessors[t]) == 0, "The task was already present."
+        self.tasks.add(t)
+        self.tasks.update(dependencies)
+        self.predecessors[t] = set(dependencies)
+
+        for u in dependencies:
+            self.successors[u].add(t)
+
+    def reset(self):
+        self.completed_tasks = set()
+
+    @property
+    def done(self):
+        return self.completed_tasks == self.tasks
+
+    @property
+    def uncompleted(self):
+        return self.tasks - self.completed_tasks</code></pre>
+      <details open>
+        <summary>Expand result and meaning</summary>
+        <div class="details-body">
+          <p class="insight">
+            The scheduler stores each task, what it depends on, what depends on it, and what has already been completed. This is the foundation for turning a task list into a dependency-aware plan.
+          </p>
+        </div>
+      </details>
+    </section>
+
+    <section class="code-card">
+      <div class="code-head">
+        <h3 class="code-title">2. Find Available Tasks</h3>
+        <span class="code-tag">Blockers</span>
+      </div>
+      <pre><code>def scheduler_available_tasks(self):
+    available = set()
+    for task in self.tasks:
+        if task not in self.completed_tasks:
+            if self.predecessors[task].issubset(self.completed_tasks):
+                available.add(task)
+    return available
+
+def scheduler_mark_completed(self, t):
+    self.completed_tasks.add(t)
+    newly_available = set()
+    for task in self.successors[t]:
+        if task not in self.completed_tasks:
+            if self.predecessors[task].issubset(self.completed_tasks):
+                newly_available.add(task)
+    return newly_available
+
+DependencyScheduler.available_tasks = property(scheduler_available_tasks)
+DependencyScheduler.mark_completed = scheduler_mark_completed</code></pre>
+      <details>
+        <summary>Expand result and meaning</summary>
+        <div class="details-body">
+          <p class="insight">
+            A task becomes available only when all of its prerequisites are complete. In PM terms, this separates work that can start now from work that is still blocked.
+          </p>
+        </div>
+      </details>
+    </section>
+
+    <section class="code-card">
+      <div class="code-head">
+        <h3 class="code-title">3. Run the Schedule Step by Step</h3>
+        <span class="code-tag">Execution</span>
+      </div>
+      <pre><code>class RunSchedule(object):
+
+    def __init__(self, scheduler):
+        self.scheduler = scheduler
+        self.in_process = None
+
+    def reset(self):
+        self.scheduler.reset()
+        self.in_process = None
+
+    def step(self):
+        if self.in_process is None:
+            self.in_process = self.scheduler.available_tasks
+        if len(self.in_process) == 0:
+            return None
+        t = random.choice(list(self.in_process))
+        self.in_process = self.in_process - {t} | self.scheduler.mark_completed(t)
+        return t
+
+    @property
+    def done(self):
+        return self.scheduler.done
+
+    def run(self):
+        tasks = []
+        while not self.done:
+            t = self.step()
+            if t is not None:
+                tasks.append(t)
+        return tasks</code></pre>
+      <details>
+        <summary>Expand result and meaning</summary>
+        <div class="details-body">
+          <p class="insight">
+            The runner turns available-task logic into a working schedule. Each step completes one available task and unlocks any newly available work.
+          </p>
+        </div>
+      </details>
+    </section>
+
+    <section class="code-card">
+      <div class="code-head">
+        <h3 class="code-title">4. Prevent Illegal Completion</h3>
+        <span class="code-tag">Guardrails</span>
+      </div>
+      <pre><code>class IllegalCompletion(Exception):
+    def __init__(self, t):
+        self.message = "Not all prerequisited for %r have been completed" % t
+
+def dependency_scheduler_mark_completed(self, t):
+    if not self.predecessors[t].issubset(self.completed_tasks):
+      raise IllegalCompletion(t)
+    self.completed_tasks.add(t)
+    return {u for u in self.successors[t]
+            if self.predecessors[u].issubset(self.completed_tasks)}
+
+DependencyScheduler.mark_completed = dependency_scheduler_mark_completed</code></pre>
+      <details>
+        <summary>Expand result and meaning</summary>
+        <div class="details-body">
+          <p class="insight">
+            This adds a safeguard: a task cannot be marked done if its prerequisites are unfinished. That is a useful product-planning concept because it prevents a plan from pretending blocked work is complete.
+          </p>
+        </div>
+      </details>
+    </section>
+
+    <section class="code-card">
+      <div class="code-head">
+        <h3 class="code-title">5. Redo Downstream Work</h3>
+        <span class="code-tag">Rework</span>
+      </div>
+      <pre><code>def dependency_scheduler_redo(self, t):
+    to_redo = set()
+    stack = [t]
+    while stack:
+        current = stack.pop()
+        if current not in to_redo:
+            to_redo.add(current)
+            stack.extend(self.successors[current])
+    self.completed_tasks -= to_redo
+    return to_redo
+
+DependencyScheduler.redo = dependency_scheduler_redo</code></pre>
+      <details>
+        <summary>Expand result and meaning</summary>
+        <div class="details-body">
+          <p class="insight">
+            If one task needs to be redone, all downstream tasks that depend on it may also need to be redone. This models a common launch-planning issue: changing a requirement can invalidate later work.
+          </p>
+        </div>
+      </details>
+    </section>
+
+    <section class="code-card">
+      <div class="code-head">
+        <h3 class="code-title">6. Redo Related Earlier Work</h3>
+        <span class="code-tag">Propagation</span>
+      </div>
+      <pre><code>def dependency_scheduler_cooking_redo(self, v):
+    to_redo = set()
+    to_redo.add(v)
+
+    forward_tasks = set([v])
+    while forward_tasks:
+        current = forward_tasks.pop()
+        for successor in self.successors[current]:
+            if successor not in to_redo and successor in self.completed_tasks:
+                to_redo.add(successor)
+                forward_tasks.add(successor)
+
+    backward_tasks = set(to_redo.copy())
+    while backward_tasks:
+        current = backward_tasks.pop()
+        for predecessor in self.predecessors[current]:
+            if predecessor not in to_redo and predecessor in self.completed_tasks:
+                to_redo.add(predecessor)
+                backward_tasks.add(predecessor)
+
+    self.completed_tasks -= to_redo
+    return to_redo
+
+DependencyScheduler.cooking_redo = dependency_scheduler_cooking_redo</code></pre>
+      <details>
+        <summary>Expand result and meaning</summary>
+        <div class="details-body">
+          <p class="insight">
+            This version handles a stricter rework case by propagating redo both forward and backward. It shows deeper dependency reasoning because completed prerequisites can also become invalid when the central task changes.
+          </p>
+        </div>
+      </details>
+    </section>
+
+    <section class="code-card">
+      <div class="code-head">
+        <h3 class="code-title">7. Support AND / OR Dependencies</h3>
+        <span class="code-tag">Alternatives</span>
+      </div>
+      <pre><code>class AND_OR_Scheduler(object):
+
+    def __init__(self):
+        self.tasks = set()
+        self.predecessors = defaultdict(set)
+        self.successors = defaultdict(set)
+        self.completed_tasks = set()
+        self.task_type = {}
+
+    def add_and_task(self, t, dependencies):
+        self.tasks.add(t)
+        self.tasks.update(dependencies)
+        self.predecessors[t] = set(dependencies)
+        self.task_type[t] = "AND"
+
+        for u in dependencies:
+            self.successors[u].add(t)
+            if u not in self.task_type:
+                self.task_type[u] = "AND"
+
+    def add_or_task(self, t, dependencies):
+        self.tasks.add(t)
+        self.tasks.update(dependencies)
+        self.predecessors[t] = set(dependencies)
+        self.task_type[t] = "OR"
+
+        for u in dependencies:
+            self.successors[u].add(t)
+            if u not in self.task_type:
+                self.task_type[u] = "AND"
+
+    @property
+    def available_tasks(self):
+        available = set()
+        for task in self.tasks:
+            if task in self.completed_tasks:
+                continue
+
+            if self.task_type[task] == "AND":
+                if self.predecessors[task].issubset(self.completed_tasks):
+                    available.add(task)
+            else:
+                if self.predecessors[task] and not self.predecessors[task].isdisjoint(self.completed_tasks):
+                    available.add(task)
+                elif not self.predecessors[task]:
+                    available.add(task)
+
+        return available</code></pre>
+      <details>
+        <summary>Expand result and meaning</summary>
+        <div class="details-body">
+          <p class="insight">
+            AND tasks require every prerequisite. OR tasks become available when at least one prerequisite is complete. That maps nicely to product planning when one feature has mandatory prerequisites while another can be unlocked by multiple possible paths.
+          </p>
+        </div>
+      </details>
+    </section>
+
+    <h2>What This Shows</h2>
+    <div class="two-col">
+      <div class="panel">
+        <h3>Technical Skills</h3>
+        <ul>
+          <li>Object-oriented design with scheduler classes</li>
+          <li>Set-based dependency tracking</li>
+          <li>Graph-style predecessor and successor relationships</li>
+          <li>State management for completed and available tasks</li>
+          <li>Error handling for invalid task completion</li>
+          <li>Redo propagation across dependent work</li>
+        </ul>
+      </div>
+
+      <div class="panel">
+        <h3>PM Skills</h3>
+        <ul>
+          <li>Sequencing work based on prerequisites</li>
+          <li>Separating ready tasks from blocked tasks</li>
+          <li>Understanding downstream impact from a changed task</li>
+          <li>Thinking in parallel workstreams</li>
+          <li>Modeling alternative paths with AND/OR dependencies</li>
+          <li>Explaining technical logic as a planning system</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>Productized Version</h2>
+    <div class="next-step">
+      <p><strong>Portfolio framing:</strong> this could be presented as a lightweight launch-planning tool.</p>
+      <p>The user would enter tasks, prerequisites, and optional alternatives. The tool would output ready tasks, blocked tasks, a suggested work order, and a redo list when a completed task changes.</p>
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>Feature</th><th>Based On Code</th><th>PM Value</th></tr>
+      </thead>
+      <tbody class="skills">
+        <tr>
+          <td data-label="Feature">Ready Now</td>
+          <td data-label="Based On Code">available_tasks</td>
+          <td data-label="PM Value">Shows what the team can start immediately.</td>
+        </tr>
+        <tr>
+          <td data-label="Feature">Blocked Work</td>
+          <td data-label="Based On Code">predecessors not completed</td>
+          <td data-label="PM Value">Makes blockers visible before they delay a launch.</td>
+        </tr>
+        <tr>
+          <td data-label="Feature">Suggested Sequence</td>
+          <td data-label="Based On Code">RunSchedule.run()</td>
+          <td data-label="PM Value">Turns a dependency map into an execution order.</td>
+        </tr>
+        <tr>
+          <td data-label="Feature">Redo Impact</td>
+          <td data-label="Based On Code">redo and cooking_redo</td>
+          <td data-label="PM Value">Shows what downstream work is affected by a change.</td>
+        </tr>
+        <tr>
+          <td data-label="Feature">Alternative Paths</td>
+          <td data-label="Based On Code">AND_OR_Scheduler</td>
+          <td data-label="PM Value">Models cases where one of several prerequisites can unblock work.</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <script>
+    const demoOrder = [
+      "Define launch goal",
+      "Draft requirements",
+      "Map dependencies",
+      "Build scheduler logic",
+      "Test blocked tasks",
+      "Review launch order",
+      "Ship planning tool"
+    ];
+
+    const demoDeps = {
+      "Define launch goal": [],
+      "Draft requirements": ["Define launch goal"],
+      "Map dependencies": ["Draft requirements"],
+      "Build scheduler logic": ["Draft requirements"],
+      "Test blocked tasks": ["Map dependencies", "Build scheduler logic"],
+      "Review launch order": ["Test blocked tasks"],
+      "Ship planning tool": ["Review launch order"]
+    };
+
+    const demoCompleted = new Set();
+    const readyTasks = document.getElementById("readyTasks");
+    const blockedTasks = document.getElementById("blockedTasks");
+    const completedTasks = document.getElementById("completedTasks");
+    const demoLog = document.getElementById("demoLog");
+    const demoStep = document.getElementById("demoStep");
+    const demoRedo = document.getElementById("demoRedo");
+    const demoReset = document.getElementById("demoReset");
+
+    function taskIsReady(task) {
+      return !demoCompleted.has(task) && demoDeps[task].every(dep => demoCompleted.has(dep));
+    }
+
+    function taskBlockedBy(task) {
+      return demoDeps[task].filter(dep => !demoCompleted.has(dep));
+    }
+
+    function taskCard(task, type) {
+      const missing = taskBlockedBy(task);
+      const detail = missing.length ? "Blocked by: " + missing.join(", ") : "All prerequisites complete";
+      return `<div class="task-pill ${type}">${task}<small>${detail}</small></div>`;
+    }
+
+    function renderDemo(message) {
+      const ready = demoOrder.filter(task => taskIsReady(task));
+      const blocked = demoOrder.filter(task => !demoCompleted.has(task) && !taskIsReady(task));
+      const done = demoOrder.filter(task => demoCompleted.has(task));
+
+      readyTasks.innerHTML = ready.length ? ready.map(task => taskCard(task, "ready")).join("") : "<div class=\"task-pill\">No ready tasks</div>";
+      blockedTasks.innerHTML = blocked.length ? blocked.map(task => taskCard(task, "")).join("") : "<div class=\"task-pill\">No blocked tasks</div>";
+      completedTasks.innerHTML = done.length ? done.map(task => taskCard(task, "done")).join("") : "<div class=\"task-pill\">Nothing completed yet</div>";
+      demoLog.textContent = message;
+    }
+
+    function completeNextTask() {
+      const next = demoOrder.find(task => taskIsReady(task));
+      if (!next) {
+        const allDone = demoCompleted.size === demoOrder.length;
+        renderDemo(allDone ? "All tasks are complete. The launch plan is unblocked." : "No task can be completed yet.");
+        return;
+      }
+      demoCompleted.add(next);
+      const newlyReady = demoOrder.filter(task => taskIsReady(task));
+      renderDemo(`Completed "${next}". Ready next: ${newlyReady.length ? newlyReady.join(", ") : "none"}.`);
+    }
+
+    function redoRequirements() {
+      const target = "Draft requirements";
+      const toRedo = new Set([target]);
+      let changed = true;
+
+      while (changed) {
+        changed = false;
+        for (const task of demoOrder) {
+          const dependsOnRedo = demoDeps[task].some(dep => toRedo.has(dep));
+          if (dependsOnRedo && !toRedo.has(task)) {
+            toRedo.add(task);
+            changed = true;
+          }
+        }
+      }
+
+      toRedo.forEach(task => demoCompleted.delete(task));
+      renderDemo(`Marked "${target}" and downstream dependent work for redo.`);
+    }
+
+    function resetDemo() {
+      demoCompleted.clear();
+      renderDemo("Ready to start. The first unblocked task is available.");
+    }
+
+    demoStep.addEventListener("click", completeNextTask);
+    demoRedo.addEventListener("click", redoRequirements);
+    demoReset.addEventListener("click", resetDemo);
+    renderDemo("Ready to start. The first unblocked task is available.");
+  </script>
+
+</body>
+</html>
