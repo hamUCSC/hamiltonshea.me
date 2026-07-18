@@ -218,8 +218,9 @@
   <script>
     const hoverSound = document.getElementById("hoverSound");
     const clickSound = document.getElementById("clickSound");
-    const soundVolumeScale = 0.6;
-    const clickStartOffset = 0.1;
+    const AUDIO_SCALE = 0.5;
+    const CLICK_RATE = 1.45;
+    const CLICK_START_OFFSET = 0.06;
     let audioReady = false;
 
     function primeAudio() {
@@ -233,15 +234,16 @@
       primeAudio();
       hoverSound.pause();
       hoverSound.currentTime = 0;
-      hoverSound.volume = 0.28 * soundVolumeScale;
+      hoverSound.volume = 0.35 * AUDIO_SCALE;
       hoverSound.play().catch(() => {});
     }
 
     function playClickSound() {
       primeAudio();
       clickSound.pause();
-      clickSound.currentTime = clickStartOffset;
-      clickSound.volume = 0.42 * soundVolumeScale;
+      clickSound.currentTime = CLICK_START_OFFSET;
+      clickSound.volume = 0.45 * AUDIO_SCALE;
+      clickSound.playbackRate = CLICK_RATE;
       clickSound.play().catch(() => {});
     }
 
