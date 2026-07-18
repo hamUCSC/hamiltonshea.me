@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -275,6 +276,94 @@
       font-size: 14px;
     }
 
+    .demo-shell {
+      margin: 16px 0 28px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+    }
+
+    .demo-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      background: var(--panel-2);
+    }
+
+    .demo-top h3 {
+      margin: 0;
+      font-size: 17px;
+    }
+
+    .demo-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .demo-button {
+      min-height: 34px;
+      padding: 7px 12px;
+      border: 2px solid white;
+      color: white;
+      background: var(--accent-dark);
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 4px 4px 0 black;
+    }
+
+    .demo-button:hover {
+      color: #14001e;
+      background: #e8d5ff;
+    }
+
+    .demo-output {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      gap: 12px;
+      padding: 14px 16px;
+    }
+
+    .demo-query,
+    .demo-result {
+      min-width: 0;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .demo-query h4,
+    .demo-result h4 {
+      margin: 0;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      color: #e8d5ff;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .demo-query pre {
+      border-bottom: 0;
+    }
+
+    .demo-result table {
+      margin: 0;
+      font-size: 13px;
+    }
+
+    .demo-log {
+      margin: 0;
+      padding: 12px 16px 16px;
+      border-top: 1px solid var(--line);
+      color: #eee7f8;
+      font-size: 14px;
+    }
+
     .two-col {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -288,7 +377,9 @@
       background: rgba(255, 255, 255, 0.02);
     }
 
-    .mini-panel h3 { margin-top: 0; }
+    .mini-panel h3 {
+      margin-top: 0;
+    }
 
     .note {
       margin-top: 40px;
@@ -305,21 +396,29 @@
 
     @media (max-width: 640px) {
       .top-bar a { font-size: 17px; }
-      .query-head { display: block; }
+      .query-head {
+        display: block;
+      }
       .query-tag {
         display: inline-block;
         margin-top: 8px;
       }
-
+      .demo-top {
+        display: block;
+      }
+      .demo-controls {
+        margin-top: 10px;
+      }
+      .demo-output {
+        grid-template-columns: 1fr;
+      }
       table, thead, tbody, th, td, tr { display: block; }
       th { display: none; }
-
       td {
         border: none;
         border-bottom: 1px solid var(--line);
         padding: 7px 4px;
       }
-
       td::before {
         content: attr(data-label);
         display: block;
@@ -336,8 +435,8 @@
     }
   </style>
 </head>
-
 <body>
+
   <div class="top-bar">
     <a href="../index.html">&larr; ham's website</a>
     <a href="../case-studies.html">case studies</a>
@@ -349,20 +448,68 @@
     <p class="subtitle">A SQL case study using flight and aircraft tables to answer route-capacity questions with joins, filters, aggregates, and grouped results.</p>
 
     <p class="lead">
-      This project turns a notebook assignment into a portfolio-style analysis. The goal was to use SQL to connect flight schedules with aircraft seating capacity, then answer practical questions about how many seats arrive at SFO from key routes and which aircraft types create the most capacity.
+      This project uses SQL to connect flight schedules with aircraft seating capacity, then answer practical questions about how many seats arrive at SFO from key routes and which aircraft types create the most capacity.
     </p>
 
     <div class="metrics">
-      <div class="metric"><strong>893</strong><span>Flight records analyzed</span></div>
-      <div class="metric"><strong>34</strong><span>Aircraft seat mappings</span></div>
-      <div class="metric"><strong>2,935</strong><span>Total LHR to SFO seats</span></div>
-      <div class="metric"><strong>98</strong><span>LAX to SFO flights</span></div>
+      <div class="metric">
+        <strong>893</strong>
+        <span>Flight records analyzed</span>
+      </div>
+      <div class="metric">
+        <strong>34</strong>
+        <span>Aircraft seat mappings</span>
+      </div>
+      <div class="metric">
+        <strong>2,935</strong>
+        <span>Total LHR to SFO seats</span>
+      </div>
+      <div class="metric">
+        <strong>98</strong>
+        <span>LAX to SFO flights</span>
+      </div>
     </div>
 
     <h2>Project Question</h2>
     <p>
       If an airport, airline, or travel product team wanted to understand flight capacity into SFO, which routes and aircraft types would matter most? I used SQL to connect each flight to its aircraft seat count, then answered questions about total seats, maximum aircraft capacity, and flight frequency by aircraft type.
     </p>
+
+    <h2>Live Query Demo</h2>
+    <p>
+      Click a query to see the same analysis logic run against a small embedded sample of the flight and aircraft data.
+    </p>
+
+    <section class="demo-shell" aria-label="Interactive SQL query demo">
+      <div class="demo-top">
+        <h3>Route Capacity Simulator</h3>
+        <div class="demo-controls">
+          <button class="demo-button" type="button" id="runLhr">Run LHR Seats</button>
+          <button class="demo-button" type="button" id="runLax">Run LAX Capacity</button>
+          <button class="demo-button" type="button" id="runReset">Reset</button>
+        </div>
+      </div>
+
+      <div class="demo-output">
+        <div class="demo-query">
+          <h4>Query</h4>
+          <pre><code id="demoSql">SELECT a query above to run it.</code></pre>
+        </div>
+
+        <div class="demo-result">
+          <h4>Result</h4>
+          <div id="demoResult">
+            <table>
+              <tbody>
+                <tr><td data-label="Status">Waiting</td><td data-label="Result">Choose a query.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <p class="demo-log" id="demoLog">The demo is ready. It calculates results in the browser from sample route data.</p>
+    </section>
 
     <h2>Data Model</h2>
     <table>
@@ -409,7 +556,9 @@ conn.execute(text("SELECT COUNT(*) FROM aircrafts")).fetchone()</code></pre>
               <tr><td data-label="Result">Aircrafts table</td><td data-label="Value">34 rows</td></tr>
             </tbody>
           </table>
-          <p class="insight">The first step was validating that both tables loaded correctly. This matters because every later query depends on joining flight records to the aircraft seat lookup table.</p>
+          <p class="insight">
+            The first step was validating that both tables loaded correctly. This matters because every later query depends on joining flight records to the aircraft seat lookup table.
+          </p>
         </div>
       </details>
     </section>
@@ -432,7 +581,9 @@ WHERE f.Origin = 'LHR'
         <summary>Expand result and meaning</summary>
         <div class="details-body">
           <table class="result-table">
-            <thead><tr><th>Flights</th><th>Total Seats</th><th>Average Seats</th></tr></thead>
+            <thead>
+              <tr><th>Flights</th><th>Total Seats</th><th>Average Seats</th></tr>
+            </thead>
             <tbody>
               <tr>
                 <td data-label="Flights">9</td>
@@ -441,7 +592,9 @@ WHERE f.Origin = 'LHR'
               </tr>
             </tbody>
           </table>
-          <p class="insight">LHR to SFO is a high-capacity international route in this dataset. The average aircraft has more than 300 seats, which suggests this route is served by wide-body aircraft rather than smaller domestic planes.</p>
+          <p class="insight">
+            LHR to SFO is a high-capacity international route in this dataset. The average aircraft has more than 300 seats, which suggests this route is served by wide-body aircraft rather than smaller domestic planes.
+          </p>
         </div>
       </details>
     </section>
@@ -465,7 +618,9 @@ ORDER BY a.Seats DESC, Flight;</code></pre>
         <summary>Expand result and meaning</summary>
         <div class="details-body">
           <table class="result-table">
-            <thead><tr><th>Flight</th><th>Aircraft</th><th>Seats</th></tr></thead>
+            <thead>
+              <tr><th>Flight</th><th>Aircraft</th><th>Seats</th></tr>
+            </thead>
             <tbody>
               <tr><td data-label="Flight">BA 285</td><td data-label="Aircraft">747</td><td data-label="Seats">347</td></tr>
               <tr><td data-label="Flight">BA 287</td><td data-label="Aircraft">747</td><td data-label="Seats">347</td></tr>
@@ -478,7 +633,9 @@ ORDER BY a.Seats DESC, Flight;</code></pre>
               <tr><td data-label="Flight">UA 955</td><td data-label="Aircraft">777</td><td data-label="Seats">300</td></tr>
             </tbody>
           </table>
-          <p class="insight">The capacity is split between 747/744 aircraft with 347 seats and 777 aircraft with 300 seats. Showing the detail rows makes the total explainable instead of leaving it as a black-box number.</p>
+          <p class="insight">
+            The capacity is split between 747/744 aircraft with 347 seats and 777 aircraft with 300 seats. Showing the detail rows makes the total explainable instead of leaving it as a black-box number.
+          </p>
         </div>
       </details>
     </section>
@@ -505,7 +662,9 @@ LIMIT 5;</code></pre>
         <summary>Expand result and meaning</summary>
         <div class="details-body">
           <table class="result-table">
-            <thead><tr><th>Aircraft</th><th>Seats</th><th>Origin</th><th>Flights</th></tr></thead>
+            <thead>
+              <tr><th>Aircraft</th><th>Seats</th><th>Origin</th><th>Flights</th></tr>
+            </thead>
             <tbody>
               <tr><td data-label="Aircraft">744</td><td data-label="Seats">347</td><td data-label="Origin">FRA</td><td data-label="Flights">6</td></tr>
               <tr><td data-label="Aircraft">744</td><td data-label="Seats">347</td><td data-label="Origin">LHR</td><td data-label="Flights">3</td></tr>
@@ -513,7 +672,9 @@ LIMIT 5;</code></pre>
               <tr><td data-label="Aircraft">777</td><td data-label="Seats">300</td><td data-label="Origin">LHR</td><td data-label="Flights">4</td></tr>
             </tbody>
           </table>
-          <p class="insight">The largest aircraft serving SFO from these two origins have 347 seats. Frankfurt appears especially important for high-capacity 744 service in this dataset.</p>
+          <p class="insight">
+            The largest aircraft serving SFO from these two origins have 347 seats. Frankfurt appears especially important for high-capacity 744 service in this dataset.
+          </p>
         </div>
       </details>
     </section>
@@ -536,7 +697,9 @@ ORDER BY a.Seats DESC;</code></pre>
         <summary>Expand result and meaning</summary>
         <div class="details-body">
           <table class="result-table">
-            <thead><tr><th>Aircraft</th><th>Seats</th></tr></thead>
+            <thead>
+              <tr><th>Aircraft</th><th>Seats</th></tr>
+            </thead>
             <tbody>
               <tr><td data-label="Aircraft">346</td><td data-label="Seats">300</td></tr>
               <tr><td data-label="Aircraft">320</td><td data-label="Seats">150</td></tr>
@@ -544,7 +707,9 @@ ORDER BY a.Seats DESC;</code></pre>
               <tr><td data-label="Aircraft">319</td><td data-label="Seats">124</td></tr>
             </tbody>
           </table>
-          <p class="insight">In the original notebook, the aircraft-family filter used codes containing the number 3. For a portfolio version, an explicit code list is cleaner because it avoids accidentally including unrelated aircraft codes.</p>
+          <p class="insight">
+            A first-pass aircraft-family filter used codes containing the number 3. An explicit code list is cleaner because it avoids accidentally including unrelated aircraft codes.
+          </p>
         </div>
       </details>
     </section>
@@ -566,7 +731,9 @@ ORDER BY Number_of_Flights DESC, Aircraft;</code></pre>
         <summary>Expand result and meaning</summary>
         <div class="details-body">
           <table class="result-table">
-            <thead><tr><th>Aircraft</th><th>Number of Flights</th></tr></thead>
+            <thead>
+              <tr><th>Aircraft</th><th>Number of Flights</th></tr>
+            </thead>
             <tbody>
               <tr><td data-label="Aircraft">752</td><td data-label="Number of Flights">19</td></tr>
               <tr><td data-label="Aircraft">319</td><td data-label="Number of Flights">14</td></tr>
@@ -581,7 +748,9 @@ ORDER BY Number_of_Flights DESC, Aircraft;</code></pre>
               <tr><td data-label="Aircraft">739</td><td data-label="Number of Flights">1</td></tr>
             </tbody>
           </table>
-          <p class="insight">The LAX to SFO route has 98 total flights in this dataset. Aircraft 752 appears most often, but frequency alone does not fully explain seat capacity, so I added a capacity-weighted query next.</p>
+          <p class="insight">
+            The LAX to SFO route has 98 total flights in this dataset. Aircraft 752 appears most often, but frequency alone does not fully explain seat capacity, so I added a capacity-weighted query next.
+          </p>
         </div>
       </details>
     </section>
@@ -607,7 +776,9 @@ ORDER BY Estimated_Seat_Capacity DESC;</code></pre>
         <summary>Expand result and meaning</summary>
         <div class="details-body">
           <table class="result-table">
-            <thead><tr><th>Aircraft</th><th>Flights</th><th>Seats</th><th>Estimated Capacity</th></tr></thead>
+            <thead>
+              <tr><th>Aircraft</th><th>Flights</th><th>Seats</th><th>Estimated Capacity</th></tr>
+            </thead>
             <tbody>
               <tr><td data-label="Aircraft">752</td><td data-label="Flights">19</td><td data-label="Seats">182</td><td data-label="Estimated Capacity">3,458</td></tr>
               <tr><td data-label="Aircraft">320</td><td data-label="Flights">14</td><td data-label="Seats">150</td><td data-label="Estimated Capacity">2,100</td></tr>
@@ -616,7 +787,9 @@ ORDER BY Estimated_Seat_Capacity DESC;</code></pre>
               <tr><td data-label="Aircraft">735</td><td data-label="Flights">14</td><td data-label="Seats">104</td><td data-label="Estimated Capacity">1,456</td></tr>
             </tbody>
           </table>
-          <p class="insight">This is the strongest portfolio query because it turns a simple count into an operational insight. The 752 aircraft contributes the most estimated seat capacity on LAX to SFO because it combines high frequency with a larger seat count.</p>
+          <p class="insight">
+            This is the strongest portfolio query because it turns a simple count into an operational insight. The 752 aircraft contributes the most estimated seat capacity on LAX to SFO because it combines high frequency with a larger seat count.
+          </p>
         </div>
       </details>
     </section>
@@ -645,7 +818,136 @@ ORDER BY Estimated_Seat_Capacity DESC;</code></pre>
         </ul>
       </div>
     </div>
-    </p>
+
   </div>
+
+  <script>
+    const aircraftSeats = {
+      "747": 347,
+      "744": 347,
+      "777": 300,
+      "752": 182,
+      "320": 150,
+      "M80": 136,
+      "319": 124,
+      "735": 104
+    };
+
+    const sampleFlights = [
+      { flight: "BA 285", origin: "LHR", destination: "SFO", aircraft: "747" },
+      { flight: "BA 287", origin: "LHR", destination: "SFO", aircraft: "747" },
+      { flight: "CO 8239", origin: "LHR", destination: "SFO", aircraft: "744" },
+      { flight: "SQ 2519", origin: "LHR", destination: "SFO", aircraft: "744" },
+      { flight: "VS 019", origin: "LHR", destination: "SFO", aircraft: "744" },
+      { flight: "NZ 9831", origin: "LHR", destination: "SFO", aircraft: "777" },
+      { flight: "NZ 9855", origin: "LHR", destination: "SFO", aircraft: "777" },
+      { flight: "UA 931", origin: "LHR", destination: "SFO", aircraft: "777" },
+      { flight: "UA 955", origin: "LHR", destination: "SFO", aircraft: "777" }
+    ];
+
+    const laxAircraftCounts = [
+      { aircraft: "752", flights: 19 },
+      { aircraft: "320", flights: 14 },
+      { aircraft: "M80", flights: 13 },
+      { aircraft: "319", flights: 14 },
+      { aircraft: "735", flights: 14 }
+    ];
+
+    const demoSql = document.getElementById("demoSql");
+    const demoResult = document.getElementById("demoResult");
+    const demoLog = document.getElementById("demoLog");
+    const runLhr = document.getElementById("runLhr");
+    const runLax = document.getElementById("runLax");
+    const runReset = document.getElementById("runReset");
+
+    function formatNumber(value) {
+      return value.toLocaleString("en-US");
+    }
+
+    function renderTable(headers, rows) {
+      const headerHtml = headers.map(header => `<th>${header}</th>`).join("");
+      const rowsHtml = rows.map(row => {
+        return `<tr>${headers.map((header, index) => `<td data-label="${header}">${row[index]}</td>`).join("")}</tr>`;
+      }).join("");
+
+      demoResult.innerHTML = `
+        <table>
+          <thead><tr>${headerHtml}</tr></thead>
+          <tbody>${rowsHtml}</tbody>
+        </table>
+      `;
+    }
+
+    function runLhrSeats() {
+      demoSql.textContent = `SELECT
+  COUNT(*) AS Flights,
+  SUM(a.Seats) AS Total_Seats,
+  ROUND(AVG(a.Seats), 1) AS Avg_Seats
+FROM flights f
+JOIN aircrafts a
+  ON f.Aircraft = a.Aircraft
+WHERE f.Origin = 'LHR'
+  AND f.Destination = 'SFO';`;
+
+      const flights = sampleFlights.filter(flight => flight.origin === "LHR" && flight.destination === "SFO");
+      const totalSeats = flights.reduce((sum, flight) => sum + aircraftSeats[flight.aircraft], 0);
+      const avgSeats = Math.round((totalSeats / flights.length) * 10) / 10;
+
+      renderTable(
+        ["Flights", "Total Seats", "Average Seats"],
+        [[flights.length, formatNumber(totalSeats), avgSeats]]
+      );
+
+      demoLog.textContent = `Ran LHR to SFO capacity query: ${flights.length} flights and ${formatNumber(totalSeats)} total seats.`;
+    }
+
+    function runLaxCapacity() {
+      demoSql.textContent = `SELECT
+  f.Aircraft,
+  COUNT(*) AS Flights,
+  a.Seats,
+  COUNT(*) * a.Seats AS Estimated_Seat_Capacity
+FROM flights f
+JOIN aircrafts a
+  ON f.Aircraft = a.Aircraft
+WHERE f.Origin = 'LAX'
+  AND f.Destination = 'SFO'
+GROUP BY f.Aircraft, a.Seats
+ORDER BY Estimated_Seat_Capacity DESC;`;
+
+      const rows = laxAircraftCounts
+        .map(row => {
+          const seats = aircraftSeats[row.aircraft];
+          return {
+            aircraft: row.aircraft,
+            flights: row.flights,
+            seats,
+            capacity: row.flights * seats
+          };
+        })
+        .sort((a, b) => b.capacity - a.capacity)
+        .map(row => [row.aircraft, row.flights, row.seats, formatNumber(row.capacity)]);
+
+      renderTable(["Aircraft", "Flights", "Seats", "Estimated Capacity"], rows);
+      demoLog.textContent = "Ran LAX to SFO capacity query: aircraft 752 contributes the most estimated seat capacity in the sample.";
+    }
+
+    function resetDemo() {
+      demoSql.textContent = "SELECT a query above to run it.";
+      demoResult.innerHTML = `
+        <table>
+          <tbody>
+            <tr><td data-label="Status">Waiting</td><td data-label="Result">Choose a query.</td></tr>
+          </tbody>
+        </table>
+      `;
+      demoLog.textContent = "The demo is ready. It calculates results in the browser from sample route data.";
+    }
+
+    runLhr.addEventListener("click", runLhrSeats);
+    runLax.addEventListener("click", runLaxCapacity);
+    runReset.addEventListener("click", resetDemo);
+  </script>
+
 </body>
 </html>
