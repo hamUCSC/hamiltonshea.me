@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Case Studies — Hamilton Shea</title>
+  <title>Case Studies - Hamilton Shea</title>
   <link rel="icon" type="image/jpeg" href="logo.jpg" />
 
   <style>
@@ -41,7 +41,7 @@
     .top-bar a:hover { color: #ff8a8a; }
 
     .wrap {
-      max-width: 820px;
+      max-width: 860px;
       margin: 0 auto;
       padding: 40px 22px 90px;
     }
@@ -78,87 +78,91 @@
 
     h2 {
       margin: 40px 0 4px;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 26px;
+      color: white;
+      letter-spacing: 1px;
       text-transform: uppercase;
-      color: #888;
     }
 
     .section-line {
-      border: none;
-      border-top: 1px solid #2a2a2a;
-      margin: 6px 0 16px;
+      border: 0;
+      border-top: 3px solid #d00000;
+      margin: 8px 0 16px;
+    }
+
+    .framing {
+      margin: 0 0 18px;
+      color: #bbb;
+      font-size: 14px;
+      font-style: italic;
     }
 
     .item-list {
-      display: flex;
-      flex-direction: column;
+      display: grid;
       gap: 14px;
     }
 
     .item {
       display: block;
-      padding: 18px 20px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid #2a2a2a;
-      border-radius: 4px;
+      padding: 16px 18px;
+      color: white;
       text-decoration: none;
-      color: inherit;
-      transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+      background: #111;
+      border: 3px solid #333;
+      box-shadow: 6px 6px 0 black;
+      transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
     }
 
     .item:hover {
-      transform: translateX(2px);
+      transform: translateY(-4px);
+      border-color: white;
+      box-shadow: 6px 6px 0 #d00000;
     }
 
-    .item.flagship {
-      border: 1px solid #4a1010;
-      background: rgba(208, 0, 0, 0.08);
-    }
-
-    .item.flagship:hover {
+    .flagship {
       border-color: #d00000;
-      background: rgba(208, 0, 0, 0.14);
+      background: linear-gradient(135deg, rgba(208,0,0,0.20), #111 45%);
     }
 
-    .item.coursework:hover {
-      border-color: #666;
-      background: rgba(255, 255, 255, 0.07);
+    .technical {
+      border-color: #7c3aed;
+      background: linear-gradient(135deg, rgba(124,58,237,0.22), #111 45%);
+    }
+
+    .coursework {
+      border-color: #555;
+      background: #101010;
     }
 
     .item-tag {
-      display: inline-block;
-      margin-bottom: 6px;
-      font-size: 11px;
-      letter-spacing: 1px;
+      display: block;
+      margin-bottom: 4px;
+      color: #ffb3b3;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
-      font-weight: 700;
     }
 
-    .flagship .item-tag { color: #ff9c9c; }
-    .coursework .item-tag { color: #999; }
+    .technical .item-tag { color: #d9bdff; }
+
+    .coursework .item-tag { color: #bbb; }
 
     .item-title {
-      margin: 0 0 4px;
-      font-size: 19px;
-      font-weight: 700;
+      margin: 0 0 5px;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 25px;
+      line-height: 1.05;
       color: white;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .item-desc {
       margin: 0;
+      color: #ddd;
       font-size: 14px;
-      color: #bbb;
-    }
-
-    .framing {
-      padding: 14px 18px;
-      margin: 8px 0 6px;
-      background: rgba(255, 255, 255, 0.03);
-      border-left: 4px solid #555;
-      font-size: 14px;
-      color: #bbb;
     }
 
     .footer-note {
@@ -168,66 +172,85 @@
     }
   </style>
 </head>
-<body>
 
+<body>
   <div class="top-bar">
     <a href="index.html">&larr; ham's website</a>
     <a href="resume.html">resume</a>
   </div>
 
   <div class="wrap">
-    <span class="badge">All Case Studies</span>
+    <span class="badge">Selected Work</span>
     <h1>Case Studies</h1>
-    <p class="subtitle">Independent work and coursework, side by side — click any one to open it.</p>
+    <p class="subtitle">Product, technical, data, and coursework projects organized by how they support my PM pathway.</p>
 
-    <h2>Independent Work</h2>
+    <h2>Product Case Study</h2>
     <hr class="section-line" />
+    <p class="framing">
+      My strongest product work: user problem, research, requirements, and product thinking.
+    </p>
+
     <div class="item-list">
-      <a class="item flagship" href="independent/adaptive-menu-ui.html">
-        <span class="item-tag">Independent Case Study · July 2026</span>
-        <p class="item-title">Adaptive Menu UI — VALORANT</p>
-        <p class="item-desc">Self-directed product case study: 6 player interviews, a responsive-layout PRD, and a usability test plan for stretched-resolution menus.</p>
+      <a class="item flagship" href="adaptive-menu-ui.html">
+        <span class="item-tag">Independent Product Case Study &middot; July 2026</span>
+        <p class="item-title">Adaptive Menu UI - VALORANT</p>
+        <p class="item-desc">Self-directed product case study with player interviews, a responsive-layout PRD, and a usability test plan for stretched-resolution menus.</p>
       </a>
     </div>
-    <a class="item flagship" href="independent/sql-flight-capacity-case-study.html">
-  <span class="item-tag">SQL Project · Flight Data</span>
-  <p class="item-title">SFO Flight Capacity Analysis</p>
-  <p class="item-desc">SQL case study using joins, filters, aggregates, and grouped results to analyze flight capacity into SFO by route and aircraft type.</p>
-</a>
+
+    <h2>Technical Projects</h2>
+    <hr class="section-line" />
+    <p class="framing">
+      Technical proof for product management: systems thinking, data analysis, planning logic, and clear explanations.
+    </p>
+
+    <div class="item-list">
+      <a class="item technical" href="scheduling-dependencies-case-study.html">
+        <span class="item-tag">Technical PM Project</span>
+        <p class="item-title">Dependency-Aware Scheduler</p>
+        <p class="item-desc">Python scheduling system that models tasks, blockers, prerequisites, redo logic, and alternate dependency paths for launch-style project planning.</p>
+      </a>
+
+      <a class="item technical" href="sql-flight-capacity-case-study.html">
+        <span class="item-tag">SQL Project &middot; Data Analysis</span>
+        <p class="item-title">SFO Flight Capacity Analysis</p>
+        <p class="item-desc">SQL case study using joins, filters, aggregates, and grouped results to analyze flight capacity by route and aircraft type.</p>
+      </a>
+    </div>
 
     <h2>Coursework</h2>
     <hr class="section-line" />
     <p class="framing">
-      These are graded class assignments, included to show earlier progression — not independent projects.
+      Graded class assignments included to show business strategy, product strategy, and earlier analytical progression.
     </p>
+
     <div class="item-list">
+      <a class="item coursework" href="coursework/hw5-startup-analysis.html">
+        <span class="item-tag">Coursework &middot; Product and Startup Strategy</span>
+        <p class="item-title">Startup Product, Strategy &amp; Financial Analysis</p>
+        <p class="item-desc">Coursework collection connecting product concept design, market strategy, NPV cash-flow analysis, ownership/dilution, and startup launch planning.</p>
+      </a>
+
       <a class="item coursework" href="coursework/walmart-case-study.html">
-        <span class="item-tag">TIM 80C · Case Study 1</span>
-        <p class="item-title">Walmart Inc. — Strategy Case Study</p>
+        <span class="item-tag">TIM 80C &middot; Case Study 1</span>
+        <p class="item-title">Walmart Inc. - Strategy Case Study</p>
         <p class="item-desc">SWOT and Porter's Five Forces analysis, value chain mapping, and a goals/initiatives/tactics plan for Walmart's e-commerce and labor practices.</p>
       </a>
 
       <a class="item coursework" href="coursework/cisco-case-study.html">
-        <span class="item-tag">TIM 80C · Case Study 2</span>
-        <p class="item-title">Cisco Systems — ERP Implementation</p>
+        <span class="item-tag">TIM 80C &middot; Case Study 2</span>
+        <p class="item-title">Cisco Systems - ERP Implementation</p>
         <p class="item-desc">Analysis of Cisco's 1994 ERP replacement decision, vendor selection process, and the causes of the post-launch system failure.</p>
       </a>
 
       <a class="item coursework" href="coursework/netflix-case-study.html">
-        <span class="item-tag">TIM 80C · Case Study 3</span>
-        <p class="item-title">Netflix vs. Comcast — Interconnection Dispute</p>
+        <span class="item-tag">TIM 80C &middot; Case Study 3</span>
+        <p class="item-title">Netflix vs. Comcast - Interconnection Dispute</p>
         <p class="item-desc">A report for CEO Reed Hastings on the 2014 streaming slowdown, evaluating three fixes and recommending a direct interconnection deal.</p>
-      </a>
-
-      <a class="item coursework" href="coursework/hw5-startup-analysis.html">
-        <span class="item-tag">TIM 80C · Homework 5</span>
-        <p class="item-title">Startup Financial &amp; Strategy Analysis</p>
-        <p class="item-desc">NPV cash flow analysis, ownership/dilution math, lessons from the Flickr founder interview, and a business plan for a hybrid minivan startup.</p>
       </a>
     </div>
 
-    <p class="footer-note">Course names, professor names, and grading details have been removed from the coursework pages. Content reflects the work as submitted, unedited.</p>
+    <p class="footer-note">Course names, professor names, and grading details have been removed from coursework pages. Technical projects are framed around the product, data, and systems skills they demonstrate.</p>
   </div>
-
 </body>
 </html>
