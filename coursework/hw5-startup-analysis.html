@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TIM 80C Startup Analysis - Hamilton Shea</title>
+  <link rel="icon" type="image/jpeg" href="../logo.jpg" />
+
+  <style>
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: #f2f7f3;
+      background: #07100b;
+      line-height: 1.6;
+    }
+
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 22px;
+      background: #020503;
+      border-bottom: 4px solid #0b7a3a;
+    }
+
+    .top-bar a {
+      color: white;
+      text-decoration: none;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 20px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .top-bar a:hover { color: #8dffbd; }
+
+    .wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 22px 90px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 5px 14px;
+      margin-bottom: 14px;
+      color: #031107;
+      background: #b9ffd3;
+      border: 4px solid black;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transform: rotate(-2deg);
+      box-shadow: 5px 5px 0 #0b7a3a;
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: clamp(30px, 5vw, 48px);
+      line-height: 1;
+      color: white;
+      text-shadow: 3px 3px 0 #0b7a3a, 6px 6px 0 black;
+    }
+
+    .subtitle {
+      margin: 0 0 26px;
+      color: #c7d3ca;
+      font-size: 14px;
+      font-style: italic;
+    }
+
+    h2 {
+      margin: 38px 0 10px;
+      padding-bottom: 6px;
+      font-size: 21px;
+      color: #b9ffd3;
+      border-bottom: 2px solid #213326;
+    }
+
+    h3 {
+      margin: 20px 0 8px;
+      font-size: 15.5px;
+      color: white;
+    }
+
+    p, li {
+      color: #dce7df;
+      font-size: 15px;
+    }
+
+    .lead {
+      padding: 12px 16px;
+      border-left: 4px solid #20c36b;
+      background: rgba(32, 195, 107, 0.06);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 22px;
+      font-size: 13.5px;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 8px 10px;
+      border: 1px solid #213326;
+      vertical-align: top;
+    }
+
+    th {
+      background: #12331f;
+      color: white;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    tr:nth-child(even) td {
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .highlight td:first-child {
+      background: rgba(32, 195, 107, 0.14);
+      color: #ecfff3;
+      font-weight: 700;
+    }
+
+    blockquote {
+      margin: 14px 0;
+      padding: 10px 16px;
+      border-left: 4px solid #20c36b;
+      background: rgba(255, 255, 255, 0.03);
+      color: #d5e7db;
+      font-size: 14px;
+      font-style: italic;
+    }
+
+    .note {
+      margin-top: 40px;
+      padding-top: 16px;
+      border-top: 2px solid #213326;
+      color: #8fa195;
+      font-size: 13px;
+    }
+
+    @media (max-width: 640px) {
+      table, thead, tbody, th, td, tr { display: block; }
+      th { display: none; }
+
+      td {
+        border: none;
+        border-bottom: 1px solid #213326;
+        padding: 7px 4px;
+      }
+
+      td::before {
+        content: attr(data-label);
+        display: block;
+        margin-bottom: 2px;
+        color: #91a99a;
+        font-size: 10.5px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top-bar">
+    <a href="../index.html">&larr; ham's website</a>
+    <a href="../case-studies.html">case studies</a>
+  </div>
+
+  <div class="wrap">
+    <span class="badge">TIM 80C &middot; Homework Collection</span>
+    <h1>Startup Product, Strategy &amp; Financial Analysis</h1>
+    <p class="subtitle">Class coursework - product design, market strategy, cash-flow analysis, and startup planning</p>
+
+    <p class="lead">
+      This page combines multiple TIM 80C homework assignments into one startup-focused case study. The work looks at how to evaluate a technology startup idea from product concept through market fit, competitive strategy, financial return, funding, and launch planning.
+    </p>
+
+    <h2>Project Scope</h2>
+    <table>
+      <thead>
+        <tr><th>Assignment</th><th>Focus</th><th>Skill Shown</th></tr>
+      </thead>
+      <tbody class="highlight">
+        <tr>
+          <td data-label="Assignment">HW3</td>
+          <td data-label="Focus">Robotic vacuum product concept, customer needs, market sizing, segmentation, and competitive strategy.</td>
+          <td data-label="Skill Shown">Product thinking, market research, Porter's Five Forces, and go-to-market planning.</td>
+        </tr>
+        <tr>
+          <td data-label="Assignment">HW4</td>
+          <td data-label="Focus">Investment decisions, robotic vacuum cash-flow analysis, Adobe founder lessons, and hybrid vehicle business planning.</td>
+          <td data-label="Skill Shown">NPV analysis, business model thinking, founder lessons, and early-stage planning.</td>
+        </tr>
+        <tr>
+          <td data-label="Assignment">HW5</td>
+          <td data-label="Focus">Mechanical monkey toy cash-flow analysis, ownership/dilution math, Flickr founder lessons, EcoHy business plan, and startup process reflection.</td>
+          <td data-label="Skill Shown">Financial modeling, valuation logic, fundraising basics, and startup strategy synthesis.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Product &amp; Market Strategy</h2>
+    <p>
+      The robotic vacuum work started with customer needs: autonomous cleaning, obstacle navigation, easy maintenance, quiet operation, and affordability. The concept was broken into sub-functions including power, movement, sensing, motion control, cleaning, dirt collection, and docking.
+    </p>
+
+    <table>
+      <thead>
+        <tr><th>Area</th><th>Analysis</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="Area"><strong>Customer Need</strong></td>
+          <td data-label="Analysis">Hands-off floor cleaning for residential customers who value convenience and simple maintenance.</td>
+        </tr>
+        <tr>
+          <td data-label="Area"><strong>Target Segment</strong></td>
+          <td data-label="Analysis">Consumer and residential buyers interested in automated home products.</td>
+        </tr>
+        <tr>
+          <td data-label="Area"><strong>Competitors</strong></td>
+          <td data-label="Analysis">Existing competitors included iRobot, Ecovacs, SharkNinja, and Roborock.</td>
+        </tr>
+        <tr>
+          <td data-label="Area"><strong>Strategy</strong></td>
+          <td data-label="Analysis">Compete by balancing useful features, affordability, reliability, and a clear customer value proposition.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Financial Analysis</h2>
+    <p>
+      The finance portions used NPV to decide whether startup ideas were worth developing. The analysis connected development costs, marketing costs, production costs, revenue, timing, and risk.
+    </p>
+
+    <table>
+      <thead>
+        <tr><th>Project</th><th>Result</th><th>Decision</th></tr>
+      </thead>
+      <tbody class="highlight">
+        <tr>
+          <td data-label="Project">Robotic Vacuum</td>
+          <td data-label="Result">NPV of about -$71.3k.</td>
+          <td data-label="Decision">Do not proceed under the base-case assumptions unless costs, pricing, or sales expectations improve.</td>
+        </tr>
+        <tr>
+          <td data-label="Project">Mechanical Monkey Toy</td>
+          <td data-label="Result">NPV of about $297.4k.</td>
+          <td data-label="Decision">Proceed in the base case because the project is expected to create positive value.</td>
+        </tr>
+        <tr>
+          <td data-label="Project">Land Investment Example</td>
+          <td data-label="Result">Positive two-period NPV of about $1,623.35.</td>
+          <td data-label="Decision">Use NPV, not just raw profit, when cash arrives in different periods.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Ownership &amp; Funding</h2>
+    <p>
+      HW5 modeled how early funding changes ownership. For the mechanical monkey toy company, the startup needed $400,000 to cover Year 1 development costs. In exchange, investors received 10% ownership.
+    </p>
+
+    <table>
+      <thead>
+        <tr><th>Metric</th><th>Calculation</th><th>Outcome</th></tr>
+      </thead>
+      <tbody class="highlight">
+        <tr>
+          <td data-label="Metric">Round 1 Funding Needed</td>
+          <td data-label="Calculation">$100k + $100k + $100k + $100k</td>
+          <td data-label="Outcome">$400,000</td>
+        </tr>
+        <tr>
+          <td data-label="Metric">Investor Ownership</td>
+          <td data-label="Calculation">Given ownership in exchange for funding</td>
+          <td data-label="Outcome">10%</td>
+        </tr>
+        <tr>
+          <td data-label="Metric">Post-Money Valuation</td>
+          <td data-label="Calculation">$400,000 / 0.10</td>
+          <td data-label="Outcome">$4,000,000</td>
+        </tr>
+        <tr>
+          <td data-label="Metric">Pre-Money Valuation</td>
+          <td data-label="Calculation">$4,000,000 - $400,000</td>
+          <td data-label="Outcome">$3,600,000</td>
+        </tr>
+        <tr>
+          <td data-label="Metric">Share Price</td>
+          <td data-label="Calculation">$4,000,000 / 4,000,000 shares</td>
+          <td data-label="Outcome">$1.00 per share</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Founder Lessons</h2>
+    <table>
+      <thead>
+        <tr><th>Lesson</th><th>Startup Meaning</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="Lesson"><strong>Start from a real problem</strong></td>
+          <td data-label="Startup Meaning">A product idea needs a customer need, not just technical novelty.</td>
+        </tr>
+        <tr>
+          <td data-label="Lesson"><strong>Iterate quickly</strong></td>
+          <td data-label="Startup Meaning">Early products improve through testing, feedback, and repeated adjustment.</td>
+        </tr>
+        <tr>
+          <td data-label="Lesson"><strong>Pivot when needed</strong></td>
+          <td data-label="Startup Meaning">Flickr grew out of a different original idea, showing that teams need to notice what users actually value.</td>
+        </tr>
+        <tr>
+          <td data-label="Lesson"><strong>Use partnerships</strong></td>
+          <td data-label="Startup Meaning">Adobe's early connection to Apple showed how the right partner can accelerate market entry.</td>
+        </tr>
+        <tr>
+          <td data-label="Lesson"><strong>Team matters</strong></td>
+          <td data-label="Startup Meaning">Early hires and founding values shape whether the company can keep building under uncertainty.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <blockquote>
+      A strong startup analysis needs more than a good product idea. It needs market evidence, a competitive position, a financial reason to build, and a plan for learning when assumptions are wrong.
+    </blockquote>
+
+    <h2>Startup Process</h2>
+    <table>
+      <thead>
+        <tr><th>Step</th><th>Purpose</th></tr>
+      </thead>
+      <tbody>
+        <tr><td data-label="Step">1. Identify the problem</td><td data-label="Purpose">Start with a real customer need or opportunity.</td></tr>
+        <tr><td data-label="Step">2. Generate product ideas</td><td data-label="Purpose">Create possible solutions and stay open to changing them.</td></tr>
+        <tr><td data-label="Step">3. Define business goals</td><td data-label="Purpose">Set goals for revenue, growth, profit, and return on investment.</td></tr>
+        <tr><td data-label="Step">4. Create product strategy</td><td data-label="Purpose">Decide the product features, requirements, and resources needed.</td></tr>
+        <tr><td data-label="Step">5. Create market strategy</td><td data-label="Purpose">Choose target customers, segments, pricing, promotion, and distribution.</td></tr>
+        <tr><td data-label="Step">6. Create business strategy</td><td data-label="Purpose">Study competitors, suppliers, substitutes, customers, and barriers to entry.</td></tr>
+        <tr><td data-label="Step">7. Create financial strategy</td><td data-label="Purpose">Estimate costs, revenue, cash flow, NPV, and funding needs.</td></tr>
+        <tr><td data-label="Step">8. Raise funding</td><td data-label="Purpose">Connect funding to milestones like prototype, testing, and launch.</td></tr>
+        <tr><td data-label="Step">9. Build, test, and improve</td><td data-label="Purpose">Prototype, collect feedback, and revise the product.</td></tr>
+        <tr><td data-label="Step">10. Launch and grow</td><td data-label="Purpose">Sell to customers, manage operations, and keep improving.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Final Takeaway</h2>
+    <p>
+      This homework collection shows how to evaluate whether a product idea should actually become a business. Product, market, strategy, and finance all have to support each other. A product can be interesting but financially weak, or financially promising but strategically risky. The better startup decision comes from checking all of those angles together.
+    </p>
+
+    <p class="note">
+      Course names, professor names, and grading details have been removed. This page summarizes class coursework as a portfolio case study.
+    </p>
+  </div>
+</body>
+</html>
