@@ -1,62 +1,651 @@
-<style>
-  :root {
-    --bg: #09060d;
-    --panel: #120d18;
-    --panel-2: #181021;
-    --ink: #f7f1ff;
-    --muted: #cbc2d8;
-    --soft: #a189b5;
-    --line: #352642;
-    --accent: #b76cff;
-    --accent-dark: #7c3aed;
-    --accent-soft: rgba(183, 108, 255, 0.14);
-    --code-bg: #0e0714;
-  }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SQL Flight Capacity Analysis - Hamilton Shea</title>
+  <link rel="icon" type="image/jpeg" href="../logo.jpg" />
 
-  html, body { color: var(--ink); background: var(--bg); }
+  <style>
+    * { box-sizing: border-box; }
 
-  .top-bar {
-    background: #010403;
-    border-bottom-color: var(--accent-dark);
-  }
+    :root {
+      --bg: #09060d;
+      --panel: #120d18;
+      --panel-2: #181021;
+      --ink: #f7f1ff;
+      --muted: #cbc2d8;
+      --soft: #a189b5;
+      --line: #352642;
+      --accent: #b76cff;
+      --accent-dark: #7c3aed;
+      --accent-soft: rgba(183, 108, 255, 0.14);
+      --code-bg: #0e0714;
+    }
 
-  .top-bar a:hover { color: #d9bdff; }
+    html, body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.6;
+    }
 
-  .badge {
-    color: #14001e;
-    background: #e8d5ff;
-    box-shadow: 5px 5px 0 var(--accent-dark);
-  }
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px 22px;
+      background: #010403;
+      border-bottom: 4px solid var(--accent-dark);
+    }
 
-  h1 {
-    text-shadow: 3px 3px 0 var(--accent-dark), 6px 6px 0 black;
-  }
+    .top-bar a {
+      color: white;
+      text-decoration: none;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 20px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
 
-  h2,
-  .metric strong,
-  .query-tag,
-  summary {
-    color: #e8d5ff;
-  }
+    .top-bar a:hover { color: #d9bdff; }
 
-  th { background: #2b1740; }
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 40px 22px 90px;
+    }
 
-  pre {
-    background: var(--code-bg);
-    color: #f1e6ff;
-  }
+    .badge {
+      display: inline-block;
+      padding: 5px 14px;
+      margin-bottom: 14px;
+      color: #14001e;
+      background: #e8d5ff;
+      border: 4px solid black;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transform: rotate(-2deg);
+      box-shadow: 5px 5px 0 var(--accent-dark);
+    }
 
-  .lead,
-  .insight {
-    background: rgba(183, 108, 255, 0.07);
-    border-left-color: var(--accent);
-    color: #f8f1ff;
-  }
+    h1 {
+      margin: 0 0 8px;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: clamp(32px, 5vw, 54px);
+      line-height: 0.98;
+      color: white;
+      text-shadow: 3px 3px 0 var(--accent-dark), 6px 6px 0 black;
+    }
 
-  .result-table td:first-child {
-    background: var(--accent-soft);
-    color: #f7efff;
-  }
+    .subtitle {
+      max-width: 720px;
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 14px;
+      font-style: italic;
+    }
 
-  .note { color: #a99ab8; }
-</style>
+    h2 {
+      margin: 42px 0 10px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--line);
+      color: #e8d5ff;
+      font-size: 21px;
+    }
+
+    h3 {
+      margin: 20px 0 8px;
+      color: white;
+      font-size: 15.5px;
+    }
+
+    p, li {
+      color: #eee7f8;
+      font-size: 15px;
+    }
+
+    .lead {
+      margin: 0 0 18px;
+      padding: 12px 16px;
+      border-left: 4px solid var(--accent);
+      background: rgba(183, 108, 255, 0.07);
+      color: #f8f1ff;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin: 18px 0 26px;
+    }
+
+    .metric {
+      min-height: 86px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+    }
+
+    .metric strong {
+      display: block;
+      color: #e8d5ff;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 24px;
+      letter-spacing: 1px;
+      line-height: 1;
+    }
+
+    .metric span {
+      display: block;
+      margin-top: 7px;
+      color: var(--soft);
+      font-size: 12px;
+      line-height: 1.35;
+      text-transform: uppercase;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 22px;
+      font-size: 13.5px;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    th {
+      background: #2b1740;
+      color: white;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    tr:nth-child(even) td { background: rgba(255, 255, 255, 0.025); }
+
+    .query-card {
+      margin: 18px 0 28px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+    }
+
+    .query-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 14px 16px 10px;
+      border-bottom: 1px solid var(--line);
+      background: var(--panel-2);
+    }
+
+    .query-title {
+      margin: 0;
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .query-tag {
+      flex: 0 0 auto;
+      padding: 3px 8px;
+      border: 1px solid var(--accent-dark);
+      color: #e8d5ff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+    }
+
+    pre {
+      margin: 0;
+      padding: 16px;
+      overflow-x: auto;
+      border-bottom: 1px solid var(--line);
+      background: var(--code-bg);
+      color: #f1e6ff;
+      font-size: 13px;
+      line-height: 1.45;
+      tab-size: 2;
+    }
+
+    code {
+      font-family: Consolas, "Courier New", monospace;
+    }
+
+    details {
+      padding: 0;
+      background: rgba(255, 255, 255, 0.018);
+    }
+
+    summary {
+      cursor: pointer;
+      padding: 12px 16px;
+      color: #e8d5ff;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+
+    summary::before {
+      content: "+";
+      display: inline-block;
+      width: 18px;
+      color: var(--accent);
+      font-weight: 900;
+    }
+
+    details[open] summary::before { content: "-"; }
+
+    .details-body {
+      padding: 0 16px 16px;
+    }
+
+    .result-table {
+      margin: 8px 0 12px;
+    }
+
+    .result-table td:first-child {
+      background: var(--accent-soft);
+      color: #f7efff;
+      font-weight: 700;
+    }
+
+    .insight {
+      margin: 10px 0 0;
+      padding: 10px 12px;
+      border-left: 4px solid var(--accent);
+      background: rgba(183, 108, 255, 0.07);
+      color: #eee7f8;
+      font-size: 14px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    .mini-panel {
+      padding: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .mini-panel h3 { margin-top: 0; }
+
+    .note {
+      margin-top: 40px;
+      padding-top: 16px;
+      border-top: 2px solid var(--line);
+      color: #a99ab8;
+      font-size: 13px;
+    }
+
+    @media (max-width: 760px) {
+      .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .two-col { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .top-bar a { font-size: 17px; }
+      .query-head { display: block; }
+      .query-tag {
+        display: inline-block;
+        margin-top: 8px;
+      }
+
+      table, thead, tbody, th, td, tr { display: block; }
+      th { display: none; }
+
+      td {
+        border: none;
+        border-bottom: 1px solid var(--line);
+        padding: 7px 4px;
+      }
+
+      td::before {
+        content: attr(data-label);
+        display: block;
+        margin-bottom: 2px;
+        color: var(--soft);
+        font-size: 10.5px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .metrics { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top-bar">
+    <a href="../index.html">&larr; ham's website</a>
+    <a href="../case-studies.html">case studies</a>
+  </div>
+
+  <div class="wrap">
+    <span class="badge">SQL Project</span>
+    <h1>SFO Flight Capacity Analysis</h1>
+    <p class="subtitle">A SQL case study using flight and aircraft tables to answer route-capacity questions with joins, filters, aggregates, and grouped results.</p>
+
+    <p class="lead">
+      This project turns a notebook assignment into a portfolio-style analysis. The goal was to use SQL to connect flight schedules with aircraft seating capacity, then answer practical questions about how many seats arrive at SFO from key routes and which aircraft types create the most capacity.
+    </p>
+
+    <div class="metrics">
+      <div class="metric"><strong>893</strong><span>Flight records analyzed</span></div>
+      <div class="metric"><strong>34</strong><span>Aircraft seat mappings</span></div>
+      <div class="metric"><strong>2,935</strong><span>Total LHR to SFO seats</span></div>
+      <div class="metric"><strong>98</strong><span>LAX to SFO flights</span></div>
+    </div>
+
+    <h2>Project Question</h2>
+    <p>
+      If an airport, airline, or travel product team wanted to understand flight capacity into SFO, which routes and aircraft types would matter most? I used SQL to connect each flight to its aircraft seat count, then answered questions about total seats, maximum aircraft capacity, and flight frequency by aircraft type.
+    </p>
+
+    <h2>Data Model</h2>
+    <table>
+      <thead>
+        <tr><th>Table</th><th>What It Contains</th><th>Important Columns</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="Table"><strong>flights</strong></td>
+          <td data-label="What It Contains">One row per flight in the dataset.</td>
+          <td data-label="Important Columns">Origin, Destination, Flight, Aircraft, Stops, duration</td>
+        </tr>
+        <tr>
+          <td data-label="Table"><strong>aircrafts</strong></td>
+          <td data-label="What It Contains">Aircraft code lookup table with seating capacity.</td>
+          <td data-label="Important Columns">Aircraft, Seats</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Code &amp; Findings</h2>
+
+    <section class="query-card">
+      <div class="query-head">
+        <h3 class="query-title">1. Create the SQL Tables</h3>
+        <span class="query-tag">Setup</span>
+      </div>
+      <pre><code>from sqlalchemy import create_engine, text
+
+engine = create_engine("sqlite:///:memory:")
+conn = engine.connect()
+
+flights_df.to_sql("flights", conn, index=False, if_exists="replace")
+aircrafts_df.to_sql("aircrafts", conn, index=False, if_exists="replace")
+
+conn.execute(text("SELECT COUNT(*) FROM flights")).fetchone()
+conn.execute(text("SELECT COUNT(*) FROM aircrafts")).fetchone()</code></pre>
+      <details open>
+        <summary>Expand result and meaning</summary>
+        <div class="details-body">
+          <table class="result-table">
+            <tbody>
+              <tr><td data-label="Result">Flights table</td><td data-label="Value">893 rows</td></tr>
+              <tr><td data-label="Result">Aircrafts table</td><td data-label="Value">34 rows</td></tr>
+            </tbody>
+          </table>
+          <p class="insight">The first step was validating that both tables loaded correctly. This matters because every later query depends on joining flight records to the aircraft seat lookup table.</p>
+        </div>
+      </details>
+    </section>
+
+    <section class="query-card">
+      <div class="query-head">
+        <h3 class="query-title">2. Total Seat Capacity from London Heathrow to SFO</h3>
+        <span class="query-tag">JOIN + SUM</span>
+      </div>
+      <pre><code>SELECT
+  COUNT(*) AS Flights,
+  SUM(a.Seats) AS Total_Seats,
+  ROUND(AVG(a.Seats), 1) AS Avg_Seats
+FROM flights f
+JOIN aircrafts a
+  ON f.Aircraft = a.Aircraft
+WHERE f.Origin = 'LHR'
+  AND f.Destination = 'SFO';</code></pre>
+      <details>
+        <summary>Expand result and meaning</summary>
+        <div class="details-body">
+          <table class="result-table">
+            <thead><tr><th>Flights</th><th>Total Seats</th><th>Average Seats</th></tr></thead>
+            <tbody>
+              <tr>
+                <td data-label="Flights">9</td>
+                <td data-label="Total Seats">2,935</td>
+                <td data-label="Average Seats">326.1</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="insight">LHR to SFO is a high-capacity international route in this dataset. The average aircraft has more than 300 seats, which suggests this route is served by wide-body aircraft rather than smaller domestic planes.</p>
+        </div>
+      </details>
+    </section>
+
+    <section class="query-card">
+      <div class="query-head">
+        <h3 class="query-title">3. Which Flights Make Up That London Capacity?</h3>
+        <span class="query-tag">JOIN + DETAIL</span>
+      </div>
+      <pre><code>SELECT
+  TRIM(f.Flight) AS Flight,
+  f.Aircraft,
+  a.Seats
+FROM flights f
+JOIN aircrafts a
+  ON f.Aircraft = a.Aircraft
+WHERE f.Origin = 'LHR'
+  AND f.Destination = 'SFO'
+ORDER BY a.Seats DESC, Flight;</code></pre>
+      <details>
+        <summary>Expand result and meaning</summary>
+        <div class="details-body">
+          <table class="result-table">
+            <thead><tr><th>Flight</th><th>Aircraft</th><th>Seats</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Flight">BA 285</td><td data-label="Aircraft">747</td><td data-label="Seats">347</td></tr>
+              <tr><td data-label="Flight">BA 287</td><td data-label="Aircraft">747</td><td data-label="Seats">347</td></tr>
+              <tr><td data-label="Flight">CO 8239</td><td data-label="Aircraft">744</td><td data-label="Seats">347</td></tr>
+              <tr><td data-label="Flight">SQ 2519</td><td data-label="Aircraft">744</td><td data-label="Seats">347</td></tr>
+              <tr><td data-label="Flight">VS 019</td><td data-label="Aircraft">744</td><td data-label="Seats">347</td></tr>
+              <tr><td data-label="Flight">NZ 9831</td><td data-label="Aircraft">777</td><td data-label="Seats">300</td></tr>
+              <tr><td data-label="Flight">NZ 9855</td><td data-label="Aircraft">777</td><td data-label="Seats">300</td></tr>
+              <tr><td data-label="Flight">UA 931</td><td data-label="Aircraft">777</td><td data-label="Seats">300</td></tr>
+              <tr><td data-label="Flight">UA 955</td><td data-label="Aircraft">777</td><td data-label="Seats">300</td></tr>
+            </tbody>
+          </table>
+          <p class="insight">The capacity is split between 747/744 aircraft with 347 seats and 777 aircraft with 300 seats. Showing the detail rows makes the total explainable instead of leaving it as a black-box number.</p>
+        </div>
+      </details>
+    </section>
+
+    <section class="query-card">
+      <div class="query-head">
+        <h3 class="query-title">4. Largest Aircraft Serving SFO from LHR or Frankfurt</h3>
+        <span class="query-tag">FILTER + GROUP</span>
+      </div>
+      <pre><code>SELECT
+  f.Aircraft,
+  a.Seats,
+  f.Origin,
+  COUNT(*) AS Flights
+FROM flights f
+JOIN aircrafts a
+  ON f.Aircraft = a.Aircraft
+WHERE f.Destination = 'SFO'
+  AND f.Origin IN ('LHR', 'FRA')
+GROUP BY f.Aircraft, a.Seats, f.Origin
+ORDER BY a.Seats DESC, Flights DESC
+LIMIT 5;</code></pre>
+      <details>
+        <summary>Expand result and meaning</summary>
+        <div class="details-body">
+          <table class="result-table">
+            <thead><tr><th>Aircraft</th><th>Seats</th><th>Origin</th><th>Flights</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Aircraft">744</td><td data-label="Seats">347</td><td data-label="Origin">FRA</td><td data-label="Flights">6</td></tr>
+              <tr><td data-label="Aircraft">744</td><td data-label="Seats">347</td><td data-label="Origin">LHR</td><td data-label="Flights">3</td></tr>
+              <tr><td data-label="Aircraft">747</td><td data-label="Seats">347</td><td data-label="Origin">LHR</td><td data-label="Flights">2</td></tr>
+              <tr><td data-label="Aircraft">777</td><td data-label="Seats">300</td><td data-label="Origin">LHR</td><td data-label="Flights">4</td></tr>
+            </tbody>
+          </table>
+          <p class="insight">The largest aircraft serving SFO from these two origins have 347 seats. Frankfurt appears especially important for high-capacity 744 service in this dataset.</p>
+        </div>
+      </details>
+    </section>
+
+    <section class="query-card">
+      <div class="query-head">
+        <h3 class="query-title">5. Cleaned Aircraft-Family Filter</h3>
+        <span class="query-tag">Refinement</span>
+      </div>
+      <pre><code>SELECT DISTINCT
+  f.Aircraft,
+  a.Seats
+FROM flights f
+JOIN aircrafts a
+  ON f.Aircraft = a.Aircraft
+WHERE f.Destination = 'SFO'
+  AND f.Aircraft IN ('318', '319', '320', '32S', '346')
+ORDER BY a.Seats DESC;</code></pre>
+      <details>
+        <summary>Expand result and meaning</summary>
+        <div class="details-body">
+          <table class="result-table">
+            <thead><tr><th>Aircraft</th><th>Seats</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Aircraft">346</td><td data-label="Seats">300</td></tr>
+              <tr><td data-label="Aircraft">320</td><td data-label="Seats">150</td></tr>
+              <tr><td data-label="Aircraft">32S</td><td data-label="Seats">150</td></tr>
+              <tr><td data-label="Aircraft">319</td><td data-label="Seats">124</td></tr>
+            </tbody>
+          </table>
+          <p class="insight">In the original notebook, the aircraft-family filter used codes containing the number 3. For a portfolio version, an explicit code list is cleaner because it avoids accidentally including unrelated aircraft codes.</p>
+        </div>
+      </details>
+    </section>
+
+    <section class="query-card">
+      <div class="query-head">
+        <h3 class="query-title">6. Flight Frequency from LAX to SFO by Aircraft Type</h3>
+        <span class="query-tag">GROUP BY</span>
+      </div>
+      <pre><code>SELECT
+  Aircraft,
+  COUNT(*) AS Number_of_Flights
+FROM flights
+WHERE Origin = 'LAX'
+  AND Destination = 'SFO'
+GROUP BY Aircraft
+ORDER BY Number_of_Flights DESC, Aircraft;</code></pre>
+      <details>
+        <summary>Expand result and meaning</summary>
+        <div class="details-body">
+          <table class="result-table">
+            <thead><tr><th>Aircraft</th><th>Number of Flights</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Aircraft">752</td><td data-label="Number of Flights">19</td></tr>
+              <tr><td data-label="Aircraft">319</td><td data-label="Number of Flights">14</td></tr>
+              <tr><td data-label="Aircraft">320</td><td data-label="Number of Flights">14</td></tr>
+              <tr><td data-label="Aircraft">735</td><td data-label="Number of Flights">14</td></tr>
+              <tr><td data-label="Aircraft">M80</td><td data-label="Number of Flights">13</td></tr>
+              <tr><td data-label="Aircraft">M83</td><td data-label="Number of Flights">8</td></tr>
+              <tr><td data-label="Aircraft">733</td><td data-label="Number of Flights">7</td></tr>
+              <tr><td data-label="Aircraft">734</td><td data-label="Number of Flights">3</td></tr>
+              <tr><td data-label="Aircraft">CRJ</td><td data-label="Number of Flights">3</td></tr>
+              <tr><td data-label="Aircraft">737</td><td data-label="Number of Flights">2</td></tr>
+              <tr><td data-label="Aircraft">739</td><td data-label="Number of Flights">1</td></tr>
+            </tbody>
+          </table>
+          <p class="insight">The LAX to SFO route has 98 total flights in this dataset. Aircraft 752 appears most often, but frequency alone does not fully explain seat capacity, so I added a capacity-weighted query next.</p>
+        </div>
+      </details>
+    </section>
+
+    <section class="query-card">
+      <div class="query-head">
+        <h3 class="query-title">7. Estimated LAX to SFO Seat Capacity by Aircraft Type</h3>
+        <span class="query-tag">JOIN + CALC</span>
+      </div>
+      <pre><code>SELECT
+  f.Aircraft,
+  COUNT(*) AS Flights,
+  a.Seats,
+  COUNT(*) * a.Seats AS Estimated_Seat_Capacity
+FROM flights f
+JOIN aircrafts a
+  ON f.Aircraft = a.Aircraft
+WHERE f.Origin = 'LAX'
+  AND f.Destination = 'SFO'
+GROUP BY f.Aircraft, a.Seats
+ORDER BY Estimated_Seat_Capacity DESC;</code></pre>
+      <details>
+        <summary>Expand result and meaning</summary>
+        <div class="details-body">
+          <table class="result-table">
+            <thead><tr><th>Aircraft</th><th>Flights</th><th>Seats</th><th>Estimated Capacity</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Aircraft">752</td><td data-label="Flights">19</td><td data-label="Seats">182</td><td data-label="Estimated Capacity">3,458</td></tr>
+              <tr><td data-label="Aircraft">320</td><td data-label="Flights">14</td><td data-label="Seats">150</td><td data-label="Estimated Capacity">2,100</td></tr>
+              <tr><td data-label="Aircraft">M80</td><td data-label="Flights">13</td><td data-label="Seats">136</td><td data-label="Estimated Capacity">1,768</td></tr>
+              <tr><td data-label="Aircraft">319</td><td data-label="Flights">14</td><td data-label="Seats">124</td><td data-label="Estimated Capacity">1,736</td></tr>
+              <tr><td data-label="Aircraft">735</td><td data-label="Flights">14</td><td data-label="Seats">104</td><td data-label="Estimated Capacity">1,456</td></tr>
+            </tbody>
+          </table>
+          <p class="insight">This is the strongest portfolio query because it turns a simple count into an operational insight. The 752 aircraft contributes the most estimated seat capacity on LAX to SFO because it combines high frequency with a larger seat count.</p>
+        </div>
+      </details>
+    </section>
+
+    <h2>What This Shows</h2>
+    <div class="two-col">
+      <div class="mini-panel">
+        <h3>Technical Skills</h3>
+        <ul>
+          <li>Created and loaded SQL tables from CSV data</li>
+          <li>Joined related tables using aircraft codes</li>
+          <li>Used aggregate functions like COUNT, SUM, AVG, and MAX</li>
+          <li>Grouped and ordered query results for comparison</li>
+          <li>Refined an early query to make the logic more accurate</li>
+        </ul>
+      </div>
+
+      <div class="mini-panel">
+        <h3>Product / Business Skills</h3>
+        <ul>
+          <li>Translated raw data into route-capacity questions</li>
+          <li>Connected query results to practical airport or airline decisions</li>
+          <li>Explained findings in plain English</li>
+          <li>Separated frequency from true passenger capacity</li>
+          <li>Used results to identify which aircraft types matter most</li>
+        </ul>
+      </div>
+    </div>
+    </p>
+  </div>
+</body>
+</html>
