@@ -3,18 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>ham's website</title>
-
   <link rel="icon" type="image/jpeg" href="logo.jpg" />
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
-    html,
-    body {
+    html, body {
       margin: 0;
       min-height: 100vh;
       font-family: Impact, "Arial Black", "Segoe UI", sans-serif;
@@ -53,8 +48,8 @@
       position: relative;
       z-index: 5;
       width: 100%;
-      padding: 24px;
       text-align: center;
+      padding: 24px;
     }
 
     .intro-face {
@@ -78,10 +73,7 @@
       font-size: clamp(24px, 4vw, 54px);
       font-weight: 700;
       color: white;
-      text-shadow:
-        0 0 12px white,
-        0 0 32px rgba(130, 160, 255, 0.6),
-        0 4px 18px black;
+      text-shadow: 0 0 12px white, 0 0 32px rgba(130,160,255,0.6), 0 4px 18px black;
       animation: floatBlink 2.8s ease-in-out infinite;
     }
 
@@ -90,36 +82,18 @@
       margin: 0 auto;
       display: block;
       mix-blend-mode: screen;
-      filter:
-        drop-shadow(0 0 8px white)
-        drop-shadow(0 0 24px rgba(150, 170, 255, 0.45));
+      filter: drop-shadow(0 0 8px white) drop-shadow(0 0 24px rgba(150,170,255,0.45));
       animation: floatBlink 2.8s ease-in-out infinite;
     }
 
     @keyframes floatBlink {
-      0%,
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      50% {
-        opacity: 0.28;
-        transform: translateY(-13px);
-      }
+      0%, 100% { opacity: 1; transform: translateY(0); }
+      50% { opacity: 0.28; transform: translateY(-13px); }
     }
 
     @keyframes faceBounce {
-      0%,
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      50% {
-        opacity: 1;
-        transform: translateY(-13px);
-      }
+      0%, 100% { opacity: 1; transform: translateY(0); }
+      50% { opacity: 1; transform: translateY(-13px); }
     }
 
     .persona-screen {
@@ -127,17 +101,9 @@
       min-height: 100vh;
       opacity: 0;
       transform: scale(1.04);
-      transition:
-        opacity 0.9s ease,
-        transform 0.9s ease,
-        background 0.8s ease;
+      transition: opacity 0.9s ease, transform 0.9s ease, background 0.8s ease;
       background:
-        linear-gradient(
-          90deg,
-          rgba(180, 0, 0, 0.92) 0%,
-          rgba(120, 0, 0, 0.78) 32%,
-          rgba(0, 0, 0, 0.95) 55%
-        ),
+        linear-gradient(90deg, rgba(180,0,0,0.92) 0%, rgba(120,0,0,0.78) 32%, rgba(0,0,0,0.95) 55%),
         url("background2nd") center / cover no-repeat;
       overflow: hidden;
     }
@@ -150,10 +116,10 @@
     .theme-video {
       position: absolute;
       inset: 0;
-      z-index: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
+      z-index: 0;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.8s ease;
@@ -167,15 +133,12 @@
     .red-slab {
       position: absolute;
       inset: -12vh auto auto 34vw;
-      z-index: 2;
       width: 34vw;
       height: 130vh;
       background: #d00000;
       transform: rotate(14deg);
-      box-shadow:
-        -26px 0 0 black,
-        28px 0 0 white,
-        52px 0 0 black;
+      box-shadow: -26px 0 0 black, 28px 0 0 white, 52px 0 0 black;
+      z-index: 2;
       transition: opacity 0.8s ease;
     }
 
@@ -183,19 +146,14 @@
       position: absolute;
       right: -7vw;
       top: -8vh;
-      z-index: 1;
       width: 46vw;
       height: 116vh;
       background:
-        radial-gradient(circle, black 0 4px, transparent 5px)
-          0 0 / 24px 24px,
-        repeating-linear-gradient(
-          45deg,
-          white 0 16px,
-          #d9d9d9 16px 30px
-        );
+        radial-gradient(circle, black 0 4px, transparent 5px) 0 0 / 24px 24px,
+        repeating-linear-gradient(45deg, white 0 16px, #d9d9d9 16px 30px);
       border-left: 18px solid black;
       transform: rotate(5deg);
+      z-index: 1;
       transition: opacity 0.8s ease;
     }
 
@@ -217,17 +175,17 @@
       position: absolute;
       right: -7vw;
       bottom: -13vh;
-      z-index: 5;
       width: min(76vw, 1160px);
       max-height: 130vh;
       object-fit: contain;
+      z-index: 5;
       filter: drop-shadow(-14px 14px 0 black);
       transform: rotate(-4deg);
     }
 
     .persona-screen.natural-theme .ham-character,
     .persona-screen.video-theme .ham-character {
-      filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.75));
+      filter: drop-shadow(0 12px 18px rgba(0,0,0,0.75));
     }
 
     .menu-wrap {
@@ -262,17 +220,13 @@
       text-transform: uppercase;
       color: white;
       transform: rotate(-4deg);
-      text-shadow:
-        6px 6px 0 black,
-        12px 12px 0 #d00000;
+      text-shadow: 6px 6px 0 black, 12px 12px 0 #d00000;
     }
 
     .main-title span {
       display: block;
       color: #d00000;
-      text-shadow:
-        5px 5px 0 white,
-        11px 11px 0 black;
+      text-shadow: 5px 5px 0 white, 11px 11px 0 black;
     }
 
     .desktop-icons {
@@ -347,16 +301,12 @@
       min-height: 260px;
       background: rgba(8, 8, 8, 0.94);
       border: 5px solid white;
-      box-shadow:
-        12px 12px 0 black,
-        18px 18px 0 #d00000;
+      box-shadow: 12px 12px 0 black, 18px 18px 0 #d00000;
       display: none;
       font-family: "Segoe UI", Arial, sans-serif;
     }
 
-    .window.open {
-      display: block;
-    }
+    .window.open { display: block; }
 
     .window-bar {
       display: flex;
@@ -375,11 +325,11 @@
     }
 
     .close-window {
-      width: 34px;
-      height: 34px;
       border: 0;
       background: #d00000;
       color: white;
+      width: 34px;
+      height: 34px;
       font-family: Impact, "Arial Black", sans-serif;
       font-size: 24px;
       cursor: pointer;
@@ -400,21 +350,7 @@
       font-size: 44px;
       color: #d00000;
       text-transform: uppercase;
-      text-shadow:
-        3px 3px 0 white,
-        7px 7px 0 black;
-    }
-
-    .window-content h3 {
-      margin: 24px 0 10px;
-      font-family: Impact, "Arial Black", sans-serif;
-      font-size: 30px;
-      color: white;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      text-shadow:
-        3px 3px 0 #d00000,
-        6px 6px 0 black;
+      text-shadow: 3px 3px 0 white, 7px 7px 0 black;
     }
 
     .window-content a {
@@ -423,15 +359,15 @@
     }
 
     .highlight-link {
-      display: inline-block;
-      margin: 2px;
-      padding: 2px 7px;
       color: white;
       background: #d00000;
+      padding: 2px 7px;
       border: 2px solid white;
       text-decoration: none;
       font-weight: 900;
       box-shadow: 3px 3px 0 black;
+      display: inline-block;
+      margin: 2px;
     }
 
     .highlight-link:hover {
@@ -439,39 +375,10 @@
       background: white;
     }
 
-    .featured-project {
-      margin-top: 18px;
-      padding: 16px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 3px solid white;
-      box-shadow:
-        6px 6px 0 black,
-        10px 10px 0 #d00000;
-    }
-
-    .featured-project-title {
-      margin: 0 0 8px;
-      font-size: 22px;
-      font-weight: 900;
-      line-height: 1.2;
-    }
-
-    .featured-project-description {
-      margin: 10px 0 0;
-    }
-
     .contact-window-content {
       background:
-        linear-gradient(
-          135deg,
-          rgba(120, 0, 0, 0.28),
-          rgba(0, 0, 0, 0.82)
-        ),
-        repeating-linear-gradient(
-          -10deg,
-          rgba(255, 255, 255, 0.04) 0 2px,
-          transparent 2px 12px
-        );
+        linear-gradient(135deg, rgba(120,0,0,0.28), rgba(0,0,0,0.82)),
+        repeating-linear-gradient(-10deg, rgba(255,255,255,0.04) 0 2px, transparent 2px 12px);
     }
 
     .contact-intro {
@@ -586,9 +493,7 @@
       display: block;
       margin: 18px auto 0;
       border: 4px solid white;
-      box-shadow:
-        8px 8px 0 black,
-        13px 13px 0 #d00000;
+      box-shadow: 8px 8px 0 black, 13px 13px 0 #d00000;
       background: white;
     }
 
@@ -602,9 +507,7 @@
       color: white;
       background: rgba(0, 0, 0, 0.86);
       border: 4px solid white;
-      box-shadow:
-        8px 8px 0 black,
-        13px 13px 0 #d00000;
+      box-shadow: 8px 8px 0 black, 13px 13px 0 #d00000;
       font-family: "Segoe UI", Arial, sans-serif;
       transform: rotate(-3deg);
     }
@@ -653,16 +556,13 @@
     }
 
     @media (max-width: 720px) {
-      html,
-      body {
+      html, body {
         min-height: 100%;
         overflow-x: hidden;
         overflow-y: auto;
       }
 
-      .enter-content {
-        padding: 18px;
-      }
+      .enter-content { padding: 18px; }
 
       .intro-face {
         width: min(68vw, 260px);
@@ -676,9 +576,7 @@
         margin-bottom: 18px;
       }
 
-      .press-any-key {
-        width: min(82vw, 360px);
-      }
+      .press-any-key { width: min(82vw, 360px); }
 
       .persona-screen {
         min-height: 100vh;
@@ -687,13 +585,9 @@
         padding-bottom: 130px;
       }
 
-      .persona-screen.active {
-        transform: none;
-      }
+      .persona-screen.active { transform: none; }
 
-      .theme-video {
-        position: fixed;
-      }
+      .theme-video { position: fixed; }
 
       .red-slab {
         left: 50%;
@@ -702,10 +596,7 @@
         height: 130vh;
         opacity: 0.78;
         transform: rotate(12deg);
-        box-shadow:
-          -16px 0 0 black,
-          16px 0 0 white,
-          30px 0 0 black;
+        box-shadow: -16px 0 0 black, 16px 0 0 white, 30px 0 0 black;
       }
 
       .comic-panel {
@@ -718,9 +609,7 @@
         transform: rotate(4deg);
       }
 
-      .ham-character {
-        display: none;
-      }
+      .ham-character { display: none; }
 
       .menu-wrap {
         width: 100%;
@@ -745,16 +634,10 @@
         line-height: 0.8;
         text-align: center;
         transform: rotate(-3deg);
-        text-shadow:
-          4px 4px 0 black,
-          8px 8px 0 #d00000;
+        text-shadow: 4px 4px 0 black, 8px 8px 0 #d00000;
       }
 
-      .main-title span {
-        text-shadow:
-          4px 4px 0 white,
-          8px 8px 0 black;
-      }
+      .main-title span { text-shadow: 4px 4px 0 white, 8px 8px 0 black; }
 
       .desktop-icons {
         width: 100%;
@@ -771,9 +654,7 @@
         filter: drop-shadow(4px 4px 0 black);
       }
 
-      .desktop-icon:hover {
-        transform: translateY(-4px) scale(1.04);
-      }
+      .desktop-icon:hover { transform: translateY(-4px) scale(1.04); }
 
       .desktop-icon svg {
         width: 78px;
@@ -795,9 +676,7 @@
         max-height: calc(100vh - 180px);
         overflow: hidden;
         border: 4px solid white;
-        box-shadow:
-          7px 7px 0 black,
-          11px 11px 0 #d00000;
+        box-shadow: 7px 7px 0 black, 11px 11px 0 #d00000;
       }
 
       .window-bar {
@@ -823,18 +702,10 @@
       .window-content h2 {
         font-size: 34px;
         line-height: 0.95;
-        text-shadow:
-          2px 2px 0 white,
-          5px 5px 0 black;
+        text-shadow: 2px 2px 0 white, 5px 5px 0 black;
       }
 
-      .window-content h3 {
-        font-size: 25px;
-      }
-
-      .contact-row {
-        grid-template-columns: 1fr;
-      }
+      .contact-row { grid-template-columns: 1fr; }
 
       .highlight-link {
         margin: 3px 2px;
@@ -849,18 +720,11 @@
         padding: 10px;
         transform: none;
         border: 3px solid white;
-        box-shadow:
-          5px 5px 0 black,
-          8px 8px 0 #d00000;
+        box-shadow: 5px 5px 0 black, 8px 8px 0 #d00000;
       }
 
-      .radio-title {
-        font-size: 20px;
-      }
-
-      .track-name {
-        font-size: 12px;
-      }
+      .radio-title { font-size: 20px; }
+      .track-name { font-size: 12px; }
 
       .radio-controls button {
         font-size: 13px;
@@ -881,47 +745,21 @@
     <canvas class="wave-canvas" id="waveCanvas"></canvas>
 
     <div class="enter-content">
-      <img
-        class="intro-face"
-        src="logo.jpg"
-        alt="Hamilton Shea"
-      />
-
-      <div class="welcome-text">
-        Welcome to my website! :D
-      </div>
-
-      <img
-        class="press-any-key"
-        src="press-any-key.png"
-        alt="Press any key"
-      />
+      <img class="intro-face" src="logo.jpg" alt="Hamilton Shea" />
+      <div class="welcome-text">Welcome to my website! :D</div>
+      <img class="press-any-key" src="press-any-key.png" alt="Press any key" />
     </div>
   </section>
 
   <main class="persona-screen comic-theme" id="gameScreen">
-    <video
-      class="theme-video"
-      id="themeVideo"
-      muted
-      loop
-      playsinline
-      preload="auto"
-    ></video>
+    <video class="theme-video" id="themeVideo" muted loop playsinline preload="auto"></video>
 
     <div class="comic-panel"></div>
     <div class="red-slab"></div>
-
-    <img
-      class="ham-character"
-      src="characterham.png"
-      alt="Hamilton Shea"
-    />
+    <img class="ham-character" src="characterham.png" alt="Hamilton Shea" />
 
     <section class="menu-wrap">
-      <div class="menu-badge">
-        Select a Button
-      </div>
+      <div class="menu-badge">Select a Button</div>
 
       <h1 class="main-title">
         Ham's
@@ -929,266 +767,91 @@
       </h1>
 
       <div class="desktop-icons">
-        <button
-          class="desktop-icon"
-          data-window="aboutWindow"
-          type="button"
-        >
-          <svg viewBox="0 0 64 64">
-            <circle cx="32" cy="32" r="24" />
-            <rect x="29" y="27" width="6" height="22" />
-            <circle cx="32" cy="17" r="4" />
-          </svg>
-
+        <button class="desktop-icon" data-window="aboutWindow">
+          <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="24"/><rect x="29" y="27" width="6" height="22"/><circle cx="32" cy="17" r="4"/></svg>
           <span>about</span>
         </button>
 
-        <button
-          class="desktop-icon"
-          data-window="linksWindow"
-          type="button"
-        >
+        <button class="desktop-icon" data-window="linksWindow">
           <svg class="clean-link-icon" viewBox="0 0 64 64">
             <path d="M25 38l-4 4a11 11 0 0 1-16-16l8-8a11 11 0 0 1 16 0" />
             <path d="M39 26l4-4a11 11 0 0 1 16 16l-8 8a11 11 0 0 1-16 0" />
             <path d="M24 40l16-16" />
           </svg>
-
           <span>links</span>
         </button>
 
-        <button
-          class="desktop-icon"
-          data-window="workWindow"
-          type="button"
-        >
-          <svg viewBox="0 0 64 64">
-            <path d="M6 18h20l5 7h27v29H6z" />
-            <path d="M6 25h52" />
-          </svg>
-
+        <button class="desktop-icon" data-window="workWindow">
+          <svg viewBox="0 0 64 64"><path d="M6 18h20l5 7h27v29H6z"/><path d="M6 25h52"/></svg>
           <span>work</span>
         </button>
 
-        <button
-          class="desktop-icon"
-          data-window="highlightsWindow"
-          type="button"
-        >
+        <button class="desktop-icon" data-window="highlightsWindow">
           <svg viewBox="0 0 64 64">
-            <path d="M32 6l7 18h19l-15 12 6 19-17-11-17 11 6-19L6 24h19z" />
+            <path d="M32 6l7 18h19l-15 12 6 19-17-11-17 11 6-19L6 24h19z"/>
           </svg>
-
           <span>highlights</span>
         </button>
 
-        <button
-          class="desktop-icon"
-          data-window="contactWindow"
-          type="button"
-        >
-          <svg viewBox="0 0 64 64">
-            <rect x="7" y="16" width="50" height="34" />
-            <path d="M7 18l25 20 25-20" />
-          </svg>
-
+        <button class="desktop-icon" data-window="contactWindow">
+          <svg viewBox="0 0 64 64"><rect x="7" y="16" width="50" height="34"/><path d="M7 18l25 20 25-20"/></svg>
           <span>contact</span>
         </button>
       </div>
     </section>
 
-    <section
-      class="window"
-      id="aboutWindow"
-      style="left: 48%; top: 18%;"
-    >
-      <div class="window-bar">
-        <span>about</span>
-
-        <button
-          class="close-window"
-          type="button"
-          aria-label="Close about window"
-        >
-          x
-        </button>
-      </div>
-
+    <section class="window" id="aboutWindow" style="left: 48%; top: 18%;">
+      <div class="window-bar"><span>about</span><button class="close-window" type="button">x</button></div>
       <div class="window-content">
         <h2>About Me</h2>
-
         <p>hello! i’m ham or hamilton :D</p>
-
-        <p>
-          Collegiate leader with experience in product, data,
-          and program execution in gaming and tech.
-        </p>
-
-        <p>
-          I am interested in product, operations, and partnerships
-          roles focused on data-driven, user-centered impact.
-        </p>
+        <p>Collegiate leader with experience in product, data, and program execution in gaming and tech.</p>
+        <p>I am interested in product, operations, and partnerships roles focused on data-driven, user-centered impact.</p>
       </div>
     </section>
 
-    <section
-      class="window"
-      id="linksWindow"
-      style="left: 52%; top: 24%;"
-    >
-      <div class="window-bar">
-        <span>links</span>
-
-        <button
-          class="close-window"
-          type="button"
-          aria-label="Close links window"
-        >
-          x
-        </button>
-      </div>
-
+    <section class="window" id="linksWindow" style="left: 52%; top: 24%;">
+      <div class="window-bar"><span>links</span><button class="close-window" type="button">x</button></div>
       <div class="window-content">
         <h2>Links</h2>
-
-        <p>
-          <a
-            href="https://www.linkedin.com/in/hamshea/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            LinkedIn
-          </a>
-        </p>
-
-        <p>
-          <a href="resume.html">
-            Resume
-          </a>
-        </p>
-
-        <p>
-          <a href="adaptive-menu-ui.html">
-            Adaptive Menu UI Case Study
-          </a>
-        </p>
-
-        <p>
-          <a
-            href="https://www.youtube.com/@hamval244"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            For Fun Channel
-          </a>
-        </p>
+        <p><a href="https://www.linkedin.com/in/hamshea/" target="_blank">LinkedIn</a></p>
+        <p><a href="https://yael-writing-notebook.my.canva.site/hamportfolio" target="_blank">Portfolio</a></p>
+        <p><a href="resume.html">Resume</a></p>
+        <p><a href="case-studies.html">Case Studies</a></p>
+        <p><a href="https://www.youtube.com/@hamval244" target="_blank">For Fun Channel</a></p>
       </div>
     </section>
 
-    <section
-      class="window"
-      id="workWindow"
-      style="left: 46%; top: 18%;"
-    >
-      <div class="window-bar">
-        <span>work + projects</span>
-
-        <button
-          class="close-window"
-          type="button"
-          aria-label="Close work and projects window"
-        >
-          x
-        </button>
-      </div>
-
+    <section class="window" id="workWindow" style="left: 46%; top: 28%;">
+      <div class="window-bar"><span>work</span><button class="close-window" type="button">x</button></div>
       <div class="window-content">
         <h2>Work</h2>
 
         <p>
-          Experience:
-          <a
-            class="highlight-link"
-            href="https://www.skyrisai.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            SkyrisAI
-          </a>
-
-          <a
-            class="highlight-link"
-            href="https://h15den.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            H15DEN
-          </a>
-
-          <a
-            class="highlight-link"
-            href="https://sluggaming.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Slug Gaming
-          </a>
-
-          <a
-            class="highlight-link"
-            href="https://geng.gg/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Gen.G
-          </a>
-
-          <a
-            class="highlight-link"
-            href="https://anthoscapital.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Anthos Capital
-          </a>
+          Current:
+          <a class="highlight-link" href="https://www.ucsc.edu/" target="_blank">UCSC</a>
+          <a class="highlight-link" href="https://sluggaming.org/" target="_blank">Slug Gaming</a>
+          <a class="highlight-link" href="https://geng.gg/" target="_blank">Gen.G</a>
         </p>
 
         <p>
-          I have worked across product management, product strategy,
-          user research, program execution, partnerships, and
-          community growth.
+          Previously:
+          <a class="highlight-link" href="https://h15den.com/" target="_blank">H15DEN</a>
+          <a class="highlight-link" href="https://www.skyrisai.com/" target="_blank">SkyrisAI</a>
+          <a class="highlight-link" href="https://anthoscapital.com/" target="_blank">Anthos Capital</a>
         </p>
 
-        <h3>Featured Project</h3>
-
-        <div class="featured-project">
-          <p class="featured-project-title">
-            <a
-              class="highlight-link"
-              href="adaptive-menu-ui.html"
-            >
-              Adaptive Menu UI
-            </a>
-          </p>
-
-          <p class="featured-project-description">
-            A VALORANT product case study focused on making Shop and
-            Settings usable on stretched resolutions.
-          </p>
-
-          <p class="featured-project-description">
-            I interviewed 6 players, compared layouts across aspect
-            ratios, evaluated solution options, and wrote a focused PRD.
-          </p>
-        </div>
-
-        <h3>Tools & Skills</h3>
+        <p>
+          I have worked on product and program management, product strategy, and user research, while focusing on growth improvements.
+        </p>
 
         <p>
+          Tools & Skills:
           <span class="highlight-link">SQL</span>
           <span class="highlight-link">Python</span>
           <span class="highlight-link">HTML/CSS</span>
           <span class="highlight-link">Excel</span>
+          <span class="highlight-link">Power BI</span>
           <span class="highlight-link">Figma</span>
           <span class="highlight-link">PRDs</span>
           <span class="highlight-link">User Interviews</span>
@@ -1196,79 +859,36 @@
           <span class="highlight-link">Agile/Scrum</span>
         </p>
 
-        <img
-          class="work-meme"
-          src="future-role.png"
-          alt="The world if you consider me for the role"
-        />
+        <img class="work-meme" src="future-role.png" alt="The world if you consider me for the role" />
       </div>
     </section>
 
-    <section
-      class="window"
-      id="highlightsWindow"
-      style="left: 44%; top: 22%;"
-    >
-      <div class="window-bar">
-        <span>highlights</span>
-
-        <button
-          class="close-window"
-          type="button"
-          aria-label="Close highlights window"
-        >
-          x
-        </button>
-      </div>
-
+    <section class="window" id="highlightsWindow" style="left: 44%; top: 22%;">
+      <div class="window-bar"><span>highlights</span><button class="close-window" type="button">x</button></div>
       <div class="window-content">
         <h2>Highlights</h2>
 
         <p>
-          <span class="highlight-link">
-            Red Bull Back to Base Summit
-          </span>
-
-          Selected as a collegiate esports leader to attend Red Bull’s
-          Back to Base Summit at Riot Games HQ for workshops,
-          networking, and community growth sessions.
+          <span class="highlight-link">Red Bull Back to Base Summit</span>
+          Selected as a collegiate esports leader to attend Red Bull’s Back to Base Summit at Riot Games HQ for workshops, networking, and community growth sessions.
         </p>
 
         <p>
-          <span class="highlight-link">
-            Community Growth
-          </span>
-
-          Helped grow Slug Gaming through tournaments, campus
-          activations, sponsorships, and student-led programs reaching
-          hundreds of signups and attendees. Initiated partnership
-          conversations with Razer, Corsair, NVIDIA, Red Bull, Gen.G,
-          NRG, Team Liquid, and Extra Life Charity.
+          <span class="highlight-link">Community Growth</span>
+          Helped grow Slug Gaming through tournaments, campus activations, sponsorships, and student-led programs reaching hundreds of signups and attendees. Initiated partnership conversations with Razer, Corsair, NVIDIA, Red Bull, Gen.G, NRG, Team Liquid, and Extra Life Charity.
         </p>
 
         <p>
-          <span class="highlight-link">
-            Product Direction
-          </span>
-
-          Led product work across websites, onboarding flows, user
-          research, PRDs, MVP planning, and growth experiments across
-          gaming, AI, and community platforms.
+          <span class="highlight-link">Product Direction</span>
+          Led product work across websites, onboarding flows, user research, PRDs, MVP planning, and growth experiments across gaming, AI, and community platforms.
         </p>
 
         <div class="recommendation-card">
           <div class="recommendation-header">
-            <img
-              class="recommendation-pfp"
-              src="jasper-lee.png"
-              alt="Jasper Lee"
-            />
+            <img class="recommendation-pfp" src="jasper-lee.png" alt="Jasper Lee" />
 
             <div>
-              <p class="recommendation-name">
-                Jasper Lee
-              </p>
-
+              <p class="recommendation-name">Jasper Lee</p>
               <p class="recommendation-title">
                 GEN.G Esports Partnerships & Program Manager
               </p>
@@ -1276,167 +896,82 @@
           </div>
 
           <p class="recommendation-quote">
-            “Hamilton was one of the best student leaders to work with
-            across Gen.G's Collegiate Club Program. He didn’t just
-            execute. He understood his campus, his community, and how
-            to make Gen.G campaigns land in a way that made sense for
-            UCSC students.”
+            “Hamilton was one of the best student leaders to work with across Gen.G's Collegiate Club Program. He didn’t just execute. He understood his campus, his community, and how to make Gen.G campaigns land in a way that made sense for UCSC students.”
           </p>
 
           <p class="recommendation-quote">
-            “He was reliable, communicative, and able to operate
-            independently while staying locked in with the team.
-            I’d work with him again in a heartbeat.”
+            “He was reliable, communicative, and able to operate independently while staying locked in with the team. I’d work with him again in a heartbeat.”
           </p>
         </div>
       </div>
     </section>
 
-    <section
-      class="window"
-      id="contactWindow"
-      style="left: 50%; top: 18%;"
-    >
-      <div class="window-bar">
-        <span>contact</span>
-
-        <button
-          class="close-window"
-          type="button"
-          aria-label="Close contact window"
-        >
-          x
-        </button>
-      </div>
+    <section class="window" id="contactWindow" style="left: 50%; top: 18%;">
+      <div class="window-bar"><span>contact</span><button class="close-window" type="button">x</button></div>
 
       <div class="window-content contact-window-content">
         <h2>Get In Touch</h2>
-
-        <p class="contact-intro">
-          Send me a message below!
-        </p>
+        <p class="contact-intro">Send me a message below!</p>
 
         <form class="contact-form" id="contactForm">
           <div class="contact-row">
             <label>
               <span>Name</span>
-
-              <input
-                id="contactName"
-                type="text"
-                placeholder="Your full name"
-              />
+              <input id="contactName" type="text" placeholder="Your full name" />
             </label>
 
             <label>
               <span>Email *</span>
-
-              <input
-                id="contactEmail"
-                type="email"
-                placeholder="you@example.com"
-                required
-              />
+              <input id="contactEmail" type="email" placeholder="you@example.com" required />
             </label>
           </div>
 
           <label>
             <span>Subject</span>
-
-            <input
-              id="contactSubject"
-              type="text"
-              placeholder="What would you like to discuss?"
-            />
+            <input id="contactSubject" type="text" placeholder="What would you like to discuss?" />
           </label>
 
           <label>
             <span>Message</span>
-
-            <textarea
-              id="contactMessage"
-              placeholder="Ask me a question, or just say hello!"
-              required
-            ></textarea>
+            <textarea id="contactMessage" placeholder="Ask me a question, or just say hello!" required></textarea>
           </label>
 
-          <button
-            class="contact-submit"
-            type="submit"
-          >
-            Send
-          </button>
+          <button class="contact-submit" type="submit">Send</button>
         </form>
       </div>
     </section>
 
     <div class="radio-player">
-      <div class="radio-title">
-        radio
-      </div>
-
-      <div class="track-name" id="trackName">
-        resident evil 6 theme
-      </div>
-
+      <div class="radio-title">radio</div>
+      <div class="track-name" id="trackName">resident evil 6 theme</div>
       <div class="radio-controls">
-        <button id="prevTrack" type="button">
-          prev
-        </button>
-
-        <button id="playPause" type="button">
-          pause
-        </button>
-
-        <button id="nextTrack" type="button">
-          next
-        </button>
-
-        <button id="muteButton" type="button">
-          mute
-        </button>
+        <button id="prevTrack" type="button">prev</button>
+        <button id="playPause" type="button">pause</button>
+        <button id="nextTrack" type="button">next</button>
+        <button id="muteButton" type="button">mute</button>
       </div>
     </div>
 
-    <div class="bottom-line">
-      © 2026 Hamilton Shea
-    </div>
+    <div class="bottom-line">© 2026 Hamilton Shea</div>
   </main>
 
-  <audio
-    id="backgroundMusic"
-    preload="auto"
-  ></audio>
-
-  <audio
-    id="clickSound"
-    src="click.mp3"
-    preload="auto"
-  ></audio>
-
-  <audio
-    id="hoverSound"
-    src="hover.mp3"
-    preload="auto"
-  ></audio>
+  <audio id="backgroundMusic" preload="auto"></audio>
+  <audio id="clickSound" src="click.mp3" preload="auto"></audio>
+  <audio id="hoverSound" src="hover.mp3" preload="auto"></audio>
 
   <script>
     const enterScreen = document.getElementById("enterScreen");
     const gameScreen = document.getElementById("gameScreen");
-
     const clickSound = document.getElementById("clickSound");
     const hoverSound = document.getElementById("hoverSound");
     const backgroundMusic = document.getElementById("backgroundMusic");
-
     const trackName = document.getElementById("trackName");
     const prevTrack = document.getElementById("prevTrack");
     const nextTrack = document.getElementById("nextTrack");
     const playPause = document.getElementById("playPause");
     const muteButton = document.getElementById("muteButton");
-
     const themeVideo = document.getElementById("themeVideo");
     const contactForm = document.getElementById("contactForm");
-
     const canvas = document.getElementById("waveCanvas");
     const ctx = canvas.getContext("2d");
 
@@ -1454,90 +989,71 @@
         name: "resident evil 6 theme",
         src: "Resident Evil 6 Soundtrack - Main Theme Leon  Helena.mp3",
         bg: "background2nd",
-        overlay:
-          "linear-gradient(90deg, rgba(180,0,0,0.92) 0%, rgba(120,0,0,0.78) 32%, rgba(0,0,0,0.95) 55%)",
+        overlay: "linear-gradient(90deg, rgba(180,0,0,0.92) 0%, rgba(120,0,0,0.78) 32%, rgba(0,0,0,0.95) 55%)",
         theme: "comic"
       },
       {
         name: "twilight song",
         src: "Bella's Lullaby - Carter Burwell 4.mp3",
         bg: "twilight-bg.jpg",
-        overlay:
-          "linear-gradient(90deg, rgba(4,10,10,0.60) 0%, rgba(10,20,24,0.38) 45%, rgba(0,0,0,0.72) 100%)",
+        overlay: "linear-gradient(90deg, rgba(4,10,10,0.60) 0%, rgba(10,20,24,0.38) 45%, rgba(0,0,0,0.72) 100%)",
         theme: "natural"
       },
       {
         name: "clarity",
         src: "Zedd - Clarity ft. Foxes 4.mp3",
         bg: "clarity-bg.jpg",
-        overlay:
-          "linear-gradient(90deg, rgba(0,20,60,0.58) 0%, rgba(10,30,80,0.28) 45%, rgba(0,0,0,0.62) 100%)",
+        overlay: "linear-gradient(90deg, rgba(0,20,60,0.58) 0%, rgba(10,30,80,0.28) 45%, rgba(0,0,0,0.62) 100%)",
         theme: "natural"
       },
       {
         name: "deftones",
         src: "deftones - i think about you all the time [visualizer].mp3",
         bg: "deftones-bg.jpg",
-        overlay:
-          "linear-gradient(90deg, rgba(0,0,0,0.76) 0%, rgba(12,12,16,0.48) 48%, rgba(0,0,0,0.84) 100%)",
+        overlay: "linear-gradient(90deg, rgba(0,0,0,0.76) 0%, rgba(12,12,16,0.48) 48%, rgba(0,0,0,0.84) 100%)",
         theme: "natural"
       },
       {
         name: "minecraft",
         src: "Wet Hands.mp3",
         video: "Minecon 2016 1st day.mp4",
-        overlay:
-          "linear-gradient(90deg, rgba(20,50,20,0.42) 0%, rgba(40,80,40,0.18) 48%, rgba(0,0,0,0.42) 100%)",
+        overlay: "linear-gradient(90deg, rgba(20,50,20,0.42) 0%, rgba(40,80,40,0.18) 48%, rgba(0,0,0,0.42) 100%)",
         theme: "video"
       },
       {
         name: "wasian national anthem",
         src: "Joji - WANTED U (Official Audio) 4.mp3",
         bg: "joji-bg.jpg",
-        overlay:
-          "linear-gradient(90deg, rgba(35,10,38,0.62) 0%, rgba(75,25,55,0.32) 48%, rgba(0,0,0,0.70) 100%)",
+        overlay: "linear-gradient(90deg, rgba(35,10,38,0.62) 0%, rgba(75,25,55,0.32) 48%, rgba(0,0,0,0.70) 100%)",
         theme: "natural"
       },
       {
         name: "chopin",
         src: "Chopin - Winter Wind (Op.25-11) by Hayato Sumino.mp3",
         bg: "chopin-bg.jpg",
-        overlay:
-          "linear-gradient(90deg, rgba(10,14,20,0.58) 0%, rgba(40,45,55,0.28) 48%, rgba(0,0,0,0.70) 100%)",
+        overlay: "linear-gradient(90deg, rgba(10,14,20,0.58) 0%, rgba(40,45,55,0.28) 48%, rgba(0,0,0,0.70) 100%)",
         theme: "natural"
       }
     ];
 
     function playClick() {
-      if (!entered) {
-        return;
-      }
-
+      if (!entered) return;
       clickSound.pause();
       clickSound.currentTime = CLICK_START_OFFSET;
       clickSound.volume = 0.45 * AUDIO_SCALE;
       clickSound.playbackRate = CLICK_RATE;
-
       clickSound.play().catch(() => {});
     }
 
     function playHover() {
-      if (!entered) {
-        return;
-      }
-
+      if (!entered) return;
       hoverSound.currentTime = 0;
       hoverSound.volume = 0.35 * AUDIO_SCALE;
-
       hoverSound.play().catch(() => {});
     }
 
     function applyTrackTheme(track) {
-      gameScreen.classList.remove(
-        "comic-theme",
-        "natural-theme",
-        "video-theme"
-      );
+      gameScreen.classList.remove("comic-theme", "natural-theme", "video-theme");
 
       themeVideo.oncanplay = null;
       themeVideo.onerror = null;
@@ -1555,10 +1071,7 @@
 
         const playVideo = () => {
           themeVideo.play().catch(error => {
-            console.log(
-              "Could not play background video:",
-              error
-            );
+            console.log("Could not play background video:", error);
           });
         };
 
@@ -1584,9 +1097,7 @@
     }
 
     function loadTrack(index) {
-      currentTrack =
-        (index + tracks.length) % tracks.length;
-
+      currentTrack = (index + tracks.length) % tracks.length;
       const track = tracks[currentTrack];
 
       backgroundMusic.pause();
@@ -1600,20 +1111,13 @@
       applyTrackTheme(track);
 
       if (entered) {
-        backgroundMusic
-          .play()
+        backgroundMusic.play()
           .then(() => {
             playPause.textContent = "pause";
           })
           .catch(error => {
-            trackName.textContent =
-              `${track.name} - file missing`;
-
-            console.log(
-              "Could not play:",
-              track.src,
-              error
-            );
+            trackName.textContent = `${track.name} - file missing`;
+            console.log("Could not play:", track.src, error);
           });
       }
     }
@@ -1623,10 +1127,7 @@
     });
 
     function enterSite() {
-      if (entered) {
-        return;
-      }
-
+      if (entered) return;
       entered = true;
 
       enterScreen.classList.add("hidden");
@@ -1639,81 +1140,29 @@
     }
 
     function resizeCanvas() {
-      canvas.width =
-        window.innerWidth * window.devicePixelRatio;
-
-      canvas.height =
-        window.innerHeight * window.devicePixelRatio;
-
-      canvas.style.width =
-        window.innerWidth + "px";
-
-      canvas.style.height =
-        window.innerHeight + "px";
-
-      ctx.setTransform(
-        window.devicePixelRatio,
-        0,
-        0,
-        window.devicePixelRatio,
-        0,
-        0
-      );
+      canvas.width = window.innerWidth * window.devicePixelRatio;
+      canvas.height = window.innerHeight * window.devicePixelRatio;
+      canvas.style.width = window.innerWidth + "px";
+      canvas.style.height = window.innerHeight + "px";
+      ctx.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0);
     }
 
     function drawWave() {
       const width = window.innerWidth;
       const height = window.innerHeight;
-
       ctx.fillStyle = "#000";
       ctx.fillRect(0, 0, width, height);
 
-      for (
-        let y = -6;
-        y < Math.ceil(height / 16) + 12;
-        y++
-      ) {
-        for (
-          let x = -6;
-          x < Math.ceil(width / 16) + 12;
-          x++
-        ) {
+      for (let y = -6; y < Math.ceil(height / 16) + 12; y++) {
+        for (let x = -6; x < Math.ceil(width / 16) + 12; x++) {
           const px = x * 16;
           const py = y * 16;
-
-          const finalX =
-            px +
-            Math.cos(y * 0.22 + time * 0.018) * 26 +
-            Math.sin((x + y) * 0.12 + time * 0.02) * 16;
-
-          const finalY =
-            py +
-            Math.sin(x * 0.28 + time * 0.025) * 34;
-
-          const alpha = Math.min(
-            1,
-            0.45 +
-              Math.sin(
-                x * 0.18 +
-                y * 0.24 +
-                time * 0.035
-              ) *
-                0.35
-          );
-
+          const finalX = px + Math.cos(y * 0.22 + time * 0.018) * 26 + Math.sin((x + y) * 0.12 + time * 0.02) * 16;
+          const finalY = py + Math.sin(x * 0.28 + time * 0.025) * 34;
+          const alpha = Math.min(1, 0.45 + Math.sin(x * 0.18 + y * 0.24 + time * 0.035) * 0.35);
           ctx.beginPath();
-
-          ctx.fillStyle =
-            "rgba(255,255,255," + alpha + ")";
-
-          ctx.arc(
-            finalX,
-            finalY,
-            1.8,
-            0,
-            Math.PI * 2
-          );
-
+          ctx.fillStyle = "rgba(255,255,255," + alpha + ")";
+          ctx.arc(finalX, finalY, 1.8, 0, Math.PI * 2);
           ctx.fill();
         }
       }
@@ -1724,10 +1173,8 @@
 
     function openWindow(id) {
       const win = document.getElementById(id);
-
       win.classList.add("open");
       win.style.zIndex = ++topZ;
-
       playClick();
     }
 
@@ -1738,224 +1185,110 @@
 
     function makeDraggable(win) {
       const bar = win.querySelector(".window-bar");
-
       let dragging = false;
       let offsetX = 0;
       let offsetY = 0;
 
       bar.addEventListener("pointerdown", event => {
-        if (
-          event.target.classList.contains("close-window")
-        ) {
-          return;
-        }
-
+        if (event.target.classList.contains("close-window")) return;
         dragging = true;
         win.style.zIndex = ++topZ;
-
-        offsetX =
-          event.clientX - win.offsetLeft;
-
-        offsetY =
-          event.clientY - win.offsetTop;
-
+        offsetX = event.clientX - win.offsetLeft;
+        offsetY = event.clientY - win.offsetTop;
         bar.setPointerCapture(event.pointerId);
       });
 
       bar.addEventListener("pointermove", event => {
-        if (!dragging) {
-          return;
-        }
-
-        win.style.left =
-          event.clientX - offsetX + "px";
-
-        win.style.top =
-          event.clientY - offsetY + "px";
+        if (!dragging) return;
+        win.style.left = event.clientX - offsetX + "px";
+        win.style.top = event.clientY - offsetY + "px";
       });
 
-      bar.addEventListener("pointerup", () => {
-        dragging = false;
-      });
-
-      bar.addEventListener("pointercancel", () => {
-        dragging = false;
-      });
+      bar.addEventListener("pointerup", () => dragging = false);
     }
 
     resizeCanvas();
     drawWave();
+    window.addEventListener("resize", resizeCanvas);
 
-    window.addEventListener(
-      "resize",
-      resizeCanvas
-    );
-
-    enterScreen.addEventListener(
-      "click",
-      enterSite
-    );
-
+    enterScreen.addEventListener("click", enterSite);
     window.addEventListener("keydown", () => {
-      if (!entered) {
-        enterSite();
+      if (!entered) enterSite();
+    });
+
+    document.querySelectorAll(".desktop-icon").forEach(icon => {
+      icon.addEventListener("click", () => openWindow(icon.dataset.window));
+    });
+
+    document.querySelectorAll(".window").forEach(win => {
+      makeDraggable(win);
+      const closeButton = win.querySelector(".close-window");
+
+      closeButton.addEventListener("pointerdown", event => event.stopPropagation());
+
+      closeButton.addEventListener("click", event => {
+        event.preventDefault();
+        event.stopPropagation();
+        closeWindow(win);
+      });
+    });
+
+    document.querySelectorAll("button, a, .desktop-icon, .close-window").forEach(item => {
+      item.addEventListener("mouseenter", playHover);
+    });
+
+    contactForm.addEventListener("submit", event => {
+      event.preventDefault();
+      playClick();
+
+      const name = document.getElementById("contactName").value.trim();
+      const email = document.getElementById("contactEmail").value.trim();
+      const subject = document.getElementById("contactSubject").value.trim() || "Message from ham's website";
+      const message = document.getElementById("contactMessage").value.trim();
+
+      const body =
+        "Name: " + name + "\n" +
+        "Email: " + email + "\n\n" +
+        "Message:\n" + message;
+
+      const gmailLink =
+        "https://mail.google.com/mail/?view=cm&fs=1" +
+        "&to=" + encodeURIComponent("haminproduct@gmail.com") +
+        "&su=" + encodeURIComponent(subject) +
+        "&body=" + encodeURIComponent(body);
+
+      window.open(gmailLink, "_blank");
+    });
+
+    prevTrack.addEventListener("click", () => {
+      playClick();
+      loadTrack(currentTrack - 1);
+    });
+
+    nextTrack.addEventListener("click", () => {
+      playClick();
+      loadTrack(currentTrack + 1);
+    });
+
+    playPause.addEventListener("click", () => {
+      playClick();
+
+      if (backgroundMusic.paused) {
+        backgroundMusic.play().catch(error => {
+          console.log("Could not resume:", error);
+        });
+        playPause.textContent = "pause";
+      } else {
+        backgroundMusic.pause();
+        playPause.textContent = "play";
       }
     });
 
-    document
-      .querySelectorAll(".desktop-icon")
-      .forEach(icon => {
-        icon.addEventListener("click", () => {
-          openWindow(icon.dataset.window);
-        });
-      });
-
-    document
-      .querySelectorAll(".window")
-      .forEach(win => {
-        makeDraggable(win);
-
-        const closeButton =
-          win.querySelector(".close-window");
-
-        closeButton.addEventListener(
-          "pointerdown",
-          event => {
-            event.stopPropagation();
-          }
-        );
-
-        closeButton.addEventListener(
-          "click",
-          event => {
-            event.preventDefault();
-            event.stopPropagation();
-
-            closeWindow(win);
-          }
-        );
-      });
-
-    document
-      .querySelectorAll(
-        "button, a, .desktop-icon, .close-window"
-      )
-      .forEach(item => {
-        item.addEventListener(
-          "mouseenter",
-          playHover
-        );
-      });
-
-    contactForm.addEventListener(
-      "submit",
-      event => {
-        event.preventDefault();
-        playClick();
-
-        const name =
-          document
-            .getElementById("contactName")
-            .value
-            .trim();
-
-        const email =
-          document
-            .getElementById("contactEmail")
-            .value
-            .trim();
-
-        const subject =
-          document
-            .getElementById("contactSubject")
-            .value
-            .trim() ||
-          "Message from ham's website";
-
-        const message =
-          document
-            .getElementById("contactMessage")
-            .value
-            .trim();
-
-        const body =
-          "Name: " +
-          name +
-          "\n" +
-          "Email: " +
-          email +
-          "\n\n" +
-          "Message:\n" +
-          message;
-
-        const gmailLink =
-          "https://mail.google.com/mail/?view=cm&fs=1" +
-          "&to=" +
-          encodeURIComponent(
-            "haminproduct@gmail.com"
-          ) +
-          "&su=" +
-          encodeURIComponent(subject) +
-          "&body=" +
-          encodeURIComponent(body);
-
-        window.location.href = gmailLink;
-      }
-    );
-
-    prevTrack.addEventListener(
-      "click",
-      () => {
-        playClick();
-        loadTrack(currentTrack - 1);
-      }
-    );
-
-    nextTrack.addEventListener(
-      "click",
-      () => {
-        playClick();
-        loadTrack(currentTrack + 1);
-      }
-    );
-
-    playPause.addEventListener(
-      "click",
-      () => {
-        playClick();
-
-        if (backgroundMusic.paused) {
-          backgroundMusic
-            .play()
-            .catch(error => {
-              console.log(
-                "Could not resume:",
-                error
-              );
-            });
-
-          playPause.textContent = "pause";
-        } else {
-          backgroundMusic.pause();
-          playPause.textContent = "play";
-        }
-      }
-    );
-
-    muteButton.addEventListener(
-      "click",
-      () => {
-        playClick();
-
-        backgroundMusic.muted =
-          !backgroundMusic.muted;
-
-        muteButton.textContent =
-          backgroundMusic.muted
-            ? "unmute"
-            : "mute";
-      }
-    );
+    muteButton.addEventListener("click", () => {
+      playClick();
+      backgroundMusic.muted = !backgroundMusic.muted;
+      muteButton.textContent = backgroundMusic.muted ? "unmute" : "mute";
+    });
   </script>
 </body>
 </html>
