@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -232,25 +233,83 @@
       </a>
 
       <a class="item coursework" href="coursework/walmart-case-study.html">
-        <span class="item-tag">TIM 80C &middot; Case Study 1</span>
+        <span class="item-tag">Coursework &middot; Strategy Case Study</span>
         <p class="item-title">Walmart Inc. - Strategy Case Study</p>
         <p class="item-desc">SWOT and Porter's Five Forces analysis, value chain mapping, and a goals/initiatives/tactics plan for Walmart's e-commerce and labor practices.</p>
       </a>
 
       <a class="item coursework" href="coursework/cisco-case-study.html">
-        <span class="item-tag">TIM 80C &middot; Case Study 2</span>
+        <span class="item-tag">Coursework &middot; Systems Case Study</span>
         <p class="item-title">Cisco Systems - ERP Implementation</p>
-        <p class="item-desc">Analysis of Cisco's 1994 ERP replacement decision, vendor selection process, and the causes of the post-launch system failure.</p>
+        <p class="item-desc">Analysis of Cisco's ERP replacement decision, vendor selection process, and the causes of the post-launch system failure.</p>
       </a>
 
       <a class="item coursework" href="coursework/netflix-case-study.html">
-        <span class="item-tag">TIM 80C &middot; Case Study 3</span>
+        <span class="item-tag">Coursework &middot; Business Case Study</span>
         <p class="item-title">Netflix vs. Comcast - Interconnection Dispute</p>
-        <p class="item-desc">A report for CEO Reed Hastings on the 2014 streaming slowdown, evaluating three fixes and recommending a direct interconnection deal.</p>
+        <p class="item-desc">A report-style case study on the streaming slowdown, evaluating three fixes and recommending a direct interconnection deal.</p>
       </a>
     </div>
 
     <p class="footer-note">Course names, professor names, and grading details have been removed from coursework pages. Technical projects are framed around the product, data, and systems skills they demonstrate.</p>
   </div>
+
+  <audio id="hoverSound" src="hover.mp3" preload="auto"></audio>
+  <audio id="clickSound" src="click.mp3" preload="auto"></audio>
+
+  <script>
+    const hoverSound = document.getElementById("hoverSound");
+    const clickSound = document.getElementById("clickSound");
+    let audioReady = false;
+
+    function primeAudio() {
+      if (audioReady) return;
+      audioReady = true;
+      hoverSound.load();
+      clickSound.load();
+    }
+
+    function playHoverSound() {
+      primeAudio();
+      hoverSound.pause();
+      hoverSound.currentTime = 0;
+      hoverSound.volume = 0.28;
+      hoverSound.play().catch(() => {});
+    }
+
+    function playClickSound() {
+      primeAudio();
+      clickSound.pause();
+      clickSound.currentTime = 0;
+      clickSound.volume = 0.42;
+      clickSound.play().catch(() => {});
+    }
+
+    document.querySelectorAll("a, button, [role='button'], .item").forEach((element) => {
+      element.addEventListener("mouseenter", playHoverSound);
+
+      element.addEventListener("click", (event) => {
+        playClickSound();
+
+        const link = element.closest("a");
+        if (!link) return;
+
+        const opensNewTab = link.target && link.target !== "_self";
+        const modifiedClick = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
+        const isDownload = link.hasAttribute("download");
+        const isHashOnly = link.getAttribute("href")?.startsWith("#");
+
+        if (opensNewTab || modifiedClick || isDownload || isHashOnly) return;
+
+        event.preventDefault();
+        setTimeout(() => {
+          window.location.href = link.href;
+        }, 120);
+      });
+    });
+
+    window.addEventListener("pointerdown", primeAudio, { once: true });
+    window.addEventListener("keydown", primeAudio, { once: true });
+  </script>
 </body>
 </html>
