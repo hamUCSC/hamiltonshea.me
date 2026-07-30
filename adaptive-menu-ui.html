@@ -556,23 +556,6 @@
       font-style: italic;
     }
 
-    .status-note {
-      margin: 18px 0;
-      padding: 16px 18px;
-
-      color: #dcdcdc;
-      background: rgba(255, 215, 106, 0.08);
-
-      border: 2px solid rgba(255, 215, 106, 0.4);
-      border-left: 6px solid var(--gold);
-
-      font-size: 14px;
-    }
-
-    .status-note strong {
-      color: var(--gold);
-    }
-
     table {
       width: 100%;
 
@@ -772,7 +755,7 @@
     }
 
     /* -------------------------------------------------------
-       INTERACTIVE PROTOTYPE SLIDESHOW
+       PROTOTYPE SLIDESHOW
     ------------------------------------------------------- */
 
     .prototype-showcase {
@@ -989,93 +972,6 @@
       font-weight: 900;
       letter-spacing: 0.8px;
       text-transform: uppercase;
-    }
-
-    .live-prototype {
-      position: relative;
-
-      width: 100%;
-      height: 520px;
-
-      overflow: hidden;
-      background: #050505;
-    }
-
-    .live-prototype iframe {
-      width: 100%;
-      height: 100%;
-
-      display: block;
-
-      border: 0;
-      background: #050505;
-    }
-
-    .live-prototype-bar {
-      position: absolute;
-      left: 14px;
-      right: 14px;
-      bottom: 14px;
-      z-index: 4;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-
-      padding: 12px 14px;
-
-      background: rgba(0, 0, 0, 0.88);
-
-      border: 1px solid rgba(255, 255, 255, 0.28);
-      backdrop-filter: blur(8px);
-
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
-    }
-
-    .live-prototype-copy {
-      min-width: 0;
-    }
-
-    .live-prototype-copy strong {
-      display: block;
-
-      color: var(--green);
-      font-size: 13px;
-    }
-
-    .live-prototype-copy span {
-      display: block;
-
-      color: #bbbbbb;
-      font-size: 11px;
-    }
-
-    .open-prototype-float {
-      flex-shrink: 0;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      min-height: 38px;
-      padding: 0 13px;
-
-      color: #041510;
-      background: var(--green);
-
-      border: 1px solid white;
-
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: 0.6px;
-      text-decoration: none;
-      text-transform: uppercase;
-    }
-
-    .open-prototype-float:hover {
-      color: #041510;
-      background: #6ff0ce;
     }
 
     .prototype-arrow {
@@ -1395,8 +1291,7 @@
       }
 
       .prototype-slide-link,
-      .prototype-slide img,
-      .live-prototype {
+      .prototype-slide img {
         height: 390px;
         min-height: 390px;
       }
@@ -1411,19 +1306,6 @@
 
       .prototype-open-hint {
         display: none;
-      }
-
-      .live-prototype-bar {
-        left: 8px;
-        right: 8px;
-        bottom: 8px;
-
-        align-items: stretch;
-        flex-direction: column;
-      }
-
-      .open-prototype-float {
-        width: 100%;
       }
 
       .prototype-controls {
@@ -1513,8 +1395,7 @@
       }
 
       .prototype-slide-link,
-      .prototype-slide img,
-      .live-prototype {
+      .prototype-slide img {
         height: 300px;
         min-height: 300px;
       }
@@ -1540,10 +1421,6 @@
 
       .prototype-arrow.next {
         right: 5px;
-      }
-
-      .live-prototype-copy span {
-        display: none;
       }
     }
 
@@ -1778,8 +1655,8 @@
       <p>
         This slideshow connects the original client evidence to the
         proposed responsive experience. The first two slides show the
-        unedited client screenshots. The third slide contains the published
-        interactive prototype.
+        unedited client screenshots. The third slide previews the proposed
+        responsive layout and opens the full published prototype when clicked.
       </p>
 
       <div
@@ -1794,7 +1671,7 @@
 
             <p>
               Use the arrows or dots to compare the native layout, the
-              compressed stretched layout, and the interactive proposed
+              compressed stretched layout, and the proposed responsive
               experience.
             </p>
           </div>
@@ -1828,7 +1705,7 @@
                 href="https://bask-rise-24361779.figma.site/"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Open the interactive prototype"
+                aria-label="Open the responsive menu prototype in full screen"
               >
                 <img
                   src="lobby-native-16x9.png"
@@ -1853,7 +1730,7 @@
                   </div>
 
                   <span class="prototype-open-hint">
-                    Click to Open Prototype ↗
+                    Click to Open Full Prototype ↗
                   </span>
                 </div>
               </a>
@@ -1868,7 +1745,7 @@
                 href="https://bask-rise-24361779.figma.site/"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Open the interactive prototype"
+                aria-label="Open the responsive menu prototype in full screen"
               >
                 <img
                   src="lobby-stretched-5x4.png"
@@ -1893,7 +1770,7 @@
                   </div>
 
                   <span class="prototype-open-hint">
-                    Click to Open Prototype ↗
+                    Click to Open Full Prototype ↗
                   </span>
                 </div>
               </a>
@@ -1901,38 +1778,43 @@
 
             <article
               class="prototype-slide"
-              aria-label="Slide 3 of 3: Interactive responsive prototype"
+              aria-label="Slide 3 of 3: Proposed responsive prototype"
             >
-              <div class="live-prototype">
-                <iframe
-                  src="https://bask-rise-24361779.figma.site/"
-                  title="Interactive responsive menu prototype"
+              <a
+                class="prototype-slide-link"
+                href="https://bask-rise-24361779.figma.site/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open the responsive menu prototype in full screen"
+              >
+                <img
+                  src="valorant-responsive-prototype.png"
+                  alt="Proposed responsive 5 by 4 game menu layout with Shop visible, Missions collapsed, and a protected safe UI frame"
                   loading="lazy"
-                  allow="fullscreen"
-                ></iframe>
+                />
 
-                <div class="live-prototype-bar">
-                  <div class="live-prototype-copy">
-                    <strong>
-                      Interactive Responsive Prototype
-                    </strong>
-
-                    <span>
-                      Use the prototype directly. Click Settings inside
-                      the interface to view the Adaptive Menu UI controls.
+                <div class="prototype-slide-overlay">
+                  <div class="prototype-slide-copy">
+                    <span class="prototype-slide-label proposed">
+                      Proposed Experience
                     </span>
+
+                    <h3>
+                      Responsive 5:4 Layout
+                    </h3>
+
+                    <p>
+                      Shop remains visible, Missions collapse into a compact
+                      control, and critical actions stay inside a protected
+                      safe UI frame.
+                    </p>
                   </div>
 
-                  <a
-                    class="open-prototype-float"
-                    href="https://bask-rise-24361779.figma.site/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Open Full Screen ↗
-                  </a>
+                  <span class="prototype-open-hint">
+                    Click to Open Full Prototype ↗
+                  </span>
                 </div>
-              </div>
+              </a>
             </article>
           </div>
 
@@ -1989,7 +1871,7 @@
               class="prototype-dot"
               type="button"
               data-prototype-slide="2"
-              aria-label="View interactive prototype"
+              aria-label="View proposed responsive screenshot"
               aria-selected="false"
             ></button>
           </div>
@@ -2001,9 +1883,9 @@
 
         <div class="prototype-note">
           <strong>Prototype instructions:</strong>
-          On the interactive slide, click <strong>Settings</strong> in the
-          top navigation to view Automatic Mode, Menu Scale, Safe Area,
-          Preview Changes, and Reset to Automatic.
+          Click any slideshow image to open the full prototype. Inside the
+          prototype, select <strong>Settings</strong> to view Automatic Mode,
+          Menu Scale, Safe Area, Preview Changes, and Reset to Automatic.
         </div>
       </div>
     </section>
@@ -3095,14 +2977,6 @@
         return;
       }
 
-      /*
-        Do not automatically move away from the live prototype
-        while someone is using it.
-      */
-      if (currentSlide === 2) {
-        return;
-      }
-
       autoplayTimer = window.setInterval(() => {
         showPrototypeSlide(
           currentSlide + 1,
@@ -3154,12 +3028,7 @@
     prototypeSlider.addEventListener(
       "pointerdown",
       (event) => {
-        /*
-          Avoid triggering swipe behavior when the visitor is
-          interacting with the embedded prototype.
-        */
         if (
-          event.target.closest("iframe") ||
           event.target.closest("a") ||
           event.target.closest("button")
         ) {
