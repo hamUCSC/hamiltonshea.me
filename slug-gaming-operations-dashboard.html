@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Slug Gaming Operations Dashboard - Hamilton Shea</title>
+
+  <link rel="icon" type="image/jpeg" href="logo.jpg" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: #f2f2f2;
+      background: #0a0a0a;
+      line-height: 1.6;
+    }
+
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 22px;
+      background: #000;
+      border-bottom: 4px solid #fdc700;
+    }
+
+    .top-bar a {
+      color: white;
+      text-decoration: none;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 20px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .top-bar a:hover {
+      color: #fdc700;
+    }
+
+    .wrap {
+      width: min(1180px, calc(100% - 36px));
+      margin: 0 auto;
+      padding: 42px 0 90px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 34px;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(3, 38, 72, 0.98),
+          rgba(4, 82, 128, 0.9)
+        );
+      border: 4px solid #0b5f93;
+      box-shadow: 10px 10px 0 #000, 15px 15px 0 #fdc700;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -110px;
+      top: -170px;
+      width: 370px;
+      height: 370px;
+      border: 45px solid rgba(253, 199, 0, 0.13);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-logo {
+      width: min(260px, 72%);
+      display: block;
+      margin-bottom: 24px;
+      object-fit: contain;
+    }
+
+    .badge {
+      display: inline-block;
+      margin-bottom: 16px;
+      padding: 5px 14px;
+      color: #001e3c;
+      background: #fdc700;
+      border: 4px solid #000;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transform: rotate(-2deg);
+      box-shadow: 5px 5px 0 #0b5f93;
+    }
+
+    h1 {
+      position: relative;
+      z-index: 2;
+      max-width: 850px;
+      margin: 0 0 10px;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: clamp(36px, 7vw, 70px);
+      line-height: 0.95;
+      color: white;
+      text-transform: uppercase;
+      text-shadow:
+        4px 4px 0 #0b5f93,
+        8px 8px 0 #000;
+    }
+
+    .subtitle {
+      position: relative;
+      z-index: 2;
+      max-width: 760px;
+      margin: 18px 0 0;
+      color: #e7eef7;
+      font-size: 16px;
+    }
+
+    h2 {
+      margin: 44px 0 8px;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 29px;
+      color: white;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .section-line {
+      width: 100%;
+      margin: 8px 0 18px;
+      border: 0;
+      border-top: 3px solid #fdc700;
+    }
+
+    p,
+    li {
+      color: #dedede;
+      font-size: 15px;
+    }
+
+    ul {
+      padding-left: 22px;
+    }
+
+    strong {
+      color: white;
+    }
+
+    .overview-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .panel {
+      padding: 22px;
+      background: #111;
+      border: 3px solid #293441;
+      box-shadow: 7px 7px 0 #000;
+    }
+
+    .panel h3 {
+      margin: 0 0 10px;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 22px;
+      letter-spacing: 0.5px;
+      color: #fdc700;
+      text-transform: uppercase;
+    }
+
+    .panel p {
+      margin-top: 0;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .metric {
+      padding: 18px 12px;
+      text-align: center;
+      background:
+        linear-gradient(
+          145deg,
+          rgba(11, 95, 147, 0.38),
+          #111 62%
+        );
+      border: 3px solid #0b5f93;
+      box-shadow: 5px 5px 0 #000;
+    }
+
+    .metric-number {
+      display: block;
+      margin-bottom: 4px;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: clamp(27px, 4vw, 38px);
+      line-height: 1;
+      color: #fdc700;
+    }
+
+    .metric-label {
+      color: #e4e4e4;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .dashboard-shell {
+      width: 100%;
+      margin-top: 18px;
+      padding: 12px;
+      overflow: hidden;
+      background: #050505;
+      border: 4px solid #0b5f93;
+      box-shadow: 9px 9px 0 #000, 14px 14px 0 #fdc700;
+    }
+
+    .dashboard-frame {
+      position: relative;
+      width: 100%;
+      height: 900px;
+      overflow: hidden;
+      background: white;
+    }
+
+    .dashboard-frame iframe {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border: 0;
+    }
+
+    .project-note {
+      margin-top: 18px;
+      padding: 14px 16px;
+      color: #d7d7d7;
+      background: #111;
+      border-left: 5px solid #fdc700;
+      font-size: 13px;
+    }
+
+    .tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 12px;
+    }
+
+    .tool {
+      display: inline-block;
+      padding: 5px 11px;
+      color: white;
+      background: #082d52;
+      border: 2px solid #0b5f93;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    .footer {
+      margin-top: 60px;
+      padding-top: 20px;
+      color: #888;
+      border-top: 2px solid #292929;
+      font-size: 13px;
+    }
+
+    @media (max-width: 850px) {
+      .overview-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .metric-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .dashboard-frame {
+        height: 760px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .top-bar {
+        padding: 12px 14px;
+      }
+
+      .top-bar a {
+        font-size: 15px;
+      }
+
+      .wrap {
+        width: min(100% - 22px, 1180px);
+        padding-top: 24px;
+      }
+
+      .hero {
+        padding: 25px 19px;
+        box-shadow: 6px 6px 0 #000, 10px 10px 0 #fdc700;
+      }
+
+      .hero-logo {
+        width: 190px;
+      }
+
+      .metric-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .metric {
+        padding: 15px 8px;
+      }
+
+      .dashboard-shell {
+        padding: 6px;
+        box-shadow: 6px 6px 0 #000, 10px 10px 0 #fdc700;
+      }
+
+      .dashboard-frame {
+        height: 650px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top-bar">
+    <a href="case-studies.html">&larr; case studies</a>
+    <a href="index.html">ham's website</a>
+  </div>
+
+  <main class="wrap">
+    <section class="hero">
+      <img
+        class="hero-logo"
+        src="slug-gaming-logo.png"
+        alt="Slug Gaming logo"
+      />
+
+      <span class="badge">Excel Data Project · 2026</span>
+
+      <h1>Slug Gaming Operations Dashboard</h1>
+
+      <p class="subtitle">
+        An anonymized operations and analytics dashboard connecting
+        community growth, event performance, esports room usage,
+        program activity, budgets, recruitment, and external partnerships.
+      </p>
+    </section>
+
+    <section>
+      <h2>Project Overview</h2>
+      <hr class="section-line" />
+
+      <div class="overview-grid">
+        <div class="panel">
+          <h3>The Challenge</h3>
+
+          <p>
+            Slug Gaming operated across events, esports, partnerships,
+            recruitment, budgeting, community growth, and a shared gaming
+            room. The organization had useful data, but it was stored across
+            separate spreadsheets and was difficult to review as one
+            operating system.
+          </p>
+
+          <p>
+            I organized the information into one centralized dashboard so
+            performance could be reviewed more quickly and decisions could
+            be supported by measurable results.
+          </p>
+        </div>
+
+        <div class="panel">
+          <h3>My Role</h3>
+
+          <p>
+            As President of Slug Gaming, I helped lead operations,
+            partnerships, event execution, officer workflows, and the
+            organization’s community growth.
+          </p>
+
+          <p>
+            For this project, I cleaned and anonymized the source data,
+            structured the workbook, selected key performance indicators,
+            and designed the final dashboard.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Key Results</h2>
+      <hr class="section-line" />
+
+      <div class="metric-grid">
+        <div class="metric">
+          <span class="metric-number">3,700+</span>
+          <span class="metric-label">Community Members</span>
+        </div>
+
+        <div class="metric">
+          <span class="metric-number">30+</span>
+          <span class="metric-label">Officers Led</span>
+        </div>
+
+        <div class="metric">
+          <span class="metric-number">600+</span>
+          <span class="metric-label">Member Growth</span>
+        </div>
+
+        <div class="metric">
+          <span class="metric-number">530%</span>
+          <span class="metric-label">Attendance Growth</span>
+        </div>
+
+        <div class="metric">
+          <span class="metric-number">200%</span>
+          <span class="metric-label">Website Signup Growth</span>
+        </div>
+
+        <div class="metric">
+          <span class="metric-number">300+</span>
+          <span class="metric-label">Centralized Submissions</span>
+        </div>
+
+        <div class="metric">
+          <span class="metric-number">500+</span>
+          <span class="metric-label">Recorded Esports Room Uses</span>
+        </div>
+
+        <div class="metric">
+          <span class="metric-number">$4K+</span>
+          <span class="metric-label">Sponsorship Support</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Interactive Dashboard</h2>
+      <hr class="section-line" />
+
+      <p>
+        The embedded dashboard includes community, event, esports room,
+        program, financial, recruitment, merchandise, and external
+        partnership data.
+      </p>
+
+      <div class="dashboard-shell">
+        <div class="dashboard-frame">
+          <iframe
+            title="Slug Gaming Operations Dashboard"
+            src="https://ucsc0-my.sharepoint.com/personal/hvshea_ucsc_edu/_layouts/15/Doc.aspx?sourcedoc={6b3ba619-1e4c-4feb-9202-e0736a08b6aa}&amp;action=embedview&amp;wdAllowInteractivity=False&amp;AllowTyping=True&amp;wdHideGridlines=True&amp;wdHideHeaders=True&amp;wdDownloadButton=True&amp;wdInConfigurator=True"
+            frameborder="0"
+            scrolling="no"
+            loading="lazy"
+          ></iframe>
+        </div>
+      </div>
+
+      <div class="project-note">
+        Personal information, contact information, private written
+        responses, addresses, account details, and confidential internal
+        notes were removed. Only anonymized or aggregate operational data
+        is displayed.
+      </div>
+    </section>
+
+    <section>
+      <h2>Dashboard Areas</h2>
+      <hr class="section-line" />
+
+      <ul>
+        <li>
+          <strong>Community and events:</strong>
+          tracked member growth, signups, attendance, and event performance.
+        </li>
+
+        <li>
+          <strong>Esports room operations:</strong>
+          organized more than 500 recorded uses to understand utilization.
+        </li>
+
+        <li>
+          <strong>Partnerships:</strong>
+          summarized external company relationships and sponsorship support.
+        </li>
+
+        <li>
+          <strong>Programs and operations:</strong>
+          connected officer workflows, recruitment, event execution,
+          budgeting, reimbursements, and merchandise demand.
+        </li>
+
+        <li>
+          <strong>Privacy:</strong>
+          removed names, emails, handles, addresses, confidential responses,
+          and other personally identifiable information.
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Tools and Skills</h2>
+      <hr class="section-line" />
+
+      <div class="tools">
+        <span class="tool">Excel</span>
+        <span class="tool">Data Cleaning</span>
+        <span class="tool">Data Analysis</span>
+        <span class="tool">Dashboard Design</span>
+        <span class="tool">KPI Definition</span>
+        <span class="tool">Charts</span>
+        <span class="tool">Formulas</span>
+        <span class="tool">Operations</span>
+        <span class="tool">Partnerships</span>
+        <span class="tool">Process Improvement</span>
+      </div>
+    </section>
+
+    <section>
+      <h2>What I Learned</h2>
+      <hr class="section-line" />
+
+      <p>
+        This project showed me how operational data becomes more useful
+        when it is connected to a clear decision. Instead of treating
+        attendance, room usage, budgets, recruitment, and partnerships as
+        separate activities, I designed the dashboard to show how they
+        contributed to the organization’s overall growth.
+      </p>
+
+      <p>
+        It also strengthened my experience with data privacy. The original
+        files included information that should not appear in a public
+        portfolio, so anonymization and aggregation were treated as core
+        parts of the project rather than final cleanup steps.
+      </p>
+    </section>
+
+    <div class="footer">
+      © 2026 Hamilton Shea
+    </div>
+  </main>
+
+  <audio id="hoverSound" src="hover.mp3" preload="auto"></audio>
+  <audio id="clickSound" src="click.mp3" preload="auto"></audio>
+
+  <script>
+    const hoverSound = document.getElementById("hoverSound");
+    const clickSound = document.getElementById("clickSound");
+
+    const AUDIO_SCALE = 0.5;
+    const CLICK_RATE = 1.45;
+    const CLICK_START_OFFSET = 0.06;
+
+    let audioReady = false;
+
+    function primeAudio() {
+      if (audioReady) return;
+
+      audioReady = true;
+      hoverSound.load();
+      clickSound.load();
+    }
+
+    function playHoverSound() {
+      primeAudio();
+
+      hoverSound.pause();
+      hoverSound.currentTime = 0;
+      hoverSound.volume = 0.35 * AUDIO_SCALE;
+
+      hoverSound.play().catch(() => {});
+    }
+
+    function playClickSound() {
+      primeAudio();
+
+      clickSound.pause();
+      clickSound.currentTime = CLICK_START_OFFSET;
+      clickSound.volume = 0.45 * AUDIO_SCALE;
+      clickSound.playbackRate = CLICK_RATE;
+
+      clickSound.play().catch(() => {});
+    }
+
+    document
+      .querySelectorAll("a, button, [role='button']")
+      .forEach((element) => {
+        element.addEventListener("mouseenter", playHoverSound);
+
+        element.addEventListener("click", (event) => {
+          playClickSound();
+
+          const link = element.closest("a");
+
+          if (!link) return;
+
+          const opensNewTab =
+            link.target && link.target !== "_self";
+
+          const modifiedClick =
+            event.metaKey ||
+            event.ctrlKey ||
+            event.shiftKey ||
+            event.altKey;
+
+          const isDownload = link.hasAttribute("download");
+
+          const isHashOnly =
+            link.getAttribute("href")?.startsWith("#");
+
+          if (
+            opensNewTab ||
+            modifiedClick ||
+            isDownload ||
+            isHashOnly
+          ) {
+            return;
+          }
+
+          event.preventDefault();
+
+          setTimeout(() => {
+            window.location.href = link.href;
+          }, 120);
+        });
+      });
+
+    window.addEventListener(
+      "pointerdown",
+      primeAudio,
+      { once: true }
+    );
+
+    window.addEventListener(
+      "keydown",
+      primeAudio,
+      { once: true }
+    );
+  </script>
+</body>
+</html>
