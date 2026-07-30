@@ -35,11 +35,11 @@
       --red-soft: rgba(208, 0, 0, 0.12);
 
       --green: #2ecfa6;
+      --green-dark: #158f72;
       --green-soft: rgba(46, 207, 166, 0.12);
 
       --gold: #ffd76a;
 
-      --black: #000000;
       --background: #0a0a0a;
       --panel: #111111;
       --panel-light: #171717;
@@ -59,6 +59,7 @@
     body {
       margin: 0;
       min-height: 100%;
+
       font-family: "Segoe UI", Arial, sans-serif;
       color: var(--text);
       background: var(--background);
@@ -94,6 +95,11 @@
 
     strong {
       color: white;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
     }
 
     .top-bar {
@@ -256,6 +262,71 @@
       font-weight: 700;
       letter-spacing: 0.5px;
       text-transform: uppercase;
+    }
+
+    .hero-actions {
+      position: relative;
+      z-index: 2;
+
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+
+      margin-top: 26px;
+    }
+
+    .primary-link,
+    .secondary-link {
+      min-height: 46px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+
+      padding: 0 18px;
+
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.9px;
+      text-decoration: none;
+      text-transform: uppercase;
+
+      transition:
+        transform 0.16s ease,
+        background 0.16s ease,
+        box-shadow 0.16s ease;
+    }
+
+    .primary-link {
+      color: white;
+      background: var(--red);
+
+      border: 2px solid white;
+
+      box-shadow: 5px 5px 0 black;
+    }
+
+    .primary-link:hover {
+      color: white;
+      background: var(--red-light);
+
+      transform: translate(-2px, -2px);
+      box-shadow: 7px 7px 0 black;
+    }
+
+    .secondary-link {
+      color: white;
+      background: rgba(255, 255, 255, 0.045);
+
+      border: 2px solid rgba(255, 255, 255, 0.35);
+    }
+
+    .secondary-link:hover {
+      color: white;
+      border-color: white;
+
+      transform: translateY(-2px);
     }
 
     section {
@@ -538,26 +609,61 @@
       background: rgba(255, 255, 255, 0.025);
     }
 
-    figure {
-      margin: 28px 0;
-    }
+    blockquote {
+      margin: 16px 0;
+      padding: 14px 18px;
 
-    figure svg {
-      width: 100%;
-      height: auto;
-      display: block;
+      color: #dddddd;
+      background: rgba(255, 255, 255, 0.035);
 
-      background: #0d0d0d;
+      border-left: 5px solid var(--red);
 
-      border: 2px solid #282828;
-    }
-
-    figcaption {
-      margin-top: 9px;
-
-      color: #999;
-      font-size: 13px;
       font-style: italic;
+    }
+
+    .theme-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+
+      margin-top: 18px;
+    }
+
+    .theme-card {
+      padding: 18px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(208, 0, 0, 0.11),
+          #111 70%
+        );
+
+      border: 2px solid #343434;
+    }
+
+    .theme-card h3 {
+      margin-bottom: 7px;
+
+      color: white;
+      font-size: 16px;
+    }
+
+    .theme-evidence {
+      display: inline-block;
+
+      margin-top: 8px;
+      padding: 3px 8px;
+
+      color: var(--red-light);
+      background: rgba(208, 0, 0, 0.09);
+
+      border: 1px solid rgba(255, 156, 156, 0.25);
+
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
     }
 
     .proof-row {
@@ -608,62 +714,6 @@
 
     .proof-label strong {
       color: var(--red-light);
-    }
-
-    blockquote {
-      margin: 16px 0;
-      padding: 14px 18px;
-
-      color: #dddddd;
-      background: rgba(255, 255, 255, 0.035);
-
-      border-left: 5px solid var(--red);
-
-      font-style: italic;
-    }
-
-    .theme-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-
-      margin-top: 18px;
-    }
-
-    .theme-card {
-      padding: 18px;
-
-      background:
-        linear-gradient(
-          145deg,
-          rgba(208, 0, 0, 0.11),
-          #111 70%
-        );
-
-      border: 2px solid #343434;
-    }
-
-    .theme-card h3 {
-      margin-bottom: 7px;
-      color: white;
-      font-size: 16px;
-    }
-
-    .theme-evidence {
-      display: inline-block;
-
-      margin-top: 8px;
-      padding: 3px 8px;
-
-      color: var(--red-light);
-      background: rgba(208, 0, 0, 0.09);
-
-      border: 1px solid rgba(255, 156, 156, 0.25);
-
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
     }
 
     .decision-banner {
@@ -721,79 +771,428 @@
       font-size: 16px;
     }
 
-    .prototype-section {
-      margin-top: 20px;
-      padding: 24px;
+    /* -------------------------------------------------------
+       INTERACTIVE PROTOTYPE SLIDESHOW
+    ------------------------------------------------------- */
+
+    .prototype-showcase {
+      margin-top: 22px;
+      padding: 22px;
+      overflow: hidden;
 
       background:
         linear-gradient(
           135deg,
-          rgba(208, 0, 0, 0.12),
+          rgba(208, 0, 0, 0.14),
           #101010 65%
         );
 
       border: 3px solid #3a3a3a;
+
+      box-shadow:
+        8px 8px 0 #000,
+        12px 12px 0 #4a0000;
     }
 
-    .prototype-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 15px;
+    .prototype-showcase-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 22px;
 
-      margin-top: 18px;
+      margin-bottom: 18px;
     }
 
-    .prototype-placeholder {
-      min-height: 250px;
-
-      display: grid;
-      place-items: center;
-
-      padding: 20px;
-
-      text-align: center;
-
-      background:
-        repeating-linear-gradient(
-          45deg,
-          #111 0,
-          #111 12px,
-          #151515 12px,
-          #151515 24px
-        );
-
-      border: 2px dashed #555;
+    .prototype-showcase-copy {
+      max-width: 700px;
     }
 
-    .prototype-placeholder strong {
+    .prototype-showcase-copy h3 {
+      margin: 0 0 7px;
+
+      color: white;
+
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 24px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .prototype-showcase-copy p {
+      margin: 0;
+    }
+
+    .prototype-link-button {
+      flex-shrink: 0;
+
+      min-height: 44px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+
+      padding: 0 16px;
+
+      color: white;
+      background: var(--red);
+
+      border: 2px solid white;
+
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.8px;
+      text-decoration: none;
+      text-transform: uppercase;
+
+      box-shadow: 5px 5px 0 #000;
+
+      transition:
+        transform 0.16s ease,
+        background 0.16s ease,
+        box-shadow 0.16s ease;
+    }
+
+    .prototype-link-button:hover {
+      color: white;
+      background: var(--red-light);
+
+      transform: translate(-2px, -2px);
+      box-shadow: 7px 7px 0 #000;
+    }
+
+    .prototype-slider {
+      position: relative;
+      overflow: hidden;
+
+      background: #050505;
+
+      border: 3px solid var(--red);
+    }
+
+    .prototype-slides {
+      display: flex;
+
+      transition: transform 0.5s ease;
+      will-change: transform;
+    }
+
+    .prototype-slide {
+      position: relative;
+      min-width: 100%;
+
+      background: #050505;
+    }
+
+    .prototype-slide-link {
+      position: relative;
+
+      display: block;
+      min-height: 520px;
+
+      color: white;
+      background: #050505;
+      text-decoration: none;
+    }
+
+    .prototype-slide-link:hover {
+      color: white;
+    }
+
+    .prototype-slide img {
+      width: 100%;
+      height: 520px;
+
       display: block;
 
-      margin-bottom: 7px;
+      object-fit: contain;
+      object-position: center;
 
-      color: var(--red-light);
-      font-size: 16px;
+      background: #050505;
     }
 
-    .prototype-placeholder span {
-      max-width: 270px;
+    .prototype-slide-overlay {
+      position: absolute;
+      inset: auto 0 0;
 
-      color: #a6a6a6;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+
+      padding: 60px 22px 19px;
+
+      pointer-events: none;
+
+      background:
+        linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.97),
+          rgba(0, 0, 0, 0.68) 62%,
+          transparent
+        );
+    }
+
+    .prototype-slide-copy {
+      max-width: 760px;
+    }
+
+    .prototype-slide-label {
+      display: inline-block;
+
+      margin-bottom: 7px;
+      padding: 4px 8px;
+
+      color: white;
+      background: var(--red);
+
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .prototype-slide-label.proposed {
+      color: #041510;
+      background: var(--green);
+    }
+
+    .prototype-slide-copy h3 {
+      margin: 0 0 4px;
+
+      color: white;
+
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 21px;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+    }
+
+    .prototype-slide-copy p {
+      margin: 0;
+
+      color: #d7d7d7;
       font-size: 13px;
     }
 
-    .todo-label {
-      display: inline-block;
+    .prototype-open-hint {
+      flex-shrink: 0;
 
-      margin-bottom: 11px;
-      padding: 4px 8px;
+      padding: 6px 9px;
 
-      color: #2d2100;
-      background: var(--gold);
+      color: white;
+      background: rgba(208, 0, 0, 0.9);
+
+      border: 1px solid rgba(255, 255, 255, 0.55);
 
       font-size: 10px;
       font-weight: 900;
       letter-spacing: 0.8px;
       text-transform: uppercase;
+    }
+
+    .live-prototype {
+      position: relative;
+
+      width: 100%;
+      height: 520px;
+
+      overflow: hidden;
+      background: #050505;
+    }
+
+    .live-prototype iframe {
+      width: 100%;
+      height: 100%;
+
+      display: block;
+
+      border: 0;
+      background: #050505;
+    }
+
+    .live-prototype-bar {
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 14px;
+      z-index: 4;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+
+      padding: 12px 14px;
+
+      background: rgba(0, 0, 0, 0.88);
+
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      backdrop-filter: blur(8px);
+
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .live-prototype-copy {
+      min-width: 0;
+    }
+
+    .live-prototype-copy strong {
+      display: block;
+
+      color: var(--green);
+      font-size: 13px;
+    }
+
+    .live-prototype-copy span {
+      display: block;
+
+      color: #bbbbbb;
+      font-size: 11px;
+    }
+
+    .open-prototype-float {
+      flex-shrink: 0;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      min-height: 38px;
+      padding: 0 13px;
+
+      color: #041510;
+      background: var(--green);
+
+      border: 1px solid white;
+
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.6px;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .open-prototype-float:hover {
+      color: #041510;
+      background: #6ff0ce;
+    }
+
+    .prototype-arrow {
+      position: absolute;
+      top: 50%;
+      z-index: 6;
+
+      width: 46px;
+      height: 58px;
+
+      display: grid;
+      place-items: center;
+
+      color: white;
+      background: rgba(0, 0, 0, 0.78);
+
+      border: 2px solid rgba(255, 255, 255, 0.28);
+
+      font-size: 25px;
+
+      cursor: pointer;
+
+      transform: translateY(-50%);
+
+      transition:
+        background 0.15s ease,
+        border-color 0.15s ease;
+    }
+
+    .prototype-arrow:hover {
+      background: var(--red);
+      border-color: white;
+    }
+
+    .prototype-arrow.previous {
+      left: 12px;
+    }
+
+    .prototype-arrow.next {
+      right: 12px;
+    }
+
+    .prototype-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+
+      margin-top: 15px;
+    }
+
+    .prototype-counter {
+      color: #999;
+
+      font-family: "Courier New", monospace;
+      font-size: 12px;
+      letter-spacing: 0.8px;
+    }
+
+    .prototype-dots {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .prototype-dot {
+      width: 11px;
+      height: 11px;
+
+      padding: 0;
+
+      background: #3d3d3d;
+
+      border: 1px solid #777;
+      border-radius: 50%;
+
+      cursor: pointer;
+
+      transition:
+        background 0.15s ease,
+        transform 0.15s ease;
+    }
+
+    .prototype-dot:hover {
+      background: var(--red-light);
+    }
+
+    .prototype-dot.active {
+      background: var(--red);
+      border-color: white;
+
+      transform: scale(1.18);
+    }
+
+    .prototype-instructions {
+      color: #858585;
+
+      font-size: 11px;
+      text-align: right;
+    }
+
+    .prototype-note {
+      margin-top: 18px;
+      padding: 14px 16px;
+
+      background: rgba(46, 207, 166, 0.07);
+
+      border: 1px solid rgba(46, 207, 166, 0.35);
+      border-left: 5px solid var(--green);
+
+      color: #d6d6d6;
+      font-size: 13px;
+    }
+
+    .prototype-note strong {
+      color: var(--green);
     }
 
     .acceptance-list {
@@ -845,6 +1244,7 @@
 
     .validation-status h3 {
       color: var(--gold);
+
       font-family: Impact, "Arial Black", sans-serif;
       font-size: 22px;
       text-transform: uppercase;
@@ -973,18 +1373,66 @@
       .validation-grid {
         grid-template-columns: 1fr;
       }
+
+      .prototype-showcase-header {
+        flex-direction: column;
+      }
+
+      .prototype-link-button {
+        width: 100%;
+      }
     }
 
     @media (max-width: 700px) {
       .two-col,
       .theme-grid,
-      .proof-row,
-      .prototype-grid {
+      .proof-row {
         grid-template-columns: 1fr;
       }
 
       .metric-list {
         grid-template-columns: 1fr;
+      }
+
+      .prototype-slide-link,
+      .prototype-slide img,
+      .live-prototype {
+        height: 390px;
+        min-height: 390px;
+      }
+
+      .prototype-slide-overlay {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 9px;
+
+        padding: 80px 16px 15px;
+      }
+
+      .prototype-open-hint {
+        display: none;
+      }
+
+      .live-prototype-bar {
+        left: 8px;
+        right: 8px;
+        bottom: 8px;
+
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .open-prototype-float {
+        width: 100%;
+      }
+
+      .prototype-controls {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .prototype-instructions {
+        text-align: left;
       }
 
       table,
@@ -1051,6 +1499,69 @@
       .problem-question {
         font-size: 17px;
       }
+
+      .prototype-showcase {
+        padding: 12px;
+
+        box-shadow:
+          5px 5px 0 #000,
+          8px 8px 0 #4a0000;
+      }
+
+      .prototype-slider {
+        border-width: 2px;
+      }
+
+      .prototype-slide-link,
+      .prototype-slide img,
+      .live-prototype {
+        height: 300px;
+        min-height: 300px;
+      }
+
+      .prototype-slide-copy h3 {
+        font-size: 17px;
+      }
+
+      .prototype-slide-copy p {
+        display: none;
+      }
+
+      .prototype-arrow {
+        width: 37px;
+        height: 48px;
+
+        font-size: 21px;
+      }
+
+      .prototype-arrow.previous {
+        left: 5px;
+      }
+
+      .prototype-arrow.next {
+        right: 5px;
+      }
+
+      .live-prototype-copy span {
+        display: none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .prototype-slides {
+        transition: none;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+      }
     }
   </style>
 </head>
@@ -1096,8 +1607,26 @@
         </span>
 
         <span class="meta-chip">
-          PRD &amp; Interface Concept
+          Interactive Prototype
         </span>
+      </div>
+
+      <div class="hero-actions">
+        <a
+          class="primary-link"
+          href="https://bask-rise-24361779.figma.site/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Open Interactive Prototype ↗
+        </a>
+
+        <a
+          class="secondary-link"
+          href="#prototype"
+        >
+          View Prototype Preview
+        </a>
       </div>
     </section>
 
@@ -1107,9 +1636,9 @@
       for limited screen width.
 
       I interviewed six players, reviewed outside community signals,
-      compared four solution paths, and defined a responsive-menu MVP
-      designed to protect critical actions without changing VALORANT's
-      in-match experience.
+      compared four solution paths, defined a responsive-menu MVP, and
+      built an interactive prototype designed to protect critical actions
+      without changing VALORANT's in-match experience.
     </div>
 
     <div class="disclaimer">
@@ -1139,7 +1668,7 @@
           </span>
 
           <span class="glance-value">
-            Concept defined. Prototype and usability validation planned.
+            Interactive prototype complete. Usability validation planned.
           </span>
         </article>
 
@@ -1149,8 +1678,8 @@
           </span>
 
           <span class="glance-value">
-            Player interviews, secondary research, product prioritization,
-            requirements, and usability planning
+            Player interviews, secondary research, prioritization,
+            requirements, interface prototyping, and usability planning
           </span>
         </article>
 
@@ -1161,7 +1690,7 @@
 
           <span class="glance-value">
             Problem definition, solution comparison, MVP, acceptance
-            criteria, concepts, metrics, and experiment plan
+            criteria, interactive prototype, metrics, and experiment plan
           </span>
         </article>
       </div>
@@ -1242,392 +1771,240 @@
       </p>
     </section>
 
-    <section>
-      <h2>Current Experience</h2>
+    <section id="prototype">
+      <h2>Interactive Prototype</h2>
       <hr class="section-line" />
 
-      <figure>
-        <svg
-          viewBox="0 0 900 430"
-          xmlns="http://www.w3.org/2000/svg"
-          role="img"
-          aria-label="Comparison between a wider 16 by 9 lobby viewport and a compressed 5 by 4 viewport."
-        >
-          <text
-            x="20"
-            y="30"
-            fill="#ff9c9c"
-            font-family="Impact, Arial Black, sans-serif"
-            font-size="16"
-            letter-spacing="1"
-          >
-            SAME LOBBY, DIFFERENT VIEWPORTS
-          </text>
-
-          <text
-            x="20"
-            y="58"
-            fill="#aaa"
-            font-family="Segoe UI, sans-serif"
-            font-size="11"
-            letter-spacing="1"
-          >
-            NATIVE / WIDER (16:9)
-          </text>
-
-          <rect
-            x="20"
-            y="68"
-            width="410"
-            height="320"
-            rx="4"
-            fill="#111"
-            stroke="#333"
-            stroke-width="1.5"
-          />
-
-          <rect
-            x="34"
-            y="80"
-            width="382"
-            height="26"
-            rx="2"
-            fill="#1c2430"
-            stroke="#2f3d50"
-          />
-
-          <circle cx="48" cy="93" r="5" fill="#3a4a5e" />
-          <circle cx="66" cy="93" r="5" fill="#3a4a5e" />
-          <circle cx="84" cy="93" r="5" fill="#3a4a5e" />
-
-          <text
-            x="225"
-            y="97"
-            fill="#8fa3bb"
-            font-family="Segoe UI, sans-serif"
-            font-size="10"
-            text-anchor="middle"
-            letter-spacing="1"
-          >
-            PLAY
-          </text>
-
-          <rect
-            x="34"
-            y="150"
-            width="90"
-            height="70"
-            rx="3"
-            fill="#1a2532"
-            stroke="#2ecfa6"
-            stroke-width="2"
-          />
-
-          <text
-            x="79"
-            y="172"
-            fill="#6fe3c4"
-            font-family="Segoe UI, sans-serif"
-            font-size="9"
-            text-anchor="middle"
-          >
-            PARTY
-          </text>
-
-          <text
-            x="79"
-            y="188"
-            fill="#6fe3c4"
-            font-family="Segoe UI, sans-serif"
-            font-size="9"
-            text-anchor="middle"
-          >
-            CODE
-          </text>
-
-          <rect
-            x="170"
-            y="120"
-            width="130"
-            height="170"
-            rx="4"
-            fill="#182130"
-            stroke="#3a4a5e"
-          />
-
-          <circle
-            cx="235"
-            cy="195"
-            r="34"
-            fill="#2a5a52"
-          />
-
-          <text
-            x="235"
-            y="252"
-            fill="#e8c76a"
-            font-family="Segoe UI, sans-serif"
-            font-size="9"
-            text-anchor="middle"
-            letter-spacing="1"
-          >
-            READY
-          </text>
-
-          <rect
-            x="34"
-            y="330"
-            width="382"
-            height="34"
-            rx="3"
-            fill="#161e2a"
-            stroke="#2ecfa6"
-            stroke-width="2"
-          />
-
-          <rect
-            x="170"
-            y="336"
-            width="130"
-            height="22"
-            rx="2"
-            fill="#d23b3b"
-          />
-
-          <text
-            x="235"
-            y="351"
-            fill="white"
-            font-family="Impact, Arial Black, sans-serif"
-            font-size="11"
-            text-anchor="middle"
-          >
-            START
-          </text>
-
-          <text
-            x="20"
-            y="410"
-            fill="#6fe3c4"
-            font-family="Segoe UI, sans-serif"
-            font-size="11"
-          >
-            More spacing separates party controls, the lobby card, and primary actions.
-          </text>
-
-          <text
-            x="470"
-            y="58"
-            fill="#aaa"
-            font-family="Segoe UI, sans-serif"
-            font-size="11"
-            letter-spacing="1"
-          >
-            STRETCHED / NARROWER (5:4)
-          </text>
-
-          <rect
-            x="470"
-            y="68"
-            width="410"
-            height="320"
-            rx="4"
-            fill="#111"
-            stroke="#333"
-            stroke-width="1.5"
-          />
-
-          <rect
-            x="480"
-            y="78"
-            width="392"
-            height="30"
-            rx="2"
-            fill="#1c2430"
-            stroke="#d23b3b"
-            stroke-width="2"
-          />
-
-          <circle cx="494" cy="93" r="5" fill="#3a4a5e" />
-          <circle cx="512" cy="93" r="5" fill="#3a4a5e" />
-
-          <text
-            x="675"
-            y="98"
-            fill="#8fa3bb"
-            font-family="Segoe UI, sans-serif"
-            font-size="10"
-            text-anchor="middle"
-            letter-spacing="1"
-          >
-            PLAY
-          </text>
-
-          <rect
-            x="480"
-            y="150"
-            width="66"
-            height="52"
-            rx="3"
-            fill="#1a2532"
-            stroke="#d23b3b"
-            stroke-width="2"
-          />
-
-          <text
-            x="513"
-            y="170"
-            fill="#f5a3a3"
-            font-family="Segoe UI, sans-serif"
-            font-size="7"
-            text-anchor="middle"
-          >
-            PARTY
-          </text>
-
-          <text
-            x="513"
-            y="182"
-            fill="#f5a3a3"
-            font-family="Segoe UI, sans-serif"
-            font-size="7"
-            text-anchor="middle"
-          >
-            CODE
-          </text>
-
-          <rect
-            x="600"
-            y="120"
-            width="120"
-            height="150"
-            rx="4"
-            fill="#182130"
-            stroke="#3a4a5e"
-          />
-
-          <circle
-            cx="660"
-            cy="188"
-            r="30"
-            fill="#2a5a52"
-          />
-
-          <text
-            x="660"
-            y="238"
-            fill="#e8c76a"
-            font-family="Segoe UI, sans-serif"
-            font-size="8"
-            text-anchor="middle"
-            letter-spacing="1"
-          >
-            READY
-          </text>
-
-          <rect
-            x="850"
-            y="78"
-            width="26"
-            height="300"
-            rx="2"
-            fill="#1a2230"
-            stroke="#d23b3b"
-            stroke-width="2"
-          />
-
-          <circle cx="863" cy="100" r="9" fill="#3a4a5e" />
-          <circle cx="863" cy="122" r="9" fill="#3a4a5e" />
-          <circle cx="863" cy="144" r="9" fill="#3a4a5e" />
-          <circle cx="863" cy="166" r="9" fill="#3a4a5e" />
-          <circle cx="863" cy="188" r="9" fill="#3a4a5e" />
-
-          <rect
-            x="480"
-            y="330"
-            width="392"
-            height="30"
-            rx="3"
-            fill="#161e2a"
-            stroke="#3a4a5e"
-          />
-
-          <rect
-            x="600"
-            y="335"
-            width="120"
-            height="20"
-            rx="2"
-            fill="#d23b3b"
-          />
-
-          <text
-            x="660"
-            y="349"
-            fill="white"
-            font-family="Impact, Arial Black, sans-serif"
-            font-size="10"
-            text-anchor="middle"
-          >
-            START
-          </text>
-
-          <text
-            x="470"
-            y="410"
-            fill="#f5a3a3"
-            font-family="Segoe UI, sans-serif"
-            font-size="11"
-          >
-            Top navigation, party controls, and the social rail compete for width.
-          </text>
-        </svg>
-
-        <figcaption>
-          Figure 1. Schematic redraw of the same lobby structure at
-          16:9 and 5:4. This is not a live-client screenshot; it is a
-          simplified diagram of the compression pattern shown in the
-          screenshots below.
-        </figcaption>
-      </figure>
-
-      <h3>Real client screenshots</h3>
-
-      <p class="note">
-        These are unedited screenshots from my own client at native 16:9
-        and at my regular 5:4 stretched setup.
+      <p>
+        This slideshow connects the original client evidence to the
+        proposed responsive experience. The first two slides show the
+        unedited client screenshots. The third slide contains the published
+        interactive prototype.
       </p>
 
-      <div class="proof-row">
-        <article class="proof-item">
-          <a href="lobby-native-16x9.png">
-            <img
-              src="lobby-native-16x9.png"
-              alt="VALORANT lobby at a native 16 by 9 resolution"
-              loading="lazy"
-            />
+      <div
+        class="prototype-showcase"
+        id="prototypeShowcase"
+      >
+        <div class="prototype-showcase-header">
+          <div class="prototype-showcase-copy">
+            <h3>
+              From Current Experience to Responsive Prototype
+            </h3>
+
+            <p>
+              Use the arrows or dots to compare the native layout, the
+              compressed stretched layout, and the interactive proposed
+              experience.
+            </p>
+          </div>
+
+          <a
+            class="prototype-link-button"
+            href="https://bask-rise-24361779.figma.site/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open Full Prototype ↗
           </a>
+        </div>
 
-          <p class="proof-label">
-            <strong>16:9:</strong>
-            Wider spacing with fewer competing elements
-          </p>
-        </article>
+        <div
+          class="prototype-slider"
+          id="prototypeSlider"
+          aria-roledescription="carousel"
+          aria-label="VALORANT responsive menu prototype preview"
+        >
+          <div
+            class="prototype-slides"
+            id="prototypeSlides"
+          >
+            <article
+              class="prototype-slide"
+              aria-label="Slide 1 of 3: Native 16 by 9 layout"
+            >
+              <a
+                class="prototype-slide-link"
+                href="https://bask-rise-24361779.figma.site/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open the interactive prototype"
+              >
+                <img
+                  src="lobby-native-16x9.png"
+                  alt="Original VALORANT lobby screenshot at a native 16 by 9 resolution"
+                  loading="eager"
+                />
 
-        <article class="proof-item">
-          <a href="lobby-stretched-5x4.png">
-            <img
-              src="lobby-stretched-5x4.png"
-              alt="VALORANT lobby at a stretched 5 by 4 resolution"
-              loading="lazy"
-            />
-          </a>
+                <div class="prototype-slide-overlay">
+                  <div class="prototype-slide-copy">
+                    <span class="prototype-slide-label">
+                      Original Client
+                    </span>
 
-          <p class="proof-label">
-            <strong>5:4:</strong>
-            My actual stretched setup
-          </p>
-        </article>
+                    <h3>
+                      Native 16:9 Layout
+                    </h3>
+
+                    <p>
+                      Wider spacing keeps primary navigation, party
+                      controls, and secondary panels separated.
+                    </p>
+                  </div>
+
+                  <span class="prototype-open-hint">
+                    Click to Open Prototype ↗
+                  </span>
+                </div>
+              </a>
+            </article>
+
+            <article
+              class="prototype-slide"
+              aria-label="Slide 2 of 3: Stretched 5 by 4 layout"
+            >
+              <a
+                class="prototype-slide-link"
+                href="https://bask-rise-24361779.figma.site/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open the interactive prototype"
+              >
+                <img
+                  src="lobby-stretched-5x4.png"
+                  alt="Original VALORANT lobby screenshot at a stretched 5 by 4 resolution"
+                  loading="lazy"
+                />
+
+                <div class="prototype-slide-overlay">
+                  <div class="prototype-slide-copy">
+                    <span class="prototype-slide-label">
+                      Problem State
+                    </span>
+
+                    <h3>
+                      Compressed 5:4 Layout
+                    </h3>
+
+                    <p>
+                      Primary navigation, party controls, social elements,
+                      and persistent panels compete for limited width.
+                    </p>
+                  </div>
+
+                  <span class="prototype-open-hint">
+                    Click to Open Prototype ↗
+                  </span>
+                </div>
+              </a>
+            </article>
+
+            <article
+              class="prototype-slide"
+              aria-label="Slide 3 of 3: Interactive responsive prototype"
+            >
+              <div class="live-prototype">
+                <iframe
+                  src="https://bask-rise-24361779.figma.site/"
+                  title="Interactive responsive menu prototype"
+                  loading="lazy"
+                  allow="fullscreen"
+                ></iframe>
+
+                <div class="live-prototype-bar">
+                  <div class="live-prototype-copy">
+                    <strong>
+                      Interactive Responsive Prototype
+                    </strong>
+
+                    <span>
+                      Use the prototype directly. Click Settings inside
+                      the interface to view the Adaptive Menu UI controls.
+                    </span>
+                  </div>
+
+                  <a
+                    class="open-prototype-float"
+                    href="https://bask-rise-24361779.figma.site/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Open Full Screen ↗
+                  </a>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <button
+            class="prototype-arrow previous"
+            id="prototypePrevious"
+            type="button"
+            aria-label="View previous prototype slide"
+          >
+            &#10094;
+          </button>
+
+          <button
+            class="prototype-arrow next"
+            id="prototypeNext"
+            type="button"
+            aria-label="View next prototype slide"
+          >
+            &#10095;
+          </button>
+        </div>
+
+        <div class="prototype-controls">
+          <div
+            class="prototype-counter"
+            id="prototypeCounter"
+            aria-live="polite"
+          >
+            01 / 03
+          </div>
+
+          <div
+            class="prototype-dots"
+            role="tablist"
+            aria-label="Choose prototype slide"
+          >
+            <button
+              class="prototype-dot active"
+              type="button"
+              data-prototype-slide="0"
+              aria-label="View native 16 by 9 screenshot"
+              aria-selected="true"
+            ></button>
+
+            <button
+              class="prototype-dot"
+              type="button"
+              data-prototype-slide="1"
+              aria-label="View stretched 5 by 4 screenshot"
+              aria-selected="false"
+            ></button>
+
+            <button
+              class="prototype-dot"
+              type="button"
+              data-prototype-slide="2"
+              aria-label="View interactive prototype"
+              aria-selected="false"
+            ></button>
+          </div>
+
+          <div class="prototype-instructions">
+            Arrow keys and swipe are supported
+          </div>
+        </div>
+
+        <div class="prototype-note">
+          <strong>Prototype instructions:</strong>
+          On the interactive slide, click <strong>Settings</strong> in the
+          top navigation to view Automatic Mode, Menu Scale, Safe Area,
+          Preview Changes, and Reset to Automatic.
+        </div>
       </div>
     </section>
 
@@ -1699,8 +2076,8 @@
             </td>
 
             <td data-label="What Was Collected">
-              This was a directional sample intended to justify prototype
-              testing, not represent the full player population
+              A directional sample intended to justify prototype testing,
+              not represent the entire player population
             </td>
           </tr>
         </tbody>
@@ -1719,7 +2096,9 @@
 
       <div class="theme-grid">
         <article class="theme-card">
-          <h3>Players Preferred Familiarity</h3>
+          <h3>
+            Players Preferred Familiarity
+          </h3>
 
           <p>
             Interviewed players generally did not ask for a full visual
@@ -1728,12 +2107,14 @@
           </p>
 
           <span class="theme-evidence">
-            Repeated interview theme
+            Repeated Interview Theme
           </span>
         </article>
 
         <article class="theme-card">
-          <h3>Stretched Layouts Can Reduce Access</h3>
+          <h3>
+            Stretched Layouts Can Reduce Access
+          </h3>
 
           <p>
             Narrower aspect ratios create less space for persistent
@@ -1741,12 +2122,14 @@
           </p>
 
           <span class="theme-evidence">
-            Interviews + client observation
+            Interviews + Client Observation
           </span>
         </article>
 
         <article class="theme-card">
-          <h3>Gameplay Should Stay Untouched</h3>
+          <h3>
+            Gameplay Should Stay Untouched
+          </h3>
 
           <p>
             The solution should not change aiming, models, FOV, hitboxes,
@@ -1754,12 +2137,14 @@
           </p>
 
           <span class="theme-evidence">
-            Scope decision
+            Scope Decision
           </span>
         </article>
 
         <article class="theme-card">
-          <h3>More Controls Could Add Friction</h3>
+          <h3>
+            More Controls Could Add Friction
+          </h3>
 
           <p>
             Manual settings can help as a fallback, but the system should
@@ -1767,7 +2152,7 @@
           </p>
 
           <span class="theme-evidence">
-            Product tradeoff
+            Product Tradeoff
           </span>
         </article>
       </div>
@@ -1798,7 +2183,11 @@
 
       <div class="proof-row">
         <article class="proof-item">
-          <a href="reddit-2024-stretched-shop.png">
+          <a
+            href="reddit-2024-stretched-shop.png"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img
               src="reddit-2024-stretched-shop.png"
               alt="Reddit discussion regarding stretched-resolution Shop readability"
@@ -1813,7 +2202,11 @@
         </article>
 
         <article class="proof-item">
-          <a href="reddit-2026-ui-changes.png">
+          <a
+            href="reddit-2026-ui-changes.png"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img
               src="reddit-2026-ui-changes.png"
               alt="Reddit discussion regarding broader VALORANT interface friction"
@@ -1952,7 +2345,9 @@
             1
           </span>
 
-          <h3>Protect Critical Actions</h3>
+          <h3>
+            Protect Critical Actions
+          </h3>
 
           <p>
             Shop, Back, Close, Confirm, Cancel, and Apply should remain
@@ -1965,7 +2360,9 @@
             2
           </span>
 
-          <h3>Adapt Secondary Content First</h3>
+          <h3>
+            Adapt Secondary Content First
+          </h3>
 
           <p>
             Quest panels, social elements, and secondary information can
@@ -1978,7 +2375,9 @@
             3
           </span>
 
-          <h3>Keep Players in Control</h3>
+          <h3>
+            Keep Players in Control
+          </h3>
 
           <p>
             Automatic behavior should be the default, with optional scale,
@@ -1990,701 +2389,14 @@
     </section>
 
     <section>
-      <h2>Concept Direction</h2>
+      <h2>MVP Scope</h2>
       <hr class="section-line" />
-
-      <figure>
-        <svg
-          viewBox="0 0 900 400"
-          xmlns="http://www.w3.org/2000/svg"
-          role="img"
-          aria-label="Concept showing the current compressed state, a proposed responsive layout, and adaptive menu settings."
-        >
-          <text
-            x="20"
-            y="26"
-            fill="#ff9c9c"
-            font-family="Impact, Arial Black, sans-serif"
-            font-size="14"
-            letter-spacing="1"
-          >
-            CONCEPT VISUALS — RESPONSIVE, FAMILIAR, OUT-OF-MATCH ONLY
-          </text>
-
-          <rect
-            x="20"
-            y="42"
-            width="270"
-            height="340"
-            rx="4"
-            fill="#1a0d0d"
-            stroke="#a80000"
-            stroke-width="1.5"
-          />
-
-          <rect
-            x="20"
-            y="42"
-            width="270"
-            height="28"
-            rx="4"
-            fill="#a80000"
-          />
-
-          <text
-            x="155"
-            y="61"
-            fill="white"
-            font-family="Impact, Arial Black, sans-serif"
-            font-size="12"
-            text-anchor="middle"
-            letter-spacing="1"
-          >
-            CURRENT 5:4 FAILURE
-          </text>
-
-          <rect
-            x="38"
-            y="86"
-            width="80"
-            height="20"
-            rx="2"
-            fill="#222"
-            stroke="#444"
-          />
-
-          <text
-            x="78"
-            y="100"
-            fill="#aaa"
-            font-family="Segoe UI, sans-serif"
-            font-size="8"
-            text-anchor="middle"
-          >
-            PLAY
-          </text>
-
-          <rect
-            x="122"
-            y="86"
-            width="80"
-            height="20"
-            rx="2"
-            fill="#222"
-            stroke="#444"
-          />
-
-          <text
-            x="162"
-            y="100"
-            fill="#aaa"
-            font-family="Segoe UI, sans-serif"
-            font-size="8"
-            text-anchor="middle"
-          >
-            CAREER
-          </text>
-
-          <rect
-            x="206"
-            y="86"
-            width="64"
-            height="66"
-            rx="2"
-            fill="#5a3a8a"
-            stroke="#8a5fd6"
-            stroke-width="1.5"
-          />
-
-          <text
-            x="238"
-            y="105"
-            fill="white"
-            font-family="Segoe UI, sans-serif"
-            font-size="8"
-            text-anchor="middle"
-            font-weight="700"
-          >
-            QUESTS
-          </text>
-
-          <line
-            x1="216"
-            y1="120"
-            x2="260"
-            y2="145"
-            stroke="#ff9c9c"
-            stroke-width="2"
-          />
-
-          <rect
-            x="38"
-            y="230"
-            width="216"
-            height="46"
-            rx="3"
-            fill="#2a1414"
-            stroke="#a80000"
-            stroke-width="1.5"
-          />
-
-          <text
-            x="155"
-            y="250"
-            fill="#ff9b9b"
-            font-family="Segoe UI, sans-serif"
-            font-size="10.5"
-            text-anchor="middle"
-            font-weight="700"
-          >
-            Shop access can be
-          </text>
-
-          <text
-            x="155"
-            y="264"
-            fill="#ff9b9b"
-            font-family="Segoe UI, sans-serif"
-            font-size="10.5"
-            text-anchor="middle"
-            font-weight="700"
-          >
-            covered by a persistent panel
-          </text>
-
-          <text
-            x="155"
-            y="315"
-            fill="#ffcf5c"
-            font-family="Impact, Arial Black, sans-serif"
-            font-size="12"
-            text-anchor="middle"
-          >
-            RESULT: A BASIC MENU
-          </text>
-
-          <text
-            x="155"
-            y="332"
-            fill="#ffcf5c"
-            font-family="Impact, Arial Black, sans-serif"
-            font-size="12"
-            text-anchor="middle"
-          >
-            TASK IS BLOCKED
-          </text>
-
-          <rect
-            x="315"
-            y="42"
-            width="270"
-            height="340"
-            rx="4"
-            fill="#0a1a17"
-            stroke="#2ecfa6"
-            stroke-width="1.5"
-          />
-
-          <rect
-            x="315"
-            y="42"
-            width="270"
-            height="28"
-            rx="4"
-            fill="#2ecfa6"
-          />
-
-          <text
-            x="450"
-            y="61"
-            fill="#062018"
-            font-family="Impact, Arial Black, sans-serif"
-            font-size="12"
-            text-anchor="middle"
-            letter-spacing="1"
-          >
-            PROPOSED RESPONSIVE MENU
-          </text>
-
-          <rect
-            x="333"
-            y="86"
-            width="66"
-            height="20"
-            rx="2"
-            fill="#16241f"
-            stroke="#2ecfa6"
-          />
-
-          <text
-            x="366"
-            y="100"
-            fill="#9de8d3"
-            font-family="Segoe UI, sans-serif"
-            font-size="7.5"
-            text-anchor="middle"
-          >
-            PLAY
-          </text>
-
-          <rect
-            x="403"
-            y="86"
-            width="66"
-            height="20"
-            rx="2"
-            fill="#16241f"
-            stroke="#2ecfa6"
-          />
-
-          <text
-            x="436"
-            y="100"
-            fill="#9de8d3"
-            font-family="Segoe UI, sans-serif"
-            font-size="7.5"
-            text-anchor="middle"
-          >
-            CAREER
-          </text>
-
-          <rect
-            x="473"
-            y="86"
-            width="52"
-            height="20"
-            rx="2"
-            fill="#2ecfa6"
-          />
-
-          <text
-            x="499"
-            y="100"
-            fill="#062018"
-            font-family="Segoe UI, sans-serif"
-            font-size="7.5"
-            text-anchor="middle"
-            font-weight="700"
-          >
-            SHOP
-          </text>
-
-          <circle
-            cx="551"
-            cy="96"
-            r="14"
-            fill="#5a3a8a"
-            stroke="#8a5fd6"
-            stroke-width="1.5"
-          />
-
-          <text
-            x="551"
-            y="99"
-            fill="white"
-            font-family="Segoe UI, sans-serif"
-            font-size="9"
-            text-anchor="middle"
-            font-weight="700"
-          >
-            Q
-          </text>
-
-          <text
-            x="551"
-            y="120"
-            fill="#9de8d3"
-            font-family="Segoe UI, sans-serif"
-            font-size="6.5"
-            text-anchor="middle"
-          >
-            COLLAPSED
-          </text>
-
-          <text
-            x="333"
-            y="150"
-            fill="#eaffef"
-            font-family="Segoe UI, sans-serif"
-            font-size="11"
-            font-weight="700"
-          >
-            Responsive rules keep core
-          </text>
-
-          <text
-            x="333"
-            y="166"
-            fill="#eaffef"
-            font-family="Segoe UI, sans-serif"
-            font-size="11"
-            font-weight="700"
-          >
-            actions inside the safe frame.
-          </text>
-
-          <text
-            x="333"
-            y="196"
-            fill="#eaffef"
-            font-family="Segoe UI, sans-serif"
-            font-size="11"
-            font-weight="700"
-          >
-            Secondary content collapses
-          </text>
-
-          <text
-            x="333"
-            y="212"
-            fill="#eaffef"
-            font-family="Segoe UI, sans-serif"
-            font-size="11"
-            font-weight="700"
-          >
-            before primary actions move.
-          </text>
-
-          <text
-            x="333"
-            y="242"
-            fill="#ffd76a"
-            font-family="Segoe UI, sans-serif"
-            font-size="10.5"
-          >
-            No changes to the in-match
-          </text>
-
-          <text
-            x="333"
-            y="258"
-            fill="#ffd76a"
-            font-family="Segoe UI, sans-serif"
-            font-size="10.5"
-          >
-            HUD, FOV, hitboxes, or aiming.
-          </text>
-
-          <rect
-            x="333"
-            y="342"
-            width="234"
-            height="26"
-            rx="2"
-            fill="none"
-            stroke="#2ecfa6"
-            stroke-width="1.5"
-            stroke-dasharray="3 3"
-          />
-
-          <text
-            x="450"
-            y="359"
-            fill="#2ecfa6"
-            font-family="Segoe UI, sans-serif"
-            font-size="9"
-            text-anchor="middle"
-            letter-spacing="1"
-          >
-            PROTECTED SAFE UI FRAME
-          </text>
-
-          <rect
-            x="610"
-            y="42"
-            width="270"
-            height="340"
-            rx="4"
-            fill="#0d0d10"
-            stroke="#3a4a5e"
-            stroke-width="1.5"
-          />
-
-          <rect
-            x="610"
-            y="42"
-            width="270"
-            height="28"
-            rx="4"
-            fill="#3a4a5e"
-          />
-
-          <text
-            x="745"
-            y="61"
-            fill="white"
-            font-family="Impact, Arial Black, sans-serif"
-            font-size="12"
-            text-anchor="middle"
-            letter-spacing="1"
-          >
-            OPTIONAL SETTINGS CONTROL
-          </text>
-
-          <text
-            x="628"
-            y="88"
-            fill="#888"
-            font-family="Segoe UI, sans-serif"
-            font-size="9"
-            letter-spacing="1"
-          >
-            VIDEO &gt; DISPLAY
-          </text>
-
-          <rect
-            x="628"
-            y="98"
-            width="234"
-            height="26"
-            rx="2"
-            fill="#181c22"
-          />
-
-          <text
-            x="636"
-            y="115"
-            fill="#ccc"
-            font-family="Segoe UI, sans-serif"
-            font-size="9.5"
-          >
-            Display Mode
-          </text>
-
-          <text
-            x="854"
-            y="115"
-            fill="#888"
-            font-family="Segoe UI, sans-serif"
-            font-size="9"
-            text-anchor="end"
-          >
-            Fullscreen
-          </text>
-
-          <rect
-            x="628"
-            y="128"
-            width="234"
-            height="26"
-            rx="2"
-            fill="#181c22"
-          />
-
-          <text
-            x="636"
-            y="145"
-            fill="#ccc"
-            font-family="Segoe UI, sans-serif"
-            font-size="9.5"
-          >
-            Resolution
-          </text>
-
-          <text
-            x="854"
-            y="145"
-            fill="#888"
-            font-family="Segoe UI, sans-serif"
-            font-size="9"
-            text-anchor="end"
-          >
-            1280x1024 (5:4)
-          </text>
-
-          <rect
-            x="628"
-            y="158"
-            width="234"
-            height="26"
-            rx="2"
-            fill="#20161a"
-            stroke="#a80000"
-          />
-
-          <text
-            x="636"
-            y="175"
-            fill="white"
-            font-family="Segoe UI, sans-serif"
-            font-size="9.5"
-            font-weight="700"
-          >
-            Adaptive Menu UI
-          </text>
-
-          <text
-            x="854"
-            y="175"
-            fill="#ff9c9c"
-            font-family="Segoe UI, sans-serif"
-            font-size="9"
-            text-anchor="end"
-          >
-            Automatic ▾
-          </text>
-
-          <text
-            x="636"
-            y="204"
-            fill="#ccc"
-            font-family="Segoe UI, sans-serif"
-            font-size="9.5"
-          >
-            Menu Scale
-          </text>
-
-          <line
-            x1="636"
-            y1="216"
-            x2="862"
-            y2="216"
-            stroke="#3a4a5e"
-            stroke-width="3"
-          />
-
-          <line
-            x1="636"
-            y1="216"
-            x2="815"
-            y2="216"
-            stroke="#a80000"
-            stroke-width="3"
-          />
-
-          <circle
-            cx="815"
-            cy="216"
-            r="6"
-            fill="#a80000"
-            stroke="white"
-            stroke-width="1.5"
-          />
-
-          <text
-            x="862"
-            y="219"
-            fill="#888"
-            font-family="Segoe UI, sans-serif"
-            font-size="8"
-            text-anchor="end"
-          >
-            90%
-          </text>
-
-          <text
-            x="636"
-            y="242"
-            fill="#ccc"
-            font-family="Segoe UI, sans-serif"
-            font-size="9.5"
-          >
-            Safe Area
-          </text>
-
-          <line
-            x1="636"
-            y1="254"
-            x2="862"
-            y2="254"
-            stroke="#3a4a5e"
-            stroke-width="3"
-          />
-
-          <line
-            x1="636"
-            y1="254"
-            x2="825"
-            y2="254"
-            stroke="#a80000"
-            stroke-width="3"
-          />
-
-          <circle
-            cx="825"
-            cy="254"
-            r="6"
-            fill="#a80000"
-            stroke="white"
-            stroke-width="1.5"
-          />
-
-          <text
-            x="862"
-            y="257"
-            fill="#888"
-            font-family="Segoe UI, sans-serif"
-            font-size="8"
-            text-anchor="end"
-          >
-            92%
-          </text>
-
-          <text
-            x="628"
-            y="286"
-            fill="#ff9c9c"
-            font-family="Segoe UI, sans-serif"
-            font-size="9"
-            text-decoration="underline"
-          >
-            Preview changes
-          </text>
-
-          <text
-            x="700"
-            y="286"
-            fill="#666"
-            font-family="Segoe UI, sans-serif"
-            font-size="9"
-          >
-            |
-          </text>
-
-          <text
-            x="712"
-            y="286"
-            fill="#ff9c9c"
-            font-family="Segoe UI, sans-serif"
-            font-size="9"
-            text-decoration="underline"
-          >
-            Reset to Automatic
-          </text>
-
-          <rect
-            x="628"
-            y="342"
-            width="234"
-            height="26"
-            rx="2"
-            fill="none"
-            stroke="#444"
-            stroke-width="1.5"
-            stroke-dasharray="3 3"
-          />
-
-          <text
-            x="745"
-            y="359"
-            fill="#ffd76a"
-            font-family="Segoe UI, sans-serif"
-            font-size="9"
-            text-anchor="middle"
-          >
-            Collapsed by default. No new lobby button.
-          </text>
-        </svg>
-
-        <figcaption>
-          Figure 2. Early product concept showing the current compressed
-          state, responsive behavior, and optional settings controls.
-        </figcaption>
-      </figure>
 
       <div class="two-col">
         <article class="card highlight">
-          <h3>What the MVP Changes</h3>
+          <h3>
+            What the MVP Changes
+          </h3>
 
           <ul>
             <li>
@@ -2696,18 +2408,20 @@
             </li>
 
             <li>
-              Quests and secondary panels can collapse when width is limited
+              Quests and secondary panels collapse when width is limited
             </li>
 
             <li>
-              One expandable Settings row exposes optional scale and
-              safe-area controls
+              One expandable Settings experience exposes optional scale
+              and safe-area controls
             </li>
           </ul>
         </article>
 
         <article class="card">
-          <h3>What the MVP Leaves Alone</h3>
+          <h3>
+            What the MVP Leaves Alone
+          </h3>
 
           <ul>
             <li>
@@ -2728,87 +2442,6 @@
           </ul>
         </article>
       </div>
-    </section>
-
-    <section>
-      <h2>Figma Prototype</h2>
-      <hr class="section-line" />
-
-      <div class="prototype-section">
-        <span class="todo-label">
-          In Progress
-        </span>
-
-        <h3>
-          High-fidelity interface screens will be added after the
-          responsive rules are finalized.
-        </h3>
-
-        <p>
-          The final prototype should demonstrate the same task across
-          the current and proposed layouts, rather than only showing
-          isolated screens.
-        </p>
-
-        <div class="prototype-grid">
-          <!-- Replace this placeholder with your exported Figma screenshot. -->
-          <div class="prototype-placeholder">
-            <div>
-              <strong>
-                Before-and-After Shop Screen
-              </strong>
-
-              <span>
-                Add the current 5:4 Shop state beside the proposed
-                responsive Shop state.
-              </span>
-            </div>
-          </div>
-
-          <!-- Replace this placeholder with your exported Figma screenshot. -->
-          <div class="prototype-placeholder">
-            <div>
-              <strong>
-                Adaptive Settings Row
-              </strong>
-
-              <span>
-                Add the final Video Settings design with automatic,
-                scale, safe-area, preview, and reset controls.
-              </span>
-            </div>
-          </div>
-
-          <!-- Replace this placeholder with your exported Figma screenshot. -->
-          <div class="prototype-placeholder">
-            <div>
-              <strong>
-                Current User Flow
-              </strong>
-
-              <span>
-                Show the current steps, blocked action, workaround, and
-                resolution-switching behavior.
-              </span>
-            </div>
-          </div>
-
-          <!-- Replace this placeholder with your exported Figma screenshot. -->
-          <div class="prototype-placeholder">
-            <div>
-              <strong>
-                Proposed User Flow
-              </strong>
-
-              <span>
-                Show how the player reaches Shop without changing
-                resolution or navigating around an overlapping panel.
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </section>
 
     <section>
@@ -2909,21 +2542,21 @@
             </td>
 
             <td data-label="Requirement">
-              Add one expandable Adaptive Menu UI row in Video Settings.
+              Add an Adaptive Menu UI area in Video Settings.
             </td>
 
             <td data-label="Acceptance Criteria">
               <ul class="acceptance-list">
                 <li>
-                  The row is collapsed by default
+                  Automatic responsive behavior is the default
                 </li>
 
                 <li>
-                  No new lobby-level button is added
+                  No new lobby-level button is required
                 </li>
 
                 <li>
-                  Automatic behavior remains the default
+                  Manual scale and safe-area controls remain optional
                 </li>
               </ul>
             </td>
@@ -2987,7 +2620,9 @@
 
       <div class="edge-grid">
         <article class="edge-card">
-          <h3>Localization</h3>
+          <h3>
+            Localization
+          </h3>
 
           <p>
             Longer translated labels may require more space than the
@@ -2996,7 +2631,9 @@
         </article>
 
         <article class="edge-card">
-          <h3>Display Changes</h3>
+          <h3>
+            Display Changes
+          </h3>
 
           <p>
             The client must respond safely when resolution or display mode
@@ -3005,7 +2642,9 @@
         </article>
 
         <article class="edge-card">
-          <h3>Windowed Modes</h3>
+          <h3>
+            Windowed Modes
+          </h3>
 
           <p>
             Windowed and borderless modes can create viewport sizes that do
@@ -3014,7 +2653,9 @@
         </article>
 
         <article class="edge-card">
-          <h3>Event Content</h3>
+          <h3>
+            Event Content
+          </h3>
 
           <p>
             New event banners, offers, and quest states should not push
@@ -3023,7 +2664,9 @@
         </article>
 
         <article class="edge-card">
-          <h3>Minimum Legibility</h3>
+          <h3>
+            Minimum Legibility
+          </h3>
 
           <p>
             Text and click targets should remain readable and usable after
@@ -3032,7 +2675,9 @@
         </article>
 
         <article class="edge-card">
-          <h3>Detection Failure</h3>
+          <h3>
+            Detection Failure
+          </h3>
 
           <p>
             If the correct menu profile cannot be loaded, the system should
@@ -3052,7 +2697,9 @@
             Planned
           </span>
 
-          <h3>Moderated Usability Test</h3>
+          <h3>
+            Moderated Usability Test
+          </h3>
 
           <p>
             Test the current and proposed Shop and Settings tasks with five
@@ -3071,7 +2718,7 @@
             </li>
 
             <li>
-              Compare the current experience against the responsive concept
+              Compare the current experience against the responsive prototype
             </li>
 
             <li>
@@ -3154,48 +2801,16 @@
       </div>
 
       <div class="results-placeholder">
-        <strong>Usability results will be added after testing.</strong>
+        <strong>
+          Usability results will be added after testing.
+        </strong>
 
-
+        <p>
+          This section will contain actual completion rates, task times,
+          errors, participant feedback, and design changes rather than
+          estimated improvements.
+        </p>
       </div>
-
-      <!--
-        AFTER TESTING, REPLACE THE RESULTS PLACEHOLDER ABOVE WITH A TABLE LIKE THIS:
-
-        <table>
-          <thead>
-            <tr>
-              <th>Measure</th>
-              <th>Current Design</th>
-              <th>Proposed Design</th>
-              <th>Observed Change</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr>
-              <td data-label="Measure">Shop task completion</td>
-              <td data-label="Current Design">Insert real result</td>
-              <td data-label="Proposed Design">Insert real result</td>
-              <td data-label="Observed Change">Insert real change</td>
-            </tr>
-
-            <tr>
-              <td data-label="Measure">Median completion time</td>
-              <td data-label="Current Design">Insert real result</td>
-              <td data-label="Proposed Design">Insert real result</td>
-              <td data-label="Observed Change">Insert real change</td>
-            </tr>
-
-            <tr>
-              <td data-label="Measure">Average errors</td>
-              <td data-label="Current Design">Insert real result</td>
-              <td data-label="Proposed Design">Insert real result</td>
-              <td data-label="Observed Change">Insert real change</td>
-            </tr>
-          </tbody>
-        </table>
-      -->
     </section>
 
     <section>
@@ -3287,23 +2902,23 @@
         </li>
 
         <li>
-          Create high-fidelity current and proposed Shop and Settings
-          screens in Figma.
+          Run five moderated usability sessions using the current layout
+          and interactive responsive prototype.
         </li>
 
         <li>
-          Build a clickable prototype covering the full Shop and display
-          settings tasks.
+          Compare task completion, time, errors, resolution switching,
+          clarity, and player preference.
         </li>
 
         <li>
-          Run five moderated usability sessions across native and
-          stretched configurations.
+          Refine the responsive breakpoints and Settings controls based on
+          observed behavior.
         </li>
 
         <li>
-          Add the actual results, design changes, and final product decision
-          to this case study.
+          Add the actual test results and final product recommendation to
+          this case study.
         </li>
       </ol>
 
@@ -3332,6 +2947,14 @@
           smaller responsive system that protects critical actions,
           adapts secondary content first, preserves familiar navigation,
           and leaves the competitive experience untouched.
+        </p>
+
+        <p>
+          Building the interactive prototype also forced me to translate
+          product requirements into visible interface behavior. The concept
+          needed to demonstrate how Shop remains accessible, how Missions
+          collapse, and how players retain control through Settings—not
+          merely describe those ideas in a document.
         </p>
 
         <p>
@@ -3371,8 +2994,243 @@
       </p>
     </section>
 
+    <footer class="footer">
+      <strong>Role:</strong>
+      Product Manager and UX Researcher
+      <br />
+
+      <strong>Project Scope:</strong>
+      Problem discovery, player interviews, secondary research, solution
+      evaluation, product requirements, responsive interface prototyping,
+      acceptance criteria, risk analysis, and validation planning
+      <br />
+
       © 2026 Hamilton Shea
     </footer>
   </main>
+
+  <script>
+    const prototypeSlides = document.getElementById("prototypeSlides");
+    const prototypeSlider = document.getElementById("prototypeSlider");
+    const prototypeShowcase =
+      document.getElementById("prototypeShowcase");
+
+    const previousButton =
+      document.getElementById("prototypePrevious");
+
+    const nextButton =
+      document.getElementById("prototypeNext");
+
+    const counter =
+      document.getElementById("prototypeCounter");
+
+    const dots = Array.from(
+      document.querySelectorAll("[data-prototype-slide]")
+    );
+
+    const slideElements = Array.from(
+      document.querySelectorAll(".prototype-slide")
+    );
+
+    let currentSlide = 0;
+    let autoplayTimer = null;
+    let pointerStartX = null;
+
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    function formatSlideNumber(number) {
+      return String(number).padStart(2, "0");
+    }
+
+    function showPrototypeSlide(index, restartAutoplay = true) {
+      const slideCount = slideElements.length;
+
+      currentSlide =
+        (index + slideCount) % slideCount;
+
+      prototypeSlides.style.transform =
+        `translateX(-${currentSlide * 100}%)`;
+
+      counter.textContent =
+        `${formatSlideNumber(currentSlide + 1)} / ` +
+        `${formatSlideNumber(slideCount)}`;
+
+      dots.forEach((dot, dotIndex) => {
+        const isActive = dotIndex === currentSlide;
+
+        dot.classList.toggle("active", isActive);
+
+        dot.setAttribute(
+          "aria-selected",
+          String(isActive)
+        );
+      });
+
+      if (restartAutoplay) {
+        startAutoplay();
+      }
+    }
+
+    function showNextPrototypeSlide() {
+      showPrototypeSlide(currentSlide + 1);
+    }
+
+    function showPreviousPrototypeSlide() {
+      showPrototypeSlide(currentSlide - 1);
+    }
+
+    function stopAutoplay() {
+      if (autoplayTimer) {
+        window.clearInterval(autoplayTimer);
+        autoplayTimer = null;
+      }
+    }
+
+    function startAutoplay() {
+      stopAutoplay();
+
+      if (reducedMotion) {
+        return;
+      }
+
+      /*
+        Do not automatically move away from the live prototype
+        while someone is using it.
+      */
+      if (currentSlide === 2) {
+        return;
+      }
+
+      autoplayTimer = window.setInterval(() => {
+        showPrototypeSlide(
+          currentSlide + 1,
+          false
+        );
+      }, 8000);
+    }
+
+    previousButton.addEventListener(
+      "click",
+      showPreviousPrototypeSlide
+    );
+
+    nextButton.addEventListener(
+      "click",
+      showNextPrototypeSlide
+    );
+
+    dots.forEach((dot) => {
+      dot.addEventListener("click", () => {
+        const index = Number(
+          dot.dataset.prototypeSlide
+        );
+
+        showPrototypeSlide(index);
+      });
+    });
+
+    prototypeShowcase.addEventListener(
+      "mouseenter",
+      stopAutoplay
+    );
+
+    prototypeShowcase.addEventListener(
+      "mouseleave",
+      startAutoplay
+    );
+
+    prototypeShowcase.addEventListener(
+      "focusin",
+      stopAutoplay
+    );
+
+    prototypeShowcase.addEventListener(
+      "focusout",
+      startAutoplay
+    );
+
+    prototypeSlider.addEventListener(
+      "pointerdown",
+      (event) => {
+        /*
+          Avoid triggering swipe behavior when the visitor is
+          interacting with the embedded prototype.
+        */
+        if (
+          event.target.closest("iframe") ||
+          event.target.closest("a") ||
+          event.target.closest("button")
+        ) {
+          return;
+        }
+
+        pointerStartX = event.clientX;
+      }
+    );
+
+    prototypeSlider.addEventListener(
+      "pointerup",
+      (event) => {
+        if (pointerStartX === null) {
+          return;
+        }
+
+        const difference =
+          event.clientX - pointerStartX;
+
+        pointerStartX = null;
+
+        if (Math.abs(difference) < 55) {
+          return;
+        }
+
+        if (difference < 0) {
+          showNextPrototypeSlide();
+        } else {
+          showPreviousPrototypeSlide();
+        }
+      }
+    );
+
+    prototypeSlider.addEventListener(
+      "pointercancel",
+      () => {
+        pointerStartX = null;
+      }
+    );
+
+    document.addEventListener(
+      "keydown",
+      (event) => {
+        const activeElement =
+          document.activeElement;
+
+        const isTyping =
+          activeElement &&
+          (
+            activeElement.tagName === "INPUT" ||
+            activeElement.tagName === "TEXTAREA" ||
+            activeElement.isContentEditable
+          );
+
+        if (isTyping) {
+          return;
+        }
+
+        if (event.key === "ArrowLeft") {
+          showPreviousPrototypeSlide();
+        }
+
+        if (event.key === "ArrowRight") {
+          showNextPrototypeSlide();
+        }
+      }
+    );
+
+    showPrototypeSlide(0, false);
+    startAutoplay();
+  </script>
 </body>
 </html>
