@@ -4,7 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Slug Gaming Operations Dashboard - Hamilton Shea</title>
+  <meta
+    name="description"
+    content="Slug Gaming Executive Operations Dashboard case study by Hamilton Shea."
+  />
+
+  <title>Slug Gaming Operations System - Hamilton Shea</title>
 
   <link rel="icon" type="image/jpeg" href="logo.jpg" />
 
@@ -13,13 +18,45 @@
       box-sizing: border-box;
     }
 
+    :root {
+      --slug-navy: #06345f;
+      --slug-blue: #0b5f93;
+      --slug-gold: #fdc700;
+      --black: #000000;
+      --background: #0a0a0a;
+      --panel: #111111;
+      --panel-light: #181818;
+      --text: #f2f2f2;
+      --muted: #cfcfcf;
+      --line: #333333;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     html,
     body {
       margin: 0;
       font-family: "Segoe UI", Arial, sans-serif;
-      color: #f2f2f2;
-      background: #0a0a0a;
-      line-height: 1.6;
+      color: var(--text);
+      background: var(--background);
+      line-height: 1.65;
+    }
+
+    body {
+      background:
+        radial-gradient(
+          circle at 92% 12%,
+          rgba(11, 95, 147, 0.18),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 7% 38%,
+          rgba(253, 199, 0, 0.08),
+          transparent 24%
+        ),
+        #0a0a0a;
     }
 
     .top-bar {
@@ -29,9 +66,10 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 18px;
       padding: 14px 22px;
       background: #000;
-      border-bottom: 4px solid #fdc700;
+      border-bottom: 4px solid var(--slug-gold);
     }
 
     .top-bar a {
@@ -44,27 +82,29 @@
     }
 
     .top-bar a:hover {
-      color: #fdc700;
+      color: var(--slug-gold);
     }
 
     .wrap {
       width: min(1180px, calc(100% - 36px));
       margin: 0 auto;
-      padding: 42px 0 90px;
+      padding: 42px 0 96px;
     }
 
     .hero {
       position: relative;
       overflow: hidden;
-      padding: 34px;
+      padding: 36px;
       background:
         linear-gradient(
           135deg,
           rgba(3, 38, 72, 0.98),
           rgba(4, 82, 128, 0.9)
         );
-      border: 4px solid #0b5f93;
-      box-shadow: 10px 10px 0 #000, 15px 15px 0 #fdc700;
+      border: 4px solid var(--slug-blue);
+      box-shadow:
+        10px 10px 0 #000,
+        15px 15px 0 var(--slug-gold);
     }
 
     .hero::after {
@@ -80,6 +120,8 @@
     }
 
     .hero-logo {
+      position: relative;
+      z-index: 2;
       width: min(260px, 72%);
       display: block;
       margin-bottom: 24px;
@@ -87,58 +129,66 @@
     }
 
     .badge {
+      position: relative;
+      z-index: 2;
       display: inline-block;
       margin-bottom: 16px;
       padding: 5px 14px;
       color: #001e3c;
-      background: #fdc700;
+      background: var(--slug-gold);
       border: 4px solid #000;
       font-family: Impact, "Arial Black", sans-serif;
       font-size: 14px;
       letter-spacing: 2px;
       text-transform: uppercase;
       transform: rotate(-2deg);
-      box-shadow: 5px 5px 0 #0b5f93;
+      box-shadow: 5px 5px 0 var(--slug-blue);
     }
 
     h1 {
       position: relative;
       z-index: 2;
-      max-width: 850px;
-      margin: 0 0 10px;
+      max-width: 920px;
+      margin: 0 0 12px;
       font-family: Impact, "Arial Black", sans-serif;
-      font-size: clamp(36px, 7vw, 70px);
+      font-size: clamp(38px, 7vw, 72px);
       line-height: 0.95;
       color: white;
       text-transform: uppercase;
       text-shadow:
-        4px 4px 0 #0b5f93,
+        4px 4px 0 var(--slug-blue),
         8px 8px 0 #000;
     }
 
     .subtitle {
       position: relative;
       z-index: 2;
-      max-width: 760px;
-      margin: 18px 0 0;
+      max-width: 820px;
+      margin: 20px 0 0;
       color: #e7eef7;
       font-size: 16px;
     }
 
     h2 {
-      margin: 44px 0 8px;
+      margin: 48px 0 8px;
       font-family: Impact, "Arial Black", sans-serif;
-      font-size: 29px;
+      font-size: 30px;
       color: white;
       letter-spacing: 1px;
       text-transform: uppercase;
     }
 
+    h3 {
+      margin: 0 0 8px;
+      color: var(--slug-gold);
+      font-size: 18px;
+    }
+
     .section-line {
       width: 100%;
-      margin: 8px 0 18px;
+      margin: 8px 0 20px;
       border: 0;
-      border-top: 3px solid #fdc700;
+      border-top: 3px solid var(--slug-gold);
     }
 
     p,
@@ -147,49 +197,57 @@
       font-size: 15px;
     }
 
-    ul {
-      padding-left: 22px;
-    }
-
     strong {
       color: white;
     }
 
+    ul {
+      padding-left: 22px;
+    }
+
     .overview-grid {
       display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
+      grid-template-columns: 1.15fr 0.85fr;
       gap: 18px;
-      margin-top: 24px;
     }
 
     .panel {
       padding: 22px;
-      background: #111;
+      background: var(--panel);
       border: 3px solid #293441;
       box-shadow: 7px 7px 0 #000;
     }
 
+    .panel.highlight {
+      border-color: var(--slug-blue);
+      background:
+        linear-gradient(
+          135deg,
+          rgba(6, 52, 95, 0.44),
+          #111 58%
+        );
+    }
+
     .panel h3 {
-      margin: 0 0 10px;
       font-family: Impact, "Arial Black", sans-serif;
       font-size: 22px;
       letter-spacing: 0.5px;
-      color: #fdc700;
       text-transform: uppercase;
     }
 
-    .panel p {
+    .panel p:first-of-type {
       margin-top: 0;
     }
 
     .metric-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 14px;
       margin-top: 20px;
     }
 
     .metric {
+      min-height: 130px;
       padding: 18px 12px;
       text-align: center;
       background:
@@ -198,23 +256,91 @@
           rgba(11, 95, 147, 0.38),
           #111 62%
         );
-      border: 3px solid #0b5f93;
+      border: 3px solid var(--slug-blue);
       box-shadow: 5px 5px 0 #000;
     }
 
     .metric-number {
       display: block;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
       font-family: Impact, "Arial Black", sans-serif;
-      font-size: clamp(27px, 4vw, 38px);
+      font-size: clamp(28px, 4vw, 39px);
       line-height: 1;
-      color: #fdc700;
+      color: var(--slug-gold);
     }
 
     .metric-label {
+      display: block;
       color: #e4e4e4;
       font-size: 13px;
       font-weight: 700;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .process-card {
+      padding: 20px;
+      background: var(--panel-light);
+      border: 2px solid #363636;
+      box-shadow: 5px 5px 0 #000;
+    }
+
+    .process-number {
+      display: inline-grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      margin-bottom: 10px;
+      color: #061f38;
+      background: var(--slug-gold);
+      border: 2px solid white;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 18px;
+    }
+
+    .workflow-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .workflow-card {
+      padding: 20px;
+      background:
+        linear-gradient(
+          145deg,
+          rgba(6, 52, 95, 0.3),
+          #111 68%
+        );
+      border: 3px solid var(--slug-blue);
+      box-shadow: 6px 6px 0 #000;
+    }
+
+    .workflow-card h3 {
+      margin-bottom: 10px;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 21px;
+      text-transform: uppercase;
+    }
+
+    .workflow-card ul {
+      margin-bottom: 0;
+    }
+
+    .status {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 4px 9px;
+      color: #061f38;
+      background: var(--slug-gold);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
     }
 
     .dashboard-shell {
@@ -223,8 +349,10 @@
       padding: 12px;
       overflow: hidden;
       background: #050505;
-      border: 4px solid #0b5f93;
-      box-shadow: 9px 9px 0 #000, 14px 14px 0 #fdc700;
+      border: 4px solid var(--slug-blue);
+      box-shadow:
+        9px 9px 0 #000,
+        14px 14px 0 var(--slug-gold);
     }
 
     .dashboard-frame {
@@ -242,32 +370,51 @@
       border: 0;
     }
 
-    .project-note {
-      margin-top: 18px;
-      padding: 14px 16px;
+    .privacy-note {
+      margin-top: 22px;
+      padding: 18px 20px;
       color: #d7d7d7;
-      background: #111;
-      border-left: 5px solid #fdc700;
-      font-size: 13px;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(6, 52, 95, 0.42),
+          #111 58%
+        );
+      border: 3px solid var(--slug-blue);
+      border-left: 7px solid var(--slug-gold);
+      box-shadow: 6px 6px 0 #000;
+      font-size: 14px;
     }
 
-    .tools {
+    .privacy-note strong {
+      color: var(--slug-gold);
+    }
+
+    .tool-list {
       display: flex;
       flex-wrap: wrap;
       gap: 9px;
-      margin-top: 12px;
+      margin-top: 14px;
     }
 
     .tool {
       display: inline-block;
-      padding: 5px 11px;
+      padding: 6px 11px;
       color: white;
       background: #082d52;
-      border: 2px solid #0b5f93;
+      border: 2px solid var(--slug-blue);
       font-size: 12px;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.6px;
+      box-shadow: 3px 3px 0 #000;
+    }
+
+    .takeaway {
+      padding: 22px;
+      background: #111;
+      border: 3px solid var(--slug-gold);
+      box-shadow: 7px 7px 0 #000;
     }
 
     .footer {
@@ -278,13 +425,15 @@
       font-size: 13px;
     }
 
-    @media (max-width: 850px) {
-      .overview-grid {
+    @media (max-width: 900px) {
+      .overview-grid,
+      .process-grid,
+      .workflow-grid {
         grid-template-columns: 1fr;
       }
 
       .metric-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .dashboard-frame {
@@ -307,8 +456,10 @@
       }
 
       .hero {
-        padding: 25px 19px;
-        box-shadow: 6px 6px 0 #000, 10px 10px 0 #fdc700;
+        padding: 26px 19px;
+        box-shadow:
+          6px 6px 0 #000,
+          10px 10px 0 var(--slug-gold);
       }
 
       .hero-logo {
@@ -321,12 +472,15 @@
       }
 
       .metric {
+        min-height: 118px;
         padding: 15px 8px;
       }
 
       .dashboard-shell {
         padding: 6px;
-        box-shadow: 6px 6px 0 #000, 10px 10px 0 #fdc700;
+        box-shadow:
+          6px 6px 0 #000,
+          10px 10px 0 var(--slug-gold);
       }
 
       .dashboard-frame {
@@ -350,14 +504,18 @@
         alt="Slug Gaming logo"
       />
 
-      <span class="badge">Excel Data Project · 2026</span>
+      <span class="badge">
+        Operations and Analytics Project &middot; 2026
+      </span>
 
-      <h1>Slug Gaming Operations Dashboard</h1>
+      <h1>
+        Slug Gaming Executive Operations System
+      </h1>
 
       <p class="subtitle">
-        An anonymized operations and analytics dashboard connecting
-        community growth, event performance, esports room usage,
-        program activity, budgets, recruitment, and external partnerships.
+        An organization-wide operating tool I led from requirements and
+        data consolidation through workflow design, implementation, and
+        executive reporting for a 3,700+ member collegiate gaming organization.
       </p>
     </section>
 
@@ -366,55 +524,152 @@
       <hr class="section-line" />
 
       <div class="overview-grid">
-        <div class="panel">
-          <h3>The Challenge</h3>
+        <div class="panel highlight">
+          <h3>The Project</h3>
 
           <p>
-            Slug Gaming operated across events, esports, partnerships,
-            recruitment, budgeting, community growth, and a shared gaming
-            room. The organization had useful data, but it was stored across
-            separate spreadsheets and was difficult to review as one
-            operating system.
+            As President of Slug Gaming, I led a project to consolidate
+            fragmented operational records into one executive operations
+            system. The organization managed events, competitive teams,
+            sponsorships, room usage, officer assignments, tournament
+            payments, reimbursements, and community growth across several
+            disconnected spreadsheets and communication channels.
           </p>
 
           <p>
-            I organized the information into one centralized dashboard so
-            performance could be reviewed more quickly and decisions could
-            be supported by measurable results.
+            I moved the project from identifying the operational problems
+            through designing the data structure, defining performance
+            metrics, building workflows, and delivering a centralized tool
+            that could support recurring leadership reviews and future
+            officer transitions.
           </p>
         </div>
 
         <div class="panel">
-          <h3>My Role</h3>
+          <h3>My Ownership</h3>
 
           <p>
-            As President of Slug Gaming, I helped lead operations,
-            partnerships, event execution, officer workflows, and the
-            organization’s community growth.
+            I acted as the project owner and operations lead. I determined
+            what information leadership needed, collected requirements from
+            different teams, organized the source data, created the workbook
+            structure, defined workflows, and translated organizational
+            activity into measurable KPIs.
           </p>
 
           <p>
-            For this project, I cleaned and anonymized the source data,
-            structured the workbook, selected key performance indicators,
-            and designed the final dashboard.
+            I also aligned the system with the responsibilities of officers,
+            competitive directors, event leads, partnership leads, and
+            financial approvers.
           </p>
         </div>
       </div>
     </section>
 
     <section>
-      <h2>Key Results</h2>
+      <h2>Business Problem</h2>
+      <hr class="section-line" />
+
+      <ul>
+        <li>
+          Operational information was spread across separate spreadsheets,
+          forms, messages, and officer-owned documents.
+        </li>
+
+        <li>
+          Leadership could not quickly understand community health,
+          room demand, partnership progress, event cadence, or payment status.
+        </li>
+
+        <li>
+          Competitive programs such as NECC and Octane required recurring
+          registration, roster, scheduling, payment, and approval steps.
+        </li>
+
+        <li>
+          LAN tournaments involved multiple owners, deadlines, equipment
+          requirements, purchases, reimbursements, and post-event reporting.
+        </li>
+
+        <li>
+          Important processes depended too heavily on individual officers
+          remembering what to do.
+        </li>
+
+        <li>
+          The organization needed a tool that could support both current
+          execution and future leadership transitions.
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Project Delivery</h2>
+      <hr class="section-line" />
+
+      <div class="process-grid">
+        <article class="process-card">
+          <span class="process-number">1</span>
+
+          <h3>Defined Requirements</h3>
+
+          <p>
+            Identified the recurring decisions leadership needed to make
+            across events, esports, partnerships, finance, room operations,
+            recruitment, and community growth.
+          </p>
+        </article>
+
+        <article class="process-card">
+          <span class="process-number">2</span>
+
+          <h3>Consolidated Data</h3>
+
+          <p>
+            Combined useful information from attendance records, room
+            check-ins, team rosters, sponsorship tracking, budgets,
+            reimbursements, merchandise orders, and officer applications.
+          </p>
+        </article>
+
+        <article class="process-card">
+          <span class="process-number">3</span>
+
+          <h3>Designed Workflows</h3>
+
+          <p>
+            Created repeatable operating flows for NECC, Octane, LAN
+            tournaments, purchasing, reimbursements, approvals, and
+            financial reconciliation.
+          </p>
+        </article>
+
+        <article class="process-card">
+          <span class="process-number">4</span>
+
+          <h3>Delivered the System</h3>
+
+          <p>
+            Built an executive dashboard, operating review, action queue,
+            workflow tracker, payment ledger, performance metrics, ownership
+            fields, and decision-focused reporting.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>Organization Impact</h2>
       <hr class="section-line" />
 
       <div class="metric-grid">
         <div class="metric">
           <span class="metric-number">3,700+</span>
-          <span class="metric-label">Community Members</span>
+          <span class="metric-label">Community Members Served</span>
         </div>
 
         <div class="metric">
           <span class="metric-number">30+</span>
-          <span class="metric-label">Officers Led</span>
+          <span class="metric-label">Officers Coordinated</span>
         </div>
 
         <div class="metric">
@@ -424,7 +679,7 @@
 
         <div class="metric">
           <span class="metric-number">530%</span>
-          <span class="metric-label">Attendance Growth</span>
+          <span class="metric-label">Event Attendance Growth</span>
         </div>
 
         <div class="metric">
@@ -444,84 +699,219 @@
 
         <div class="metric">
           <span class="metric-number">$4K+</span>
-          <span class="metric-label">Sponsorship Support</span>
+          <span class="metric-label">Sponsorship Support Secured</span>
         </div>
       </div>
     </section>
 
     <section>
-      <h2>Interactive Dashboard</h2>
+      <h2>Operational Workflows</h2>
+      <hr class="section-line" />
+
+      <div class="workflow-grid">
+        <article class="workflow-card">
+          <span class="status">Competitive Operations</span>
+
+          <h3>NECC Workflow</h3>
+
+          <ul>
+            <li>Confirm participating game titles and competitive teams</li>
+            <li>Validate player eligibility and roster requirements</li>
+            <li>Assign team directors and operational owners</li>
+            <li>Track registration deadlines and league fees</li>
+            <li>Submit payment and reimbursement requests</li>
+            <li>Document approval and reconciliation status</li>
+            <li>Track schedules, results, and follow-up actions</li>
+          </ul>
+        </article>
+
+        <article class="workflow-card">
+          <span class="status">Competitive Operations</span>
+
+          <h3>Octane Workflow</h3>
+
+          <ul>
+            <li>Review tournament requirements and available divisions</li>
+            <li>Confirm roster availability and participant commitment</li>
+            <li>Assign registration and communications ownership</li>
+            <li>Track tournament fee, approval, and payment status</li>
+            <li>Coordinate match schedules and officer coverage</li>
+            <li>Record outcomes and operational issues</li>
+          </ul>
+        </article>
+
+        <article class="workflow-card">
+          <span class="status">Event Operations</span>
+
+          <h3>LAN Tournament Workflow</h3>
+
+          <ul>
+            <li>Define event scope, game title, format, and capacity</li>
+            <li>Confirm room availability and equipment requirements</li>
+            <li>Create the budget and identify purchase needs</li>
+            <li>Assign marketing, registration, production, and event owners</li>
+            <li>Track signups, staffing, payments, and tournament brackets</li>
+            <li>Complete post-event reconciliation and performance review</li>
+          </ul>
+        </article>
+
+        <article class="workflow-card">
+          <span class="status">Financial Operations</span>
+
+          <h3>Payments and Reimbursements</h3>
+
+          <ul>
+            <li>Document the purpose and business justification</li>
+            <li>Identify the budget source and approving role</li>
+            <li>Track requested, approved, paid, and reconciled status</li>
+            <li>Record purchase or registration deadlines</li>
+            <li>Store receipt and reimbursement confirmation status</li>
+            <li>Escalate missing documentation or overdue approvals</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>Executive Operating Tool</h2>
       <hr class="section-line" />
 
       <p>
-        The embedded dashboard includes community, event, esports room,
-        program, financial, recruitment, merchandise, and external
-        partnership data.
+        The final system was structured to help leadership understand the
+        organization within a short operating review. It combines performance
+        indicators with owners, targets, deadlines, current status, and next
+        actions.
       </p>
 
       <div class="dashboard-shell">
         <div class="dashboard-frame">
           <iframe
-            title="Slug Gaming Operations Dashboard"
-            src="https://ucsc0-my.sharepoint.com/personal/hvshea_ucsc_edu/_layouts/15/Doc.aspx?sourcedoc={6b3ba619-1e4c-4feb-9202-e0736a08b6aa}&amp;action=embedview&amp;wdAllowInteractivity=False&amp;AllowTyping=True&amp;wdHideGridlines=True&amp;wdHideHeaders=True&amp;wdDownloadButton=True&amp;wdInConfigurator=True"
+            title="Slug Gaming Executive Operations Dashboard"
+            src="https://ucsc0-my.sharepoint.com/personal/hvshea_ucsc_edu/_layouts/15/Doc.aspx?sourcedoc={103080bd-c718-4d88-9634-00f834413534}&amp;action=embedview&amp;AllowTyping=True&amp;wdHideGridlines=True&amp;wdHideHeaders=True&amp;wdDownloadButton=True&amp;wdInConfigurator=True"
             frameborder="0"
             scrolling="no"
             loading="lazy"
           ></iframe>
         </div>
       </div>
-
     </section>
 
     <section>
-      <h2>Dashboard Areas</h2>
+      <h2>What the System Tracks</h2>
       <hr class="section-line" />
 
       <ul>
         <li>
-          <strong>Community and events:</strong>
-          tracked member growth, signups, attendance, and event performance.
+          <strong>Organization health:</strong>
+          membership growth, event attendance, signups, active teams,
+          officer capacity, and budget activity.
+        </li>
+
+        <li>
+          <strong>Community growth:</strong>
+          Discord acquisition, major event impact, social reach, and
+          community engagement.
         </li>
 
         <li>
           <strong>Esports room operations:</strong>
-          organized more than 500 recorded uses to understand utilization.
+          more than 500 recorded uses, monthly session activity, PC usage,
+          operational compliance, and issues requiring follow-up.
+        </li>
+
+        <li>
+          <strong>Competitive programs:</strong>
+          league registration, rosters, schedules, payments, deadlines,
+          and assigned owners for NECC and Octane.
+        </li>
+
+        <li>
+          <strong>LAN tournaments:</strong>
+          planning stages, registration, staffing, equipment, budgeting,
+          event delivery, and post-event review.
         </li>
 
         <li>
           <strong>Partnerships:</strong>
-          summarized external company relationships and sponsorship support.
+          external company relationships, outreach stages, sponsorship
+          support, activations, and follow-up status.
         </li>
 
         <li>
-          <strong>Programs and operations:</strong>
-          connected officer workflows, recruitment, event execution,
-          budgeting, reimbursements, and merchandise demand.
+          <strong>Financial operations:</strong>
+          purchases, reimbursements, league fees, approvals, receipts,
+          payment status, and reconciliation.
         </li>
 
         <li>
-          <strong>Privacy:</strong>
-          removed names, emails, handles, addresses, confidential responses,
-          and other personally identifiable information.
+          <strong>Leadership review:</strong>
+          active priorities, responsible owners, risks, decisions needed,
+          and next actions.
         </li>
       </ul>
+    </section>
+
+    <section>
+      <h2>Confidentiality</h2>
+      <hr class="section-line" />
+
+      <div class="privacy-note">
+        <strong>Public portfolio version:</strong>
+
+        This case study shows the structure, operating logic, workflow design,
+        and high-level outcomes of the system. Some organizational details
+        have been removed, anonymized, generalized, or summarized because
+        they contain confidential information.
+
+        The public version does not include personal information, private
+        officer records, direct contact information, detailed partnership
+        discussions, sponsor terms, payment credentials, account details,
+        private approval conversations, or internal strategic notes.
+      </div>
+    </section>
+
+    <section>
+      <h2>External Partnerships</h2>
+      <hr class="section-line" />
+
+      <p>
+        The organization worked with gaming, esports, technology, and
+        community partners. The public dashboard includes high-level company
+        names and aggregate partnership outcomes, while confidential contacts,
+        negotiations, fulfillment details, and agreement terms are excluded.
+      </p>
+
+      <div class="tool-list">
+        <span class="tool">Gen.G</span>
+        <span class="tool">NVIDIA</span>
+        <span class="tool">NRG</span>
+        <span class="tool">Team Liquid</span>
+        <span class="tool">Corsair</span>
+        <span class="tool">SCUF</span>
+        <span class="tool">Razer</span>
+        <span class="tool">Red Bull</span>
+        <span class="tool">Pixio</span>
+        <span class="tool">Extra Life</span>
+      </div>
     </section>
 
     <section>
       <h2>Tools and Skills</h2>
       <hr class="section-line" />
 
-      <div class="tools">
-        <span class="tool">Excel</span>
+      <div class="tool-list">
+        <span class="tool">Microsoft Excel</span>
         <span class="tool">Data Cleaning</span>
-        <span class="tool">Data Analysis</span>
-        <span class="tool">Dashboard Design</span>
         <span class="tool">KPI Definition</span>
-        <span class="tool">Charts</span>
-        <span class="tool">Formulas</span>
-        <span class="tool">Operations</span>
-        <span class="tool">Partnerships</span>
+        <span class="tool">Dashboard Design</span>
+        <span class="tool">Workflow Design</span>
         <span class="tool">Process Improvement</span>
+        <span class="tool">Project Management</span>
+        <span class="tool">Operations Management</span>
+        <span class="tool">Financial Tracking</span>
+        <span class="tool">Partnership Operations</span>
+        <span class="tool">Risk Tracking</span>
+        <span class="tool">Stakeholder Coordination</span>
       </div>
     </section>
 
@@ -529,23 +919,37 @@
       <h2>What I Learned</h2>
       <hr class="section-line" />
 
-      <p>
-        This project showed me how operational data becomes more useful
-        when it is connected to a clear decision. Instead of treating
-        attendance, room usage, budgets, recruitment, and partnerships as
-        separate activities, I designed the dashboard to show how they
-        contributed to the organization’s overall growth.
-      </p>
+      <div class="takeaway">
+        <p>
+          This project strengthened my understanding of how a leader takes an
+          operational problem from discovery through implementation. Building
+          the dashboard was only one part of the work. The larger challenge
+          was deciding what information mattered, creating repeatable
+          workflows, defining ownership, connecting financial and event
+          processes, and designing a tool that other officers could continue
+          using.
+        </p>
 
-      <p>
-        It also strengthened my experience with data privacy. The original
-        files included information that should not appear in a public
-        portfolio, so anonymization and aggregation were treated as core
-        parts of the project rather than final cleanup steps.
-      </p>
+        <p>
+          I also learned that an operating system is most useful when it helps
+          teams decide what to do next. The final tool connects performance
+          metrics with deadlines, owners, risks, payment status, and next
+          actions rather than displaying charts without context.
+        </p>
+      </div>
     </section>
 
     <div class="footer">
+      <strong>Role:</strong>
+      Project Owner, Organization President, Operations Lead, Dashboard
+      Designer, and Workflow Designer
+      <br />
+
+      <strong>Project Scope:</strong>
+      Requirements, data consolidation, KPI design, workflow development,
+      implementation, executive reporting, and privacy review
+      <br />
+
       © 2026 Hamilton Shea
     </div>
   </main>
@@ -613,7 +1017,8 @@
             event.shiftKey ||
             event.altKey;
 
-          const isDownload = link.hasAttribute("download");
+          const isDownload =
+            link.hasAttribute("download");
 
           const isHashOnly =
             link.getAttribute("href")?.startsWith("#");
