@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,6 +15,12 @@
       font-family: Impact, "Arial Black", "Segoe UI", sans-serif;
       color: white;
       background: #050505;
+      overflow-x: hidden;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+    }
+
+    body.site-locked {
       overflow: hidden;
     }
 
@@ -536,6 +541,307 @@
       background: white;
     }
 
+
+    .scroll-hint {
+      position: fixed;
+      left: 50%;
+      bottom: 28px;
+      z-index: 90;
+      max-width: calc(100vw - 32px);
+      padding: 11px 18px;
+      color: white;
+      background: rgba(0, 0, 0, 0.92);
+      border: 3px solid white;
+      box-shadow: 6px 6px 0 #d00000;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: clamp(14px, 2vw, 19px);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-align: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translate(-50%, 18px) rotate(-1deg);
+      transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease,
+        transform 0.25s ease;
+    }
+
+    .scroll-hint.show {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translate(-50%, 0) rotate(-1deg);
+      animation: hintBounce 1.4s ease-in-out infinite;
+    }
+
+    @keyframes hintBounce {
+      0%, 100% { margin-bottom: 0; }
+      50% { margin-bottom: 8px; }
+    }
+
+    .portfolio-preview {
+      position: relative;
+      z-index: 20;
+      padding: 90px 22px 120px;
+      color: white;
+      background:
+        radial-gradient(circle at 80% 10%, rgba(208, 0, 0, 0.22), transparent 34%),
+        repeating-linear-gradient(
+          -8deg,
+          rgba(255, 255, 255, 0.025) 0 2px,
+          transparent 2px 14px
+        ),
+        #090909;
+      border-top: 8px solid #d00000;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    .portfolio-shell {
+      width: min(1100px, 100%);
+      margin: 0 auto;
+    }
+
+    .portfolio-kicker {
+      display: inline-block;
+      margin-bottom: 16px;
+      padding: 6px 15px;
+      color: black;
+      background: white;
+      border: 4px solid black;
+      box-shadow: 6px 6px 0 #d00000;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transform: rotate(-2deg);
+    }
+
+    .portfolio-title {
+      margin: 0;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: clamp(44px, 8vw, 88px);
+      line-height: 0.9;
+      text-transform: uppercase;
+      text-shadow: 5px 5px 0 #d00000, 10px 10px 0 black;
+    }
+
+    .portfolio-intro {
+      max-width: 760px;
+      margin: 22px 0 34px;
+      color: #d8d8d8;
+      font-size: 17px;
+      line-height: 1.65;
+    }
+
+    .featured-work-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .home-work-card {
+      position: relative;
+      min-height: 290px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      overflow: hidden;
+      padding: 26px;
+      color: white;
+      text-decoration: none;
+      background:
+        linear-gradient(145deg, rgba(208, 0, 0, 0.30), rgba(12, 12, 12, 0.96) 56%),
+        #111;
+      border: 4px solid #d00000;
+      box-shadow: 10px 10px 0 #000;
+      transition:
+        transform 0.18s ease,
+        border-color 0.18s ease,
+        box-shadow 0.18s ease;
+    }
+
+    .home-work-card.dashboard {
+      background:
+        linear-gradient(145deg, rgba(6, 52, 95, 0.68), rgba(12, 12, 12, 0.96) 58%),
+        #111;
+      border-color: #0b5f93;
+    }
+
+    .home-work-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0.20;
+      background:
+        repeating-linear-gradient(
+          135deg,
+          transparent 0 20px,
+          rgba(255, 255, 255, 0.10) 20px 22px
+        );
+      pointer-events: none;
+    }
+
+    .home-work-card:hover {
+      transform: translateY(-7px);
+      border-color: white;
+      box-shadow: 10px 10px 0 #d00000;
+    }
+
+    .home-work-card.dashboard:hover {
+      box-shadow: 10px 10px 0 #fdc700;
+    }
+
+    .home-work-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .home-work-tag {
+      width: fit-content;
+      margin-bottom: 10px;
+      padding: 4px 9px;
+      color: black;
+      background: white;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+    }
+
+    .home-work-title {
+      margin: 0 0 10px;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 0.95;
+      text-transform: uppercase;
+    }
+
+    .home-work-desc {
+      margin: 0;
+      max-width: 520px;
+      color: #e0e0e0;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .home-work-cta {
+      display: inline-block;
+      margin-top: 18px;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 16px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .preview-heading {
+      margin: 68px 0 18px;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: clamp(30px, 5vw, 52px);
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .experience-preview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .experience-preview-card {
+      padding: 20px;
+      color: white;
+      background: #111;
+      border: 3px solid #3a3a3a;
+      box-shadow: 6px 6px 0 #000;
+    }
+
+    .experience-role {
+      margin: 0 0 4px;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 24px;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .experience-company {
+      margin: 0 0 12px;
+      color: #ff9696;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .experience-copy {
+      margin: 0;
+      color: #d4d4d4;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .resume-preview-card {
+      margin-top: 22px;
+      overflow: hidden;
+      background: white;
+      border: 4px solid white;
+      box-shadow: 10px 10px 0 #d00000;
+    }
+
+    .resume-preview-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 18px 20px;
+      color: white;
+      background: #050505;
+      border-bottom: 4px solid #d00000;
+    }
+
+    .resume-preview-header h3 {
+      margin: 0;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 30px;
+      text-transform: uppercase;
+    }
+
+    .resume-preview-link,
+    .all-work-link {
+      display: inline-block;
+      padding: 9px 14px;
+      color: white;
+      background: #d00000;
+      border: 2px solid white;
+      box-shadow: 4px 4px 0 black;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 14px;
+      letter-spacing: 1px;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .resume-preview-link:hover,
+    .all-work-link:hover {
+      color: black;
+      background: white;
+    }
+
+    .resume-home-frame {
+      display: block;
+      width: 100%;
+      height: 620px;
+      border: 0;
+      background: white;
+    }
+
+    .portfolio-footer-actions {
+      margin-top: 38px;
+      text-align: center;
+    }
+
     @media (max-width: 720px) {
       html, body {
         min-height: 100%;
@@ -711,11 +1017,49 @@
         bottom: 116px;
         font-size: 10px;
       }
+
+      .scroll-hint {
+        bottom: 108px;
+        width: calc(100vw - 30px);
+        padding: 9px 11px;
+        font-size: 13px;
+      }
+
+      .portfolio-preview {
+        padding: 64px 16px 100px;
+      }
+
+      .portfolio-title {
+        font-size: clamp(44px, 16vw, 68px);
+      }
+
+      .portfolio-intro {
+        font-size: 15px;
+      }
+
+      .featured-work-grid,
+      .experience-preview-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .home-work-card {
+        min-height: 250px;
+        padding: 22px;
+      }
+
+      .resume-preview-header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .resume-home-frame {
+        height: 460px;
+      }
     }
   </style>
 </head>
 
-<body>
+<body class="site-locked">
   <section class="enter-screen" id="enterScreen">
     <canvas class="wave-canvas" id="waveCanvas"></canvas>
 
@@ -919,6 +1263,120 @@
     <div class="bottom-line">© 2026 Hamilton Shea</div>
   </main>
 
+
+  <button class="scroll-hint" id="scrollHint" type="button">
+    scroll down for projects and resume! &darr;
+  </button>
+
+  <section class="portfolio-preview" id="projects">
+    <div class="portfolio-shell">
+      <span class="portfolio-kicker">Selected Work</span>
+      <h2 class="portfolio-title">Projects &amp; Experience</h2>
+
+      <p class="portfolio-intro">
+        A quick look at my product work, gaming operations experience, and
+        resume. The full case studies are still available, but the important
+        work is visible directly from the homepage.
+      </p>
+
+      <div class="featured-work-grid">
+        <a class="home-work-card" href="adaptive-menu-ui.html">
+          <span class="home-work-tag">Product Management &amp; UX Case Study</span>
+
+          <h3 class="home-work-title">
+            VALORANT Adaptive Menu UI
+          </h3>
+
+          <p class="home-work-desc">
+            A player-focused case study using 6 interviews, product
+            requirements, solution tradeoffs, responsive breakpoints, and
+            an interactive prototype to improve Shop and Settings access
+            on 5:4 and 4:3 resolutions.
+          </p>
+
+          <span class="home-work-cta">View case study &rarr;</span>
+        </a>
+
+        <a
+          class="home-work-card dashboard"
+          href="slug-gaming-operations-dashboard.html"
+        >
+          <span class="home-work-tag">Excel Data &amp; Operations Project</span>
+
+          <h3 class="home-work-title">
+            Slug Gaming Dashboard
+          </h3>
+
+          <p class="home-work-desc">
+            An anonymized executive dashboard connecting community growth,
+            event performance, budgets, recruitment, partnerships, and
+            500+ recorded esports room uses to recurring planning decisions.
+          </p>
+
+          <span class="home-work-cta">View dashboard case study &rarr;</span>
+        </a>
+      </div>
+
+      <h2 class="preview-heading">Selected Experience</h2>
+
+      <div class="experience-preview-grid">
+        <article class="experience-preview-card">
+          <h3 class="experience-role">President</h3>
+          <p class="experience-company">Slug Gaming</p>
+          <p class="experience-copy">
+            Led 30+ officers serving 3,700+ members and built data,
+            website, and operating systems supporting 600+ member growth
+            and a 530% increase in attendance.
+          </p>
+        </article>
+
+        <article class="experience-preview-card">
+          <h3 class="experience-role">Product Management Intern</h3>
+          <p class="experience-company">SkyrisAI</p>
+          <p class="experience-copy">
+            Translated 20 interviews across 5 user segments into 10+
+            prioritized features, 2 PRDs, and 20+ sprint-ready user stories.
+          </p>
+        </article>
+
+        <article class="experience-preview-card">
+          <h3 class="experience-role">Collegiate Program Lead</h3>
+          <p class="experience-company">Gen.G Esports</p>
+          <p class="experience-copy">
+            Coordinated collegiate activations generating 150+ signups,
+            200+ attendees, and more than $2,000 in program resources.
+          </p>
+        </article>
+      </div>
+
+      <h2 class="preview-heading">Resume</h2>
+
+      <div class="resume-preview-card">
+        <div class="resume-preview-header">
+          <h3>Hamilton Shea Resume</h3>
+
+          <a class="resume-preview-link" href="resume.html">
+            Open full resume
+          </a>
+        </div>
+
+        <iframe
+          class="resume-home-frame"
+          title="Hamilton Shea Resume Preview"
+          src="https://drive.google.com/file/d/1blLOPu8WSrju4m0HjqUsPqp4qERb0nql/preview"
+          loading="lazy"
+          allow="autoplay"
+        ></iframe>
+      </div>
+
+      <div class="portfolio-footer-actions">
+        <a class="all-work-link" href="case-studies.html">
+          View all case studies
+        </a>
+      </div>
+    </div>
+  </section>
+
   <audio id="backgroundMusic" preload="auto"></audio>
   <audio id="clickSound" src="click.mp3" preload="auto"></audio>
   <audio id="hoverSound" src="hover.mp3" preload="auto"></audio>
@@ -938,11 +1396,14 @@
     const contactForm = document.getElementById("contactForm");
     const canvas = document.getElementById("waveCanvas");
     const ctx = canvas.getContext("2d");
+    const scrollHint = document.getElementById("scrollHint");
+    const projectsSection = document.getElementById("projects");
 
     let entered = false;
     let time = 0;
     let topZ = 40;
     let currentTrack = 0;
+    let idleTimer = null;
 
     const AUDIO_SCALE = 0.5;
     const CLICK_RATE = 1.45;
@@ -1090,10 +1551,29 @@
       loadTrack(currentTrack + 1);
     });
 
+    function hideScrollHint() {
+      scrollHint.classList.remove("show");
+    }
+
+    function scheduleScrollHint() {
+      clearTimeout(idleTimer);
+      hideScrollHint();
+
+      if (!entered || window.scrollY > 80) return;
+
+      idleTimer = setTimeout(() => {
+        if (entered && window.scrollY <= 80) {
+          scrollHint.classList.add("show");
+        }
+      }, 5000);
+    }
+
     function enterSite() {
       if (entered) return;
       entered = true;
 
+      document.body.classList.remove("site-locked");
+      document.body.classList.add("site-entered");
       enterScreen.classList.add("hidden");
       gameScreen.classList.add("active");
 
@@ -1101,6 +1581,7 @@
       hoverSound.load();
 
       loadTrack(currentTrack);
+      scheduleScrollHint();
     }
 
     function resizeCanvas() {
@@ -1200,6 +1681,19 @@
     document.querySelectorAll("button, a, .desktop-icon, .close-window").forEach(item => {
       item.addEventListener("mouseenter", playHover);
     });
+
+    scrollHint.addEventListener("click", () => {
+      playClick();
+      hideScrollHint();
+      clearTimeout(idleTimer);
+      projectsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    ["pointermove", "pointerdown", "touchstart", "keydown"].forEach(eventName => {
+      window.addEventListener(eventName, scheduleScrollHint, { passive: true });
+    });
+
+    window.addEventListener("scroll", scheduleScrollHint, { passive: true });
 
     contactForm.addEventListener("submit", event => {
       event.preventDefault();
