@@ -3,12 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>ham's resume</title>
+  <link rel="icon" type="image/jpeg" href="logo.jpg" />
+
   <style>
     * {
       box-sizing: border-box;
     }
-    html, body {
+
+    html,
+    body {
       margin: 0;
       width: 100%;
       min-height: 100vh;
@@ -17,18 +22,23 @@
       font-family: "Segoe UI", Arial, sans-serif;
       overflow: hidden;
     }
+
     .resume-page {
       width: 100vw;
       height: 100vh;
       display: flex;
       flex-direction: column;
       background:
-        linear-gradient(90deg, rgba(180,0,0,0.70), rgba(0,0,0,0.92)),
+        linear-gradient(
+          90deg,
+          rgba(180, 0, 0, 0.70),
+          rgba(0, 0, 0, 0.92)
+        ),
         #050505;
     }
+
     .top-bar {
-      position: sticky;
-      top: 0;
+      position: relative;
       z-index: 10;
       display: flex;
       align-items: center;
@@ -37,6 +47,7 @@
       background: #000;
       border-bottom: 4px solid #d00000;
     }
+
     .top-bar a {
       color: white;
       text-decoration: none;
@@ -45,54 +56,292 @@
       letter-spacing: 1px;
       text-transform: uppercase;
     }
+
     .top-bar a:hover {
-      color: #d00000;
+      color: #ff8a8a;
     }
+
+    .resume-switcher {
+      position: relative;
+      z-index: 9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px 16px;
+      background: #111;
+      border-bottom: 2px solid #333;
+    }
+
+    .resume-button {
+      padding: 8px 15px;
+      color: #ddd;
+      background: #181818;
+      border: 2px solid #444;
+      cursor: pointer;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      transition:
+        color 0.15s ease,
+        background 0.15s ease,
+        border-color 0.15s ease,
+        transform 0.15s ease;
+    }
+
+    .resume-button:hover {
+      color: white;
+      border-color: white;
+      transform: translateY(-2px);
+    }
+
+    .resume-button.active {
+      color: white;
+      background: #a90000;
+      border-color: #d00000;
+      box-shadow: 4px 4px 0 #000;
+    }
+
     .resume-section {
+      min-height: 0;
       flex: 1;
-      background: white;
       display: flex;
       flex-direction: column;
+      background: white;
     }
+
     .resume-frame {
       width: 100%;
+      min-height: 0;
       flex: 1;
       border: 0;
       background: white;
     }
+
     .resume-fallback {
       margin: 0;
-      padding: 12px;
+      padding: 9px 12px;
       text-align: center;
       font-family: Arial, sans-serif;
-      background: white;
+      font-size: 13px;
       color: black;
+      background: white;
+      border-top: 1px solid #ddd;
     }
+
     .resume-fallback a {
       color: #d00000;
       font-weight: bold;
     }
+
+    @media (max-width: 650px) {
+      .top-bar {
+        padding: 12px 14px;
+      }
+
+      .top-bar a {
+        font-size: 15px;
+      }
+
+      .resume-switcher {
+        gap: 7px;
+        padding: 9px 10px;
+      }
+
+      .resume-button {
+        flex: 1;
+        padding: 8px 6px;
+        font-size: 12px;
+      }
+
+      .resume-fallback {
+        font-size: 12px;
+      }
+    }
   </style>
 </head>
+
 <body>
   <main class="resume-page">
     <div class="top-bar">
       <a href="index.html">&larr; ham's website</a>
       <a href="case-studies.html">case studies</a>
     </div>
+
+    <div class="resume-switcher">
+      <button
+        id="generalButton"
+        class="resume-button active"
+        type="button"
+      >
+        General Product Resume
+      </button>
+
+      <button
+        id="gamingButton"
+        class="resume-button"
+        type="button"
+      >
+        Gaming Product Resume
+      </button>
+    </div>
+
     <section class="resume-section">
       <iframe
+        id="resumeFrame"
         class="resume-frame"
+        title="Hamilton Shea Resume"
         src="https://drive.google.com/file/d/1Tk1iAryLnnEyBa4VbTx-iOhJQxBmcoFi/preview"
-        allow="autoplay">
-      </iframe>
+        allow="autoplay"
+      ></iframe>
+
       <p class="resume-fallback">
         If the resume does not load,
-        <a href="https://drive.google.com/file/d/1Tk1iAryLnnEyBa4VbTx-iOhJQxBmcoFi/view">
+        <a
+          id="resumeLink"
+          href="https://drive.google.com/file/d/1Tk1iAryLnnEyBa4VbTx-iOhJQxBmcoFi/view"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           open it here
         </a>.
       </p>
     </section>
   </main>
+
+  <audio id="hoverSound" src="hover.mp3" preload="auto"></audio>
+  <audio id="clickSound" src="click.mp3" preload="auto"></audio>
+
+  <script>
+    const resumes = {
+      general: {
+        preview:
+          "https://drive.google.com/file/d/1Tk1iAryLnnEyBa4VbTx-iOhJQxBmcoFi/preview",
+        view:
+          "https://drive.google.com/file/d/1Tk1iAryLnnEyBa4VbTx-iOhJQxBmcoFi/view",
+        title: "Hamilton Shea General Product Resume"
+      },
+
+      gaming: {
+        preview:
+          "https://drive.google.com/file/d/1n9sHeJ6T30yZa13TemWIyU0-ux3vmfCM/preview",
+        view:
+          "https://drive.google.com/file/d/1n9sHeJ6T30yZa13TemWIyU0-ux3vmfCM/view",
+        title: "Hamilton Shea Gaming Product Resume"
+      }
+    };
+
+    const resumeFrame = document.getElementById("resumeFrame");
+    const resumeLink = document.getElementById("resumeLink");
+
+    const generalButton =
+      document.getElementById("generalButton");
+
+    const gamingButton =
+      document.getElementById("gamingButton");
+
+    const hoverSound = document.getElementById("hoverSound");
+    const clickSound = document.getElementById("clickSound");
+
+    const AUDIO_SCALE = 0.5;
+    const CLICK_RATE = 1.45;
+    const CLICK_START_OFFSET = 0.06;
+
+    let audioReady = false;
+
+    function primeAudio() {
+      if (audioReady) return;
+
+      audioReady = true;
+      hoverSound.load();
+      clickSound.load();
+    }
+
+    function playHoverSound() {
+      primeAudio();
+
+      hoverSound.pause();
+      hoverSound.currentTime = 0;
+      hoverSound.volume = 0.35 * AUDIO_SCALE;
+
+      hoverSound.play().catch(() => {});
+    }
+
+    function playClickSound() {
+      primeAudio();
+
+      clickSound.pause();
+      clickSound.currentTime = CLICK_START_OFFSET;
+      clickSound.volume = 0.45 * AUDIO_SCALE;
+      clickSound.playbackRate = CLICK_RATE;
+
+      clickSound.play().catch(() => {});
+    }
+
+    function showResume(type, updateHash = true) {
+      const selectedResume = resumes[type];
+
+      resumeFrame.src = selectedResume.preview;
+      resumeFrame.title = selectedResume.title;
+      resumeLink.href = selectedResume.view;
+
+      generalButton.classList.toggle(
+        "active",
+        type === "general"
+      );
+
+      gamingButton.classList.toggle(
+        "active",
+        type === "gaming"
+      );
+
+      if (updateHash) {
+        history.replaceState(
+          null,
+          "",
+          type === "gaming" ? "#gaming" : "#general"
+        );
+      }
+    }
+
+    generalButton.addEventListener("click", () => {
+      playClickSound();
+      showResume("general");
+    });
+
+    gamingButton.addEventListener("click", () => {
+      playClickSound();
+      showResume("gaming");
+    });
+
+    document
+      .querySelectorAll("a, button")
+      .forEach((element) => {
+        element.addEventListener(
+          "mouseenter",
+          playHoverSound
+        );
+      });
+
+    window.addEventListener(
+      "pointerdown",
+      primeAudio,
+      { once: true }
+    );
+
+    window.addEventListener(
+      "keydown",
+      primeAudio,
+      { once: true }
+    );
+
+    const startingResume =
+      window.location.hash.toLowerCase() === "#gaming"
+        ? "gaming"
+        : "general";
+
+    showResume(startingResume, false);
+  </script>
 </body>
 </html>
