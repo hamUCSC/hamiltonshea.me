@@ -55,52 +55,11 @@
       font-size: 20px;
       letter-spacing: 1px;
       text-transform: uppercase;
+      transition: color 0.15s ease;
     }
 
     .top-bar a:hover {
       color: #ff8a8a;
-    }
-
-    .resume-switcher {
-      position: relative;
-      z-index: 9;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 10px 16px;
-      background: #111;
-      border-bottom: 2px solid #333;
-    }
-
-    .resume-button {
-      padding: 8px 15px;
-      color: #ddd;
-      background: #181818;
-      border: 2px solid #444;
-      cursor: pointer;
-      font-family: Impact, "Arial Black", sans-serif;
-      font-size: 14px;
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-      transition:
-        color 0.15s ease,
-        background 0.15s ease,
-        border-color 0.15s ease,
-        transform 0.15s ease;
-    }
-
-    .resume-button:hover {
-      color: white;
-      border-color: white;
-      transform: translateY(-2px);
-    }
-
-    .resume-button.active {
-      color: white;
-      background: #a90000;
-      border-color: #d00000;
-      box-shadow: 4px 4px 0 #000;
     }
 
     .resume-section {
@@ -144,17 +103,6 @@
         font-size: 15px;
       }
 
-      .resume-switcher {
-        gap: 7px;
-        padding: 9px 10px;
-      }
-
-      .resume-button {
-        flex: 1;
-        padding: 8px 6px;
-        font-size: 12px;
-      }
-
       .resume-fallback {
         font-size: 12px;
       }
@@ -169,38 +117,18 @@
       <a href="case-studies.html">case studies</a>
     </div>
 
-    <div class="resume-switcher">
-      <button
-        id="generalButton"
-        class="resume-button active"
-        type="button"
-      >
-        General Resume
-      </button>
-
-      <button
-        id="gamingButton"
-        class="resume-button"
-        type="button"
-      >
-        Game Resume
-      </button>
-    </div>
-
     <section class="resume-section">
       <iframe
-        id="resumeFrame"
         class="resume-frame"
         title="Hamilton Shea Resume"
-        src="https://drive.google.com/file/d/1Tk1iAryLnnEyBa4VbTx-iOhJQxBmcoFi/preview"
+        src="https://drive.google.com/file/d/1blLOPu8WSrju4m0HjqUsPqp4qERb0nql/preview"
         allow="autoplay"
       ></iframe>
 
       <p class="resume-fallback">
         If the resume does not load,
         <a
-          id="resumeLink"
-          href="https://drive.google.com/file/d/1Tk1iAryLnnEyBa4VbTx-iOhJQxBmcoFi/view"
+          href="https://drive.google.com/file/d/1blLOPu8WSrju4m0HjqUsPqp4qERb0nql/view"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -214,33 +142,6 @@
   <audio id="clickSound" src="click.mp3" preload="auto"></audio>
 
   <script>
-    const resumes = {
-      general: {
-        preview:
-          "https://drive.google.com/file/d/1TeIPBLlU-Y-rMtaXg70rsJdwSkBw18E9/preview",
-        view:
-          "https://drive.google.com/file/d/1TeIPBLlU-Y-rMtaXg70rsJdwSkBw18E9/view",
-        title: "Hamilton Resume"
-      },
-
-      gaming: {
-        preview:
-          "https://drive.google.com/file/d/1LEhG3r9XefQRwGJyc3Bj186YDmLgK5bl/preview",
-        view:
-          "https://drive.google.com/file/d/1LEhG3r9XefQRwGJyc3Bj186YDmLgK5bl/view",
-        title: "Hamilton Game Resume"
-      }
-    };
-
-    const resumeFrame = document.getElementById("resumeFrame");
-    const resumeLink = document.getElementById("resumeLink");
-
-    const generalButton =
-      document.getElementById("generalButton");
-
-    const gamingButton =
-      document.getElementById("gamingButton");
-
     const hoverSound = document.getElementById("hoverSound");
     const clickSound = document.getElementById("clickSound");
 
@@ -279,69 +180,13 @@
       clickSound.play().catch(() => {});
     }
 
-    function showResume(type, updateHash = true) {
-      const selectedResume = resumes[type];
-
-      resumeFrame.src = selectedResume.preview;
-      resumeFrame.title = selectedResume.title;
-      resumeLink.href = selectedResume.view;
-
-      generalButton.classList.toggle(
-        "active",
-        type === "general"
-      );
-
-      gamingButton.classList.toggle(
-        "active",
-        type === "gaming"
-      );
-
-      if (updateHash) {
-        history.replaceState(
-          null,
-          "",
-          type === "gaming" ? "#gaming" : "#general"
-        );
-      }
-    }
-
-    generalButton.addEventListener("click", () => {
-      playClickSound();
-      showResume("general");
+    document.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("mouseenter", playHoverSound);
+      link.addEventListener("click", playClickSound);
     });
 
-    gamingButton.addEventListener("click", () => {
-      playClickSound();
-      showResume("gaming");
-    });
-
-    document
-      .querySelectorAll("a, button")
-      .forEach((element) => {
-        element.addEventListener(
-          "mouseenter",
-          playHoverSound
-        );
-      });
-
-    window.addEventListener(
-      "pointerdown",
-      primeAudio,
-      { once: true }
-    );
-
-    window.addEventListener(
-      "keydown",
-      primeAudio,
-      { once: true }
-    );
-
-    const startingResume =
-      window.location.hash.toLowerCase() === "#gaming"
-        ? "gaming"
-        : "general";
-
-    showResume(startingResume, false);
+    window.addEventListener("pointerdown", primeAudio, { once: true });
+    window.addEventListener("keydown", primeAudio, { once: true });
   </script>
 </body>
 </html>
