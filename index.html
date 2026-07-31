@@ -628,16 +628,9 @@
       text-shadow: 5px 5px 0 #d00000, 10px 10px 0 black;
     }
 
-    .portfolio-intro {
-      max-width: 760px;
-      margin: 22px 0 34px;
-      color: #d8d8d8;
-      font-size: 17px;
-      line-height: 1.65;
-    }
-
     .featured-work-grid {
       display: grid;
+      margin-top: 34px;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 22px;
     }
@@ -780,6 +773,42 @@
       color: #d4d4d4;
       font-size: 14px;
       line-height: 1.55;
+    }
+
+    .homepage-recommendation {
+      margin-top: 0;
+      padding: 26px;
+      background:
+        linear-gradient(135deg, rgba(208, 0, 0, 0.22), rgba(17, 17, 17, 0.98) 48%),
+        #111;
+      border: 4px solid white;
+      box-shadow: 10px 10px 0 #d00000;
+    }
+
+    .homepage-recommendation .recommendation-header {
+      padding-bottom: 14px;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.24);
+    }
+
+    .homepage-recommendation .recommendation-pfp {
+      width: 70px;
+      height: 70px;
+    }
+
+    .homepage-recommendation .recommendation-name {
+      font-size: 21px;
+    }
+
+    .homepage-recommendation .recommendation-title {
+      max-width: 620px;
+      font-size: 14px;
+    }
+
+    .homepage-recommendation .recommendation-quote {
+      margin-top: 16px;
+      color: #ededed;
+      font-size: 15px;
+      line-height: 1.65;
     }
 
     .resume-preview-card {
@@ -1033,8 +1062,17 @@
         font-size: clamp(44px, 16vw, 68px);
       }
 
-      .portfolio-intro {
-        font-size: 15px;
+      .homepage-recommendation {
+        padding: 18px;
+      }
+
+      .homepage-recommendation .recommendation-header {
+        align-items: flex-start;
+      }
+
+      .homepage-recommendation .recommendation-pfp {
+        width: 58px;
+        height: 58px;
       }
 
       .featured-work-grid,
@@ -1273,12 +1311,6 @@
       <span class="portfolio-kicker">Selected Work</span>
       <h2 class="portfolio-title">Projects &amp; Experience</h2>
 
-      <p class="portfolio-intro">
-        A quick look at my product work, gaming operations experience, and
-        resume. The full case studies are still available, but the important
-        work is visible directly from the homepage.
-      </p>
-
       <div class="featured-work-grid">
         <a class="home-work-card" href="adaptive-menu-ui.html">
           <span class="home-work-tag">Product Management &amp; UX Case Study</span>
@@ -1349,6 +1381,54 @@
         </article>
       </div>
 
+      <h2 class="preview-heading">Recommendation</h2>
+
+      <div class="recommendation-card homepage-recommendation">
+        <div class="recommendation-header">
+          <img
+            class="recommendation-pfp"
+            src="jasper-lee.png"
+            alt="Jasper Lee"
+          />
+
+          <div>
+            <p class="recommendation-name">Jasper Lee</p>
+            <p class="recommendation-title">
+              Partnerships &amp; Program Manager, Gen.G Esports
+            </p>
+          </div>
+        </div>
+
+        <p class="recommendation-quote">
+          “Hamilton was a part of Gen.G's Collegiate Club Program at UC Santa
+          Cruz this past year, and he was one of the best student leaders to
+          work with across our program.
+        </p>
+
+        <p class="recommendation-quote">
+          What I appreciated most was that he didn't just execute; he actually
+          thought about his campus, understood his community, and figured out
+          how to make Gen.G campaigns and initiatives land in a way that made
+          sense for UCSC students. That kind of initiative and thinking
+          outside-the-box isn't something you can teach, and Hamilton's had
+          that.
+        </p>
+
+        <p class="recommendation-quote">
+          On top of that, Hamilton was reliable, communicative, and had an
+          awesome attitude throughout the academic year. In a program that
+          runs across a lot of schools simultaneously, students who can
+          operate independently and still stay locked in with you are
+          genuinely valuable.
+        </p>
+
+        <p class="recommendation-quote">
+          I'd work with him again in a heartbeat, and whoever brings him onto
+          their team is getting a smart, passionate, and amazing talent who's
+          going to show up and deliver.”
+        </p>
+      </div>
+
       <h2 class="preview-heading">Resume</h2>
 
       <div class="resume-preview-card">
@@ -1403,7 +1483,8 @@
     let time = 0;
     let topZ = 40;
     let currentTrack = 0;
-    let idleTimer = null;
+    let scrollPromptTimer = null;
+    let hasScrolledHomepage = false;
 
     const AUDIO_SCALE = 0.5;
     const CLICK_RATE = 1.45;
@@ -1555,17 +1636,31 @@
       scrollHint.classList.remove("show");
     }
 
-    function scheduleScrollHint() {
-      clearTimeout(idleTimer);
+    function startScrollPromptTimer() {
+      clearTimeout(scrollPromptTimer);
       hideScrollHint();
 
-      if (!entered || window.scrollY > 80) return;
+      if (!entered || hasScrolledHomepage || window.scrollY > 20) return;
 
-      idleTimer = setTimeout(() => {
-        if (entered && window.scrollY <= 80) {
+      scrollPromptTimer = setTimeout(() => {
+        if (
+          entered &&
+          !hasScrolledHomepage &&
+          window.scrollY <= 20
+        ) {
           scrollHint.classList.add("show");
         }
       }, 5000);
+    }
+
+    function handleHomepageScroll() {
+      if (!entered) return;
+
+      if (window.scrollY > 20) {
+        hasScrolledHomepage = true;
+        hideScrollHint();
+        clearTimeout(scrollPromptTimer);
+      }
     }
 
     function enterSite() {
@@ -1581,7 +1676,8 @@
       hoverSound.load();
 
       loadTrack(currentTrack);
-      scheduleScrollHint();
+      hasScrolledHomepage = window.scrollY > 20;
+      startScrollPromptTimer();
     }
 
     function resizeCanvas() {
@@ -1684,16 +1780,17 @@
 
     scrollHint.addEventListener("click", () => {
       playClick();
+      hasScrolledHomepage = true;
       hideScrollHint();
-      clearTimeout(idleTimer);
+      clearTimeout(scrollPromptTimer);
       projectsSection.scrollIntoView({ behavior: "smooth", block: "start" });
     });
 
-    ["pointermove", "pointerdown", "touchstart", "keydown"].forEach(eventName => {
-      window.addEventListener(eventName, scheduleScrollHint, { passive: true });
-    });
-
-    window.addEventListener("scroll", scheduleScrollHint, { passive: true });
+    window.addEventListener(
+      "scroll",
+      handleHomepageScroll,
+      { passive: true }
+    );
 
     contactForm.addEventListener("submit", event => {
       event.preventDefault();
