@@ -651,7 +651,7 @@
 
     .proof-row {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 17px;
 
       margin: 18px 0 28px;
@@ -1475,12 +1475,12 @@
           Role: Product Manager &amp; UX Researcher
         </span>
 
-
-    
+        <span class="meta-chip">
+          6 Player Interviews
         </span>
 
         <span class="meta-chip">
-          6 Player Interviews
+          Slug Gaming Community Survey
         </span>
 
         <span class="meta-chip">
@@ -1512,10 +1512,11 @@
       to important out-of-match actions when persistent panels compete
       for limited screen width.
 
-      I interviewed six players, reviewed outside community signals,
-      compared four solution paths, defined a responsive-menu MVP, and
-      built an interactive prototype designed to protect critical actions
-      without changing VALORANT's in-match experience.
+      I interviewed six players, ran a directional survey in the Slug
+      Gaming community, reviewed outside community signals, compared four
+      solution paths, defined a responsive-menu MVP, and built an
+      interactive prototype designed to protect critical actions without
+      changing VALORANT's in-match experience.
     </div>
 
     <div class="disclaimer">
@@ -1895,9 +1896,9 @@
       <hr class="section-line" />
 
       <p>
-        I used three evidence sources: short player interviews, my repeated
-        client observation, and public community discussions about menu
-        usability.
+        I used four evidence sources: short player interviews, a directional
+        survey in the Slug Gaming Discord community, my repeated client
+        observation, and public discussions about menu usability.
       </p>
 
       <table>
@@ -1927,6 +1928,17 @@
             <td data-label="What Was Collected">
               Navigation, UI changes, stretched resolution, menu usability,
               and what players would actually want changed
+            </td>
+          </tr>
+
+          <tr>
+            <td data-label="Research Detail">
+              Community Survey
+            </td>
+
+            <td data-label="What Was Collected">
+              A directional survey shared in the Slug Gaming Discord server;
+              one in four respondents said they liked VALORANT's current UI
             </td>
           </tr>
 
@@ -1966,9 +1978,11 @@
       </table>
 
       <p class="note">
-        The original interview notes did not record a consistent rank,
-        resolution, or play-frequency breakdown for every participant.
-        This case study therefore does not invent those details.
+        The interviews and Slug Gaming survey were directional research
+        intended to identify patterns and justify further testing. They do
+        not represent the entire VALORANT player population. The survey
+        measures general UI sentiment, while individual comments provide
+        more specific evidence about stretched-resolution friction.
       </p>
     </section>
 
@@ -2037,6 +2051,23 @@
             Product Tradeoff
           </span>
         </article>
+
+        <article class="theme-card">
+          <h3>
+            General UI Satisfaction Was Limited
+          </h3>
+
+          <p>
+            In a directional survey shared with the Slug Gaming community,
+            only one in four respondents said they liked VALORANT's current
+            UI. This result supports further investigation, but it does not
+            show that every other respondent actively disliked the UI.
+          </p>
+
+          <span class="theme-evidence">
+            Slug Gaming Community Survey
+          </span>
+        </article>
       </div>
 
       <blockquote>
@@ -2049,6 +2080,12 @@
         “The UI is nice, but it could be touched up for stretched
         resolution.”
         — Interviewee B
+      </blockquote>
+
+      <blockquote>
+        “I can't change my beautiful skins without changing my resolution
+        first, so no, I don't like VALORANT's UI.”
+        — Mikey, three-time Slug Gaming varsity player and CS:GO Director
       </blockquote>
     </section>
 
@@ -2101,11 +2138,30 @@
             Broader navigation and interface discussion
           </p>
         </article>
+
+        <article class="proof-item">
+          <a
+            href="mikey-valorant-ui-quote.png"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="mikey-valorant-ui-quote.png"
+              alt="Mikey explaining that he must change resolution to access skins in VALORANT"
+              loading="lazy"
+            />
+          </a>
+
+          <p class="proof-label">
+            <strong>Slug Gaming:</strong>
+            Stretched-resolution access feedback from Mikey
+          </p>
+        </article>
       </div>
 
       <p class="note">
-        These threads are anecdotal signals, not prevalence data. Six
-        interviews and two public discussions justify further testing,
+        These threads, interviews, and community survey are directional
+        signals rather than prevalence data. They justify further testing,
         but they do not prove that every stretched-resolution player has
         the same problem.
       </p>
@@ -2849,23 +2905,27 @@
         [2] Reddit — “These UI changes are terrible” (2026)
         <br />
 
-        [3] Riot Games — “Performance Boost: VALORANT's Global
+        [3] Slug Gaming Discord — Directional VALORANT UI survey and
+        stretched-resolution participant feedback (2026)
+        <br />
+
+        [4] Riot Games — “Performance Boost: VALORANT's Global
         Invalidation” (March 8, 2022)
         <br />
 
-        [4] Riot Games — VALORANT Patch Notes 12.07
+        [5] Riot Games — VALORANT Patch Notes 12.07
         (April 14, 2026)
       </p>
 
       <p class="footer-note">
-        Public discussions are included as anecdotal community signals
-        and are not representative research samples. Interview quotes
-        have been anonymized. No confidential Riot Games information
-        was used.
+        Public discussions, interviews, and the Slug Gaming survey are
+        directional signals and are not representative research samples.
+        Interviewees are anonymized unless identified in the case study.
+        No confidential Riot Games information was used.
       </p>
     </section>
 
-
+    <footer class="footer">
       © 2026 Hamilton Shea
     </footer>
   </main>
