@@ -15,7 +15,7 @@
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: Impact, "Arial Black", "Segoe UI", sans-serif;
+      font-family: "Segoe UI", Arial, sans-serif;
       color: white;
       background: #050505;
       overflow-x: hidden;
@@ -123,6 +123,52 @@
       transform: none;
     }
 
+    /* Shared curved line field. The exact same fixed radial pattern is used
+       in the hero and portfolio so the arcs continue through the section seam. */
+    .persona-screen::after {
+      content: "";
+      position: absolute;
+      left: -12%;
+      right: -12%;
+      top: 18%;
+      bottom: -12%;
+      z-index: 4;
+      pointer-events: none;
+      opacity: 0.50;
+      background:
+        repeating-radial-gradient(
+          ellipse at 28% 118%,
+          rgba(255, 255, 255, 0.10) 0 1.5px,
+          transparent 1.5px 24px
+        ),
+        repeating-radial-gradient(
+          ellipse at 82% 116%,
+          rgba(255, 255, 255, 0.045) 0 1px,
+          transparent 1px 34px
+        );
+      background-size: 150vw 118vh, 128vw 108vh;
+      background-position: 0 0, 0 0;
+      background-attachment: fixed;
+      -webkit-mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        transparent 28%,
+        rgba(0, 0, 0, 0.20) 46%,
+        black 76%,
+        black 100%
+      );
+      mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        transparent 28%,
+        rgba(0, 0, 0, 0.20) 46%,
+        black 76%,
+        black 100%
+      );
+      animation: curvedLineDrift 30s ease-in-out infinite alternate;
+      will-change: background-position;
+    }
+
     .theme-video {
       position: absolute;
       inset: 0;
@@ -218,6 +264,7 @@
 
     .menu-badge {
       width: fit-content;
+      font-weight: 900;
       margin-bottom: 14px;
       padding: 7px 18px;
       color: black;
@@ -232,6 +279,8 @@
 
     .main-title {
       margin: 0 0 34px;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-weight: 900;
       font-size: clamp(54px, 8vw, 118px);
       line-height: 0.78;
       text-transform: uppercase;
@@ -319,18 +368,32 @@
       position: absolute;
       z-index: 30;
       width: min(560px, calc(100vw - 32px));
-      min-height: 260px;
+      min-width: 320px;
+      min-height: 220px;
+      max-width: calc(100vw - 16px);
+      max-height: calc(100vh - 16px);
       background: rgba(8, 8, 8, 0.94);
       border: 5px solid white;
       box-shadow:
         12px 12px 0 black,
         18px 18px 0 #d00000;
       display: none;
+      flex-direction: column;
+      overflow: hidden;
       font-family: "Segoe UI", Arial, sans-serif;
     }
 
     .window.open {
-      display: block;
+      display: flex;
+    }
+
+    .window.resizing,
+    .window.resizing * {
+      user-select: none !important;
+    }
+
+    .window.user-resized .window-content {
+      max-height: none;
     }
 
     .window-bar {
@@ -338,12 +401,14 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
+      flex: 0 0 auto;
       padding: 9px 12px;
       color: black;
       background: white;
       cursor: move;
       user-select: none;
-      font-family: Impact, "Arial Black", sans-serif;
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-weight: 900;
       font-size: 24px;
       letter-spacing: 2px;
       text-transform: uppercase;
@@ -355,23 +420,153 @@
       color: white;
       width: 34px;
       height: 34px;
-      font-family: Impact, "Arial Black", sans-serif;
+      flex: 0 0 auto;
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-weight: 900;
       font-size: 24px;
+      line-height: 1;
       cursor: pointer;
       box-shadow: 4px 4px 0 black;
     }
 
+    .close-window:hover {
+      color: black;
+      background: white;
+    }
+
+    /* Resize zones make each popup behave like a desktop window. */
+    .resize-handle {
+      position: absolute;
+      z-index: 50;
+      touch-action: none;
+    }
+
+    .resize-n,
+    .resize-s {
+      left: 10px;
+      right: 10px;
+      height: 10px;
+    }
+
+    .resize-e,
+    .resize-w {
+      top: 10px;
+      bottom: 10px;
+      width: 10px;
+    }
+
+    .resize-n {
+      top: -5px;
+      cursor: n-resize;
+    }
+
+    .resize-s {
+      bottom: -5px;
+      cursor: s-resize;
+    }
+
+    .resize-e {
+      right: -5px;
+      cursor: e-resize;
+    }
+
+    .resize-w {
+      left: -5px;
+      cursor: w-resize;
+    }
+
+    .resize-ne,
+    .resize-nw,
+    .resize-se,
+    .resize-sw {
+      width: 18px;
+      height: 18px;
+    }
+
+    .resize-ne {
+      top: -7px;
+      right: -7px;
+      cursor: ne-resize;
+    }
+
+    .resize-nw {
+      top: -7px;
+      left: -7px;
+      cursor: nw-resize;
+    }
+
+    .resize-se {
+      right: 0;
+      bottom: 0;
+      width: 28px;
+      height: 28px;
+      cursor: se-resize;
+      opacity: 0.9;
+      background:
+        linear-gradient(
+          135deg,
+          transparent 0 38%,
+          rgba(255, 255, 255, 0.95) 38% 44%,
+          transparent 44% 53%,
+          rgba(255, 255, 255, 0.95) 53% 59%,
+          transparent 59% 68%,
+          #d00000 68% 74%,
+          transparent 74%
+        );
+      transition: opacity 0.15s ease, transform 0.15s ease, filter 0.15s ease;
+    }
+
+    .window.open .resize-se {
+      transform-origin: bottom right;
+      animation: resizeGripBounceGlow 1.8s ease-in-out infinite;
+    }
+
+    @keyframes resizeGripBounceGlow {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+        filter:
+          drop-shadow(0 0 2px rgba(255, 255, 255, 0.5))
+          drop-shadow(0 0 4px rgba(208, 0, 0, 0.5));
+      }
+
+      45% {
+        transform: translate(-4px, -4px) scale(1.16);
+        filter:
+          drop-shadow(0 0 6px rgba(255, 255, 255, 1))
+          drop-shadow(0 0 12px rgba(208, 0, 0, 1));
+      }
+
+      65% {
+        transform: translate(-1px, -1px) scale(1.05);
+      }
+    }
+
+    .resize-se:hover {
+      opacity: 1;
+      transform: scale(1.12);
+      transform-origin: bottom right;
+    }
+
+    .resize-sw {
+      left: -7px;
+      bottom: -7px;
+      cursor: sw-resize;
+    }
+
     .window-content {
+      flex: 1 1 auto;
+      min-height: 0;
       padding: 22px;
       font-size: 16px;
       line-height: 1.65;
       max-height: 70vh;
-      overflow-y: auto;
+      overflow: auto;
     }
 
     .window-content h2 {
       margin: 0 0 12px;
-      font-family: Impact, "Arial Black", sans-serif;
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-weight: 900;
       font-size: 44px;
       color: #d00000;
       text-transform: uppercase;
@@ -466,7 +661,8 @@
       color: white;
       background: #d00000;
       border: 3px solid white;
-      font-family: Impact, "Arial Black", sans-serif;
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-weight: 900;
       font-size: 24px;
       text-transform: uppercase;
       cursor: pointer;
@@ -557,7 +753,8 @@
       padding: 2px 10px;
       color: black;
       background: white;
-      font-family: Impact, "Arial Black", sans-serif;
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-weight: 900;
       font-size: 24px;
       text-transform: uppercase;
       box-shadow: 4px 4px 0 #d00000;
@@ -582,7 +779,8 @@
       color: white;
       background: #d00000;
       border: 2px solid white;
-      font-family: Impact, "Arial Black", sans-serif;
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-weight: 900;
       font-size: 15px;
       text-transform: uppercase;
       cursor: pointer;
@@ -605,7 +803,8 @@
       background: rgba(0, 0, 0, 0.92);
       border: 3px solid white;
       box-shadow: 6px 6px 0 #d00000;
-      font-family: Impact, "Arial Black", sans-serif;
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-weight: 900;
       font-size: clamp(14px, 2vw, 19px);
       letter-spacing: 1px;
       text-transform: uppercase;
@@ -643,27 +842,111 @@
     .portfolio-preview {
       position: relative;
       z-index: 20;
-      padding: 90px 22px 120px;
+      padding: 34px 22px 120px;
       color: white;
       background:
         radial-gradient(
-          circle at 80% 10%,
-          rgba(208, 0, 0, 0.22),
-          transparent 34%
-        ),
-        repeating-linear-gradient(
-          -8deg,
-          rgba(255, 255, 255, 0.025) 0 2px,
-          transparent 2px 14px
+          ellipse at 72% -34%,
+          rgba(208, 0, 0, 0.22) 0%,
+          rgba(208, 0, 0, 0.09) 34%,
+          transparent 66%
         ),
         #090909;
-      border-top: 8px solid #d00000;
       font-family: "Segoe UI", Arial, sans-serif;
+      isolation: isolate;
+      overflow: visible;
+    }
+
+    /* The portfolio fades upward over the bottom of the hero instead of
+       beginning at a hard horizontal edge. The faint red carryover keeps the
+       default Resident Evil theme connected while still settling into black. */
+    .portfolio-preview::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: -420px;
+      height: 540px;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(
+          ellipse at 68% 22%,
+          rgba(208, 0, 0, 0.22) 0%,
+          rgba(208, 0, 0, 0.10) 34%,
+          transparent 72%
+        ),
+        linear-gradient(
+          to bottom,
+          rgba(9, 9, 9, 0) 0%,
+          rgba(9, 9, 9, 0.06) 18%,
+          rgba(9, 9, 9, 0.22) 36%,
+          rgba(9, 9, 9, 0.52) 56%,
+          rgba(9, 9, 9, 0.82) 74%,
+          rgba(9, 9, 9, 0.96) 88%,
+          #090909 100%
+        );
+    }
+
+    /* Same curved line field as the hero, extended upward so the arcs visually
+       pass through the fade instead of restarting after it. */
+    .portfolio-preview::after {
+      content: "";
+      position: absolute;
+      left: -12%;
+      right: -12%;
+      top: -420px;
+      bottom: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.50;
+      background:
+        repeating-radial-gradient(
+          ellipse at 28% 118%,
+          rgba(255, 255, 255, 0.10) 0 1.5px,
+          transparent 1.5px 24px
+        ),
+        repeating-radial-gradient(
+          ellipse at 82% 116%,
+          rgba(255, 255, 255, 0.045) 0 1px,
+          transparent 1px 34px
+        );
+      background-size: 150vw 118vh, 128vw 108vh;
+      background-position: 0 0, 0 0;
+      background-attachment: fixed;
+      animation: curvedLineDrift 30s ease-in-out infinite alternate;
+      will-change: background-position;
+    }
+
+    @keyframes curvedLineDrift {
+      from {
+        background-position: 0 0, 0 0;
+      }
+
+      to {
+        background-position: 72px -28px, -48px 22px;
+      }
     }
 
     .portfolio-shell {
+      position: relative;
+      z-index: 2;
       width: min(1100px, 100%);
       margin: 0 auto;
+    }
+
+    /* Only animate after JS is running, so content stays visible without JS. */
+    .portfolio-preview.reveal-ready .portfolio-shell {
+      opacity: 0;
+      transform: translateY(28px);
+      transition:
+        opacity 0.72s ease,
+        transform 0.82s cubic-bezier(0.2, 0.75, 0.2, 1);
+    }
+
+    .portfolio-preview.reveal-ready.in-view .portfolio-shell {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .portfolio-kicker {
@@ -674,7 +957,8 @@
       background: white;
       border: 4px solid black;
       box-shadow: 6px 6px 0 #d00000;
-      font-family: Impact, "Arial Black", sans-serif;
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-weight: 900;
       font-size: 14px;
       letter-spacing: 2px;
       text-transform: uppercase;
@@ -683,7 +967,8 @@
 
     .portfolio-title {
       margin: 0;
-      font-family: Impact, "Arial Black", sans-serif;
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-weight: 900;
       font-size: clamp(44px, 8vw, 88px);
       line-height: 0.9;
       text-transform: uppercase;
@@ -778,7 +1063,8 @@
 
     .home-work-title {
       margin: 0 0 10px;
-      font-family: Impact, "Arial Black", sans-serif;
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-weight: 900;
       font-size: clamp(28px, 4vw, 42px);
       line-height: 0.95;
       text-transform: uppercase;
@@ -795,7 +1081,8 @@
     .home-work-cta {
       display: inline-block;
       margin-top: 18px;
-      font-family: Impact, "Arial Black", sans-serif;
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-weight: 900;
       font-size: 16px;
       letter-spacing: 1px;
       text-transform: uppercase;
@@ -803,48 +1090,11 @@
 
     .preview-heading {
       margin: 68px 0 18px;
-      font-family: Impact, "Arial Black", sans-serif;
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-weight: 900;
       font-size: clamp(30px, 5vw, 52px);
       line-height: 1;
       text-transform: uppercase;
-    }
-
-    .experience-preview-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .experience-preview-card {
-      padding: 20px;
-      color: white;
-      background: #111;
-      border: 3px solid #3a3a3a;
-      box-shadow: 6px 6px 0 #000;
-    }
-
-    .experience-role {
-      margin: 0 0 4px;
-      font-family: Impact, "Arial Black", sans-serif;
-      font-size: 24px;
-      line-height: 1;
-      text-transform: uppercase;
-    }
-
-    .experience-company {
-      margin: 0 0 12px;
-      color: #ff9696;
-      font-size: 13px;
-      font-weight: 900;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    .experience-copy {
-      margin: 0;
-      color: #d4d4d4;
-      font-size: 14px;
-      line-height: 1.55;
     }
 
     .homepage-recommendation {
@@ -908,7 +1158,8 @@
 
     .resume-preview-header h3 {
       margin: 0;
-      font-family: Impact, "Arial Black", sans-serif;
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-weight: 900;
       font-size: 30px;
       text-transform: uppercase;
     }
@@ -921,7 +1172,8 @@
       background: #d00000;
       border: 2px solid white;
       box-shadow: 4px 4px 0 black;
-      font-family: Impact, "Arial Black", sans-serif;
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-weight: 900;
       font-size: 14px;
       letter-spacing: 1px;
       text-decoration: none;
@@ -1046,6 +1298,7 @@
 
       .main-title {
         margin: 0 0 28px;
+        font-family: Impact, "Arial Black", sans-serif;
         font-size: clamp(54px, 18vw, 82px);
         line-height: 0.8;
         text-align: center;
@@ -1128,6 +1381,10 @@
         -webkit-overflow-scrolling: touch;
       }
 
+      .resize-handle {
+        display: none;
+      }
+
       .window-content h2 {
         font-size: 34px;
         line-height: 0.95;
@@ -1184,8 +1441,28 @@
         font-size: 13px;
       }
 
+      .persona-screen::after {
+        left: -28%;
+        right: -28%;
+        top: 28%;
+        bottom: -12%;
+        background-size: 190vw 108vh, 155vw 96vh;
+      }
+
       .portfolio-preview {
-        padding: 64px 16px 100px;
+        padding: 28px 16px 100px;
+      }
+
+      .portfolio-preview::before {
+        top: -300px;
+        height: 390px;
+      }
+
+      .portfolio-preview::after {
+        left: -28%;
+        right: -28%;
+        top: -300px;
+        background-size: 190vw 108vh, 155vw 96vh;
       }
 
       .portfolio-title {
@@ -1205,8 +1482,7 @@
         height: 58px;
       }
 
-      .featured-work-grid,
-      .experience-preview-grid {
+      .featured-work-grid {
         grid-template-columns: 1fr;
       }
 
@@ -1222,6 +1498,14 @@
 
       .resume-home-frame {
         height: 460px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .persona-screen::after,
+      .portfolio-preview::before,
+      .portfolio-preview::after {
+        animation: none !important;
       }
     }
   </style>
@@ -1345,9 +1629,10 @@
         </p>
 
         <p>
-          I was also the kid making Roblox games and websites for fun. I built one
-          of my first websites back in 2018, and I’ve always liked figuring out how
-          things on the internet and in games actually work.
+          I was also the kid making Roblox games and websites for fun. Back in 2018,
+          I built <a href="https://loodekres.com/" target="_blank" rel="noopener noreferrer">Loodekres.com</a>,
+          one of my first websites, and I’ve always liked figuring out how things on
+          the internet and in games actually work.
         </p>
 
         <p>
@@ -1713,49 +1998,6 @@
         </a>
       </div>
 
-      <h2 class="preview-heading">
-        Selected Experience
-      </h2>
-
-      <div class="experience-preview-grid">
-        <article class="experience-preview-card">
-          <h3 class="experience-role">President</h3>
-          <p class="experience-company">Slug Gaming</p>
-
-          <p class="experience-copy">
-            Led 30+ officers serving 3,700+ members and built data,
-            website, and operating systems supporting 600+ member growth
-            and a 530% increase in attendance.
-          </p>
-        </article>
-
-        <article class="experience-preview-card">
-          <h3 class="experience-role">
-            Product Management Intern
-          </h3>
-
-          <p class="experience-company">SkyrisAI</p>
-
-          <p class="experience-copy">
-            Translated 20 interviews across 5 user segments into 10+
-            prioritized features, 2 PRDs, and 20+ sprint-ready user stories.
-          </p>
-        </article>
-
-        <article class="experience-preview-card">
-          <h3 class="experience-role">
-            Collegiate Program Lead
-          </h3>
-
-          <p class="experience-company">Gen.G Esports</p>
-
-          <p class="experience-copy">
-            Coordinated collegiate activations generating 150+ signups,
-            200+ attendees, and more than $2,000 in program resources.
-          </p>
-        </article>
-      </div>
-
       <h2 class="preview-heading">Recommendation</h2>
 
       <div class="recommendation-card homepage-recommendation">
@@ -1851,6 +2093,26 @@
     const ctx = canvas.getContext("2d");
     const scrollHint = document.getElementById("scrollHint");
     const projectsSection = document.getElementById("projects");
+
+    // Reveal the lower portfolio section as it scrolls into view.
+    projectsSection.classList.add("reveal-ready");
+
+    const projectsObserver = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            projectsSection.classList.add("in-view");
+            projectsObserver.unobserve(projectsSection);
+          }
+        });
+      },
+      {
+        threshold: 0.08,
+        rootMargin: "0px 0px -6% 0px"
+      }
+    );
+
+    projectsObserver.observe(projectsSection);
 
     let entered = false;
     let time = 0;
@@ -2190,9 +2452,7 @@
       let offsetY = 0;
 
       bar.addEventListener("pointerdown", event => {
-        if (
-          event.target.classList.contains("close-window")
-        ) {
+        if (event.target.closest(".close-window")) {
           return;
         }
 
@@ -2215,11 +2475,24 @@
       bar.addEventListener("pointermove", event => {
         if (!dragging) return;
 
-        win.style.left =
-          event.clientX - offsetX + "px";
+        const maxLeft =
+          Math.max(8, window.innerWidth - win.offsetWidth - 8);
 
-        win.style.top =
-          event.clientY - offsetY + "px";
+        const maxTop =
+          Math.max(8, window.innerHeight - win.offsetHeight - 8);
+
+        const nextLeft = Math.min(
+          Math.max(8, event.clientX - offsetX),
+          maxLeft
+        );
+
+        const nextTop = Math.min(
+          Math.max(8, event.clientY - offsetY),
+          maxTop
+        );
+
+        win.style.left = nextLeft + "px";
+        win.style.top = nextTop + "px";
       });
 
       bar.addEventListener("pointerup", () => {
@@ -2228,6 +2501,142 @@
 
       bar.addEventListener("pointercancel", () => {
         dragging = false;
+      });
+    }
+
+    function makeResizable(win) {
+      const directions = [
+        "n", "s", "e", "w",
+        "ne", "nw", "se", "sw"
+      ];
+
+      directions.forEach(direction => {
+        const handle = document.createElement("div");
+        handle.className =
+          `resize-handle resize-${direction}`;
+        handle.dataset.resize = direction;
+        win.appendChild(handle);
+
+        handle.addEventListener("pointerdown", event => {
+          if (window.innerWidth <= 720) return;
+
+          event.preventDefault();
+          event.stopPropagation();
+
+          win.style.zIndex = ++topZ;
+          win.classList.add("resizing", "user-resized");
+
+          const startX = event.clientX;
+          const startY = event.clientY;
+          const startWidth = win.offsetWidth;
+          const startHeight = win.offsetHeight;
+          const startLeft = win.offsetLeft;
+          const startTop = win.offsetTop;
+
+          const minWidth = 320;
+          const minHeight = 220;
+          const viewportPadding = 8;
+
+          handle.setPointerCapture(event.pointerId);
+
+          const resizeWindow = moveEvent => {
+            const dx = moveEvent.clientX - startX;
+            const dy = moveEvent.clientY - startY;
+
+            let width = startWidth;
+            let height = startHeight;
+            let left = startLeft;
+            let top = startTop;
+
+            if (direction.includes("e")) {
+              width = startWidth + dx;
+            }
+
+            if (direction.includes("s")) {
+              height = startHeight + dy;
+            }
+
+            if (direction.includes("w")) {
+              width = startWidth - dx;
+              left = startLeft + dx;
+            }
+
+            if (direction.includes("n")) {
+              height = startHeight - dy;
+              top = startTop + dy;
+            }
+
+            if (width < minWidth) {
+              if (direction.includes("w")) {
+                left -= minWidth - width;
+              }
+              width = minWidth;
+            }
+
+            if (height < minHeight) {
+              if (direction.includes("n")) {
+                top -= minHeight - height;
+              }
+              height = minHeight;
+            }
+
+            if (left < viewportPadding) {
+              if (direction.includes("w")) {
+                width -= viewportPadding - left;
+              }
+              left = viewportPadding;
+            }
+
+            if (top < viewportPadding) {
+              if (direction.includes("n")) {
+                height -= viewportPadding - top;
+              }
+              top = viewportPadding;
+            }
+
+            const maxWidth =
+              window.innerWidth - left - viewportPadding;
+            const maxHeight =
+              window.innerHeight - top - viewportPadding;
+
+            width = Math.min(width, maxWidth);
+            height = Math.min(height, maxHeight);
+
+            win.style.left = left + "px";
+            win.style.top = top + "px";
+            win.style.width = width + "px";
+            win.style.height = height + "px";
+          };
+
+          const stopResize = () => {
+            win.classList.remove("resizing");
+            handle.removeEventListener(
+              "pointermove",
+              resizeWindow
+            );
+            handle.removeEventListener(
+              "pointerup",
+              stopResize
+            );
+            handle.removeEventListener(
+              "pointercancel",
+              stopResize
+            );
+          };
+
+          handle.addEventListener(
+            "pointermove",
+            resizeWindow
+          );
+          handle.addEventListener(
+            "pointerup",
+            stopResize
+          );
+          handle.addEventListener(
+            "pointercancel",
+            stopResize
+          );
+        });
       });
     }
 
@@ -2271,6 +2680,7 @@
       .querySelectorAll(".window")
       .forEach(win => {
         makeDraggable(win);
+        makeResizable(win);
 
         const closeButton =
           win.querySelector(".close-window");
