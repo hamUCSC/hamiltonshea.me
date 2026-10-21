@@ -1414,20 +1414,1194 @@
         animation: none !important;
       }
     }
-  </style>
+  
+    /* Frosted-glass treatment: retains the original Persona-inspired palette. */
+    :root {
+      --glass-fill: rgba(18, 18, 24, 0.60);
+      --glass-border: rgba(255, 255, 255, 0.32);
+      --glass-glow: rgba(255, 255, 255, 0.10);
+      --glass-blur: 20px;
+    }
+
+    .window {
+      background: linear-gradient(135deg, rgba(48, 48, 58, 0.65), rgba(5, 5, 10, 0.72) 70%);
+      border: 1px solid var(--glass-border);
+      border-radius: 18px;
+      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.54),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.24),
+                  0 0 35px rgba(208, 0, 0, 0.12);
+      -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(145%);
+      backdrop-filter: blur(var(--glass-blur)) saturate(145%);
+    }
+    .window-bar {
+      background: rgba(255, 255, 255, 0.13);
+      color: #fff;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.20);
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
+    }
+    .close-window {
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      border-radius: 9px;
+      background: rgba(208, 0, 0, 0.65);
+      box-shadow: 0 4px 18px rgba(0,0,0,.3);
+    }
+    .window-content { color: #f7f7fa; }
+    .window-content h2 { color: #ff4545; text-shadow: 0 2px 14px rgba(208,0,0,.32); }
+    .contact-window-content {
+      background: linear-gradient(135deg, rgba(190, 0, 0, 0.12), rgba(0, 0, 0, 0.04));
+    }
+    .contact-form input, .contact-form textarea {
+      background: rgba(255, 255, 255, .11);
+      color: white;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 10px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+      outline-offset: 3px;
+    }
+    .contact-form input::placeholder, .contact-form textarea::placeholder { color: rgba(255,255,255,.62); }
+    .contact-form input:focus, .contact-form textarea:focus { border-color: rgba(255,255,255,.85); background: rgba(255,255,255,.16); }
+    .contact-submit, .highlight-link, .resume-preview-link, .all-work-link {
+      border-radius: 10px;
+      background: rgba(208, 0, 0, 0.64);
+      border: 1px solid rgba(255, 255, 255, .50);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 7px 20px rgba(0,0,0,.25);
+    }
+    .radio-player {
+      background: linear-gradient(135deg, rgba(45,45,55,.67), rgba(8,8,13,.66));
+      border: 1px solid rgba(255,255,255,.38);
+      border-radius: 18px;
+      box-shadow: 0 18px 48px rgba(0,0,0,.52), inset 0 1px 0 rgba(255,255,255,.25);
+      -webkit-backdrop-filter: blur(22px) saturate(145%);
+      backdrop-filter: blur(22px) saturate(145%);
+    }
+    .radio-title {
+      border-radius: 8px;
+      box-shadow: none;
+      cursor: grab;
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .radio-player.is-dragging .radio-title { cursor: grabbing; }
+    .radio-player.is-dragging { transition: none !important; }
+    .radio-controls button {
+      background: rgba(208,0,0,.54);
+      border: 1px solid rgba(255,255,255,.4);
+      border-radius: 9px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.18);
+    }
+    .scroll-hint {
+      background: rgba(18,18,24,.62);
+      border: 1px solid rgba(255,255,255,.45);
+      border-radius: 999px;
+      box-shadow: 0 12px 35px rgba(0,0,0,.35);
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
+    }
+    .menu-badge, .portfolio-kicker {
+      color: white;
+      background: rgba(35,35,42,.55);
+      border: 1px solid rgba(255,255,255,.5);
+      border-radius: 10px;
+      box-shadow: 0 9px 22px rgba(0,0,0,.32);
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
+    }
+    .home-work-card, .home-work-card.dashboard, .homepage-recommendation, .recommendation-card {
+      background: linear-gradient(140deg, rgba(95,25,35,.28), rgba(18,18,26,.65) 65%);
+      border: 1px solid rgba(255,255,255,.28);
+      border-radius: 20px;
+      box-shadow: 0 16px 38px rgba(0,0,0,.32), inset 0 1px 0 rgba(255,255,255,.18);
+      -webkit-backdrop-filter: blur(16px) saturate(125%);
+      backdrop-filter: blur(16px) saturate(125%);
+    }
+    .home-work-card.dashboard { background: linear-gradient(140deg, rgba(12,77,120,.38), rgba(18,18,26,.65) 65%); }
+    .home-work-card:hover, .home-work-card.dashboard:hover {
+      border-color: rgba(255,255,255,.72);
+      box-shadow: 0 24px 48px rgba(0,0,0,.38), inset 0 1px 0 rgba(255,255,255,.3);
+    }
+    .portfolio-preview { background: radial-gradient(ellipse at 50% 6%, rgba(155,0,0,.20), transparent 60%), #09090e; }
+    .portfolio-preview::after { opacity: .2; }
+    .resume-preview-card { border-radius: 18px; box-shadow: 0 18px 45px rgba(0,0,0,.35); }
+    .desktop-icon:focus-visible, .radio-controls button:focus-visible, .close-window:focus-visible {
+      outline: 3px solid white;
+      outline-offset: 5px;
+    }
+    @media (max-width: 720px) {
+      .window { border: 1px solid rgba(255,255,255,.4); border-radius: 16px; box-shadow: 0 18px 48px rgba(0,0,0,.5); }
+      .radio-player { border: 1px solid rgba(255,255,255,.4); border-radius: 15px; box-shadow: 0 12px 30px rgba(0,0,0,.4); }
+    }
+    @media (prefers-reduced-transparency: reduce) {
+      .window, .radio-player { background: #191920; }
+      .home-work-card, .home-work-card.dashboard, .recommendation-card { background: #1b1b24; }
+    }
+
+
+    /* Reference-inspired dark liquid glass: translucent charcoal, silver rim,
+       bright environmental reflections and soft red refraction. */
+    :root { --glass-blur: 34px; --glass-border: rgba(235,244,255,.48); }
+    .window, .radio-player, .home-work-card, .home-work-card.dashboard,
+    .recommendation-card, .homepage-recommendation, .resume-preview-card {
+      position: relative;
+      background: linear-gradient(125deg, rgba(235,242,255,.17) 0%, rgba(110,125,142,.09) 12%, rgba(15,22,32,.62) 41%, rgba(5,14,25,.72) 75%, rgba(205,220,236,.15) 100%) !important;
+      border: 1px solid rgba(237,246,255,.53) !important;
+      border-radius: 27px !important;
+      box-shadow: inset 0 1px 1px rgba(255,255,255,.72), inset 1px 0 1px rgba(255,255,255,.15),
+                  inset -1px -1px 1px rgba(250,253,255,.28),
+                  0 26px 70px rgba(0,0,0,.62), 0 0 28px rgba(141,174,207,.10) !important;
+      -webkit-backdrop-filter: blur(34px) saturate(175%) brightness(1.07);
+      backdrop-filter: blur(34px) saturate(175%) brightness(1.07);
+    }
+    .window::before, .radio-player::before, .home-work-card::after,
+    .recommendation-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      z-index: 0;
+      background: radial-gradient(ellipse 70% 25% at 80% 0%, rgba(255,255,255,.32), transparent 75%),
+                  radial-gradient(ellipse 55% 42% at 99% 98%, rgba(201,222,245,.23), transparent 80%),
+                  radial-gradient(ellipse 55% 52% at 0% 0%, rgba(255,44,54,.19), transparent 78%);
+      opacity: .78;
+    }
+    .window > *, .radio-player > *, .home-work-card > *, .recommendation-card > * { position: relative; z-index: 1; }
+    .window { overflow: hidden; }
+    .window-bar {
+      background: linear-gradient(90deg,rgba(250,250,255,.17),rgba(255,255,255,.035)) !important;
+      border-bottom: 1px solid rgba(255,255,255,.26);
+      border-radius: 26px 26px 0 0;
+    }
+    .radio-player { cursor: grab; touch-action: none; user-select: none; -webkit-user-select:none;
+      transform: none; overflow: hidden; }
+    .radio-player.is-dragging { cursor: grabbing; }
+    .radio-controls, .radio-controls button { touch-action: manipulation; }
+    .radio-controls button { cursor: pointer; }
+    .radio-title { background: rgba(255,255,255,.16); color: #fff; border: 1px solid rgba(255,255,255,.32); border-radius: 12px; }
+    .desktop-icons { gap: 20px; }
+    .desktop-icon {
+      width: 116px; min-height: 132px; padding: 13px 6px 9px;
+      border: 1px solid rgba(240,248,255,.5);
+      border-radius: 24px;
+      background: linear-gradient(130deg,rgba(255,255,255,.25),rgba(28,34,45,.34) 42%,rgba(6,10,18,.56) 82%,rgba(255,255,255,.14));
+      -webkit-backdrop-filter: blur(26px) saturate(165%);
+      backdrop-filter: blur(26px) saturate(165%);
+      box-shadow: inset 0 1px 1px rgba(255,255,255,.65), 0 12px 28px rgba(0,0,0,.38), 0 0 22px rgba(230,40,50,.08);
+      filter: none;
+      transform: translateZ(0);
+      transition: transform .22s cubic-bezier(.2,.85,.25,1.3), box-shadow .22s ease, background .22s ease;
+    }
+    .desktop-icon:hover, .desktop-icon:focus-visible {
+      transform: translateY(-11px) scale(1.1) rotate(0deg);
+      box-shadow: inset 0 1px 1px #fff, 0 20px 45px rgba(0,0,0,.53), 0 0 26px rgba(240,55,67,.33);
+      background: linear-gradient(135deg,rgba(255,255,255,.35),rgba(28,34,45,.48) 42%,rgba(5,10,20,.57) 80%,rgba(255,255,255,.22));
+    }
+    .desktop-icon svg { width: 68px; height: 68px; filter: drop-shadow(0 4px 7px rgba(0,0,0,.55)); }
+    .desktop-icon span { text-shadow: 0 2px 7px #000; }
+    .menu-badge { background: linear-gradient(120deg,rgba(255,255,255,.3),rgba(11,17,26,.55)) !important;
+      border: 1px solid rgba(255,255,255,.58); border-radius: 14px; backdrop-filter: blur(24px); }
+    .main-title {
+      display: inline-block;
+      width: fit-content;
+      padding: 14px 23px 25px 9px;
+      border-radius: 25px;
+      transform: rotate(-4deg) perspective(850px) translateZ(0);
+      transition: transform .3s cubic-bezier(.18,.86,.28,1.3), filter .3s ease, text-shadow .3s ease;
+      cursor: default;
+      -webkit-text-stroke: .5px rgba(255,255,255,.36);
+    }
+    .main-title:hover {
+      transform: rotate(-2deg) perspective(850px) translateZ(62px) scale(1.105) translateY(-8px);
+      filter: drop-shadow(0 20px 15px rgba(0,0,0,.55)) drop-shadow(0 0 18px rgba(255,255,255,.24));
+      text-shadow: 7px 8px 0 rgba(0,0,0,.92), 14px 16px 0 #b60018, 0 0 22px rgba(255,255,255,.35);
+    }
+    .main-title span { transition: filter .3s ease; }
+    .main-title:hover span { filter: brightness(1.23) drop-shadow(0 0 9px rgba(255,80,90,.7)); }
+    .portfolio-preview { background: radial-gradient(ellipse at 22% 5%, rgba(159,21,40,.17), transparent 55%), #09101b; }
+    @media (max-width:720px) {
+      .desktop-icon { width: min(130px,100%); min-height: 130px; }
+      .main-title { padding: 12px; }
+      .main-title:hover { transform: rotate(-2deg) scale(1.055) translateY(-4px); }
+      .radio-player { touch-action: none; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      .main-title, .desktop-icon { transition: none !important; }
+    }
+
+
+    /* Refined dock: consistent alignment, restrained glass and crisp icons. */
+    .desktop-icons {
+      display: grid;
+      grid-template-columns: repeat(5, 104px);
+      gap: 13px;
+      max-width: none;
+      width: max-content;
+      transform: none;
+      align-items: stretch;
+    }
+    .desktop-icon {
+      width: 104px;
+      min-height: 110px;
+      height: 110px;
+      padding: 15px 7px 11px;
+      border: 1px solid rgba(255,255,255,.32);
+      border-radius: 20px;
+      background: linear-gradient(145deg, rgba(255,255,255,.16), rgba(18,22,32,.43) 48%, rgba(10,14,25,.58));
+      box-shadow: inset 0 1px rgba(255,255,255,.34), 0 9px 22px rgba(0,0,0,.25);
+      -webkit-backdrop-filter: blur(24px) saturate(140%);
+      backdrop-filter: blur(24px) saturate(140%);
+      filter: none;
+      transform: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      transition: transform .22s ease, background .22s ease, border-color .22s ease, box-shadow .22s ease;
+    }
+    .desktop-icon:hover, .desktop-icon:focus-visible {
+      transform: translateY(-5px) scale(1.035);
+      border-color: rgba(255,255,255,.7);
+      background: linear-gradient(145deg, rgba(255,255,255,.24), rgba(17,22,34,.53) 65%, rgba(10,14,25,.64));
+      box-shadow: inset 0 1px rgba(255,255,255,.55), 0 14px 26px rgba(0,0,0,.34);
+    }
+    .desktop-icon svg {
+      width: 42px;
+      height: 42px;
+      flex: 0 0 auto;
+      margin: 0;
+      stroke-width: 3px;
+      filter: drop-shadow(0 2px 2px rgba(0,0,0,.4));
+    }
+    .desktop-icon .clean-link-icon { stroke-width: 4px !important; }
+    .desktop-icon span {
+      font-size: 13px;
+      font-weight: 750;
+      letter-spacing: .2px;
+      line-height: 1.1;
+      text-shadow: 0 2px 3px rgba(0,0,0,.5);
+    }
+    /* Each title word has its own hover target and independent depth animation. */
+    .main-title {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      width: fit-content;
+      padding: 0 24px 18px 0;
+      border: 0;
+      transform: rotate(-4deg);
+      filter: none;
+      overflow: visible;
+      transition: none;
+      cursor: default;
+    }
+    .main-title:hover {
+      transform: rotate(-4deg);
+      filter: none;
+      text-shadow: 6px 6px 0 black, 12px 12px 0 #d00000;
+    }
+    .main-title .title-word {
+      display: block;
+      width: fit-content;
+      position: relative;
+      transform-origin: left center;
+      cursor: default;
+      transition: transform .3s cubic-bezier(.2,.8,.2,1.18), filter .3s ease;
+      will-change: transform;
+    }
+    .main-title .title-ham { color: #fff; text-shadow: 6px 6px 0 #000, 12px 12px 0 #d00000; }
+    .main-title .title-website { color: #d00000; text-shadow: 5px 5px 0 #fff, 11px 11px 0 #000; }
+    .main-title .title-word:hover {
+      transform: perspective(650px) translateY(-7px) translateZ(45px) scale(1.09);
+      filter: drop-shadow(0 12px 12px rgba(0,0,0,.6)) drop-shadow(0 0 10px rgba(255,255,255,.20));
+    }
+    .main-title:hover .title-website:not(:hover) { filter: none; }
+    @media (max-width: 720px) {
+      .main-title { align-items: center; padding: 0 8px 20px; transform: rotate(-3deg); }
+      .main-title:hover { transform: rotate(-3deg); }
+      .main-title .title-word { transform-origin: center center; }
+      .desktop-icons {
+        width: min(100%, 350px);
+        max-width: 350px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        justify-items: stretch;
+      }
+      .desktop-icon { width: 100%; height: 102px; min-height: 102px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .main-title .title-word, .desktop-icon { transition: none !important; }
+    }
+
+
+    /* Standalone transparent navigation icons, no tiles or glass boxes. */
+    .desktop-icons {
+      display: flex;
+      width: fit-content;
+      max-width: 100%;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 19px;
+      transform: none;
+    }
+    .desktop-icon, .desktop-icon:hover, .desktop-icon:focus-visible {
+      width: 90px;
+      height: auto;
+      min-height: 100px;
+      padding: 10px 4px;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+      box-shadow: none;
+      filter: none;
+    }
+    .desktop-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 9px;
+      transition: transform .2s ease, filter .2s ease;
+    }
+    .desktop-icon:hover, .desktop-icon:focus-visible {
+      transform: translateY(-6px) scale(1.06);
+      filter: drop-shadow(0 0 12px rgba(255,255,255,.28));
+    }
+    .desktop-icon svg {
+      width: 59px;
+      height: 59px;
+      margin: 0;
+      filter: drop-shadow(0 3px 3px rgba(0,0,0,.8));
+    }
+    .desktop-icon span { font-size: 14px; font-weight: 800; }
+    /* A later generic glass rule accidentally changed the radio to position:relative.
+       Keep it fixed to the viewport, both before and after dragging. */
+    .radio-player {
+      position: fixed !important;
+      left: auto;
+      top: auto;
+      right: 24px;
+      bottom: 24px;
+      transform: none !important;
+      margin: 0;
+      z-index: 100;
+    }
+    @media (max-width: 720px) {
+      .desktop-icons {
+        display: grid;
+        width: min(100%, 340px);
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px 8px;
+        justify-items: center;
+      }
+      .desktop-icon, .desktop-icon:hover, .desktop-icon:focus-visible {
+        width: 100%;
+        height: auto;
+        min-height: 98px;
+      }
+      .radio-player { left: 10px; right: 10px; bottom: 12px; top: auto; width: auto; }
+    }
+
+
+    /* Redesigned intro: high-contrast glass panel over the original living dot field. */
+    .enter-screen { isolation: isolate; background: #030305; }
+    .enter-screen::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1;
+      background: radial-gradient(ellipse at 50% 50%, rgba(0,0,0,.30) 0%, rgba(0,0,0,.14) 36%, rgba(0,0,0,.50) 100%);
+    }
+    .wave-canvas { opacity: .8; }
+    .entrance-orb { position: absolute; border-radius: 50%; filter: blur(75px); pointer-events: none; z-index: 2; animation: introAmbient 11s ease-in-out infinite alternate; }
+    .entrance-orb-a { width: 390px; height: 390px; left: calc(50% - 500px); top: calc(50% - 260px); background: rgba(214, 16, 34, .31); }
+    .entrance-orb-b { width: 350px; height: 350px; right: calc(50% - 490px); bottom: calc(50% - 290px); background: rgba(125, 142, 194, .14); animation-delay: -5s; }
+    @keyframes introAmbient { to { transform: translate(32px,-26px) scale(1.2); } }
+    .enter-content { z-index: 5; width: min(94vw, 960px); padding: 22px; }
+    .entrance-panel {
+      position: relative; overflow: hidden; isolation: isolate;
+      min-height: 440px; padding: 25px 32px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      border-radius: 27px; text-align: left;
+      border: 1px solid rgba(255,255,255,.48);
+      background: linear-gradient(120deg, rgba(25,26,33,.78), rgba(7,10,16,.79) 55%, rgba(35,20,26,.71));
+      -webkit-backdrop-filter: blur(24px) saturate(155%); backdrop-filter: blur(24px) saturate(155%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.32), inset 0 0 65px rgba(255,255,255,.025), 0 32px 100px rgba(0,0,0,.75), 0 0 70px rgba(170,0,12,.10);
+      transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+      animation: introArrive .9s cubic-bezier(.16,1,.3,1) both;
+    }
+    .entrance-panel::before { content:""; position:absolute; pointer-events:none; inset:0 0 auto; height: 38%; z-index:-1; background: linear-gradient(180deg, rgba(255,255,255,.095), transparent); }
+    .entrance-panel::after { content:""; position:absolute; width: 260px; height:260px; border-radius:50%; background:rgba(247,34,56,.20); filter:blur(67px); right:-80px; top:-100px; z-index:-1; }
+    .entrance-panel:hover { transform: translateY(-5px); border-color: rgba(255,255,255,.70); box-shadow: inset 0 1px 0 rgba(255,255,255,.40),0 38px 100px rgba(0,0,0,.8),0 0 70px rgba(170,0,12,.18); }
+    .entrance-topline, .entrance-bottomline { display:flex; align-items:center; justify-content:space-between; gap: 16px; }
+    .entrance-topline { color:#f4eff0; letter-spacing:.22em; font-size: 11px; font-weight: 800; }
+    .entrance-topline-right { margin-left:auto; color:#a9a9b1; font-size:10px; font-weight:600; }
+    .live-dot { width:8px; height:8px; background:#ff3550; border-radius:50%; display:inline-block; flex-shrink:0; box-shadow:0 0 15px #ff2949; animation: dotPulse 2s ease-in-out infinite; }
+    .entrance-main { padding: 35px 0 27px; }
+    .entrance-eyebrow { color: #ff7688; font-size:clamp(10px,1.4vw,12px); font-weight:900; letter-spacing:.26em; margin-bottom: 13px; }
+    .entrance-name { font-family:Impact,"Arial Black",sans-serif; font-size:clamp(120px,20vw,228px); letter-spacing:-.065em; line-height:.83; margin:0 0 22px; font-weight:900; text-shadow:0 8px 40px rgba(0,0,0,.45); }
+    .entrance-asterisk { display:inline-block; vertical-align:top; font-family:Arial,sans-serif; color:#fa2945; font-size:.32em; margin-left:.22em; margin-top:.08em; text-shadow:0 0 27px rgba(255,45,70,.6); animation: starSpin 16s linear infinite; }
+    .entrance-subtitle { max-width: 520px; margin:0; font-size:clamp(16px,2.3vw,22px); color:#e6e6eb; line-height:1.5; font-weight:500; }
+    .entrance-subtitle span { color:#ff7d91; }
+    .entrance-bottomline { padding-top:22px; border-top:1px solid rgba(255,255,255,.20); }
+    .entrance-instruction { display:flex; gap:14px; align-items:center; font-weight:900; font-size:13px; letter-spacing:.12em; }
+    .entrance-instruction small { display:block; font-size:10px; font-weight:600; color:#acacb7; margin-top:5px; letter-spacing:.12em; }
+    .entrance-key { display:grid; place-items:center; width:49px; height:47px; border:1px solid rgba(255,255,255,.55); background:rgba(255,255,255,.10); border-radius:12px; box-shadow:inset 0 1px 0 rgba(255,255,255,.28),0 4px 0 rgba(0,0,0,.35); font-size:25px; animation:keyPrompt 2.2s ease-in-out infinite; }
+    .entrance-index { color:#a2a2ac; font-size:11px; font-weight:800; letter-spacing:.16em; white-space:nowrap; }
+    .entrance-outside { margin:22px 0 0; color:rgba(255,255,255,.57); font-size:10px; font-weight:700; letter-spacing:.28em; }
+    @keyframes introArrive { from { opacity:0; transform:translateY(30px) scale(.97); } to { opacity:1; transform:translateY(0) scale(1); } }
+    @keyframes dotPulse { 50% { opacity:.45; box-shadow:0 0 4px #ff2949; } }
+    @keyframes keyPrompt { 50% { transform:translateY(-4px); background:rgba(255,255,255,.2); } }
+    @keyframes starSpin { to { transform:rotate(360deg); } }
+    @media (max-width:600px) {
+      .enter-content { width:100%; padding:15px; }
+      .entrance-panel { min-height:440px; padding:20px; border-radius:20px; }
+      .entrance-topline { letter-spacing:.11em; font-size:10px; }
+      .entrance-topline-right { font-size:9px; text-align:right; }
+      .entrance-name { font-size:clamp(106px,29vw,175px); }
+      .entrance-eyebrow { letter-spacing:.13em; }
+      .entrance-instruction { font-size:11px; letter-spacing:.07em; }
+      .entrance-instruction small { font-size:9px; letter-spacing:0; }
+      .entrance-index { display:none; }
+      .entrance-outside { font-size:9px; letter-spacing:.12em; }
+    }
+    @media (prefers-reduced-motion:reduce) { .entrance-panel, .entrance-orb, .entrance-asterisk, .live-dot, .entrance-key { animation:none !important; transition:none !important; } }
+
+  
+
+    /* Radio glass pass: make it feel see-through so the page is visible beneath it. */
+    .radio-player {
+      background: linear-gradient(145deg,
+        rgba(255,255,255,0.18) 0%,
+        rgba(255,255,255,0.08) 14%,
+        rgba(34,24,28,0.22) 40%,
+        rgba(14,10,14,0.18) 72%,
+        rgba(255,255,255,0.10) 100%) !important;
+      border: 1px solid rgba(255,255,255,0.50) !important;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.52),
+        inset 0 -1px 0 rgba(255,255,255,0.08),
+        0 20px 48px rgba(0,0,0,0.38),
+        0 0 0 1px rgba(255,255,255,0.06) !important;
+      -webkit-backdrop-filter: blur(30px) saturate(190%) brightness(1.15) !important;
+      backdrop-filter: blur(30px) saturate(190%) brightness(1.15) !important;
+      overflow: hidden;
+    }
+
+    .radio-player::before {
+      background:
+        radial-gradient(circle at 12% 16%, rgba(255,255,255,0.28), transparent 20%),
+        radial-gradient(circle at 86% 12%, rgba(255,255,255,0.24), transparent 26%),
+        radial-gradient(circle at 88% 88%, rgba(194,220,255,0.16), transparent 24%),
+        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02) 34%, transparent 72%) !important;
+      opacity: 0.68 !important;
+    }
+
+    .radio-title {
+      background: rgba(255,255,255,0.18) !important;
+      border: 1px solid rgba(255,255,255,0.34) !important;
+      color: #fff !important;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.20) !important;
+    }
+
+    .track-name {
+      color: rgba(255,255,255,0.95) !important;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.55) !important;
+    }
+
+    .radio-controls button {
+      background: rgba(208, 0, 0, 0.34) !important;
+      border: 1px solid rgba(255,255,255,0.34) !important;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.20) !important;
+    }
+
+    .radio-controls button:hover {
+      background: rgba(255,255,255,0.20) !important;
+      color: #fff !important;
+    }
+
+
+    /* Minimal welcome screen: only the original greeting over the animated dots. */
+    .enter-content.welcome-only {
+      width: 100%;
+      max-width: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .welcome-simple {
+      margin: 0;
+      color: #fff;
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-size: clamp(30px, 5.4vw, 76px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.035em;
+      text-align: center;
+      text-shadow: 0 3px 28px rgba(0,0,0,.95), 0 0 24px rgba(255,255,255,.26);
+      animation: welcomeFloat 3s ease-in-out infinite;
+    }
+    @keyframes welcomeFloat {
+      0%,100% { transform: translateY(0); opacity: 1; }
+      50% { transform: translateY(-5px); opacity: .82; }
+    }
+    @media (prefers-reduced-motion: reduce) { .welcome-simple { animation: none; } }
+
+
+    /* Final polish: clearer standalone icons and a lighter bubble-like radio glass. */
+    .desktop-icons {
+      display: flex !important;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 22px !important;
+      width: fit-content;
+      max-width: 100%;
+      transform: none !important;
+    }
+
+    .desktop-icon,
+    .desktop-icon:hover,
+    .desktop-icon:focus-visible {
+      width: 90px !important;
+      min-height: 102px !important;
+      height: auto !important;
+      padding: 8px 2px !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      -webkit-backdrop-filter: none !important;
+      backdrop-filter: none !important;
+    }
+
+    .desktop-icon {
+      display: flex !important;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 8px !important;
+      color: #fff;
+      transition: transform .18s ease, filter .18s ease;
+      filter: drop-shadow(0 4px 0 rgba(0,0,0,.9));
+    }
+
+    .desktop-icon:hover,
+    .desktop-icon:focus-visible {
+      transform: translateY(-5px) scale(1.06) !important;
+      filter: drop-shadow(0 4px 0 rgba(0,0,0,.95)) drop-shadow(0 10px 12px rgba(255,255,255,.12));
+    }
+
+    .desktop-icon svg {
+      width: 64px !important;
+      height: 64px !important;
+      margin: 0 !important;
+      display: block;
+      fill: #fff !important;
+      stroke: #000 !important;
+      stroke-width: 5.5px !important;
+      paint-order: stroke fill;
+      stroke-linejoin: round;
+      stroke-linecap: round;
+      filter: drop-shadow(0 2px 2px rgba(0,0,0,.6));
+    }
+
+    .desktop-icon svg * {
+      vector-effect: non-scaling-stroke;
+    }
+
+    .desktop-icon .clean-link-icon {
+      fill: none !important;
+      stroke: #fff !important;
+      stroke-width: 5.5px !important;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .desktop-icon span {
+      display: block;
+      color: #fff !important;
+      font-size: 16px !important;
+      font-weight: 900 !important;
+      letter-spacing: .2px !important;
+      line-height: 1.05;
+      text-shadow: 0 2px 0 rgba(0,0,0,.95), 0 4px 10px rgba(0,0,0,.35);
+    }
+
+    @media (max-width: 720px) {
+      .desktop-icons {
+        display: grid !important;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        width: min(100%, 340px);
+        gap: 14px 10px !important;
+        justify-items: center;
+      }
+      .desktop-icon,
+      .desktop-icon:hover,
+      .desktop-icon:focus-visible {
+        width: 100% !important;
+        min-height: 98px !important;
+      }
+      .desktop-icon svg {
+        width: 58px !important;
+        height: 58px !important;
+      }
+      .desktop-icon span {
+        font-size: 15px !important;
+      }
+    }
+
+    .radio-player {
+      background: linear-gradient(145deg,
+        rgba(255,255,255,0.18) 0%,
+        rgba(255,255,255,0.10) 16%,
+        rgba(255,92,92,0.16) 38%,
+        rgba(255,40,40,0.12) 58%,
+        rgba(255,255,255,0.08) 100%) !important;
+      border: 1.5px solid rgba(255,255,255,0.52) !important;
+      border-radius: 26px !important;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.50),
+        inset 0 -1px 0 rgba(255,255,255,0.10),
+        0 18px 38px rgba(0,0,0,0.24),
+        0 0 0 1px rgba(255,255,255,0.05) !important;
+      -webkit-backdrop-filter: blur(18px) saturate(165%) brightness(1.12) !important;
+      backdrop-filter: blur(18px) saturate(165%) brightness(1.12) !important;
+      overflow: hidden;
+    }
+
+    .radio-player::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 20% 14%, rgba(255,255,255,0.36), transparent 20%),
+        radial-gradient(circle at 76% 10%, rgba(255,255,255,0.20), transparent 24%),
+        radial-gradient(circle at 86% 82%, rgba(255,255,255,0.14), transparent 24%),
+        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.015) 40%, transparent 72%) !important;
+      opacity: .88 !important;
+    }
+
+    .radio-player > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .radio-title {
+      background: rgba(255,255,255,0.14) !important;
+      border: 1px solid rgba(255,255,255,0.38) !important;
+      border-radius: 13px !important;
+      color: #fff !important;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.18) !important;
+    }
+
+    .track-name {
+      color: rgba(255,255,255,0.96) !important;
+      text-shadow: 0 1px 6px rgba(0,0,0,.35) !important;
+    }
+
+    .radio-controls button {
+      background: rgba(208,0,0,0.22) !important;
+      border: 1px solid rgba(255,255,255,0.34) !important;
+      border-radius: 10px !important;
+      color: #fff !important;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.18) !important;
+    }
+
+    .radio-controls button:hover {
+      background: rgba(255,255,255,0.18) !important;
+      color: #fff !important;
+    }
+
+
+    /* Popup repair: viewport anchored even after other glass styles load. */
+    .persona-screen .window {
+      position: fixed !important;
+      z-index: 40;
+      max-height: calc(100dvh - 24px);
+    }
+    .persona-screen .window.open { display: flex; }
+    .persona-screen .window .window-content {
+      min-height: 0;
+      overflow: auto;
+    }
+
+    /* Crystal icons, not boxed tiles. */
+    .desktop-icon,
+    .desktop-icon:hover,
+    .desktop-icon:focus-visible {
+      background: transparent !important;
+      border: 0 !important;
+      box-shadow: none !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+    .desktop-icon svg {
+      fill: rgba(235, 246, 255, .48) !important;
+      stroke: rgba(255,255,255,.98) !important;
+      stroke-width: 2.8px !important;
+      paint-order: stroke fill;
+      filter: drop-shadow(0 1px 0 rgba(255,255,255,.8))
+              drop-shadow(1px 3px 0 rgba(5,10,20,.94))
+              drop-shadow(0 6px 9px rgba(0,0,0,.55)) !important;
+    }
+    .desktop-icon .clean-link-icon {
+      fill: none !important;
+      stroke: rgba(246,251,255,.96) !important;
+      stroke-width: 5.5px !important;
+    }
+    .desktop-icon span {
+      font-weight: 900 !important;
+      color: rgba(255,255,255,.96) !important;
+      text-shadow: 0 2px 1px rgba(0,0,0,.9), 0 0 10px rgba(255,255,255,.2) !important;
+    }
+    .desktop-icon:hover svg,
+    .desktop-icon:focus-visible svg {
+      fill: rgba(245,251,255,.66) !important;
+      filter: drop-shadow(0 1px 0 white)
+              drop-shadow(0 4px 0 rgba(5,10,20,.85))
+              drop-shadow(0 0 14px rgba(220,240,255,.75)) !important;
+    }
+    @media (max-width: 720px) {
+      .persona-screen .window {
+        left: 10px !important;
+        top: 72px !important;
+        width: calc(100vw - 20px) !important;
+        max-height: calc(100dvh - 110px) !important;
+      }
+    }
+
+
+    /* Readable popup headings on every music-theme background. */
+    .persona-screen .window .window-content h2 {
+      color: #fff !important;
+      -webkit-text-fill-color: #fff !important;
+      text-shadow: 0 2px 2px rgba(0,0,0,.88), 0 4px 18px rgba(0,0,0,.72) !important;
+      letter-spacing: .4px;
+    }
+
+    /* Colored clear-glass SVGs with a translucent fill and crisp illuminated rims. */
+    .desktop-icon svg {
+      fill: rgba(235,245,255,.19) !important;
+      stroke: rgba(255,255,255,.94) !important;
+      stroke-width: 3.4px !important;
+      paint-order: stroke fill;
+      filter: drop-shadow(0 1px 0 rgba(255,255,255,.55)) drop-shadow(1px 3px 1px rgba(0,0,0,.83)) drop-shadow(0 5px 9px rgba(0,0,0,.34)) !important;
+    }
+    /* Keep an individual subtle color cast for each symbol without opaque centers. */
+    .desktop-icon:nth-child(1) svg { fill: rgba(224,240,255,.25) !important; }
+    .desktop-icon:nth-child(2) svg { fill: none !important; stroke: rgba(245,250,255,.9) !important; }
+    .desktop-icon:nth-child(3) svg { fill: rgba(180,225,235,.17) !important; }
+    .desktop-icon:nth-child(4) svg { fill: rgba(212,225,255,.23) !important; }
+    .desktop-icon:nth-child(5) svg { fill: rgba(235,245,255,.14) !important; }
+    .desktop-icon .clean-link-icon { fill: none !important; stroke-width: 5.5px !important; }
+    .desktop-icon:hover svg, .desktop-icon:focus-visible svg {
+      filter: drop-shadow(0 1px 0 rgba(255,255,255,.85)) drop-shadow(0 3px 2px rgba(0,0,0,.75)) drop-shadow(0 0 14px rgba(225,243,255,.58)) !important;
+    }
+    .desktop-icon:nth-child(1):hover svg { fill: rgba(224,240,255,.36) !important; }
+    .desktop-icon:nth-child(3):hover svg { fill: rgba(180,225,235,.31) !important; }
+    .desktop-icon:nth-child(4):hover svg { fill: rgba(212,225,255,.36) !important; }
+    .desktop-icon:nth-child(5):hover svg { fill: rgba(235,245,255,.28) !important; }
+
+
+
+    /* Final tune-up: stronger RADIO label, one clear resize cue at bottom-right,
+       and more transparent glassy icons with different tints. */
+    .radio-title {
+      font-weight: 1000 !important;
+      font-size: 26px !important;
+      letter-spacing: .8px !important;
+      text-transform: uppercase;
+      text-shadow: 0 1px 0 rgba(255,255,255,.18), 0 2px 10px rgba(0,0,0,.35) !important;
+      padding: 3px 12px !important;
+    }
+
+    /* Only show the resize/grab indication in the bottom-right corner. */
+    .resize-sw, .resize-nw, .resize-ne {
+      display: none !important;
+    }
+    .window.open .resize-se,
+    .resize-se {
+      right: 10px !important;
+      bottom: 10px !important;
+      left: auto !important;
+      top: auto !important;
+      width: 24px !important;
+      height: 24px !important;
+      opacity: 1 !important;
+      background:
+        linear-gradient(
+          135deg,
+          transparent 0 40%,
+          rgba(255,255,255,.95) 40% 46%,
+          transparent 46% 57%,
+          rgba(255,255,255,.95) 57% 63%,
+          transparent 63% 74%,
+          rgba(255,255,255,.95) 74% 80%,
+          transparent 80%
+        ) !important;
+      filter: drop-shadow(0 0 4px rgba(255,255,255,.65)) drop-shadow(0 0 8px rgba(0,0,0,.25));
+      transform-origin: bottom right !important;
+    }
+
+    /* Make the standalone icons feel like clearer tinted glass. */
+    .desktop-icon svg {
+      fill: rgba(245, 250, 255, .10) !important;
+      stroke: rgba(255,255,255,.98) !important;
+      stroke-width: 3.6px !important;
+      paint-order: stroke fill;
+      filter:
+        drop-shadow(0 1px 0 rgba(255,255,255,.88))
+        drop-shadow(1px 3px 1px rgba(0,0,0,.92))
+        drop-shadow(0 7px 10px rgba(0,0,0,.30))
+        drop-shadow(0 0 10px rgba(255,255,255,.18)) !important;
+    }
+    .desktop-icon:nth-child(1) svg { fill: rgba(224,240,255,.12) !important; }
+    .desktop-icon:nth-child(2) svg { fill: none !important; stroke: rgba(246,251,255,.96) !important; }
+    .desktop-icon:nth-child(3) svg { fill: rgba(184,229,240,.10) !important; }
+    .desktop-icon:nth-child(4) svg { fill: rgba(218,230,255,.12) !important; }
+    .desktop-icon:nth-child(5) svg { fill: rgba(244,248,255,.09) !important; }
+    .desktop-icon .clean-link-icon {
+      fill: none !important;
+      stroke: rgba(246,251,255,.96) !important;
+      stroke-width: 5.5px !important;
+    }
+    .desktop-icon:hover svg,
+    .desktop-icon:focus-visible svg {
+      filter:
+        drop-shadow(0 1px 0 rgba(255,255,255,.96))
+        drop-shadow(0 3px 2px rgba(0,0,0,.80))
+        drop-shadow(0 0 16px rgba(225,243,255,.55)) !important;
+    }
+    .desktop-icon:nth-child(1):hover svg { fill: rgba(224,240,255,.18) !important; }
+    .desktop-icon:nth-child(3):hover svg { fill: rgba(184,229,240,.15) !important; }
+    .desktop-icon:nth-child(4):hover svg { fill: rgba(218,230,255,.18) !important; }
+    .desktop-icon:nth-child(5):hover svg { fill: rgba(244,248,255,.14) !important; }
+
+
+    /* Corner grip fix: only southeast grip is visible and interactive. */
+    .window .resize-handle.resize-sw,
+    .window .resize-handle.resize-nw,
+    .window .resize-handle.resize-ne {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      background: none !important;
+    }
+    .window .resize-handle.resize-se {
+      position: absolute !important;
+      display: block !important;
+      visibility: visible !important;
+      box-sizing: border-box;
+      left: auto !important;
+      right: 0 !important;
+      top: auto !important;
+      bottom: 0 !important;
+      width: 34px !important;
+      height: 34px !important;
+      padding: 0 !important;
+      opacity: 1 !important;
+      transform: none !important;
+      animation: none !important;
+      cursor: se-resize !important;
+      z-index: 100 !important;
+      pointer-events: auto !important;
+      background: none !important;
+    }
+    .window .resize-handle.resize-se::after {
+      content: "";
+      position: absolute;
+      right: 6px;
+      bottom: 6px;
+      width: 20px;
+      height: 20px;
+      border-radius: 2px;
+      background: repeating-linear-gradient(135deg,
+        transparent 0 4px, rgba(255,255,255,.95) 4px 6px,
+        transparent 6px 9px);
+      clip-path: polygon(100% 0,100% 100%,0 100%);
+      filter: drop-shadow(0 0 3px rgba(0,0,0,.6));
+      pointer-events: none;
+    }
+    @media (max-width:720px) {
+      .window .resize-handle.resize-se { display: none !important; }
+    }
+
+    /* Three-second visual hint after opening a popup. The handle stays usable. */
+    .window .resize-handle.resize-se::after {
+      opacity: .45;
+      transition: opacity .2s ease, filter .2s ease;
+    }
+    .window.open .resize-handle.resize-se {
+      opacity: 1 !important;
+    }
+    .window.open .resize-handle.resize-se::after {
+      animation: gripHint3s 3s ease-out both;
+    }
+    @keyframes gripHint3s {
+      0%, 65% { opacity: 1; filter: drop-shadow(0 0 7px #fff) drop-shadow(0 0 9px #ff3434); }
+      100% { opacity: .45; filter: drop-shadow(0 0 3px rgba(0,0,0,.6)); }
+    }
+    .window .resize-handle.resize-se:hover::after {
+      animation: none !important;
+      opacity: 1 !important;
+      filter: drop-shadow(0 0 7px white) !important;
+    }
+    /* The SELECT A BUTTON label is illuminated for 3s on entrance. */
+    .site-entered .menu-badge {
+      animation: menuHint3s 3s ease-out both;
+    }
+    @keyframes menuHint3s {
+      0%, 65% { filter: brightness(1.4) drop-shadow(0 0 12px rgba(255,255,255,.8)); }
+      100% { filter: brightness(1); }
+    }
+    .menu-badge:hover {
+      filter: brightness(1.35) drop-shadow(0 0 10px rgba(255,255,255,.7));
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .window.open .resize-handle.resize-se::after,
+      .site-entered .menu-badge { animation: none !important; }
+    }
+
+
+    /* Same attention bounce as the scroll-down prompt, for 3 seconds. */
+    @keyframes promptBounceThreeSeconds {
+      0%, 24%, 48%, 72%, 100% { transform: translateY(0); }
+      12%, 36%, 60%, 84% { transform: translateY(-8px); }
+    }
+    @keyframes gripBounceThreeSeconds {
+      0%, 24%, 48%, 72%, 100% { transform: translate(0, 0); opacity: .55; }
+      12%, 36%, 60%, 84% { transform: translate(-6px, -6px); opacity: 1; }
+    }
+    .site-entered .menu-badge {
+      animation: promptBounceThreeSeconds 3s ease-in-out 1 both !important;
+    }
+    .window.open .resize-handle.resize-se::after {
+      animation: gripBounceThreeSeconds 3s ease-in-out 1 both !important;
+    }
+    .window .resize-handle.resize-se:hover::after {
+      animation: none !important;
+      opacity: 1 !important;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .site-entered .menu-badge,
+      .window.open .resize-handle.resize-se::after {
+        animation: none !important;
+      }
+    }
+
+
+    /* Bolder, easier-to-see bottom-right resize indicator. */
+    .window .resize-handle.resize-se::after {
+      right: 5px !important;
+      bottom: 5px !important;
+      width: 26px !important;
+      height: 26px !important;
+      background: repeating-linear-gradient(135deg,
+        transparent 0 3px,
+        rgba(255,255,255,1) 3px 7px,
+        transparent 7px 10px) !important;
+      clip-path: polygon(100% 0, 100% 100%, 0 100%) !important;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,.95)) drop-shadow(0 0 5px rgba(255,255,255,.8));
+      opacity: .85;
+    }
+    .window .resize-handle.resize-se:hover::after {
+      opacity: 1 !important;
+      filter: drop-shadow(0 0 6px white) drop-shadow(0 0 10px rgba(255,255,255,.8)) !important;
+    }
+
+
+    /* Keep the Select a Button label slanted in its original spot while bouncing. */
+    .menu-badge { --badge-tilt: -5deg; transform: rotate(var(--badge-tilt)); }
+    @keyframes promptBounceThreeSeconds {
+      0%, 24%, 48%, 72%, 100% { transform: translateY(0) rotate(var(--badge-tilt)); }
+      12%, 36%, 60%, 84% { transform: translateY(-8px) rotate(var(--badge-tilt)); }
+    }
+    @media (max-width: 720px) {
+      .menu-badge { --badge-tilt: -3deg; }
+    }
+
+
+    /* Show the Anthos Capital position when hovering or keyboard-focusing its link. */
+    .role-hover { position: relative; }
+    .role-hover::after {
+      content: attr(data-role);
+      position: absolute;
+      left: 0;
+      top: calc(100% + 9px);
+      min-width: 225px;
+      width: max-content;
+      max-width: min(280px, 75vw);
+      padding: 9px 12px;
+      color: #fff;
+      background: rgba(20, 24, 34, .83);
+      border: 1px solid rgba(255,255,255,.6);
+      border-radius: 10px;
+      box-shadow: 0 8px 22px rgba(0,0,0,.4);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.35;
+      text-transform: none;
+      white-space: normal;
+      text-align: left;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(-3px);
+      transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
+      z-index: 100;
+    }
+    .role-hover:hover::after, .role-hover:focus-visible::after {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+
+    /* Work window fits its content. Tooltips are rendered outside the panel. */
+    #workWindow:not(.user-resized) {
+      width: min(530px, calc(100vw - 28px)) !important;
+      min-height: 0 !important;
+      height: auto !important;
+      max-height: calc(100dvh - 32px) !important;
+    }
+    #workWindow:not(.user-resized) .window-content {
+      flex: 0 1 auto;
+      max-height: calc(100dvh - 98px);
+      overflow-x: hidden;
+      overflow-y: auto;
+      padding: 18px 22px 23px;
+    }
+    #workWindow .window-content h2 { margin-bottom: 12px; }
+    #workWindow .window-content p { margin: 10px 0 13px; }
+    #workWindow .role-hover::after { display: none !important; }
+    .floating-role-tooltip {
+      position: fixed;
+      z-index: 2147483000;
+      max-width: min(300px, calc(100vw - 24px));
+      padding: 10px 13px;
+      color: white;
+      font: 700 13px/1.4 "Segoe UI", Arial, sans-serif;
+      border: 1px solid rgba(255,255,255,.65);
+      border-radius: 12px;
+      background: rgba(25,29,42,.77);
+      -webkit-backdrop-filter: blur(16px) saturate(150%);
+      backdrop-filter: blur(16px) saturate(150%);
+      box-shadow: 0 12px 32px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.2);
+      pointer-events: none;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .13s ease;
+    }
+    .floating-role-tooltip.visible { opacity: 1; visibility: visible; }
+
+    /* Individual letters react to the mouse without clicking or dragging. */
+    .enter-content.welcome-only { pointer-events: none; }
+    .welcome-simple {
+      pointer-events: auto;
+      cursor: grab;
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
+      animation: none !important;
+      transform: none !important;
+      transition: none !important;
+    }
+    .welcome-letter {
+      display: inline-block;
+      position: relative;
+      will-change: transform;
+      transform: translate3d(0,0,0);
+      pointer-events: none;
+    }
+    .welcome-simple.letter-dragging { cursor: grabbing; }
+    .welcome-letter-space { width: .29em; }
+    @media (prefers-reduced-motion: reduce) {
+      .welcome-letter { will-change: auto; }
+    }
+
+    /* Playful movable START control, separate from the animated letters. */
+    .enter-content.welcome-only { display: flex; flex-direction: column; align-items: center; gap: 28px; }
+    .welcome-start {
+      pointer-events: auto; position: relative; z-index: 10;
+      border: 1px solid rgba(255,255,255,.76); border-radius: 999px;
+      padding: 15px 37px; color: #fff; background: rgba(190,15,35,.32);
+      -webkit-backdrop-filter: blur(12px) saturate(145%);
+      backdrop-filter: blur(12px) saturate(145%);
+      box-shadow: inset 0 1px 1px rgba(255,255,255,.38), 0 12px 32px rgba(0,0,0,.4), 0 0 22px rgba(205,20,40,.24);
+      font: 900 21px/1 "Segoe UI",Arial,sans-serif; letter-spacing: .17em;
+      cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none;
+      transition: background .2s ease, box-shadow .2s ease;
+      transform: translate3d(0,0,0);
+    }
+    .welcome-start span { margin-left: 8px; }
+    .welcome-start:hover { background: rgba(220,35,55,.52); box-shadow: inset 0 1px 1px rgba(255,255,255,.48), 0 16px 38px rgba(0,0,0,.45), 0 0 28px rgba(225,55,65,.32); }
+    .welcome-start:focus-visible { outline: 3px solid #fff; outline-offset: 5px; }
+    .welcome-start.dragging { cursor: grabbing; }
+    @media(max-width:720px) { .welcome-start { font-size: 17px; padding: 14px 28px; } }
+
+/* Animated glass aquarium used only for the Joji track. */
+.aquarium-canvas,.aquarium-glass { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; opacity:0; transition:opacity .8s ease; }
+.aquarium-canvas { z-index:1; display:block; }
+.aquarium-glass { z-index:3; background:linear-gradient(105deg,rgba(235,255,255,.13) 0%,rgba(255,255,255,.015) 31%,transparent 47%,rgba(210,247,255,.08) 86%,rgba(255,255,255,.2) 100%),linear-gradient(to bottom,rgba(185,244,255,.13),transparent 28%,transparent 77%,rgba(2,16,28,.31)); box-shadow:inset 0 0 85px rgba(145,229,255,.13),inset 0 0 14px rgba(255,255,255,.16); }
+.persona-screen.aquarium-theme .aquarium-canvas,.persona-screen.aquarium-theme .aquarium-glass{opacity:1;}
+.persona-screen.aquarium-theme .comic-panel,.persona-screen.aquarium-theme .red-slab{opacity:0;pointer-events:none;}
+.persona-screen.aquarium-theme .ham-character{filter:drop-shadow(0 12px 20px rgba(0,0,0,.7));}
+@media(prefers-reduced-motion:reduce){.aquarium-canvas,.aquarium-glass{transition:none;}}
+
+
+    /* Clearly marked grab area, without losing the translucent bubble. */
+    .radio-player .radio-title {
+      display: flex !important;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      width: 100% !important;
+      padding: 7px 10px !important;
+      cursor: grab !important;
+    }
+    .radio-player.is-dragging .radio-title { cursor: grabbing !important; }
+    .radio-drag-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 7px;
+      border: 1px solid rgba(255,255,255,.5);
+      border-radius: 999px;
+      background: rgba(255,255,255,.14);
+      color: #fff;
+      font: 900 10px/1 "Segoe UI", Arial, sans-serif;
+      letter-spacing: .9px;
+      white-space: nowrap;
+      text-shadow: 0 1px 3px rgba(0,0,0,.6);
+      pointer-events: none;
+      animation: radioDragPulse 2.3s ease-in-out infinite;
+    }
+    .radio-drag-hint .drag-arrows { font-size: 17px; line-height: .7; }
+    @keyframes radioDragPulse {
+      0%,100% { transform: translateY(0); border-color: rgba(255,255,255,.4); }
+      50% { transform: translateY(-3px); border-color: rgba(255,255,255,.9); }
+    }
+    .radio-player.is-dragging .radio-drag-hint { animation: none; }
+    .radio-player.drag-hint-dismissed .radio-drag-hint { display: none !important; }
+    @media (prefers-reduced-motion: reduce) { .radio-drag-hint { animation: none; } }
+
+</style>
 </head>
 
 <body class="site-locked">
   <section class="enter-screen" id="enterScreen">
     <canvas class="wave-canvas" id="waveCanvas"></canvas>
 
-    <div class="enter-content">
-      <div class="welcome-text">welcome to my website! :D</div>
-      <img
-        class="press-any-key"
-        src="press-any-key.png"
-        alt="Press any key"
-      />
+    <div class="enter-content welcome-only">
+      <h1 class="welcome-simple">welcome to my website!</h1>
+      <button class="welcome-start" id="welcomeStart" type="button" aria-label="Start website">START <span aria-hidden="true">→</span></button>
     </div>
   </section>
 
@@ -1441,6 +2615,9 @@
       preload="auto"
     ></video>
 
+    <canvas id="aquariumCanvas" class="aquarium-canvas" aria-hidden="true"></canvas>
+    <div class="aquarium-glass" aria-hidden="true"></div>
+
     <div class="comic-panel"></div>
     <div class="red-slab"></div>
 
@@ -1453,9 +2630,9 @@
     <section class="menu-wrap">
       <div class="menu-badge">Select a Button</div>
 
-      <h1 class="main-title">
-        Ham's
-        <span>Website</span>
+      <h1 class="main-title" aria-label="Ham's Website">
+        <span class="title-word title-ham">Ham's</span>
+        <span class="title-word title-website">Website</span>
       </h1>
 
       <div class="desktop-icons">
@@ -1621,7 +2798,7 @@
         <p>
           Current:
           <a
-            class="highlight-link"
+            class="highlight-link role-hover" data-role="Game Operations Intern" aria-label="NECC: Game Operations Intern"
             href="https://necc.gg/"
             target="_blank"
             rel="noopener noreferrer"
@@ -1630,7 +2807,7 @@
           </a>
 
           <a
-            class="highlight-link"
+            class="highlight-link role-hover" data-role="Ming Ong Lab Systems Administrator" aria-label="UCSC: Ming Ong Lab Systems Administrator"
             href="https://www.ucsc.edu/"
             target="_blank"
             rel="noopener noreferrer"
@@ -1642,7 +2819,7 @@
         <p>
           Previously:
           <a
-            class="highlight-link"
+            class="highlight-link role-hover" data-role="President" aria-label="Slug Gaming: President"
             href="https://sluggaming.org/"
             target="_blank"
             rel="noopener noreferrer"
@@ -1651,7 +2828,7 @@
           </a>
 
           <a
-            class="highlight-link"
+            class="highlight-link role-hover" data-role="Collegiate Program Leader" aria-label="Gen.G: Collegiate Program Leader"
             href="https://geng.gg/"
             target="_blank"
             rel="noopener noreferrer"
@@ -1660,7 +2837,7 @@
           </a>
 
           <a
-            class="highlight-link"
+            class="highlight-link role-hover" data-role="Product Intern" aria-label="H15DEN: Product Intern"
             href="https://h15den.com/"
             target="_blank"
             rel="noopener noreferrer"
@@ -1669,7 +2846,7 @@
           </a>
 
           <a
-            class="highlight-link"
+            class="highlight-link role-hover" data-role="Product Management Intern" aria-label="SkyrisAI: Product Management Intern"
             href="https://www.skyrisai.com/"
             target="_blank"
             rel="noopener noreferrer"
@@ -1678,10 +2855,12 @@
           </a>
 
           <a
-            class="highlight-link"
+            class="highlight-link role-hover"
             href="https://anthoscapital.com/"
             target="_blank"
             rel="noopener noreferrer"
+            data-role="Playtester &amp; Venture Scout, Gaming Industry"
+            aria-label="Anthos Capital: Playtester and Venture Scout for the gaming industry"
           >
             Anthos Capital
           </a>
@@ -1699,13 +2878,7 @@
             Case Studies
           </a>
         </p>
-
-        <img
-          class="work-meme"
-          src="future-role.png"
-          alt="The world if you consider me for the role"
-        />
-      </div>
+</div>
     </section>
 
     <section
@@ -1840,7 +3013,7 @@
     </section>
 
     <div class="radio-player">
-      <div class="radio-title">radio</div>
+      <div class="radio-title"><span>radio</span><span class="radio-drag-hint" aria-hidden="true"><span class="drag-arrows">✥</span> drag me</span></div>
       <div class="track-name" id="trackName">
         resident evil 6 theme
       </div>
@@ -2057,6 +3230,11 @@
         theme: "comic"
       },
       {
+        name: "wasian national anthem",
+        src: "Joji - WANTED U (Official Audio) 4.mp3",
+        theme: "aquarium"
+      },
+      {
         name: "twilight song",
         src: "Bella's Lullaby - Carter Burwell 4.mp3",
         bg: "twilight-bg.jpg",
@@ -2087,14 +3265,6 @@
         overlay:
           "linear-gradient(90deg, rgba(20,50,20,0.42) 0%, rgba(40,80,40,0.18) 48%, rgba(0,0,0,0.42) 100%)",
         theme: "video"
-      },
-      {
-        name: "wasian national anthem",
-        src: "Joji - WANTED U (Official Audio) 4.mp3",
-        bg: "joji-bg.jpg",
-        overlay:
-          "linear-gradient(90deg, rgba(35,10,38,0.62) 0%, rgba(75,25,55,0.32) 48%, rgba(0,0,0,0.70) 100%)",
-        theme: "natural"
       },
       {
         name: "chopin",
@@ -2128,13 +3298,20 @@
       gameScreen.classList.remove(
         "comic-theme",
         "natural-theme",
-        "video-theme"
+        "video-theme",
+        "aquarium-theme"
       );
 
       themeVideo.oncanplay = null;
       themeVideo.onerror = null;
 
-      if (track.theme === "video") {
+      if (track.theme === "aquarium") {
+        themeVideo.pause();
+        themeVideo.removeAttribute("src");
+        themeVideo.load();
+        gameScreen.classList.add("aquarium-theme");
+        gameScreen.style.background = "#071926";
+      } else if (track.theme === "video") {
         gameScreen.classList.add("video-theme");
         gameScreen.style.background = track.overlay;
 
@@ -2292,72 +3469,304 @@
       );
     }
 
+    // Soft, overlapping water ripples which move the dot grid continuously.
+    const wavePointer = { x: -1000, y: -1000, targetX: -1000, targetY: -1000, active: false, strength: 0 };
+    const mouseRipples = [];
+    let lastRippleAt = 0;
+    let lastRippleX = -1000;
+    let lastRippleY = -1000;
+
+    enterScreen.addEventListener("pointermove", event => {
+      wavePointer.targetX = event.clientX;
+      wavePointer.targetY = event.clientY;
+      if (!wavePointer.active) {
+        wavePointer.x = event.clientX;
+        wavePointer.y = event.clientY;
+        lastRippleX = event.clientX;
+        lastRippleY = event.clientY;
+      }
+      wavePointer.active = true;
+      const now = performance.now();
+      const distance = Math.hypot(event.clientX - lastRippleX, event.clientY - lastRippleY);
+      if (distance > 35 && now - lastRippleAt > 110) {
+        mouseRipples.push({ x: event.clientX, y: event.clientY, born: now });
+        if (mouseRipples.length > 9) mouseRipples.shift();
+        lastRippleAt = now;
+        lastRippleX = event.clientX;
+        lastRippleY = event.clientY;
+      }
+    }, { passive: true });
+    enterScreen.addEventListener("pointerleave", () => { wavePointer.active = false; });
+    enterScreen.addEventListener("pointercancel", () => { wavePointer.active = false; });
+
     function drawWave() {
       const width = window.innerWidth;
       const height = window.innerHeight;
-
+      const now = performance.now();
       ctx.fillStyle = "#000";
       ctx.fillRect(0, 0, width, height);
 
-      for (
-        let y = -6;
-        y < Math.ceil(height / 16) + 12;
-        y++
-      ) {
-        for (
-          let x = -6;
-          x < Math.ceil(width / 16) + 12;
-          x++
-        ) {
+      wavePointer.x += (wavePointer.targetX - wavePointer.x) * 0.14;
+      wavePointer.y += (wavePointer.targetY - wavePointer.y) * 0.14;
+      wavePointer.strength += ((wavePointer.active ? 1 : 0) - wavePointer.strength) * 0.065;
+      const rippleDuration = 2100;
+      const activeRipples = [];
+      for (let i = mouseRipples.length - 1; i >= 0; i--) {
+        if (now - mouseRipples[i].born >= rippleDuration) mouseRipples.splice(i, 1);
+      }
+      for (const ripple of mouseRipples) {
+        const age = (now - ripple.born) / rippleDuration;
+        activeRipples.push({
+          x: ripple.x, y: ripple.y,
+          radius: age * 340,
+          fade: Math.sin(Math.PI * Math.min(1, age)) ** 1.15
+        });
+      }
+
+      for (let y = -6; y < Math.ceil(height / 16) + 12; y++) {
+        for (let x = -6; x < Math.ceil(width / 16) + 12; x++) {
           const px = x * 16;
           const py = y * 16;
+          // Slow, continuous undulation behind the reactive ripples.
+          const finalX = px + Math.cos(y * 0.22 + time * 0.011) * 23
+            + Math.sin((x + y) * 0.12 + time * 0.014) * 14;
+          const finalY = py + Math.sin(x * 0.28 + time * 0.017) * 29;
+          const alpha = Math.min(1, 0.47 + Math.sin(
+            x * 0.18 + y * 0.24 + time * 0.023) * 0.30);
+          let dotX = finalX;
+          let dotY = finalY;
+          let dotAlpha = alpha;
 
-          const finalX =
-            px +
-            Math.cos(y * 0.22 + time * 0.018) * 26 +
-            Math.sin((x + y) * 0.12 + time * 0.02) * 16;
+          // Gentle mouse clearing: a smaller, soft pocket instead of a hard hole.
+          if (wavePointer.strength > 0.003) {
+            const dx = finalX - wavePointer.x;
+            const dy = finalY - wavePointer.y;
+            const distance = Math.hypot(dx, dy);
+            const radius = 54;
+            if (distance < radius) {
+              const t = 1 - distance / radius;
+              const smooth = t * t * (3 - 2 * t);
+              const push = smooth * 19 * wavePointer.strength;
+              const inv = 1 / Math.max(distance, 1);
+              dotX += dx * inv * push;
+              dotY += dy * inv * push;
+              dotAlpha *= 1 - .23 * smooth * wavePointer.strength;
+            }
+          }
 
-          const finalY =
-            py +
-            Math.sin(x * 0.28 + time * 0.025) * 34;
-
-          const alpha = Math.min(
-            1,
-            0.45 +
-              Math.sin(
-                x * 0.18 +
-                y * 0.24 +
-                time * 0.035
-              ) * 0.35
-          );
+          // Wide, low-amplitude wavefronts, without abrupt starts or stops.
+          for (const ripple of activeRipples) {
+            const dx = finalX - ripple.x;
+            const dy = finalY - ripple.y;
+            const distance = Math.hypot(dx, dy);
+            const offset = distance - ripple.radius;
+            if (Math.abs(offset) > 110) continue;
+            const envelope = Math.exp(-0.5 * (offset / 54) ** 2);
+            const oscillation = Math.sin(offset * 0.057);
+            const displacement = 9 * envelope * oscillation * ripple.fade;
+            const inv = 1 / Math.max(distance, 1);
+            dotX += dx * inv * displacement;
+            dotY += dy * inv * displacement;
+            dotAlpha = Math.min(1, dotAlpha + envelope * ripple.fade * .09);
+          }
 
           ctx.beginPath();
-
-          ctx.fillStyle =
-            "rgba(255,255,255," + alpha + ")";
-
-          ctx.arc(
-            finalX,
-            finalY,
-            1.8,
-            0,
-            Math.PI * 2
-          );
-
+          ctx.fillStyle = "rgba(255,255,255," + Math.max(0, dotAlpha) + ")";
+          ctx.arc(dotX, dotY, 1.8, 0, Math.PI * 2);
           ctx.fill();
         }
       }
-
       time += 0.35;
       requestAnimationFrame(drawWave);
     }
 
+    // Every letter responds to a nearby cursor as if it were lightly bumped.
+    // Each keeps its displaced position until 5s after the last direct interaction, then
+    // returns home with a gentle spring. The existing dot ripples are unchanged.
+    const welcomeText = document.querySelector(".welcome-simple");
+    const greetingLabel = welcomeText.textContent;
+    welcomeText.textContent = "";
+    const welcomeLetters = [];
+    for (const char of greetingLabel) {
+      const span = document.createElement("span");
+      span.className = "welcome-letter" + (char === " " ? " welcome-letter-space" : "");
+      span.textContent = char === " " ? "\u00a0" : char;
+      span.setAttribute("aria-hidden", "true");
+      welcomeText.appendChild(span);
+      if (char !== " ") welcomeLetters.push({ node: span, x: 0, y: 0, vx: 0, vy: 0, rippleX: 0, rippleY: 0 });
+    }
+    welcomeText.setAttribute("aria-label", greetingLabel.trim());
+    let lastWelcomeBump = performance.now();
+    let welcomeReturning = false;
+    let letterFrameTime = performance.now();
+    let draggedWelcomeLetter = null;
+    let suppressWelcomeClick = false;
+    const welcomeCursor = { x: -9999, y: -9999, moved: false };
+
+    enterScreen.addEventListener("pointermove", event => {
+      if (entered || draggedWelcomeLetter) return;
+      const mx = event.clientX, my = event.clientY;
+      const movement = Math.hypot(mx - welcomeCursor.x, my - welcomeCursor.y);
+      welcomeCursor.x = mx;
+      welcomeCursor.y = my;
+      if (!movement || movement > 220) return;
+      let bumped = false;
+      for (const letter of welcomeLetters) {
+        const rect = letter.node.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        let dx = cx - mx, dy = cy - my;
+        const dist = Math.hypot(dx, dy);
+        const reach = Math.max(26, rect.width * .7 + 12);
+        if (dist > reach) continue;
+        if (dist < 1) { dx = 1; dy = -1; }
+        const force = (1 - dist / reach) * Math.min(13, 3 + movement * .4);
+        const len = Math.hypot(dx, dy);
+        letter.vx += (dx / len) * force;
+        letter.vy += (dy / len) * force;
+        bumped = true;
+      }
+      if (bumped) {
+        lastWelcomeBump = performance.now();
+        welcomeReturning = false;
+      }
+    }, { passive: true });
+
+    // Drag an individual letter directly. Clicks without movement still enter.
+    welcomeText.addEventListener("pointerdown", event => {
+      if (entered || (event.pointerType === "mouse" && event.button !== 0)) return;
+      let closest = null;
+      let closestDist = Infinity;
+      for (const letter of welcomeLetters) {
+        const rect = letter.node.getBoundingClientRect();
+        const dx = Math.max(rect.left - event.clientX, 0, event.clientX - rect.right);
+        const dy = Math.max(rect.top - event.clientY, 0, event.clientY - rect.bottom);
+        const dist = Math.hypot(dx, dy);
+        if (dist < closestDist) { closest = letter; closestDist = dist; }
+      }
+      if (!closest || closestDist > 8) return;
+      draggedWelcomeLetter = {
+        letter: closest, pointerId: event.pointerId,
+        startX: event.clientX, startY: event.clientY,
+        offsetX: closest.x, offsetY: closest.y, moved: false
+      };
+      closest.vx = closest.vy = 0;
+      welcomeReturning = false;
+      lastWelcomeBump = performance.now();
+      welcomeText.setPointerCapture(event.pointerId);
+    });
+
+    welcomeText.addEventListener("pointermove", event => {
+      const drag = draggedWelcomeLetter;
+      if (!drag || drag.pointerId !== event.pointerId) return;
+      const dx = event.clientX - drag.startX;
+      const dy = event.clientY - drag.startY;
+      if (Math.hypot(dx, dy) > 4) {
+        drag.moved = true;
+        welcomeText.classList.add("letter-dragging");
+      }
+      if (!drag.moved) return;
+      drag.letter.x = Math.max(-240, Math.min(240, drag.offsetX + dx));
+      drag.letter.y = Math.max(-180, Math.min(180, drag.offsetY + dy));
+      drag.letter.vx = drag.letter.vy = 0;
+      lastWelcomeBump = performance.now();
+      event.preventDefault();
+    });
+
+    function releaseWelcomeLetter(event) {
+      const drag = draggedWelcomeLetter;
+      if (!drag || drag.pointerId !== event.pointerId) return;
+      if (drag.moved) suppressWelcomeClick = true;
+      draggedWelcomeLetter = null;
+      welcomeText.classList.remove("letter-dragging");
+      lastWelcomeBump = performance.now();
+      welcomeReturning = false;
+      if (welcomeText.hasPointerCapture(event.pointerId)) {
+        welcomeText.releasePointerCapture(event.pointerId);
+      }
+    }
+    welcomeText.addEventListener("pointerup", releaseWelcomeLetter);
+    welcomeText.addEventListener("pointercancel", releaseWelcomeLetter);
+    // Prevent the page from opening after a letter drag.
+    enterScreen.addEventListener("click", event => {
+      if (!suppressWelcomeClick) return;
+      suppressWelcomeClick = false;
+      event.stopImmediatePropagation();
+      event.preventDefault();
+    }, true);
+
+    function animateWelcomeLetters(now) {
+      const dt = Math.min(2, (now - letterFrameTime) / 16.67 || 1);
+      letterFrameTime = now;
+      if (!draggedWelcomeLetter && now - lastWelcomeBump >= 2000) welcomeReturning = true;
+      for (const letter of welcomeLetters) {
+        // Ripple displacement is visual only: it never changes the 5s inactivity clock.
+        // Use the same expanding wavefront as the background dots, with a wide,
+        // feathered envelope that feels like water rolling through the letters.
+        const rect = letter.node.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2 - letter.x - letter.rippleX;
+        const cy = rect.top + rect.height / 2 - letter.y - letter.rippleY;
+        let targetRX = 0, targetRY = 0;
+        for (const ripple of mouseRipples) {
+          const age = (now - ripple.born) / 2100;
+          if (age < 0 || age >= 1) continue;
+          const dx = cx - ripple.x, dy = cy - ripple.y;
+          const dist = Math.hypot(dx, dy) || 1;
+          const front = dist - age * 340;
+          const envelope = Math.exp(-Math.pow(front / 82, 2));
+          const fade = Math.pow(Math.sin(Math.PI * age), 1.15);
+          const displacement = 11 * envelope * fade * Math.cos(front / 35);
+          targetRX += dx / dist * displacement;
+          targetRY += dy / dist * displacement;
+        }
+        letter.rippleX += (targetRX - letter.rippleX) * Math.min(1, .20 * dt);
+        letter.rippleY += (targetRY - letter.rippleY) * Math.min(1, .20 * dt);
+        if (draggedWelcomeLetter?.letter === letter) {
+          letter.node.style.transform = `translate3d(${(letter.x + letter.rippleX).toFixed(2)}px, ${(letter.y + letter.rippleY).toFixed(2)}px, 0)`;
+          continue;
+        }
+        if (welcomeReturning) {
+          letter.vx += -letter.x * .023 * dt;
+          letter.vy += -letter.y * .023 * dt;
+          letter.vx *= Math.pow(.83, dt);
+          letter.vy *= Math.pow(.83, dt);
+        } else {
+          letter.vx *= Math.pow(.78, dt);
+          letter.vy *= Math.pow(.78, dt);
+        }
+        letter.x = Math.max(-110, Math.min(110, letter.x + letter.vx * dt));
+        letter.y = Math.max(-95, Math.min(95, letter.y + letter.vy * dt));
+        if (welcomeReturning && Math.abs(letter.x) + Math.abs(letter.y) + Math.abs(letter.vx) + Math.abs(letter.vy) < .3) {
+          letter.x = letter.y = letter.vx = letter.vy = 0;
+        }
+        letter.node.style.transform = `translate3d(${(letter.x + letter.rippleX).toFixed(2)}px, ${(letter.y + letter.rippleY).toFixed(2)}px, 0)`;
+      }
+      requestAnimationFrame(animateWelcomeLetters);
+    }
+    requestAnimationFrame(animateWelcomeLetters);
+
     function openWindow(id) {
       const win = document.getElementById(id);
+      if (!win) return;
+
+      // Clicking an icon toggles its window open or closed.
+      if (win.classList.contains("open")) {
+        closeWindow(win);
+        return;
+      }
 
       win.classList.add("open");
       win.style.zIndex = ++topZ;
 
+      // Center inside the first screen (the viewport), not the scrolling page.
+      // Previously dragged windows retain the position the visitor chose.
+      if (window.innerWidth > 720 && !win.dataset.userPositioned) {
+        const rect = win.getBoundingClientRect();
+        const left = Math.max(8, Math.round((window.innerWidth - rect.width) / 2));
+        const top = Math.max(8, Math.round((window.innerHeight - rect.height) / 2));
+        win.style.left = left + "px";
+        win.style.top = top + "px";
+      }
       playClick();
     }
 
@@ -2383,6 +3792,7 @@
         }
 
         dragging = true;
+        win.dataset.userPositioned = "true";
         win.style.zIndex = ++topZ;
 
         offsetX =
@@ -2570,24 +3980,49 @@
       resizeCanvas
     );
 
-    enterScreen.addEventListener(
-      "click",
-      enterSite
-    );
-
-    enterScreen.addEventListener(
-      "touchend",
-      event => {
+    // Only activating START enters the website. Background and letter taps do not.
+    const welcomeStart = document.getElementById("welcomeStart");
+    let startDrag = null;
+    let suppressStartClick = false;
+    welcomeStart.addEventListener("pointerdown", event => {
+      if (event.pointerType === "mouse" && event.button !== 0) return;
+      const rect = welcomeStart.getBoundingClientRect();
+      startDrag = { id: event.pointerId, x: event.clientX, y: event.clientY,
+        left: rect.left, top: rect.top, moved: false };
+      welcomeStart.setPointerCapture(event.pointerId);
+    });
+    welcomeStart.addEventListener("pointermove", event => {
+      if (!startDrag || event.pointerId !== startDrag.id) return;
+      const dx = event.clientX - startDrag.x;
+      const dy = event.clientY - startDrag.y;
+      if (Math.hypot(dx,dy) > 5) startDrag.moved = true;
+      if (!startDrag.moved) return;
+      const width = welcomeStart.offsetWidth;
+      const height = welcomeStart.offsetHeight;
+      const left = Math.max(8, Math.min(window.innerWidth - width - 8, startDrag.left + dx));
+      const top = Math.max(8, Math.min(window.innerHeight - height - 8, startDrag.top + dy));
+      // Fixed positioning prevents the surrounding text layout from shifting.
+      welcomeStart.style.position = "fixed";
+      welcomeStart.style.left = left + "px";
+      welcomeStart.style.top = top + "px";
+      welcomeStart.classList.add("dragging");
+      event.preventDefault();
+    });
+    function endStartDrag(event) {
+      if (!startDrag || event.pointerId !== startDrag.id) return;
+      if (startDrag.moved) suppressStartClick = true;
+      startDrag = null;
+      welcomeStart.classList.remove("dragging");
+    }
+    welcomeStart.addEventListener("pointerup", endStartDrag);
+    welcomeStart.addEventListener("pointercancel", endStartDrag);
+    welcomeStart.addEventListener("click", event => {
+      if (suppressStartClick) {
+        suppressStartClick = false;
         event.preventDefault();
-        enterSite();
-      },
-      { passive: false }
-    );
-
-    window.addEventListener("keydown", () => {
-      if (!entered) {
-        enterSite();
+        return;
       }
+      enterSite();
     });
 
     document
@@ -2717,6 +4152,58 @@
       }
     );
 
+    // Drag the glass radio from its title without affecting playback controls.
+    const radioPlayer = document.querySelector(".radio-player");
+    const radioDragHandle = radioPlayer;
+    let radioDrag = null;
+
+    function clampRadioToViewport() {
+      if (!radioPlayer.style.top) return;
+      const width = radioPlayer.offsetWidth;
+      const height = radioPlayer.offsetHeight;
+      const left = Math.max(8, Math.min(parseFloat(radioPlayer.style.left) || 0, window.innerWidth - width - 8));
+      const top = Math.max(8, Math.min(parseFloat(radioPlayer.style.top) || 0, window.innerHeight - height - 8));
+      radioPlayer.style.setProperty("left", left + "px", "important");
+      radioPlayer.style.setProperty("top", top + "px", "important");
+    }
+
+    radioDragHandle.addEventListener("pointerdown", event => {
+      if (event.button !== 0 || !entered || event.target.closest("button, a, input, textarea, select")) return;
+      event.preventDefault();
+      // Hide the drag instruction once the visitor first interacts with the radio.
+      radioPlayer.classList.add("drag-hint-dismissed");
+      const rect = radioPlayer.getBoundingClientRect();
+      // Lock its current visual position before removing the original rotation.
+      radioPlayer.style.setProperty("left", rect.left + "px", "important");
+      radioPlayer.style.setProperty("top", rect.top + "px", "important");
+      radioPlayer.style.setProperty("right", "auto", "important");
+      radioPlayer.style.setProperty("bottom", "auto", "important");
+      radioPlayer.style.setProperty("width", rect.width + "px", "important");
+      radioPlayer.style.setProperty("transform", "none", "important");
+      radioPlayer.classList.add("is-dragging");
+      radioDrag = { x: event.clientX, y: event.clientY, left: rect.left, top: rect.top };
+      radioDragHandle.setPointerCapture(event.pointerId);
+    });
+
+    radioDragHandle.addEventListener("pointermove", event => {
+      if (!radioDrag) return;
+      const left = Math.max(8, Math.min(radioDrag.left + event.clientX - radioDrag.x,
+        window.innerWidth - radioPlayer.offsetWidth - 8));
+      const top = Math.max(8, Math.min(radioDrag.top + event.clientY - radioDrag.y,
+        window.innerHeight - radioPlayer.offsetHeight - 8));
+      radioPlayer.style.setProperty("left", left + "px", "important");
+      radioPlayer.style.setProperty("top", top + "px", "important");
+    });
+
+    function finishRadioDrag() {
+      radioDrag = null;
+      radioPlayer.classList.remove("is-dragging");
+    }
+    radioDragHandle.addEventListener("pointerup", finishRadioDrag);
+    radioDragHandle.addEventListener("pointercancel", finishRadioDrag);
+    radioDragHandle.addEventListener("lostpointercapture", finishRadioDrag);
+    window.addEventListener("resize", clampRadioToViewport);
+
     prevTrack.addEventListener("click", () => {
       playClick();
       loadTrack(currentTrack - 1);
@@ -2758,6 +4245,188 @@
           ? "unmute"
           : "mute";
     });
-  </script>
+  
+    // The tooltip lives on document.body so it cannot be cut off by
+    // the popup's overflow/rounded glass edges.
+    const roleTooltip = document.createElement("div");
+    roleTooltip.className = "floating-role-tooltip";
+    roleTooltip.setAttribute("role", "tooltip");
+    document.body.appendChild(roleTooltip);
+    let activeRoleLink = null;
+
+    function placeRoleTooltip(link) {
+      if (!link) return;
+      const r = link.getBoundingClientRect();
+      const tr = roleTooltip.getBoundingClientRect();
+      const margin = 12;
+      const left = Math.min(Math.max(margin, r.left),
+        Math.max(margin, window.innerWidth - tr.width - margin));
+      let top = r.bottom + 9;
+      if (top + tr.height > window.innerHeight - margin) {
+        top = Math.max(margin, r.top - tr.height - 9);
+      }
+      roleTooltip.style.left = left + "px";
+      roleTooltip.style.top = top + "px";
+    }
+    document.querySelectorAll("#workWindow .role-hover").forEach(link => {
+      const show = () => {
+        activeRoleLink = link;
+        roleTooltip.textContent = link.dataset.role || "";
+        roleTooltip.classList.add("visible");
+        placeRoleTooltip(link);
+      };
+      const hide = () => {
+        if (activeRoleLink === link) {
+          activeRoleLink = null;
+          roleTooltip.classList.remove("visible");
+        }
+      };
+      link.addEventListener("mouseenter", show);
+      link.addEventListener("focus", show);
+      link.addEventListener("mouseleave", hide);
+      link.addEventListener("blur", hide);
+    });
+    document.getElementById("workWindow").addEventListener("scroll", () => {
+      if (activeRoleLink) placeRoleTooltip(activeRoleLink);
+    }, true);
+    window.addEventListener("resize", () => {
+      if (activeRoleLink) placeRoleTooltip(activeRoleLink);
+    });
+
+    // Self-contained aquarium illustration: no image or video files required.
+    const aquariumCanvas = document.getElementById("aquariumCanvas");
+    const aquariumCtx = aquariumCanvas.getContext("2d");
+    let aqWidth = 0, aqHeight = 0, aqLast = 0, aqFrameTime = 0;
+    const aqFishEmoji = [':3', ':D', ':C', '=^-^=', 'xD', ';3', '<°)))><', '><(((*>'];
+    const aqFish = Array.from({length: 18}, (_, i) => ({
+      phase:i*2.17, x:((i*0.61803398875)%1), y:.14+((i*0.431)%1)*.69,
+      scale:.58+(i%6)*.16, speed:.019+(i%5)*.007,
+      direction:i%4===0?-1:1,
+      hue:[194,181,211,24,345,174][i%6],
+      emoji: aqFishEmoji[i % aqFishEmoji.length],
+      wobble: 0.75 + (i % 5) * 0.09,
+      fleeX: 0, fleeY: 0, velocityX: 0, velocityY: 0, scareCooldown: 0
+    }));
+    const aqBubbles = Array.from({length: 42},(_,i)=>({x:(i*.61803398875)%1,y:(i*.3119)%1,rad:1.5+(i%4)*1.2,speed:.014+(i%7)*.006,phase:i*1.3}));
+    const aqMouse = { x: 0, y: 0, active: false };
+    gameScreen.addEventListener('pointermove', event => {
+      const rect = gameScreen.getBoundingClientRect();
+      aqMouse.x = event.clientX - rect.left;
+      aqMouse.y = event.clientY - rect.top;
+      aqMouse.active = true;
+    });
+    gameScreen.addEventListener('pointerleave', () => {
+      aqMouse.active = false;
+    });
+    function sizeAquarium(){
+      const rect=gameScreen.getBoundingClientRect();
+      aqWidth=Math.max(1,rect.width);aqHeight=Math.max(1,rect.height);
+      const dpr=Math.min(window.devicePixelRatio||1,2);
+      aquariumCanvas.width=Math.round(aqWidth*dpr);
+      aquariumCanvas.height=Math.round(aqHeight*dpr);
+      aquariumCtx.setTransform(dpr,0,0,dpr,0,0);
+    }
+    window.addEventListener('resize',sizeAquarium);
+    sizeAquarium();
+    function paintAquarium(ms){
+      requestAnimationFrame(paintAquarium);
+      if(!gameScreen.classList.contains('aquarium-theme'))return;
+      if(window.matchMedia('(prefers-reduced-motion: reduce)').matches && aqLast)return;
+      aqLast=ms;
+      const delta = aqFrameTime ? Math.min((ms-aqFrameTime)/1000, .05) : 1/60;
+      aqFrameTime = ms;
+      const c=aquariumCtx,w=aqWidth,h=aqHeight,t=ms/1000;
+      c.clearRect(0,0,w,h);
+      const sea=c.createLinearGradient(0,0,0,h);
+      sea.addColorStop(0,'#10394c');sea.addColorStop(.4,'#092e40');sea.addColorStop(1,'#031621');
+      c.fillStyle=sea;c.fillRect(0,0,w,h);
+      // Caustic light ripples above the fish.
+      c.save();c.globalAlpha=.13;c.lineWidth=2;
+      for(let i=0;i<20;i++){
+        const yy=h*(.02+i*.05);
+        c.strokeStyle=i%2?'#8ee6ed':'#bcffff';c.beginPath();
+        for(let x=0;x<=w+18;x+=18){const y=yy+Math.sin(x*.013+t*.35+i)*10+Math.sin(x*.027-t*.21+i)*5;if(x===0)c.moveTo(x,y);else c.lineTo(x,y);}
+        c.stroke();
+      }c.restore();
+      // Emoticon fish avoid the cursor and drift back into their normal path.
+      for(const f of aqFish){
+        const baseX=((f.x+f.direction*t*f.speed)%1+1)%1*w;
+        const baseY=f.y*h+Math.sin(t*.7+f.phase)*12;
+        const size=Math.max(17,Math.min(w,h)*.025)*f.scale;
+        const bob=Math.sin(t*1.6*f.wobble + f.phase)*1.6;
+
+        // Persistent velocity makes the emoticons shoot away instead of simply
+        // jumping sideways for one frame. Fear kicks in only very close.
+        let drawX = baseX + f.fleeX;
+        let drawY = baseY + bob + f.fleeY;
+        let facing = f.direction;
+        f.scareCooldown = Math.max(0, f.scareCooldown - delta);
+
+        if(aqMouse.active){
+          const dx = drawX - aqMouse.x;
+          const dy = drawY - aqMouse.y;
+          const dist = Math.hypot(dx, dy);
+          const panicRadius = 66;
+          if(dist < panicRadius && f.scareCooldown <= 0){
+            // An instantaneous burst: about 650-900 pixels/second initially.
+            const angle = dist > 1 ? Math.atan2(dy, dx) : f.phase;
+            const burst = 650 + (1-dist/panicRadius)*250;
+            f.velocityX = Math.cos(angle) * burst;
+            f.velocityY = Math.sin(angle) * burst;
+            f.scareCooldown = .42;
+          }
+        }
+
+        f.fleeX += f.velocityX * delta;
+        f.fleeY += f.velocityY * delta;
+        // Damp the burst, then ease back to the original swim route.
+        const friction = Math.exp(-4.0 * delta);
+        f.velocityX *= friction;
+        f.velocityY *= friction;
+        if(f.scareCooldown <= 0){
+          const returnRate = 1 - Math.exp(-1.4 * delta);
+          f.fleeX += (0 - f.fleeX) * returnRate;
+          f.fleeY += (0 - f.fleeY) * returnRate;
+        }
+        f.fleeX = Math.max(-220, Math.min(220, f.fleeX));
+        f.fleeY = Math.max(-180, Math.min(180, f.fleeY));
+        drawX = baseX + f.fleeX;
+        drawY = baseY + bob + f.fleeY;
+        if(Math.abs(f.velocityX) > 40) facing = f.velocityX > 0 ? 1 : -1;
+
+        c.save();
+        c.translate(drawX, drawY);
+        c.scale(facing, 1);
+        const isEmoji = /[\u{1F300}-\u{1FAFF}]/u.test(f.emoji);
+        c.textAlign='center';
+        c.textBaseline='middle';
+        c.font = `${Math.round(size * (isEmoji ? 1.75 : 1.25))}px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji","Segoe UI",sans-serif`;
+        c.shadowBlur = 12;
+        c.shadowColor = `hsla(${f.hue}, 90%, 78%, .28)`;
+        if(!isEmoji){
+          c.lineWidth = Math.max(1.4, size * 0.06);
+          c.strokeStyle = 'rgba(235,251,255,.88)';
+          c.strokeText(f.emoji, 0, 0);
+          c.fillStyle = `hsla(${f.hue}, 82%, 84%, .92)`;
+          c.fillText(f.emoji, 0, 0);
+        } else {
+          c.globalAlpha = .95;
+          c.fillText(f.emoji, 0, 0);
+        }
+        c.restore();
+      }
+      for(const b of aqBubbles){
+        const x=(b.x+Math.sin(t*.46+b.phase)*.012)*w;
+        const y=((b.y-t*b.speed)%1+1)%1*h;
+        c.strokeStyle='rgba(210,250,255,.36)';c.lineWidth=1.1;c.beginPath();c.arc(x,y,b.rad,0,Math.PI*2);c.stroke();
+        c.fillStyle='rgba(255,255,255,.45)';c.beginPath();c.arc(x-b.rad*.23,y-b.rad*.29,.65,0,Math.PI*2);c.fill();
+      }
+      const bottom=c.createLinearGradient(0,h*.72,0,h);
+      bottom.addColorStop(0,'rgba(1,9,15,0)');bottom.addColorStop(1,'rgba(1,9,15,.69)');
+      c.fillStyle=bottom;c.fillRect(0,h*.72,w,h*.28);
+    }
+    requestAnimationFrame(paintAquarium);
+
+</script>
 </body>
 </html>
