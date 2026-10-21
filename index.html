@@ -3230,7 +3230,7 @@
         theme: "comic"
       },
       {
-        name: "JoJI - WANTED U",
+        name: "wasian national anthem",
         src: "Joji - WANTED U (Official Audio) 4.mp3",
         theme: "aquarium"
       },
@@ -3857,6 +3857,8 @@
 
           win.style.zIndex = ++topZ;
           win.classList.add("resizing", "user-resized");
+          // Terraria-style hover cue when grabbing the resize corner.
+          playHover();
 
           const startX = event.clientX;
           const startY = event.clientY;
@@ -3940,7 +3942,12 @@
             win.style.height = height + "px";
           };
 
-          const stopResize = () => {
+          let resizeFinished = false;
+          const stopResize = event => {
+            if (resizeFinished) return;
+            resizeFinished = true;
+            // Only a normal release gets the click sound, not a cancellation.
+            if (event.type === "pointerup") playClick();
             win.classList.remove("resizing");
             handle.removeEventListener(
               "pointermove",
@@ -4069,6 +4076,11 @@
           playHover
         );
       });
+
+    // Independent hover sounds for both title words.
+    document.querySelectorAll(".main-title .title-word").forEach(word => {
+      word.addEventListener("mouseenter", playHover);
+    });
 
     scrollHint.addEventListener("click", () => {
       playClick();
