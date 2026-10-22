@@ -428,7 +428,7 @@
       inset: 0;
       width: 100%;
       height: 100%;
-      z-index: -3;
+      z-index: 0;
       pointer-events: none;
       display: block;
     }
@@ -437,7 +437,7 @@
       background-attachment: fixed;
     }
     body::before {
-      z-index: -2;
+      z-index: 0;
       opacity: .32;
       background:
         radial-gradient(circle at 18% 14%, rgba(255,255,255,.12), transparent 0 22%),
@@ -447,11 +447,26 @@
           transparent 1px 28px
         );
     }
+    .wrap { position: relative; z-index: 1; }
     .top-bar {
       background: rgba(8, 19, 28, .42);
       box-shadow: inset 0 1px 0 rgba(255,255,255,.13), 0 8px 28px rgba(0,0,0,.20);
     }
 
+  
+    /* Aquarium glass overlay, matching the Joji theme without fish. */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background: linear-gradient(105deg,
+        rgba(235,255,255,.09) 0%,
+        rgba(255,255,255,.015) 31%, transparent 47%,
+        rgba(210,247,255,.06) 86%, rgba(255,255,255,.10) 100%);
+      box-shadow: inset 0 0 85px rgba(145,229,255,.09), inset 0 0 14px rgba(255,255,255,.10);
+    }
   </style>
 </head>
 
@@ -689,118 +704,118 @@
     );
 
 
-    // Aquarium background without fish.
-    const aquariumBg = document.getElementById("aquariumBg");
-    const aq = aquariumBg.getContext("2d", { alpha: true });
-    const aqReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const aqBubbles = Array.from({ length: 24 }, (_, i) => ({
-      x: (i * 0.61803398875) % 1,
-      y: (i * 0.3119) % 1,
-      rad: 1.4 + (i % 4) * 1.2,
-      speed: 0.013 + (i % 6) * 0.006,
-      sway: 0.014 + (i % 5) * 0.003,
-      phase: i * 1.41
-    }));
-    let aqWidth = 1;
-    let aqHeight = 1;
-    let aqDpr = 1;
-    let aqLastDraw = 0;
-    let aqGradient = null;
 
-    function sizeAquariumBg() {
-      aqWidth = Math.max(1, window.innerWidth);
-      aqHeight = Math.max(1, window.innerHeight);
-      aqDpr = Math.min(window.devicePixelRatio || 1, 1.25);
-      aquariumBg.width = Math.round(aqWidth * aqDpr);
-      aquariumBg.height = Math.round(aqHeight * aqDpr);
-      aq.setTransform(aqDpr, 0, 0, aqDpr, 0, 0);
-      aqGradient = aq.createLinearGradient(0, 0, 0, aqHeight);
-      aqGradient.addColorStop(0, "rgba(18,62,82,0.96)");
-      aqGradient.addColorStop(0.32, "rgba(9,39,55,0.98)");
-      aqGradient.addColorStop(0.68, "rgba(6,27,39,1)");
-      aqGradient.addColorStop(1, "rgba(3,18,27,1)");
+    // Shared Joji aquarium animation, without the emoticons or fish.
+    // Runs at 30 FPS with a reduced-resolution canvas for smooth performance.
+    const aquariumBg = document.getElementById("aquariumBg");
+    const aq = aquariumBg.getContext("2d", { alpha: false });
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const bubbles = Array.from({ length: 42 }, (_, i) => ({
+      x: (i * .61803398875) % 1,
+      y: (i * .3119) % 1,
+      rad: 1.5 + (i % 4) * 1.2,
+      speed: .014 + (i % 7) * .006,
+      phase: i * 1.3
+    }));
+    let waterWidth = 1, waterHeight = 1, waterLast = 0;
+    let waterGradient, waterFloorGradient, lightGlows;
+
+    function resizeWater() {
+      waterWidth = Math.max(1, window.innerWidth);
+      waterHeight = Math.max(1, window.innerHeight);
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.25);
+      aquariumBg.width = Math.round(waterWidth * dpr);
+      aquariumBg.height = Math.round(waterHeight * dpr);
+      aq.setTransform(dpr, 0, 0, dpr, 0, 0);
+      waterGradient = aq.createLinearGradient(0, 0, 0, waterHeight);
+      waterGradient.addColorStop(0, "#10394c");
+      waterGradient.addColorStop(.4, "#092e40");
+      waterGradient.addColorStop(1, "#031621");
+      waterFloorGradient = aq.createLinearGradient(0, waterHeight * .72, 0, waterHeight);
+      waterFloorGradient.addColorStop(0, "rgba(1,9,15,0)");
+      waterFloorGradient.addColorStop(1, "rgba(1,9,15,.69)");
+      lightGlows = [
+        { x: .18, y: .03, radius: .5, alpha: .14 },
+        { x: .82, y: .12, radius: .36, alpha: .08 }
+      ].map(g => {
+        const r = aq.createRadialGradient(waterWidth * g.x, waterHeight * g.y, 0,
+          waterWidth * g.x, waterHeight * g.y, waterWidth * g.radius);
+        r.addColorStop(0, `rgba(185,244,255,${g.alpha})`);
+        r.addColorStop(1, "rgba(185,244,255,0)");
+        return r;
+      });
+      waterLast = 0;
     }
 
-    function paintAquariumBg(ms) {
-      requestAnimationFrame(paintAquariumBg);
-      if (document.hidden) {
-        aqLastDraw = 0;
-        return;
-      }
-      if (aqReducedMotion.matches && aqLastDraw) return;
-      if (ms - aqLastDraw < 33.3) return;
-      aqLastDraw = ms;
-
-      const c = aq;
-      const w = aqWidth;
-      const h = aqHeight;
-      const t = ms / 1000;
-
-      c.clearRect(0, 0, w, h);
-      c.fillStyle = aqGradient;
+    function drawWater(ms) {
+      requestAnimationFrame(drawWater);
+      if (document.hidden) { waterLast = 0; return; }
+      if (reducedMotion.matches && waterLast) return;
+      if (waterLast && ms - waterLast < 33.3) return;
+      waterLast = ms;
+      const c = aq, w = waterWidth, h = waterHeight, t = ms / 1000;
+      c.fillStyle = waterGradient;
       c.fillRect(0, 0, w, h);
-
-      const glowA = c.createRadialGradient(w * 0.2, h * 0.1, 0, w * 0.2, h * 0.1, w * 0.42);
-      glowA.addColorStop(0, 'rgba(170, 242, 255, 0.14)');
-      glowA.addColorStop(1, 'rgba(170, 242, 255, 0)');
-      c.fillStyle = glowA;
-      c.fillRect(0, 0, w, h);
-      const glowB = c.createRadialGradient(w * 0.87, h * 0.18, 0, w * 0.87, h * 0.18, w * 0.34);
-      glowB.addColorStop(0, 'rgba(211, 245, 255, 0.08)');
-      glowB.addColorStop(1, 'rgba(211, 245, 255, 0)');
-      c.fillStyle = glowB;
-      c.fillRect(0, 0, w, h);
-
       c.save();
-      c.globalAlpha = 0.12;
-      c.lineWidth = 1.45;
-      for (let i = 0; i < 10; i++) {
-        const yy = h * (0.05 + i * 0.095);
-        c.strokeStyle = i % 2 ? 'rgba(152, 237, 241, .9)' : 'rgba(196, 246, 255, .9)';
+      for (const glow of lightGlows) {
+        c.fillStyle = glow;
+        c.fillRect(0, 0, w, h);
+      }
+      c.restore();
+
+      // Original aquarium's layered, gently rolling water wave lines.
+      c.save();
+      c.globalAlpha = .13;
+      c.lineWidth = 2;
+      for (let i = 0; i < 20; i++) {
+        const yy = h * (.02 + i * .05);
+        c.strokeStyle = i % 2 ? "#8ee6ed" : "#bcffff";
         c.beginPath();
-        for (let x = 0; x <= w + 30; x += 30) {
-          const y = yy + Math.sin(x * 0.012 + t * 0.34 + i * 0.8) * 10 + Math.sin(x * 0.026 - t * 0.20 + i) * 4.5;
+        for (let x = 0; x <= w + 18; x += 18) {
+          const y = yy + Math.sin(x * .013 + t * .35 + i) * 10
+            + Math.sin(x * .027 - t * .21 + i) * 5;
           if (x === 0) c.moveTo(x, y); else c.lineTo(x, y);
         }
         c.stroke();
       }
       c.restore();
 
+      // Light passing through the surface and glinting off the glass.
       c.save();
-      c.globalAlpha = 0.11;
+      c.globalAlpha = .10;
       for (let i = 0; i < 5; i++) {
-        const x = w * (0.08 + i * 0.19) + Math.sin(t * 0.16 + i) * 24;
-        const beam = c.createLinearGradient(x, 0, x + 110, 0);
-        beam.addColorStop(0, 'rgba(255,255,255,0)');
-        beam.addColorStop(0.5, 'rgba(214,249,255,.85)');
-        beam.addColorStop(1, 'rgba(255,255,255,0)');
-        c.fillStyle = beam;
-        c.fillRect(x, 0, 110, h * 0.72);
+        const beamX = w * (.08 + i * .19) + Math.sin(t * .18 + i) * 22;
+        const light = c.createLinearGradient(beamX, 0, beamX + 100, 0);
+        light.addColorStop(0, "rgba(210,250,255,0)");
+        light.addColorStop(.5, "rgba(210,250,255,.9)");
+        light.addColorStop(1, "rgba(210,250,255,0)");
+        c.fillStyle = light;
+        c.fillRect(beamX, 0, 100, h * .75);
       }
       c.restore();
 
+      // All the aquarium bubbles, but no swimming emoticons.
       c.save();
-      c.strokeStyle = 'rgba(210, 250, 255, .34)';
-      c.lineWidth = 1.05;
-      for (const b of aqBubbles) {
-        const x = (b.x + Math.sin(t * b.sway + b.phase) * 0.012) * w;
+      c.strokeStyle = "rgba(210,250,255,.36)";
+      c.lineWidth = 1.1;
+      for (const b of bubbles) {
+        const x = (b.x + Math.sin(t * .46 + b.phase) * .012) * w;
         const y = (((b.y - t * b.speed) % 1 + 1) % 1) * h;
         c.beginPath();
         c.arc(x, y, b.rad, 0, Math.PI * 2);
         c.stroke();
+        c.fillStyle = "rgba(255,255,255,.45)";
+        c.beginPath();
+        c.arc(x - b.rad * .23, y - b.rad * .29, .65, 0, Math.PI * 2);
+        c.fill();
       }
       c.restore();
-
-      const bottom = c.createLinearGradient(0, h * 0.72, 0, h);
-      bottom.addColorStop(0, 'rgba(1,9,15,0)');
-      bottom.addColorStop(1, 'rgba(1,9,15,.62)');
-      c.fillStyle = bottom;
-      c.fillRect(0, h * 0.72, w, h * 0.28);
+      c.fillStyle = waterFloorGradient;
+      c.fillRect(0, h * .72, w, h * .28);
     }
-
-    sizeAquariumBg();
-    window.addEventListener('resize', sizeAquariumBg);
-    requestAnimationFrame(paintAquariumBg);
+    resizeWater();
+    window.addEventListener("resize", resizeWater);
+    requestAnimationFrame(drawWater);
 
   </script>
 </body>
