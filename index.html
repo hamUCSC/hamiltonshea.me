@@ -3230,7 +3230,7 @@
         theme: "comic"
       },
       {
-        name: "wasian national anthem",
+        name: "Joji - WANTED U",
         src: "Joji - WANTED U (Official Audio) 4.mp3",
         theme: "aquarium"
       },
@@ -4305,137 +4305,174 @@
       if (activeRoleLink) placeRoleTooltip(activeRoleLink);
     });
 
-    // Self-contained aquarium illustration: no image or video files required.
+    // Optimized emoticon aquarium: cached text sprites and a 30 FPS ceiling.
     const aquariumCanvas = document.getElementById("aquariumCanvas");
-    const aquariumCtx = aquariumCanvas.getContext("2d");
-    let aqWidth = 0, aqHeight = 0, aqLast = 0, aqFrameTime = 0;
-    const aqFishEmoji = [':3', ':D', ':C', '=^-^=', 'xD', ';3', '<°)))><', '><(((*>'];
-    const aqFish = Array.from({length: 18}, (_, i) => ({
-      phase:i*2.17, x:((i*0.61803398875)%1), y:.14+((i*0.431)%1)*.69,
-      scale:.58+(i%6)*.16, speed:.019+(i%5)*.007,
-      direction:i%4===0?-1:1,
-      hue:[194,181,211,24,345,174][i%6],
+    const aquariumCtx = aquariumCanvas.getContext("2d", { alpha: false });
+    const aquariumReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const aqFishEmoji = [":3", ":D", ":C", "=^-^=", "xD", ";3", "<°)))><", "><(((*>"];
+    const aqFish = Array.from({ length: 15 }, (_, i) => ({
+      phase: i * 2.17,
+      x: (i * .61803398875) % 1,
+      y: .14 + ((i * .431) % 1) * .69,
+      scale: .58 + (i % 6) * .16,
+      speed: .019 + (i % 5) * .007,
+      direction: i % 4 === 0 ? -1 : 1,
+      hue: [194,181,211,24,345,174][i % 6],
       emoji: aqFishEmoji[i % aqFishEmoji.length],
-      wobble: 0.75 + (i % 5) * 0.09,
+      wobble: .75 + (i % 5) * .09,
       fleeX: 0, fleeY: 0, velocityX: 0, velocityY: 0, scareCooldown: 0
     }));
-    const aqBubbles = Array.from({length: 42},(_,i)=>({x:(i*.61803398875)%1,y:(i*.3119)%1,rad:1.5+(i%4)*1.2,speed:.014+(i%7)*.006,phase:i*1.3}));
+    const aqBubbles = Array.from({ length: 25 }, (_, i) => ({
+      x: (i * .61803398875) % 1, y: (i * .3119) % 1,
+      rad: 1.5 + (i % 4) * 1.2, speed: .014 + (i % 7) * .006,
+      phase: i * 1.3
+    }));
     const aqMouse = { x: 0, y: 0, active: false };
-    gameScreen.addEventListener('pointermove', event => {
+    let aqWidth = 1, aqHeight = 1, aqFrameTime = 0, aqLastDraw = 0;
+    let aqBackground;
+    const aqSprites = new Map();
+
+    gameScreen.addEventListener("pointermove", event => {
+      if (!gameScreen.classList.contains("aquarium-theme")) return;
       const rect = gameScreen.getBoundingClientRect();
       aqMouse.x = event.clientX - rect.left;
       aqMouse.y = event.clientY - rect.top;
       aqMouse.active = true;
-    });
-    gameScreen.addEventListener('pointerleave', () => {
-      aqMouse.active = false;
-    });
-    function sizeAquarium(){
-      const rect=gameScreen.getBoundingClientRect();
-      aqWidth=Math.max(1,rect.width);aqHeight=Math.max(1,rect.height);
-      const dpr=Math.min(window.devicePixelRatio||1,2);
-      aquariumCanvas.width=Math.round(aqWidth*dpr);
-      aquariumCanvas.height=Math.round(aqHeight*dpr);
-      aquariumCtx.setTransform(dpr,0,0,dpr,0,0);
-    }
-    window.addEventListener('resize',sizeAquarium);
-    sizeAquarium();
-    function paintAquarium(ms){
-      requestAnimationFrame(paintAquarium);
-      if(!gameScreen.classList.contains('aquarium-theme'))return;
-      if(window.matchMedia('(prefers-reduced-motion: reduce)').matches && aqLast)return;
-      aqLast=ms;
-      const delta = aqFrameTime ? Math.min((ms-aqFrameTime)/1000, .05) : 1/60;
-      aqFrameTime = ms;
-      const c=aquariumCtx,w=aqWidth,h=aqHeight,t=ms/1000;
-      c.clearRect(0,0,w,h);
-      const sea=c.createLinearGradient(0,0,0,h);
-      sea.addColorStop(0,'#10394c');sea.addColorStop(.4,'#092e40');sea.addColorStop(1,'#031621');
-      c.fillStyle=sea;c.fillRect(0,0,w,h);
-      // Caustic light ripples above the fish.
-      c.save();c.globalAlpha=.13;c.lineWidth=2;
-      for(let i=0;i<20;i++){
-        const yy=h*(.02+i*.05);
-        c.strokeStyle=i%2?'#8ee6ed':'#bcffff';c.beginPath();
-        for(let x=0;x<=w+18;x+=18){const y=yy+Math.sin(x*.013+t*.35+i)*10+Math.sin(x*.027-t*.21+i)*5;if(x===0)c.moveTo(x,y);else c.lineTo(x,y);}
-        c.stroke();
-      }c.restore();
-      // Emoticon fish avoid the cursor and drift back into their normal path.
-      for(const f of aqFish){
-        const baseX=((f.x+f.direction*t*f.speed)%1+1)%1*w;
-        const baseY=f.y*h+Math.sin(t*.7+f.phase)*12;
-        const size=Math.max(17,Math.min(w,h)*.025)*f.scale;
-        const bob=Math.sin(t*1.6*f.wobble + f.phase)*1.6;
+    }, { passive: true });
+    gameScreen.addEventListener("pointerleave", () => { aqMouse.active = false; });
 
-        // Persistent velocity makes the emoticons shoot away instead of simply
-        // jumping sideways for one frame. Fear kicks in only very close.
+    function makeFishSprite(f, size) {
+      const fontSize = Math.round(size * 1.25);
+      const key = `${f.emoji}|${f.hue}|${fontSize}`;
+      if (aqSprites.has(key)) return aqSprites.get(key);
+      const sprite = document.createElement("canvas");
+      const sc = sprite.getContext("2d");
+      sc.font = `bold ${fontSize}px "Segoe UI", Arial, sans-serif`;
+      const width = Math.ceil(sc.measureText(f.emoji).width + 20);
+      sprite.width = width;
+      sprite.height = fontSize + 22;
+      sc.font = `bold ${fontSize}px "Segoe UI", Arial, sans-serif`;
+      sc.textAlign = "center";
+      sc.textBaseline = "middle";
+      sc.lineWidth = Math.max(1.4, size * .06);
+      sc.strokeStyle = "rgba(235,251,255,.88)";
+      sc.fillStyle = `hsla(${f.hue},82%,84%,.92)`;
+      sc.strokeText(f.emoji, sprite.width / 2, sprite.height / 2);
+      sc.fillText(f.emoji, sprite.width / 2, sprite.height / 2);
+      aqSprites.set(key, sprite);
+      return sprite;
+    }
+
+    function sizeAquarium() {
+      const rect = gameScreen.getBoundingClientRect();
+      aqWidth = Math.max(1, rect.width);
+      aqHeight = Math.max(1, rect.height);
+      // Lower resolution is enough for a blurred aquarium background.
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.25);
+      aquariumCanvas.width = Math.round(aqWidth * dpr);
+      aquariumCanvas.height = Math.round(aqHeight * dpr);
+      aquariumCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      aqSprites.clear();
+      aqBackground = aquariumCtx.createLinearGradient(0, 0, 0, aqHeight);
+      aqBackground.addColorStop(0, "#10394c");
+      aqBackground.addColorStop(.4, "#092e40");
+      aqBackground.addColorStop(1, "#031621");
+    }
+    window.addEventListener("resize", sizeAquarium);
+    sizeAquarium();
+
+    function paintAquarium(ms) {
+      requestAnimationFrame(paintAquarium);
+      if (!gameScreen.classList.contains("aquarium-theme") || document.hidden) {
+        aqFrameTime = 0;
+        return;
+      }
+      if (aquariumReducedMotion.matches && aqLastDraw) return;
+      // Draw no more than 30 frames per second to reduce CPU/GPU load.
+      if (ms - aqLastDraw < 33.3) return;
+      aqLastDraw = ms;
+      const delta = aqFrameTime ? Math.min((ms - aqFrameTime) / 1000, .06) : 1 / 30;
+      aqFrameTime = ms;
+      const c = aquariumCtx, w = aqWidth, h = aqHeight, t = ms / 1000;
+      c.fillStyle = aqBackground;
+      c.fillRect(0, 0, w, h);
+
+      // Fewer, smoother background water lines.
+      c.save();
+      c.globalAlpha = .12;
+      c.lineWidth = 1.5;
+      for (let i = 0; i < 10; i++) {
+        const yy = h * (.04 + i * .095);
+        c.strokeStyle = i % 2 ? "#8ee6ed" : "#bcffff";
+        c.beginPath();
+        for (let x = 0; x <= w + 28; x += 28) {
+          const y = yy + Math.sin(x * .013 + t * .35 + i) * 10 +
+            Math.sin(x * .027 - t * .21 + i) * 5;
+          if (x === 0) c.moveTo(x, y); else c.lineTo(x, y);
+        }
+        c.stroke();
+      }
+      c.restore();
+
+      for (const f of aqFish) {
+        const baseX = (((f.x + f.direction * t * f.speed) % 1 + 1) % 1) * w;
+        const baseY = f.y * h + Math.sin(t * .7 + f.phase) * 12;
+        const size = Math.max(17, Math.min(w, h) * .025) * f.scale;
+        const bob = Math.sin(t * 1.6 * f.wobble + f.phase) * 1.6;
         let drawX = baseX + f.fleeX;
         let drawY = baseY + bob + f.fleeY;
         let facing = f.direction;
-        f.scareCooldown = Math.max(0, f.scareCooldown - delta);
 
-        if(aqMouse.active){
+        f.scareCooldown = Math.max(0, f.scareCooldown - delta);
+        if (aqMouse.active) {
           const dx = drawX - aqMouse.x;
           const dy = drawY - aqMouse.y;
           const dist = Math.hypot(dx, dy);
           const panicRadius = 66;
-          if(dist < panicRadius && f.scareCooldown <= 0){
-            // An instantaneous burst: about 650-900 pixels/second initially.
+          if (dist < panicRadius && f.scareCooldown <= 0) {
             const angle = dist > 1 ? Math.atan2(dy, dx) : f.phase;
-            const burst = 650 + (1-dist/panicRadius)*250;
+            const burst = 650 + (1 - dist / panicRadius) * 250;
             f.velocityX = Math.cos(angle) * burst;
             f.velocityY = Math.sin(angle) * burst;
             f.scareCooldown = .42;
           }
         }
-
         f.fleeX += f.velocityX * delta;
         f.fleeY += f.velocityY * delta;
-        // Damp the burst, then ease back to the original swim route.
-        const friction = Math.exp(-4.0 * delta);
+        const friction = Math.exp(-4 * delta);
         f.velocityX *= friction;
         f.velocityY *= friction;
-        if(f.scareCooldown <= 0){
+        if (f.scareCooldown <= 0) {
           const returnRate = 1 - Math.exp(-1.4 * delta);
-          f.fleeX += (0 - f.fleeX) * returnRate;
-          f.fleeY += (0 - f.fleeY) * returnRate;
+          f.fleeX *= 1 - returnRate;
+          f.fleeY *= 1 - returnRate;
         }
         f.fleeX = Math.max(-220, Math.min(220, f.fleeX));
         f.fleeY = Math.max(-180, Math.min(180, f.fleeY));
         drawX = baseX + f.fleeX;
         drawY = baseY + bob + f.fleeY;
-        if(Math.abs(f.velocityX) > 40) facing = f.velocityX > 0 ? 1 : -1;
+        if (Math.abs(f.velocityX) > 40) facing = f.velocityX > 0 ? 1 : -1;
 
+        const sprite = makeFishSprite(f, size);
         c.save();
         c.translate(drawX, drawY);
         c.scale(facing, 1);
-        const isEmoji = /[\u{1F300}-\u{1FAFF}]/u.test(f.emoji);
-        c.textAlign='center';
-        c.textBaseline='middle';
-        c.font = `${Math.round(size * (isEmoji ? 1.75 : 1.25))}px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji","Segoe UI",sans-serif`;
-        c.shadowBlur = 12;
-        c.shadowColor = `hsla(${f.hue}, 90%, 78%, .28)`;
-        if(!isEmoji){
-          c.lineWidth = Math.max(1.4, size * 0.06);
-          c.strokeStyle = 'rgba(235,251,255,.88)';
-          c.strokeText(f.emoji, 0, 0);
-          c.fillStyle = `hsla(${f.hue}, 82%, 84%, .92)`;
-          c.fillText(f.emoji, 0, 0);
-        } else {
-          c.globalAlpha = .95;
-          c.fillText(f.emoji, 0, 0);
-        }
+        c.drawImage(sprite, -sprite.width / 2, -sprite.height / 2);
         c.restore();
       }
-      for(const b of aqBubbles){
-        const x=(b.x+Math.sin(t*.46+b.phase)*.012)*w;
-        const y=((b.y-t*b.speed)%1+1)%1*h;
-        c.strokeStyle='rgba(210,250,255,.36)';c.lineWidth=1.1;c.beginPath();c.arc(x,y,b.rad,0,Math.PI*2);c.stroke();
-        c.fillStyle='rgba(255,255,255,.45)';c.beginPath();c.arc(x-b.rad*.23,y-b.rad*.29,.65,0,Math.PI*2);c.fill();
+
+      c.strokeStyle = "rgba(210,250,255,.36)";
+      c.lineWidth = 1.1;
+      for (const b of aqBubbles) {
+        const x = (b.x + Math.sin(t * .46 + b.phase) * .012) * w;
+        const y = (((b.y - t * b.speed) % 1 + 1) % 1) * h;
+        c.beginPath(); c.arc(x, y, b.rad, 0, Math.PI * 2); c.stroke();
       }
-      const bottom=c.createLinearGradient(0,h*.72,0,h);
-      bottom.addColorStop(0,'rgba(1,9,15,0)');bottom.addColorStop(1,'rgba(1,9,15,.69)');
-      c.fillStyle=bottom;c.fillRect(0,h*.72,w,h*.28);
+      const bottom = c.createLinearGradient(0, h * .72, 0, h);
+      bottom.addColorStop(0, "rgba(1,9,15,0)");
+      bottom.addColorStop(1, "rgba(1,9,15,.69)");
+      c.fillStyle = bottom;
+      c.fillRect(0, h * .72, w, h * .28);
     }
     requestAnimationFrame(paintAquarium);
 
