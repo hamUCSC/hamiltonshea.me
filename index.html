@@ -1058,34 +1058,6 @@
       line-height: 1.65;
     }
 
-    .resume-preview-card {
-      margin-top: 22px;
-      overflow: hidden;
-      background: white;
-      border: 4px solid white;
-      box-shadow: 10px 10px 0 #d00000;
-    }
-
-    .resume-preview-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      padding: 18px 20px;
-      color: white;
-      background: #050505;
-      border-bottom: 4px solid #d00000;
-    }
-
-    .resume-preview-header h3 {
-      margin: 0;
-      font-family: "Segoe UI", Arial, sans-serif;
-      font-weight: 900;
-      font-size: 30px;
-      text-transform: uppercase;
-    }
-
-    .resume-preview-link,
     .all-work-link {
       display: inline-block;
       padding: 9px 14px;
@@ -1101,17 +1073,8 @@
       text-transform: uppercase;
     }
 
-    .resume-preview-link:hover,
     .all-work-link:hover {
       color: black;
-      background: white;
-    }
-
-    .resume-home-frame {
-      display: block;
-      width: 100%;
-      height: 620px;
-      border: 0;
       background: white;
     }
 
@@ -1399,14 +1362,6 @@
         padding: 22px;
       }
 
-      .resume-preview-header {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .resume-home-frame {
-        height: 460px;
-      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1460,7 +1415,7 @@
     }
     .contact-form input::placeholder, .contact-form textarea::placeholder { color: rgba(255,255,255,.62); }
     .contact-form input:focus, .contact-form textarea:focus { border-color: rgba(255,255,255,.85); background: rgba(255,255,255,.16); }
-    .contact-submit, .highlight-link, .resume-preview-link, .all-work-link {
+    .contact-submit, .highlight-link, .all-work-link {
       border-radius: 10px;
       background: rgba(208, 0, 0, 0.64);
       border: 1px solid rgba(255, 255, 255, .50);
@@ -1522,7 +1477,6 @@
     }
     .portfolio-preview { background: radial-gradient(ellipse at 50% 6%, rgba(155,0,0,.20), transparent 60%), #09090e; }
     .portfolio-preview::after { opacity: .2; }
-    .resume-preview-card { border-radius: 18px; box-shadow: 0 18px 45px rgba(0,0,0,.35); }
     .desktop-icon:focus-visible, .radio-controls button:focus-visible, .close-window:focus-visible {
       outline: 3px solid white;
       outline-offset: 5px;
@@ -1541,7 +1495,7 @@
        bright environmental reflections and soft red refraction. */
     :root { --glass-blur: 34px; --glass-border: rgba(235,244,255,.48); }
     .window, .radio-player, .home-work-card, .home-work-card.dashboard,
-    .recommendation-card, .homepage-recommendation, .resume-preview-card {
+    .recommendation-card, .homepage-recommendation {
       position: relative;
       background: linear-gradient(125deg, rgba(235,242,255,.17) 0%, rgba(110,125,142,.09) 12%, rgba(15,22,32,.62) 41%, rgba(5,14,25,.72) 75%, rgba(205,220,236,.15) 100%) !important;
       border: 1px solid rgba(237,246,255,.53) !important;
@@ -2592,6 +2546,33 @@
     .radio-player.drag-hint-dismissed .radio-drag-hint { display: none !important; }
     @media (prefers-reduced-motion: reduce) { .radio-drag-hint { animation: none; } }
 
+
+    /* Clarity-only XMB-style animated blue waves, drawn without image assets. */
+    .xmb-canvas {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      display: block;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.9s ease;
+      background: radial-gradient(ellipse at 35% 12%, #117abd, #06448f 55%, #062967);
+    }
+    .persona-screen.xmb-theme .xmb-canvas { opacity: 1; }
+    .persona-screen.xmb-theme .red-slab,
+    .persona-screen.xmb-theme .comic-panel {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .persona-screen.xmb-theme .ham-character {
+      filter: drop-shadow(0 12px 24px rgba(0, 18, 55, 0.65));
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .xmb-canvas { transition: none; }
+    }
+
 </style>
 </head>
 
@@ -2617,6 +2598,8 @@
 
     <canvas id="aquariumCanvas" class="aquarium-canvas" aria-hidden="true"></canvas>
     <div class="aquarium-glass" aria-hidden="true"></div>
+
+    <canvas id="xmbCanvas" class="xmb-canvas" aria-hidden="true"></canvas>
 
     <div class="comic-panel"></div>
     <div class="red-slab"></div>
@@ -2698,9 +2681,16 @@
 
         <p>
           I’m a Business Management Economics major at UC Santa Cruz with a
-          Technology &amp; Information Management minor. I’m interested in product,
-          production, operations, and eventually working somewhere at the intersection
-          of technology and games.
+          Technology &amp; Information Management minor. I’m interested in
+          technical program management, product, and operations at the
+          intersection of technology and games.
+        </p>
+
+        <p>
+          I recently accepted an offer to join
+          <a href="https://www.playstation.com/" target="_blank" rel="noopener noreferrer">PlayStation</a>
+          (Sony Interactive Entertainment) as a Technical Program Management Intern
+          on the Game Streaming Infrastructure team for Summer 2027.
         </p>
 
         <p>
@@ -2768,7 +2758,6 @@
           </a>
         </p>
 
-        <p><a href="./resume.html">Resume</a></p>
         <p><a href="case-studies.html">Case Studies</a></p>
 
         <p>
@@ -2796,6 +2785,20 @@
         <h2>Work</h2>
 
         <p>
+          Incoming (Offer Accepted, Summer 2027):
+          <a
+            class="highlight-link role-hover"
+            data-role="Technical Program Manager Intern"
+            aria-label="PlayStation: Accepted Technical Program Management Intern offer for Summer 2027"
+            href="https://www.playstation.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            PlayStation
+          </a>
+        </p>
+
+        <p>
           Current:
           <a
             class="highlight-link role-hover" data-role="Game Operations Intern" aria-label="NECC: Game Operations Intern"
@@ -2805,7 +2808,10 @@
           >
             NECC
           </a>
+        </p>
 
+        <p>
+          Previously:
           <a
             class="highlight-link role-hover" data-role="Ming Ong Lab Systems Administrator" aria-label="UCSC: Ming Ong Lab Systems Administrator"
             href="https://www.ucsc.edu/"
@@ -2814,10 +2820,6 @@
           >
             UCSC
           </a>
-        </p>
-
-        <p>
-          Previously:
           <a
             class="highlight-link role-hover" data-role="Esports Fellow" aria-label="Red Bull: Esports Fellow"
             href="https://www.redbull.com/"
@@ -2902,6 +2904,12 @@
 
       <div class="window-content">
         <h2>Highlights</h2>
+
+        <p>
+          <span class="highlight-link">PlayStation TPM Internship (Offer Accepted)</span>
+          Accepted a Summer 2027 Technical Program Management internship with
+          PlayStation’s Game Streaming Infrastructure team.
+        </p>
 
         <p>
           <span class="highlight-link">Red Bull Back to Base Summit</span>
@@ -3039,7 +3047,7 @@
   </main>
 
   <button class="scroll-hint" id="scrollHint" type="button">
-    scroll down for projects and resume! &darr;
+    scroll down for projects! &darr;
   </button>
 
   <section class="portfolio-preview" id="projects">
@@ -3151,28 +3159,7 @@
         </p>
       </div>
 
-      <h2 class="preview-heading">Resume</h2>
 
-      <div class="resume-preview-card">
-        <div class="resume-preview-header">
-          <h3>Hamilton Shea Resume</h3>
-
-          <a
-            class="resume-preview-link"
-            href="./resume.html"
-          >
-            Open full resume
-          </a>
-        </div>
-
-        <iframe
-          class="resume-home-frame"
-          title="Hamilton Shea Resume Preview"
-          src="https://drive.google.com/file/d/1L1VTgCoLR2gVj2NFrdOt-CtLJlf3szyM/preview"
-          loading="lazy"
-          allow="autoplay"
-        ></iframe>
-      </div>
     </div>
   </section>
 
@@ -3239,6 +3226,11 @@
         theme: "comic"
       },
       {
+        name: "clarity",
+        src: "Zedd - Clarity ft. Foxes 4.mp3",
+        theme: "xmb"
+      },
+      {
         name: "Joji - WANTED U",
         src: "Joji - WANTED U (Official Audio) 4.mp3",
         theme: "aquarium"
@@ -3249,14 +3241,6 @@
         bg: "twilight-bg.jpg",
         overlay:
           "linear-gradient(90deg, rgba(4,10,10,0.60) 0%, rgba(10,20,24,0.38) 45%, rgba(0,0,0,0.72) 100%)",
-        theme: "natural"
-      },
-      {
-        name: "clarity",
-        src: "Zedd - Clarity ft. Foxes 4.mp3",
-        bg: "clarity-bg.jpg",
-        overlay:
-          "linear-gradient(90deg, rgba(0,20,60,0.58) 0%, rgba(10,30,80,0.28) 45%, rgba(0,0,0,0.62) 100%)",
         theme: "natural"
       },
       {
@@ -3285,6 +3269,37 @@
       }
     ];
 
+    // Audio-responsive Clarity waves. Create one analyser for the same radio
+    // audio element, so switching songs does not duplicate or echo playback.
+    let radioAudioContext = null;
+    let radioAnalyser = null;
+    let radioFrequencyData = null;
+
+    function startRadioVisualization() {
+      if (!radioAnalyser) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContextClass) return; // Older browsers retain ambient waves.
+        try {
+          radioAudioContext = new AudioContextClass();
+          radioAnalyser = radioAudioContext.createAnalyser();
+          radioAnalyser.fftSize = 2048;
+          radioAnalyser.smoothingTimeConstant = 0.78;
+          const radioSource = radioAudioContext.createMediaElementSource(backgroundMusic);
+          radioSource.connect(radioAnalyser);
+          radioAnalyser.connect(radioAudioContext.destination);
+          radioFrequencyData = new Uint8Array(radioAnalyser.frequencyBinCount);
+        } catch (error) {
+          console.warn("Audio-reactive waves unavailable; keeping ambient animation.", error);
+          radioAnalyser = null;
+          radioFrequencyData = null;
+          return;
+        }
+      }
+      if (radioAudioContext && radioAudioContext.state === "suspended") {
+        radioAudioContext.resume().catch(() => {});
+      }
+    }
+
     function playClick() {
       if (!entered) return;
 
@@ -3308,13 +3323,20 @@
         "comic-theme",
         "natural-theme",
         "video-theme",
-        "aquarium-theme"
+        "aquarium-theme",
+        "xmb-theme"
       );
 
       themeVideo.oncanplay = null;
       themeVideo.onerror = null;
 
-      if (track.theme === "aquarium") {
+      if (track.theme === "xmb") {
+        themeVideo.pause();
+        themeVideo.removeAttribute("src");
+        themeVideo.load();
+        gameScreen.classList.add("xmb-theme");
+        gameScreen.style.background = "#063c84";
+      } else if (track.theme === "aquarium") {
         themeVideo.pause();
         themeVideo.removeAttribute("src");
         themeVideo.load();
@@ -3449,6 +3471,7 @@
       clickSound.load();
       hoverSound.load();
 
+      startRadioVisualization();
       loadTrack(currentTrack);
 
       hasScrolledHomepage = window.scrollY > 20;
@@ -4239,6 +4262,7 @@
       playClick();
 
       if (backgroundMusic.paused) {
+        startRadioVisualization();
         backgroundMusic
           .play()
           .catch(error => {
@@ -4484,6 +4508,248 @@
       c.fillRect(0, h * .72, w, h * .28);
     }
     requestAnimationFrame(paintAquarium);
+
+
+    // XMB-inspired Clarity theme: soft, continuous cyan ribbons and floating
+    // geometry. Everything is rendered locally to canvas, no external assets.
+    const xmbCanvas = document.getElementById("xmbCanvas");
+    const xmbCtx = xmbCanvas.getContext("2d", { alpha: false });
+    const xmbReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let xmbW = 0, xmbH = 0, xmbLastFrame = 0;
+    let xmbBackground = null;
+    let xmbVisualTime = 0;
+    const xmbReactive = { bass: 0, mids: 0, highs: 0 };
+
+    function updateXMBFromMusic() {
+      let bass = 0, mids = 0, highs = 0;
+      const audioIsPlaying = !backgroundMusic.paused && !backgroundMusic.muted
+        && backgroundMusic.readyState >= 2;
+      if (audioIsPlaying && radioAnalyser && radioFrequencyData
+          && radioAudioContext && radioAudioContext.state === "running") {
+        radioAnalyser.getByteFrequencyData(radioFrequencyData);
+        const hzPerBin = radioAudioContext.sampleRate / radioAnalyser.fftSize;
+        function bandEnergy(fromHz, toHz) {
+          const first = Math.max(1, Math.floor(fromHz / hzPerBin));
+          const last = Math.min(radioFrequencyData.length, Math.ceil(toHz / hzPerBin));
+          if (last <= first) return 0;
+          let total = 0;
+          for (let i = first; i < last; i++) {
+            total += Math.max(0, radioFrequencyData[i] - 25);
+          }
+          return Math.min(1, total / (last - first) / 160);
+        }
+        bass = bandEnergy(35, 180);
+        mids = bandEnergy(180, 1700);
+        highs = bandEnergy(1700, 5800);
+      }
+      // Smooth fast rises and slow releases to avoid distracting flicker.
+      for (const [key, target] of [["bass", bass], ["mids", mids], ["highs", highs]]) {
+        const response = target > xmbReactive[key] ? 0.36 : 0.13;
+        xmbReactive[key] += (target - xmbReactive[key]) * response;
+      }
+    }
+
+    function sizeXMB() {
+      // Layout dimensions ignore the temporary 1.04x entrance transform.
+      xmbW = Math.max(1, gameScreen.clientWidth);
+      xmbH = Math.max(1, gameScreen.clientHeight);
+      const scale = Math.min(window.devicePixelRatio || 1, 1.5);
+      xmbCanvas.width = Math.round(xmbW * scale);
+      xmbCanvas.height = Math.round(xmbH * scale);
+      xmbCtx.setTransform(scale, 0, 0, scale, 0, 0);
+      xmbBackground = xmbCtx.createLinearGradient(0, 0, xmbW * .65, xmbH);
+      xmbBackground.addColorStop(0, "#0869b0");
+      xmbBackground.addColorStop(.28, "#0a65a9");
+      xmbBackground.addColorStop(.63, "#07448e");
+      xmbBackground.addColorStop(1, "#082b68");
+      xmbLastFrame = 0;
+    }
+    window.addEventListener("resize", sizeXMB);
+    sizeXMB();
+
+    const xmbSymbols = [
+      {k:"square", x:.055, y:.345, s:34, a:-.20, p:.3},
+      {k:"circle", x:.207, y:.394, s:27, a:.2, p:1.4},
+      {k:"triangle", x:.307, y:.493, s:20, a:-.35, p:2.3},
+      {k:"cross", x:.562, y:.565, s:29, a:.04, p:3.1},
+      {k:"triangle", x:.735, y:.432, s:31, a:.28, p:4.2},
+      {k:"circle", x:.818, y:.295, s:22, a:.16, p:5.1},
+      {k:"square", x:.893, y:.342, s:36, a:-.37, p:6.2},
+      {k:"triangle", x:.946, y:.502, s:29, a:-.49, p:2.8},
+      {k:"cross", x:.796, y:.555, s:28, a:.38, p:3.9},
+      {k:"circle", x:.681, y:.645, s:30, a:-.17, p:1.8},
+      {k:"square", x:.377, y:.727, s:23, a:.37, p:4.9},
+      {k:"cross", x:.096, y:.701, s:24, a:-.32, p:5.7},
+      {k:"circle", x:.321, y:.587, s:22, a:.12, p:2.1},
+      {k:"triangle", x:.162, y:.600, s:29, a:-.25, p:1.1}
+    ];
+
+    function xmbWaveY(x, t, offset, amp, phase = 0) {
+      const n = x / xmbW;
+      const bass = xmbReactive.bass;
+      const mids = xmbReactive.mids;
+      // Bass lifts and deepens each ribbon. Mids add smaller ripples.
+      const swell = 1 + bass * .70 + mids * .15;
+      const ripple = bass * .021 * Math.sin(n * Math.PI * 6 - t * .94 + phase);
+      return xmbH * (offset - amp * swell * Math.cos(n * Math.PI * 2 + t * .105 + phase)
+        + (.015 + mids * .012) * Math.sin(n * Math.PI * 4.5 - t * .17 + phase * 2)
+        + ripple);
+    }
+
+    function xmbStrokeWave(c, t, offset, amp, phase, color, width) {
+      c.beginPath();
+      for (let x = -10; x <= xmbW + 12; x += 8) {
+        const y = xmbWaveY(x, t, offset, amp, phase);
+        if (x < 0) c.moveTo(x, y); else c.lineTo(x, y);
+      }
+      c.strokeStyle = color;
+      c.lineWidth = width;
+      c.stroke();
+    }
+
+    function xmbWaveSheet(c, t, offset, amp, phase, colors) {
+      c.beginPath();
+      for (let x = -10; x <= xmbW + 12; x += 8) {
+        const y = xmbWaveY(x, t, offset, amp, phase);
+        if (x < 0) c.moveTo(x, y); else c.lineTo(x, y);
+      }
+      c.lineTo(xmbW + 12, xmbH + 10);
+      c.lineTo(-10, xmbH + 10);
+      c.closePath();
+      const fill = c.createLinearGradient(0, xmbH * .36, 0, xmbH);
+      colors.forEach(([pos, color]) => fill.addColorStop(pos, color));
+      c.fillStyle = fill;
+      c.fill();
+    }
+
+    function xmbRibbon(c, t, offset, amp, phase, thickness, alpha) {
+      c.beginPath();
+      for (let x = -10; x <= xmbW + 12; x += 8) {
+        const y = xmbWaveY(x, t, offset, amp, phase);
+        if (x < 0) c.moveTo(x, y); else c.lineTo(x, y);
+      }
+      for (let x = xmbW + 12; x >= -10; x -= 8) {
+        const n = x / xmbW;
+        const thicknessAtX = thickness * (1 + xmbReactive.bass * .28
+          + .25 * Math.sin(n * Math.PI * 2 + t * .15 + phase));
+        c.lineTo(x, xmbWaveY(x, t, offset, amp, phase) + xmbH * thicknessAtX);
+      }
+      c.closePath();
+      const glow = c.createLinearGradient(0, xmbH * .36, 0, xmbH * .77);
+      glow.addColorStop(0, `rgba(20,209,244,${alpha})`);
+      glow.addColorStop(.45, `rgba(5,136,220,${alpha * .75})`);
+      glow.addColorStop(1, `rgba(4,57,154,${alpha * .35})`);
+      c.fillStyle = glow;
+      c.fill();
+    }
+
+    function drawXMBSymbol(c, shape, t) {
+      const S = Math.min(xmbW / 1500, xmbH / 900);
+      const size = Math.max(9, shape.s * Math.max(.58, S));
+      const x = shape.x * xmbW + Math.sin(t * .19 + shape.p) * 13;
+      const y = shape.y * xmbH + Math.cos(t * .22 + shape.p) *
+        (9 + xmbReactive.highs * 8);
+      c.save();
+      c.translate(x, y);
+      c.rotate(shape.a + .08 * Math.sin(t * .13 + shape.p));
+      c.globalAlpha = Math.min(.82, .62 + xmbReactive.highs * .20);
+      c.lineJoin = "round";
+      c.lineCap = "round";
+      c.shadowColor = "rgba(0, 20, 62, .7)";
+      c.shadowBlur = Math.max(3, size * .42);
+      c.shadowOffsetY = Math.max(2, size * .16);
+      c.lineWidth = Math.max(3, size * .23);
+      const edge = c.createLinearGradient(-size, -size, size, size);
+      edge.addColorStop(0, "#6fe2ff");
+      edge.addColorStop(.35, "#2ea5e0");
+      edge.addColorStop(.7, "#006cba");
+      edge.addColorStop(1, "#09478c");
+      c.strokeStyle = edge;
+      function pathSymbol() {
+        c.beginPath();
+        if (shape.k === "circle") {
+          c.ellipse(0, 0, size * .57, size * .69, 0, 0, Math.PI * 2);
+        } else if (shape.k === "square") {
+          const r = size * .6;
+          c.rect(-r, -r, r * 2, r * 2);
+        } else if (shape.k === "triangle") {
+          c.moveTo(0, -size * .72);
+          c.lineTo(size * .73, size * .52);
+          c.lineTo(-size * .73, size * .52);
+          c.closePath();
+        } else {
+          c.moveTo(-size * .57, -size * .57);
+          c.lineTo(size * .57, size * .57);
+          c.moveTo(size * .57, -size * .57);
+          c.lineTo(-size * .57, size * .57);
+        }
+      }
+      pathSymbol();
+      c.stroke();
+      c.shadowBlur = 0;
+      c.shadowOffsetY = 0;
+      c.globalAlpha = .28;
+      c.lineWidth = Math.max(1.2, size * .047);
+      c.strokeStyle = "#e4ffff";
+      c.translate(-size * .05, -size * .075);
+      pathSymbol();
+      c.stroke();
+      c.restore();
+    }
+
+    function paintXMB(ms) {
+      requestAnimationFrame(paintXMB);
+      if (!gameScreen.classList.contains("xmb-theme") || document.hidden) {
+        xmbLastFrame = 0;
+        return;
+      }
+      if (xmbReducedMotion.matches && xmbLastFrame) return;
+      if (!xmbReducedMotion.matches && ms - xmbLastFrame < 33.3) return;
+      const elapsed = xmbLastFrame ? Math.min(.08, (ms - xmbLastFrame) / 1000) : 1 / 30;
+      xmbLastFrame = ms;
+      if (!xmbReducedMotion.matches) updateXMBFromMusic();
+      // Waves drift gently at rest, and pick up pace with the playing music.
+      const audioIsPlaying = !backgroundMusic.paused && !backgroundMusic.muted;
+      xmbVisualTime += elapsed * (audioIsPlaying
+        ? 1 + xmbReactive.bass * 1.25 + xmbReactive.mids * .30
+        : .18);
+      const c = xmbCtx, w = xmbW, h = xmbH, t = xmbVisualTime;
+      c.fillStyle = xmbBackground;
+      c.fillRect(0, 0, w, h);
+
+      // Airy lighting high on the screen, with a navy vignette underneath.
+      const light = c.createRadialGradient(w * .34, h * .08, 0, w * .34, h * .20, w * .92);
+      light.addColorStop(0, "rgba(23,204,242,.24)");
+      light.addColorStop(.55, "rgba(12,114,203,.07)");
+      light.addColorStop(1, "rgba(4,39,100,0)");
+      c.fillStyle = light;
+      c.fillRect(0, 0, w, h);
+
+      xmbWaveSheet(c,t,.450,.105,-.13, [[0,"rgba(7,182,233,.45)"],[.48,"rgba(7,110,190,.76)"],[1,"#073b87"]]);
+      xmbRibbon(c,t,.459,.104,-.13,.052,.65);
+      xmbWaveSheet(c,t,.522,.124,.22, [[0,"rgba(5,153,215,.35)"],[.58,"rgba(6,89,173,.90)"],[1,"#093777"]]);
+      xmbRibbon(c,t,.535,.118,.29,.048,.65);
+      xmbWaveSheet(c,t,.612,.112,-.33, [[0,"rgba(7,92,176,.22)"],[.62,"rgba(5,65,146,.94)"],[1,"#092d69"]]);
+      xmbRibbon(c,t,.618,.104,-.30,.023,.39);
+
+      // Delicate reflective edges tracing the glassy wave crests.
+      c.save();
+      c.shadowColor = "rgba(58,204,255,.6)";
+      c.shadowBlur = 10 + xmbReactive.mids * 18;
+      const gleam = .54 + xmbReactive.mids * .34;
+      xmbStrokeWave(c,t,.457,.104,-.13,`rgba(155,241,255,${gleam})`,1.4 + xmbReactive.bass * 1.2);
+      xmbStrokeWave(c,t,.535,.118,.29,`rgba(63,196,249,${.38 + xmbReactive.mids * .30})`,1.6);
+      c.restore();
+
+      // A translucent lower wash keeps the title and windows legible.
+      const lower = c.createLinearGradient(0,h*.55,0,h);
+      lower.addColorStop(0,"rgba(1,20,75,0)");
+      lower.addColorStop(1,"rgba(2,23,73,.32)");
+      c.fillStyle = lower;
+      c.fillRect(0,h*.55,w,h*.45);
+      xmbSymbols.forEach(symbol => drawXMBSymbol(c, symbol, t));
+    }
+    requestAnimationFrame(paintXMB);
 
 </script>
 </body>
