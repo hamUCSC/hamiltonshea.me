@@ -2572,6 +2572,45 @@
     @media (prefers-reduced-motion: reduce) {
       .xmb-canvas { transition: none; }
     }
+    /* Transparent hit areas keep the floating XMB symbols draggable without
+       intercepting scrolling or clicks in the rest of the page. */
+    .xmb-hotspots {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      display: none;
+      pointer-events: none;
+    }
+    .persona-screen.xmb-theme .xmb-hotspots { display: block; }
+    .xmb-hotspot {
+      position: absolute;
+      top: 0;
+      left: 0;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
+      cursor: grab;
+      pointer-events: auto;
+      touch-action: none;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+    .xmb-hotspot:active { cursor: grabbing; }
+    /* Let taps reach symbols in the open space around the main navigation.
+       Keep the actual navigation buttons and interactive title above them. */
+    .persona-screen.xmb-theme .menu-wrap { pointer-events: none; }
+    .persona-screen.xmb-theme .menu-wrap .menu-badge,
+    .persona-screen.xmb-theme .menu-wrap .main-title,
+    .persona-screen.xmb-theme .menu-wrap .desktop-icon { pointer-events: auto; }
+    .persona-screen.xmb-theme .ham-character { pointer-events: none; }
+    .xmb-hotspot:focus-visible {
+      outline: 2px solid var(--xmb-press-color, #a8edff);
+      outline-offset: 2px;
+      box-shadow: 0 0 18px var(--xmb-press-color, #a8edff);
+    }
 
 </style>
 </head>
@@ -2600,6 +2639,7 @@
     <div class="aquarium-glass" aria-hidden="true"></div>
 
     <canvas id="xmbCanvas" class="xmb-canvas" aria-hidden="true"></canvas>
+    <div id="xmbHotspots" class="xmb-hotspots" aria-label="Interactive floating PlayStation shapes"></div>
 
     <div class="comic-panel"></div>
     <div class="red-slab"></div>
@@ -4584,6 +4624,140 @@
       {k:"triangle", x:.162, y:.600, s:29, a:-.25, p:1.1}
     ];
 
+    // Interact with the floating PlayStation symbols by hovering, clicking,
+    // dragging with a mouse/touch, or focusing and pressing Enter/Space.
+    // Their color matches the corresponding PlayStation controller symbol.
+    const xmbColors = {
+      triangle: "#49cabb", // teal / green
+      square:   "#b56ac4", // purple
+      circle:   "#f15d70", // red
+      cross:    "#7d9feb"  // blue
+    };
+    const xmbHotspots = document.getElementById("xmbHotspots");
+    const xmbReturnDelay = 500; // milliseconds after release
+    const xmbReturnDuration = 300; // smooth glide home
+
+    function xmbBasePosition(shape, t) {
+      return {
+        x: shape.x * xmbW + Math.sin(t * .19 + shape.p) * 13,
+        y: shape.y * xmbH + Math.cos(t * .22 + shape.p) *
+          (9 + xmbReactive.highs * 8)
+      };
+    }
+    function xmbPosition(shape, t) {
+      const pos = xmbBasePosition(shape, t);
+      return {x: pos.x + (shape.dx || 0), y: pos.y + (shape.dy || 0)};
+    }
+    function xmbPointerPoint(event) {
+      const rect = xmbHotspots.getBoundingClientRect();
+      return {
+        x: (event.clientX - rect.left) * xmbW / Math.max(1, rect.width),
+        y: (event.clientY - rect.top) * xmbH / Math.max(1, rect.height)
+      };
+    }
+    function xmbHighlight(shape, now) {
+      if (shape.dragPointer !== null || shape.hovered || shape.hotspot.matches(":focus-visible")) return 1;
+      if (shape.releasedAt === null) return 0;
+      const age = now - shape.releasedAt;
+      if (age <= xmbReturnDelay) return 1;
+      return Math.max(0, 1 - (age - xmbReturnDelay) / xmbReturnDuration);
+    }
+    function xmbReturnHome(now) {
+      for (const shape of xmbSymbols) {
+        if (shape.dragPointer !== null || shape.releasedAt === null) continue;
+        const age = now - shape.releasedAt;
+        if (age < xmbReturnDelay) continue;
+        const progress = Math.min(1, (age - xmbReturnDelay) / xmbReturnDuration);
+        const ease = Math.pow(1 - progress, 3);
+        shape.dx = shape.returnDx * ease;
+        shape.dy = shape.returnDy * ease;
+        if (progress >= 1) {
+          shape.dx = shape.dy = 0;
+          shape.releasedAt = null;
+        }
+      }
+    }
+    function xmbRelease(shape) {
+      if (shape.dragPointer === null) return;
+      shape.dragPointer = null;
+      // Even a tap produces a brief lift, so every interaction has feedback.
+      if (!shape.moved) shape.dy -= 15;
+      shape.returnDx = shape.dx;
+      shape.returnDy = shape.dy;
+      shape.releasedAt = performance.now();
+    }
+    xmbSymbols.forEach((shape, index) => {
+      shape.dx = 0;
+      shape.dy = 0;
+      shape.dragPointer = null;
+      shape.releasedAt = null;
+      shape.returnDx = shape.returnDy = 0;
+      shape.hovered = false;
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "xmb-hotspot";
+      button.setAttribute("aria-label", `Drag or activate PlayStation ${shape.k === "cross" ? "X" : shape.k} symbol ${index + 1}`);
+      button.style.setProperty("--xmb-press-color", xmbColors[shape.k]);
+      const size = Math.max(9, shape.s * Math.max(.58, Math.min(xmbW / 1500, xmbH / 900)));
+      const diameter = Math.max(48, size * 2.5);
+      button.style.width = `${diameter}px`;
+      button.style.height = `${diameter}px`;
+      shape.hotspot = button;
+      xmbHotspots.appendChild(button);
+      button.addEventListener("pointerenter", () => {shape.hovered = true;});
+      button.addEventListener("pointerleave", () => {shape.hovered = false;});
+      button.addEventListener("pointerdown", event => {
+        if (!gameScreen.classList.contains("xmb-theme") || shape.dragPointer !== null) return;
+        event.preventDefault();
+        shape.hotspot.setPointerCapture(event.pointerId);
+        const point = xmbPointerPoint(event);
+        const pos = xmbPosition(shape, xmbVisualTime);
+        shape.pointerOffsetX = point.x - pos.x;
+        shape.pointerOffsetY = point.y - pos.y;
+        shape.dragPointer = event.pointerId;
+        shape.moved = false;
+        shape.downX = point.x;
+        shape.downY = point.y;
+        shape.releasedAt = null;
+      });
+      button.addEventListener("pointermove", event => {
+        if (shape.dragPointer !== event.pointerId) return;
+        const point = xmbPointerPoint(event);
+        const base = xmbBasePosition(shape, xmbVisualTime);
+        shape.dx = point.x - shape.pointerOffsetX - base.x;
+        shape.dy = point.y - shape.pointerOffsetY - base.y;
+        if (Math.hypot(point.x - shape.downX, point.y - shape.downY) > 5) shape.moved = true;
+      });
+      button.addEventListener("pointerup", event => {
+        if (shape.dragPointer !== event.pointerId) return;
+        xmbRelease(shape);
+        if (button.hasPointerCapture(event.pointerId)) button.releasePointerCapture(event.pointerId);
+      });
+      button.addEventListener("pointercancel", event => {
+        if (shape.dragPointer === event.pointerId) xmbRelease(shape);
+      });
+      // Keyboard activation gets the same lift, colored glow, and return.
+      button.addEventListener("click", event => {
+        if (event.detail !== 0) return;
+        shape.dy -= 15;
+        shape.returnDx = shape.dx;
+        shape.returnDy = shape.dy;
+        shape.releasedAt = performance.now();
+      });
+    });
+    function positionXMBHotspots(t) {
+      const S = Math.min(xmbW / 1500, xmbH / 900);
+      for (const shape of xmbSymbols) {
+        const size = Math.max(9, shape.s * Math.max(.58, S));
+        const diameter = Math.max(48, size * 2.5);
+        const pos = xmbPosition(shape, t);
+        // Every target follows its gently drifting symbol, including while held.
+        shape.hotspot.style.width = `${diameter}px`;
+        shape.hotspot.style.height = `${diameter}px`;
+        shape.hotspot.style.transform = `translate3d(${pos.x - diameter / 2}px, ${pos.y - diameter / 2}px, 0)`;
+      }
+    }
+
     function xmbWaveY(x, t, offset, amp, phase = 0) {
       const n = x / xmbW;
       const bass = xmbReactive.bass;
@@ -4643,28 +4817,39 @@
       c.fill();
     }
 
-    function drawXMBSymbol(c, shape, t) {
+    function drawXMBSymbol(c, shape, t, now) {
       const S = Math.min(xmbW / 1500, xmbH / 900);
       const size = Math.max(9, shape.s * Math.max(.58, S));
-      const x = shape.x * xmbW + Math.sin(t * .19 + shape.p) * 13;
-      const y = shape.y * xmbH + Math.cos(t * .22 + shape.p) *
-        (9 + xmbReactive.highs * 8);
+      const pos = xmbPosition(shape, t);
+      const glow = xmbHighlight(shape, now);
       c.save();
-      c.translate(x, y);
+      c.translate(pos.x, pos.y);
       c.rotate(shape.a + .08 * Math.sin(t * .13 + shape.p));
       c.globalAlpha = Math.min(.82, .62 + xmbReactive.highs * .20);
       c.lineJoin = "round";
       c.lineCap = "round";
-      c.shadowColor = "rgba(0, 20, 62, .7)";
-      c.shadowBlur = Math.max(3, size * .42);
-      c.shadowOffsetY = Math.max(2, size * .16);
-      c.lineWidth = Math.max(3, size * .23);
+      c.shadowColor = glow > 0 ? xmbColors[shape.k] : "rgba(0, 20, 62, .7)";
+      c.shadowBlur = Math.max(3, size * .42) + glow * (15 + size * .35);
+      c.shadowOffsetY = glow > 0 ? 0 : Math.max(2, size * .16);
+      c.lineWidth = Math.max(3, size * .23) + glow * 1.4;
+      if (glow > 0) {
+        // A soft colored halo lights up only when the shape is touched.
+        const halo = c.createRadialGradient(0, 0, size * .2, 0, 0, size * 1.7);
+        halo.addColorStop(0, xmbColors[shape.k] + "40");
+        halo.addColorStop(1, xmbColors[shape.k] + "00");
+        c.fillStyle = halo;
+        c.globalAlpha = glow * .85;
+        c.beginPath();
+        c.arc(0, 0, size * 1.7, 0, Math.PI * 2);
+        c.fill();
+        c.globalAlpha = .62 + glow * .38;
+      }
       const edge = c.createLinearGradient(-size, -size, size, size);
       edge.addColorStop(0, "#6fe2ff");
       edge.addColorStop(.35, "#2ea5e0");
       edge.addColorStop(.7, "#006cba");
       edge.addColorStop(1, "#09478c");
-      c.strokeStyle = edge;
+      c.strokeStyle = glow > .01 ? xmbColors[shape.k] : edge;
       function pathSymbol() {
         c.beginPath();
         if (shape.k === "circle") {
@@ -4688,9 +4873,9 @@
       c.stroke();
       c.shadowBlur = 0;
       c.shadowOffsetY = 0;
-      c.globalAlpha = .28;
+      c.globalAlpha = .28 + glow * .30;
       c.lineWidth = Math.max(1.2, size * .047);
-      c.strokeStyle = "#e4ffff";
+      c.strokeStyle = glow > .01 ? "#ffffff" : "#e4ffff";
       c.translate(-size * .05, -size * .075);
       pathSymbol();
       c.stroke();
@@ -4703,14 +4888,14 @@
         xmbLastFrame = 0;
         return;
       }
-      if (xmbReducedMotion.matches && xmbLastFrame) return;
-      if (!xmbReducedMotion.matches && ms - xmbLastFrame < 33.3) return;
+      if (ms - xmbLastFrame < (xmbReducedMotion.matches ? 65 : 33.3)) return;
       const elapsed = xmbLastFrame ? Math.min(.08, (ms - xmbLastFrame) / 1000) : 1 / 30;
       xmbLastFrame = ms;
+      xmbReturnHome(ms);
       if (!xmbReducedMotion.matches) updateXMBFromMusic();
       // Waves drift gently at rest, and pick up pace with the playing music.
       const audioIsPlaying = !backgroundMusic.paused && !backgroundMusic.muted;
-      xmbVisualTime += elapsed * (audioIsPlaying
+      if (!xmbReducedMotion.matches) xmbVisualTime += elapsed * (audioIsPlaying
         ? 1 + xmbReactive.bass * 1.25 + xmbReactive.mids * .30
         : .18);
       const c = xmbCtx, w = xmbW, h = xmbH, t = xmbVisualTime;
@@ -4747,7 +4932,8 @@
       lower.addColorStop(1,"rgba(2,23,73,.32)");
       c.fillStyle = lower;
       c.fillRect(0,h*.55,w,h*.45);
-      xmbSymbols.forEach(symbol => drawXMBSymbol(c, symbol, t));
+      xmbSymbols.forEach(symbol => drawXMBSymbol(c, symbol, t, ms));
+      positionXMBHotspots(t);
     }
     requestAnimationFrame(paintXMB);
 
